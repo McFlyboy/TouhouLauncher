@@ -1,0 +1,40 @@
+﻿<Window x:Class="TouhouLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TouhouLauncher"
+        mc:Ignorable="d"
+        Title="Touhou Launcher" Width="1000" Height="700"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <ItemsControl ItemsSource="{Binding CategoryList}" Background="#222222" Padding="50, 0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding CategoryName}" Command="{Binding CategoryCommand}" Background="#444444" Foreground="#dddddd" BorderThickness="0" Width="100" Height="40"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <UniformGrid Columns="4" Margin="100, 30">
+                <Button Width="170" Height="300" Margin="0, 20"/>
+                <Button Width="170" Height="300"/>
+                <Button Width="170" Height="300"/>
+                <Button Width="170" Height="300"/>
+                <Button Width="170" Height="300"/>
+                <Button Width="170" Height="300"/>
+                <Button Width="170" Height="300"/>
+            </UniformGrid>
+        </ScrollViewer>
+    </Grid>
+</Window>
