@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Touhou Launcher" Width="1000" Height="700"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -25,16 +26,19 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <UniformGrid Columns="4" Margin="100, 30">
-                <Button Width="170" Height="300" Margin="0, 20"/>
-                <Button Width="170" Height="300"/>
-                <Button Width="170" Height="300"/>
-                <Button Width="170" Height="300"/>
-                <Button Width="170" Height="300"/>
-                <Button Width="170" Height="300"/>
-                <Button Width="170" Height="300"/>
-            </UniformGrid>
+        <ScrollViewer Grid.Row="1" >
+            <ItemsControl ItemsSource="{Binding GameList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="800" Margin="0, 30"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding GameName}" Width="170" Height="300" Margin="15, 20"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </Window>
