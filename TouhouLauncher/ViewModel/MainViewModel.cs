@@ -9,13 +9,16 @@ namespace TouhouLauncher.ViewModel {
 	public class MainViewModel : ViewModelBase {
 		public List<CategoryButton> CategoryList { get; }
 		public List<GameButton> GameList { get; }
+
+		private CategoryButton _fanGameCategoryButton;
 		public MainViewModel() {
-			CategoryList = new List<CategoryButton>();
-			CategoryList.Add(new CategoryButton("Main Games\n(PC 98)", Test));
-			CategoryList.Add(new CategoryButton("Main Games\n(Windows)", Test));
-			CategoryList.Add(new CategoryButton("Fighting Games", Test));
-			CategoryList.Add(new CategoryButton("Spin-offs", Test));
-			CategoryList.Add(new CategoryButton("Fan Games", Test));
+			CategoryList = new List<CategoryButton> {
+				new CategoryButton("Main Games\n(PC 98)", Test),
+				new CategoryButton("Main Games\n(Windows)", Test),
+				new CategoryButton("Fighting Games", Test),
+				new CategoryButton("Spin-offs", Test)
+			};
+			_fanGameCategoryButton = new CategoryButton("Fan Games", Test);
 			GameList = new List<GameButton>();
 			GameList.Add(new GameButton("Touhou 01"));
 			GameList.Add(new GameButton("Touhou 02"));
@@ -43,7 +46,9 @@ namespace TouhouLauncher.ViewModel {
 			}
 		}
 		private void Test() {
-			Debug.WriteLine("Test :P");
+			Debug.WriteLine("Test");
+			CategoryList.Add(_fanGameCategoryButton);
+			RaisePropertyChanged("");
 		}
 	}
 }

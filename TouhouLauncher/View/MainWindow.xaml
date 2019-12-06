@@ -9,12 +9,12 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <Grid>
+    <Grid Background="#4B4554">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <ItemsControl ItemsSource="{Binding CategoryList}" Background="#222222" Padding="50, 0">
+        <ItemsControl ItemsSource="{Binding CategoryList}" Background="#4B4554" Padding="50, 0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="1"/>
@@ -22,11 +22,18 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding CategoryName}" Command="{Binding CategoryCommand}" Background="#444444" Foreground="#dddddd" BorderThickness="0" Width="100" Height="40"/>
+                    <Button Command="{Binding CategoryCommand}" Width="150" Height="70" Background="#342E30" BorderThickness="0">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="3"/>
+                            </Style>
+                        </Button.Resources>
+                        <Label Content="{Binding CategoryName}" Foreground="#FFFFFF" FontSize="17" HorizontalContentAlignment="Center"/>
+                    </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ScrollViewer Grid.Row="1" >
+        <ScrollViewer Grid.Row="1" Background="#595362">
             <ItemsControl ItemsSource="{Binding GameList}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -35,7 +42,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding GameName}" Width="170" Height="300" Margin="15, 20"/>
+                        <Button Content="{Binding GameName}" Width="170" Height="300" Margin="15, 20" Background="#FFFFFF"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
