@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TouhouLauncher"
         mc:Ignorable="d"
-        Title="Touhou Launcher" Width="1000" Height="700"
+        Title="Touhou Launcher" Width="1000" Height="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -14,7 +14,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <ItemsControl ItemsSource="{Binding CategoryList}" Background="#4B4554" Padding="50, 0">
+        <ItemsControl ItemsSource="{Binding CategoryList}" Background="#4B4554" Padding="{Binding CategoryPadding}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="1"/>
@@ -22,30 +22,47 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding CategoryCommand}" Width="150" Height="70" Background="#342E30" BorderThickness="0">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="3"/>
-                            </Style>
-                        </Button.Resources>
-                        <Label Content="{Binding CategoryName}" Foreground="#FFFFFF" FontSize="17" HorizontalContentAlignment="Center"/>
-                    </Button>
+                    <Grid>
+                        <Rectangle Width="140" Height="70" Fill="#3A3541" RadiusX="2" RadiusY="2" Margin="20, 20, 0, 0"/>
+                        <Button Command="{Binding CategoryCommand}" Width="140" Height="70" Background="{Binding CategoryColor}" BorderThickness="0">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="2"/>
+                                </Style>
+                            </Button.Resources>
+                            <Label Content="{Binding CategoryName}" Foreground="#FFFFFF" FontSize="17" HorizontalContentAlignment="Center"/>
+                        </Button>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ScrollViewer Grid.Row="1" Background="#595362">
-            <ItemsControl ItemsSource="{Binding GameList}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Width="800" Margin="0, 30"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="{Binding GameName}" Width="170" Height="300" Margin="15, 20" Background="#FFFFFF"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <ScrollViewer Background="#595362">
+                <ItemsControl ItemsSource="{Binding GameList}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="800" Margin="0, 30"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding GameName}" Command="{Binding GameCommand}" Width="170" Height="265" Margin="15, 20" Background="#FFFFFF">
+                                <Button.Effect>
+                                    <DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#766D82"/>
+                                </Button.Effect>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <Button Background="#2E2E2E" BorderThickness="0" Width="60" Height="60" Margin="855, 530, 0, 0" Padding="10, 10">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="25"/>
+                    </Style>
+                </Button.Resources>
+                <Image Source="C:\Users\Henrik\source\repos\TouhouLauncher\TouhouLauncher\Resources\Images\Cogwheel.png"/>
+            </Button>
+        </Grid>
     </Grid>
 </Window>
