@@ -58,7 +58,7 @@ namespace TouhouLauncher.ViewModel {
 
 		}
 		private void StartGame() {
-			_gameModel.StartGame("D:\\Games\\Touhou\\Touhou 10 Mountain of Faith\\th10e.exe");
+			_gameModel.LaunchGame("D:\\Games\\Touhou\\Touhou 10 Mountain of Faith\\th10e.exe");
 		}
 	}
 }

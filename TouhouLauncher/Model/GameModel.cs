@@ -1,11 +1,7 @@
-﻿using System.Diagnostics;
-
-namespace TouhouLauncher.Model {
-	class GameModel {
-		public void StartGame(string gameName) {
-			Process test = new Process();
-			test.StartInfo.FileName = gameName;
-			test.Start();
+﻿namespace TouhouLauncher.Model {
+	public class GameModel {
+		public void LaunchGame(string gameName) {
+			
 		}
 	}
 }

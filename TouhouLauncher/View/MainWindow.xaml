@@ -84,7 +84,7 @@
                         <Setter Property="CornerRadius" Value="25"/>
                     </Style>
                 </Button.Resources>
-                <Image Source="C:\Users\henrik.nyhammer\source\repos\Touhou-Launcher\TouhouLauncher\Resources\Images\Cogwheel.png"/>
+                <Image Source="..\Resources\Images\Cogwheel.png"/>
             </Button>
         </Grid>
     </Grid>
