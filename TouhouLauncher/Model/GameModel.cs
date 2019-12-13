@@ -1,7 +1,9 @@
-﻿namespace TouhouLauncher.Model {
+﻿using System.Collections.Generic;
+using TouhouLauncher.Model.GameInfo;
+
+namespace TouhouLauncher.Model {
 	public class GameModel {
-		public void LaunchGame(string gameName) {
-			
-		}
+		private OfficialGame[] _officialGames;
+		private List<FanGame> _fanGames;
 	}
 }

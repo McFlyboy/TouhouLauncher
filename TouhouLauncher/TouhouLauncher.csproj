@@ -93,8 +93,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Game.cs" />
+    <Compile Include="Model\GameInfo\FanGame.cs" />
+    <Compile Include="Model\GameInfo\Game.cs" />
     <Compile Include="Model\GameModel.cs" />
+    <Compile Include="Model\GameInfo\OfficialGame.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
