@@ -24,13 +24,36 @@
                 <DataTemplate>
                     <Grid>
                         <Rectangle Width="140" Height="70" Fill="#3A3541" RadiusX="2" RadiusY="2" Margin="20, 20, 0, 0"/>
-                        <Button Command="{Binding CategoryCommand}" Width="140" Height="70" Background="{Binding CategoryColor}" BorderThickness="0">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="2"/>
+                        <Button Command="{Binding CategoryCommand}" Width="140" Height="70" BorderThickness="0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border CornerRadius="2">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Background" Value="{Binding CategoryHoverColor}"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsMouseOver" Value="False">
+                                                                    <Setter Property="Background" Value="{Binding CategoryColor}"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
-                            </Button.Resources>
-                            <Label Content="{Binding CategoryName}" Foreground="#FFFFFF" FontSize="17" HorizontalContentAlignment="Center"/>
+                            </Button.Style>
+                            <StackPanel>
+                                <TextBlock Text="{Binding CategoryName}" TextAlignment="Center" Foreground="#FFFFFF" FontSize="17"/>
+                                <TextBlock Text="{Binding CategoryDesc}" TextAlignment="Center" Height="{Binding CategoryDescHeight}" Foreground="#FFFFFF" FontSize="12"/>
+                            </StackPanel>
                         </Button>
                     </Grid>
                 </DataTemplate>
@@ -61,7 +84,7 @@
                         <Setter Property="CornerRadius" Value="25"/>
                     </Style>
                 </Button.Resources>
-                <Image Source="C:\Users\Henrik\source\repos\TouhouLauncher\TouhouLauncher\Resources\Images\Cogwheel.png"/>
+                <Image Source="C:\Users\henrik.nyhammer\source\repos\Touhou-Launcher\TouhouLauncher\Resources\Images\Cogwheel.png"/>
             </Button>
         </Grid>
     </Grid>

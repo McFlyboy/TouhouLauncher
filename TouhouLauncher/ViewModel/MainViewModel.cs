@@ -12,15 +12,17 @@ namespace TouhouLauncher.ViewModel {
 		public ObservableCollection<GameButton> GameList { get; }
 
 		private GameModel _gameModel;
+		private string _standardCategoryColorCode = "#342E30";
+		private string _standardCategoryColorHoverCode = "#453F41";
 		public MainViewModel() {
 			_gameModel = new GameModel();
 			CategoryList = new ObservableCollection<CategoryButton> {
-				new CategoryButton("Main Games\n(PC-98)", "#342E30", SetCategory),
-				new CategoryButton("Main Games\n(Windows)", "#342E30", SetCategory),
-				new CategoryButton("Fighting Games", "#342E30", SetCategory),
-				new CategoryButton("Spin-offs", "#342E30", SetCategory),
-				new CategoryButton("Fan games", "#342E30", SetCategory),
-				new CategoryButton("Launch random\ngame", "#4284C4", SetCategory)
+				new CategoryButton("MAIN GAMES", "(PC-98)", true, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
+				new CategoryButton("MAIN GAMES", "(WINDOWS)", true, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
+				new CategoryButton("FIGHTING\nGAMES", "", false, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
+				new CategoryButton("SPIN-OFFS", "", false, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
+				new CategoryButton("FAN GAMES", "", false, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
+				new CategoryButton("LAUNCH\nRANDOM GAME", "", false, "#4284C4", "#5395D5", SetCategory)
 			};
 			GameList = new ObservableCollection<GameButton>();
 			for (int i = 0; i < 15; i++) {
@@ -29,11 +31,18 @@ namespace TouhouLauncher.ViewModel {
 		}
 		public class CategoryButton {
 			public string CategoryName { get; set; }
-			public ICommand CategoryCommand { get; set; }
+			public string CategoryDesc { get; set; }
+			public int CategoryDescHeight { get { return _showDesc ? 15 : 0; } }
 			public string CategoryColor { get; set; }
-			public CategoryButton(string name, string colorCode, Action action) {
+			public string CategoryHoverColor { get; set; }
+			public ICommand CategoryCommand { get; set; }
+			private readonly bool _showDesc;
+			public CategoryButton(string name, string desc, bool showDesc, string colorCode, string colorHoverCode, Action action) {
 				CategoryName = name;
+				CategoryDesc = desc;
+				_showDesc = showDesc;
 				CategoryColor = colorCode;
+				CategoryHoverColor = colorHoverCode;
 				CategoryCommand = new RelayCommand(action);
 			}
 		}
