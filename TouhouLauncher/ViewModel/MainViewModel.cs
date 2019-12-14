@@ -1,9 +1,11 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Model;
+using TouhouLauncher.Model.GameInfo;
 
 namespace TouhouLauncher.ViewModel {
 	public class MainViewModel : ViewModelBase {
@@ -12,8 +14,8 @@ namespace TouhouLauncher.ViewModel {
 		public ObservableCollection<GameButton> GameList { get; }
 
 		private GameModel _gameModel;
-		private string _standardCategoryColorCode = "#342E30";
-		private string _standardCategoryColorHoverCode = "#453F41";
+		private readonly string _standardCategoryColorCode = "#342E30";
+		private readonly string _standardCategoryColorHoverCode = "#453F41";
 		public MainViewModel() {
 			_gameModel = new GameModel();
 			CategoryList = new ObservableCollection<CategoryButton> {
@@ -25,8 +27,11 @@ namespace TouhouLauncher.ViewModel {
 				new CategoryButton("LAUNCH\nRANDOM GAME", "", false, "#4284C4", "#5395D5", SetCategory)
 			};
 			GameList = new ObservableCollection<GameButton>();
-			for (int i = 0; i < 15; i++) {
-				GameList.Add(new GameButton("Touhou " + String.Format("{0:D2}", i + 1), StartGame));
+			List<OfficialGame> games = _gameModel.MainPC98Games;
+			for (int i = 0; i < games.Count; i++) {
+				GameList.Add(new GameButton(games[i].Title + ": " + games[i].Subtitle, () => {
+					games[i].Launch();
+				}));
 			}
 		}
 		public class CategoryButton {
@@ -56,9 +61,6 @@ namespace TouhouLauncher.ViewModel {
 		}
 		private void SetCategory() {
 
-		}
-		private void StartGame() {
-			
 		}
 	}
 }

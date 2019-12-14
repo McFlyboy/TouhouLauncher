@@ -10,6 +10,7 @@ namespace TouhouLauncher.Model.GameInfo {
 		public int ReleaseYear { get; set; }
 		public string LocalFileLocation { get; set; }
 		public void Launch(bool exitOnLaunch = false) {
+			Debug.WriteLine("Launch");
 			Process proc = new Process();
 			proc.StartInfo.FileName = LocalFileLocation;
 			proc.Start();
