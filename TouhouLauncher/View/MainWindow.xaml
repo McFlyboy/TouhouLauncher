@@ -24,7 +24,7 @@
 				<DataTemplate>
 					<Grid>
 						<Rectangle Width="140" Height="70" Fill="#3A3541" RadiusX="2" RadiusY="2" Margin="20, 20, 0, 0"/>
-						<Button Command="{Binding CategoryCommand}" Width="140" Height="70" BorderThickness="0">
+						<Button Command="{Binding CategoryCommand}" Cursor="Hand" Width="140" Height="70" BorderThickness="0">
 							<Button.Style>
 								<Style TargetType="Button">
 									<Setter Property="Template">
@@ -69,7 +69,7 @@
 					</ItemsControl.ItemsPanel>
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
-							<Button Content="{Binding GameName}" Command="{Binding GameCommand}" Width="170" Height="265" Margin="15, 20" Background="#FFFFFF">
+							<Button Content="{Binding GameName}" Command="{Binding GameCommand}" Cursor="Hand"  Width="170" Height="250" Margin="15, 20" Background="#FFFFFF">
 								<Button.Effect>
 									<DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#766D82"/>
 								</Button.Effect>
@@ -78,7 +78,7 @@
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
 			</ScrollViewer>
-			<Button Background="#2E2E2E" BorderThickness="0" Width="60" Height="60" Margin="855, 530, 0, 0" Padding="10, 10">
+			<Button Background="#2E2E2E" BorderThickness="0" Cursor="Hand" Width="60" Height="60" Margin="855, 530, 0, 0" Padding="10, 10">
 				<Button.Resources>
 					<Style TargetType="Border">
 						<Setter Property="CornerRadius" Value="25"/>

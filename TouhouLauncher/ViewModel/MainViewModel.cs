@@ -17,17 +17,19 @@ namespace TouhouLauncher.ViewModel {
 		public ObservableCollection<GameButton> GameList { get; }
 
 		private readonly GameModel _gameModel;
-		private readonly string _standardCategoryColorCode = "#342E30";
-		private readonly string _standardCategoryColorHoverCode = "#453F41";
+		private readonly string _categoryColorCode = "#342E30";
+		private readonly string _categoryColorHoverCode = "#453F41";
+		private readonly string _launchRandomColorCode = "#4284C4";
+		private readonly string _launchRandomColorHoverCode = "#5395D5";
 		public MainViewModel() {
 			_gameModel = new GameModel();
 			CategoryList = new ObservableCollection<CategoryButton> {
-				new CategoryButton("MAIN GAMES", "(PC-98)", true, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
-				new CategoryButton("MAIN GAMES", "(WINDOWS)", true, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
-				new CategoryButton("FIGHTING\nGAMES", "", false, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
-				new CategoryButton("SPIN-OFFS", "", false, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
-				new CategoryButton("FAN GAMES", "", false, _standardCategoryColorCode, _standardCategoryColorHoverCode, SetCategory),
-				new CategoryButton("LAUNCH\nRANDOM GAME", "", false, "#4284C4", "#5395D5", SetCategory)
+				new CategoryButton("MAIN GAMES", "(PC-98)", _categoryColorCode, _categoryColorHoverCode, SetCategoryPC98),
+				new CategoryButton("MAIN GAMES", "(WINDOWS)", _categoryColorCode, _categoryColorHoverCode, SetCategoryWindows),
+				new CategoryButton("FIGHTING\nGAMES", "", _categoryColorCode, _categoryColorHoverCode, SetCategoryFighting),
+				new CategoryButton("SPIN-OFFS", "", _categoryColorCode, _categoryColorHoverCode, SetCategorySpinOff),
+				new CategoryButton("FAN GAMES", "", _categoryColorCode, _categoryColorHoverCode, SetCategoryFanGame),
+				new CategoryButton("LAUNCH\nRANDOM GAME", "", _launchRandomColorCode, _launchRandomColorHoverCode, LaunchRandom)
 			};
 			GameList = new ObservableCollection<GameButton>();
 			foreach (OfficialGame game in _gameModel.MainPC98Games) {
@@ -37,15 +39,13 @@ namespace TouhouLauncher.ViewModel {
 		public class CategoryButton {
 			public string CategoryName { get; }
 			public string CategoryDesc { get; }
-			public int CategoryDescHeight { get { return _showDesc ? 15 : 0; } }
+			public int CategoryDescHeight { get { return CategoryDesc.Length != 0 ? 15 : 0; } }
 			public string CategoryColor { get; }
 			public string CategoryHoverColor { get; }
 			public ICommand CategoryCommand { get; }
-			private readonly bool _showDesc;
-			public CategoryButton(string name, string desc, bool showDesc, string colorCode, string colorHoverCode, Action action) {
+			public CategoryButton(string name, string desc, string colorCode, string colorHoverCode, Action action) {
 				CategoryName = name;
 				CategoryDesc = desc;
-				_showDesc = showDesc;
 				CategoryColor = colorCode;
 				CategoryHoverColor = colorHoverCode;
 				CategoryCommand = new RelayCommand(action);
@@ -55,7 +55,7 @@ namespace TouhouLauncher.ViewModel {
 			public string GameName {
 				get {
 					if (_game.Subtitle.Length != 0) {
-						return _game.Title + ": " + _game.Subtitle;
+						return _game.Title + ":\n" + _game.Subtitle;
 					}
 					return _game.Title;
 				}
@@ -70,7 +70,37 @@ namespace TouhouLauncher.ViewModel {
 				});
 			}
 		}
-		private void SetCategory() {
+		private void SetCategoryPC98() {
+			GameList.Clear();
+			foreach (Game game in _gameModel.MainPC98Games) {
+				GameList.Add(new GameButton(game));
+			}
+		}
+		private void SetCategoryWindows() {
+			GameList.Clear();
+			foreach (Game game in _gameModel.MainWindowsGames) {
+				GameList.Add(new GameButton(game));
+			}
+		}
+		private void SetCategoryFighting() {
+			GameList.Clear();
+			foreach (Game game in _gameModel.FightingGames) {
+				GameList.Add(new GameButton(game));
+			}
+		}
+		private void SetCategorySpinOff() {
+			GameList.Clear();
+			foreach (Game game in _gameModel.SpinOffGames) {
+				GameList.Add(new GameButton(game));
+			}
+		}
+		private void SetCategoryFanGame() {
+			GameList.Clear();
+			foreach (Game game in _gameModel.FanGames) {
+				GameList.Add(new GameButton(game));
+			}
+		}
+		private void LaunchRandom() {
 
 		}
 	}
