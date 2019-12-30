@@ -35,6 +35,7 @@ namespace TouhouLauncher.Model {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 1996,
+					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.GameCategory.MainPC98
 				},
@@ -44,6 +45,7 @@ namespace TouhouLauncher.Model {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 1997,
+					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.GameCategory.MainPC98
 				},
@@ -53,6 +55,7 @@ namespace TouhouLauncher.Model {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 1997,
+					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.GameCategory.MainPC98
 				},
@@ -62,6 +65,7 @@ namespace TouhouLauncher.Model {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 1998,
+					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.GameCategory.MainPC98
 				},
@@ -71,6 +75,7 @@ namespace TouhouLauncher.Model {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 1998,
+					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.GameCategory.MainPC98
 				},
@@ -80,6 +85,7 @@ namespace TouhouLauncher.Model {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2002,
+					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.GameCategory.MainWindows
 				},
@@ -89,6 +95,7 @@ namespace TouhouLauncher.Model {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2003,
+					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.GameCategory.MainWindows
 				}

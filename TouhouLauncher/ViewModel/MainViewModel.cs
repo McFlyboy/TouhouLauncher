@@ -1,7 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Model;
@@ -10,10 +9,14 @@ using TouhouLauncher.Model.GameInfo;
 namespace TouhouLauncher.ViewModel {
 	public class MainViewModel : ViewModelBase {
 		public ObservableCollection<CategoryButton> CategoryList { get; }
-		public string CategoryPadding { get { return "10, 0"; } }
+		public string CategoryPadding {
+			get {
+				return string.Format("{0}, 0", CategoryList.Count > 5 ? 10 : 30);
+			}
+		}
 		public ObservableCollection<GameButton> GameList { get; }
 
-		private GameModel _gameModel;
+		private readonly GameModel _gameModel;
 		private readonly string _standardCategoryColorCode = "#342E30";
 		private readonly string _standardCategoryColorHoverCode = "#453F41";
 		public MainViewModel() {
@@ -27,20 +30,17 @@ namespace TouhouLauncher.ViewModel {
 				new CategoryButton("LAUNCH\nRANDOM GAME", "", false, "#4284C4", "#5395D5", SetCategory)
 			};
 			GameList = new ObservableCollection<GameButton>();
-			List<OfficialGame> games = _gameModel.MainPC98Games;
-			for (int i = 0; i < games.Count; i++) {
-				GameList.Add(new GameButton(games[i].Title + ": " + games[i].Subtitle, () => {
-					games[i].Launch();
-				}));
+			foreach (OfficialGame game in _gameModel.MainPC98Games) {
+				GameList.Add(new GameButton(game));
 			}
 		}
 		public class CategoryButton {
-			public string CategoryName { get; set; }
-			public string CategoryDesc { get; set; }
+			public string CategoryName { get; }
+			public string CategoryDesc { get; }
 			public int CategoryDescHeight { get { return _showDesc ? 15 : 0; } }
-			public string CategoryColor { get; set; }
-			public string CategoryHoverColor { get; set; }
-			public ICommand CategoryCommand { get; set; }
+			public string CategoryColor { get; }
+			public string CategoryHoverColor { get; }
+			public ICommand CategoryCommand { get; }
 			private readonly bool _showDesc;
 			public CategoryButton(string name, string desc, bool showDesc, string colorCode, string colorHoverCode, Action action) {
 				CategoryName = name;
@@ -52,11 +52,22 @@ namespace TouhouLauncher.ViewModel {
 			}
 		}
 		public class GameButton {
-			public string GameName { get; set; }
-			public ICommand GameCommand { get; set; }
-			public GameButton(string gameName, Action action) {
-				GameName = gameName;
-				GameCommand = new RelayCommand(action);
+			public string GameName {
+				get {
+					if (_game.Subtitle.Length != 0) {
+						return _game.Title + ": " + _game.Subtitle;
+					}
+					return _game.Title;
+				}
+			}
+			public ICommand GameCommand { get; }
+
+			private readonly Game _game;
+			public GameButton(Game game) {
+				_game = game;
+				GameCommand = new RelayCommand(() => {
+					_game.Launch();
+				});
 			}
 		}
 		private void SetCategory() {
