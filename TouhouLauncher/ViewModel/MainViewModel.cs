@@ -8,47 +8,58 @@ using TouhouLauncher.Model.GameInfo;
 
 namespace TouhouLauncher.ViewModel {
 	public class MainViewModel : ViewModelBase {
-		public ObservableCollection<CategoryButton> CategoryList { get; }
-		public string CategoryPadding {
+		public ObservableCollection<HeaderButton> HeaderList { get; }
+		public string HeaderPadding {
 			get {
-				return string.Format("{0}, 0", CategoryList.Count > 5 ? 10 : 30);
+				return string.Format("{0}, 0", HeaderList.Count > 5 ? 10 : 30);
 			}
 		}
 		public ObservableCollection<GameButton> GameList { get; }
 
 		private readonly GameModel _gameModel;
-		private readonly string _categoryColorCode = "#342E30";
-		private readonly string _categoryColorHoverCode = "#453F41";
-		private readonly string _launchRandomColorCode = "#4284C4";
-		private readonly string _launchRandomColorHoverCode = "#5395D5";
 		public MainViewModel() {
 			_gameModel = new GameModel();
-			CategoryList = new ObservableCollection<CategoryButton> {
-				new CategoryButton("MAIN GAMES", "(PC-98)", _categoryColorCode, _categoryColorHoverCode, SetCategoryPC98),
-				new CategoryButton("MAIN GAMES", "(WINDOWS)", _categoryColorCode, _categoryColorHoverCode, SetCategoryWindows),
-				new CategoryButton("FIGHTING\nGAMES", "", _categoryColorCode, _categoryColorHoverCode, SetCategoryFighting),
-				new CategoryButton("SPIN-OFFS", "", _categoryColorCode, _categoryColorHoverCode, SetCategorySpinOff),
-				new CategoryButton("FAN GAMES", "", _categoryColorCode, _categoryColorHoverCode, SetCategoryFanGame),
-				new CategoryButton("LAUNCH\nRANDOM GAME", "", _launchRandomColorCode, _launchRandomColorHoverCode, LaunchRandom)
+			HeaderList = new ObservableCollection<HeaderButton> {
+				new CategoryHeaderButton("MAIN GAMES", "(PC-98)", SetCurrentCategories, Game.GameCategory.MainPC98),
+				new CategoryHeaderButton("MAIN GAMES", "(WINDOWS)", SetCurrentCategories, Game.GameCategory.MainWindows),
+				new CategoryHeaderButton("FIGHTING\nGAMES", "", SetCurrentCategories, Game.GameCategory.FightingGame),
+				new CategoryHeaderButton("SPIN-OFFS", "", SetCurrentCategories, Game.GameCategory.SpinOff),
+				new CategoryHeaderButton("FAN GAMES", "", SetCurrentCategories, Game.GameCategory.FanGame),
+				new HeaderButton("LAUNCH\nRANDOM GAME", "", "#4284C4", "#5395D5", LaunchRandom)
 			};
 			GameList = new ObservableCollection<GameButton>();
-			foreach (OfficialGame game in _gameModel.MainPC98Games) {
+			foreach (OfficialGame game in _gameModel.FilterGames(Game.GameCategory.MainPC98)) {
 				GameList.Add(new GameButton(game));
 			}
 		}
-		public class CategoryButton {
-			public string CategoryName { get; }
-			public string CategoryDesc { get; }
-			public int CategoryDescHeight { get { return CategoryDesc.Length != 0 ? 15 : 0; } }
-			public string CategoryColor { get; }
-			public string CategoryHoverColor { get; }
-			public ICommand CategoryCommand { get; }
-			public CategoryButton(string name, string desc, string colorCode, string colorHoverCode, Action action) {
-				CategoryName = name;
-				CategoryDesc = desc;
-				CategoryColor = colorCode;
-				CategoryHoverColor = colorHoverCode;
-				CategoryCommand = new RelayCommand(action);
+		public class HeaderButton {
+			public string HeaderName { get; }
+			public string HeaderDesc { get; }
+			public int HeaderDescHeight { get { return HeaderDesc.Length != 0 ? 15 : 0; } }
+			public string HeaderColor { get; }
+			public string HeaderHoverColor { get; }
+			public ICommand HeaderCommand { get; protected set; }
+			public HeaderButton(string name, string desc, string colorCode, string colorHoverCode, Action action) {
+				HeaderName = name;
+				HeaderDesc = desc;
+				HeaderColor = colorCode;
+				HeaderHoverColor = colorHoverCode;
+				if (action != null) {
+					HeaderCommand = new RelayCommand(action);
+				}
+			}
+		}
+		public class CategoryHeaderButton : HeaderButton {
+			private readonly Action<Game.GameCategory> _categoryAction;
+			private readonly Game.GameCategory _categoryFlags;
+			public CategoryHeaderButton(string name, string desc, Action<Game.GameCategory> action, Game.GameCategory categoryFlags) :
+				base(name, desc, "#342E30", "#453F41", null)
+			{
+				_categoryFlags = categoryFlags;
+				_categoryAction = action;
+				HeaderCommand = new RelayCommand(() => {
+					_categoryAction(_categoryFlags);
+				});
 			}
 		}
 		public class GameButton {
@@ -70,34 +81,15 @@ namespace TouhouLauncher.ViewModel {
 				});
 			}
 		}
-		private void SetCategoryPC98() {
+		private void SetCurrentCategories(Game.GameCategory categoryFlags) {
 			GameList.Clear();
-			foreach (Game game in _gameModel.MainPC98Games) {
-				GameList.Add(new GameButton(game));
-			}
-		}
-		private void SetCategoryWindows() {
-			GameList.Clear();
-			foreach (Game game in _gameModel.MainWindowsGames) {
-				GameList.Add(new GameButton(game));
-			}
-		}
-		private void SetCategoryFighting() {
-			GameList.Clear();
-			foreach (Game game in _gameModel.FightingGames) {
-				GameList.Add(new GameButton(game));
-			}
-		}
-		private void SetCategorySpinOff() {
-			GameList.Clear();
-			foreach (Game game in _gameModel.SpinOffGames) {
-				GameList.Add(new GameButton(game));
-			}
-		}
-		private void SetCategoryFanGame() {
-			GameList.Clear();
-			foreach (Game game in _gameModel.FanGames) {
-				GameList.Add(new GameButton(game));
+			for (int i = (int)Game.GameCategory.First; i < (int)Game.GameCategory.Last; i <<= 1) {
+				if ((i & (int)categoryFlags) == 0) {
+					continue;
+				}
+				foreach (Game game in _gameModel.FilterGames((Game.GameCategory)i)) {
+					GameList.Add(new GameButton(game));
+				}
 			}
 		}
 		private void LaunchRandom() {

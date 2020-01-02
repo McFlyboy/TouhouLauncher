@@ -3,26 +3,6 @@ using TouhouLauncher.Model.GameInfo;
 
 namespace TouhouLauncher.Model {
 	public class GameModel {
-		public List<OfficialGame> MainPC98Games {
-			get {
-				return FilterOfficialGames(OfficialGame.GameCategory.MainPC98);
-			}
-		}
-		public List<OfficialGame> MainWindowsGames {
-			get {
-				return FilterOfficialGames(OfficialGame.GameCategory.MainWindows);
-			}
-		}
-		public List<OfficialGame> FightingGames {
-			get {
-				return FilterOfficialGames(OfficialGame.GameCategory.FightingGame);
-			}
-		}
-		public List<OfficialGame> SpinOffGames {
-			get {
-				return FilterOfficialGames(OfficialGame.GameCategory.SpinOff);
-			}
-		}
 		public List<FanGame> FanGames { get; set; }
 
 		private readonly OfficialGame[] _officialGames;
@@ -37,7 +17,7 @@ namespace TouhouLauncher.Model {
 					ReleaseYear = 1996,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = OfficialGame.GameCategory.MainPC98
+					Category = Game.GameCategory.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 02",
@@ -47,7 +27,7 @@ namespace TouhouLauncher.Model {
 					ReleaseYear = 1997,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = OfficialGame.GameCategory.MainPC98
+					Category = Game.GameCategory.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 03",
@@ -57,7 +37,7 @@ namespace TouhouLauncher.Model {
 					ReleaseYear = 1997,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = OfficialGame.GameCategory.MainPC98
+					Category = Game.GameCategory.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 04",
@@ -67,7 +47,7 @@ namespace TouhouLauncher.Model {
 					ReleaseYear = 1998,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = OfficialGame.GameCategory.MainPC98
+					Category = Game.GameCategory.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 05",
@@ -77,7 +57,7 @@ namespace TouhouLauncher.Model {
 					ReleaseYear = 1998,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = OfficialGame.GameCategory.MainPC98
+					Category = Game.GameCategory.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 06",
@@ -87,7 +67,7 @@ namespace TouhouLauncher.Model {
 					ReleaseYear = 2002,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = OfficialGame.GameCategory.MainWindows
+					Category = Game.GameCategory.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 07",
@@ -97,14 +77,21 @@ namespace TouhouLauncher.Model {
 					ReleaseYear = 2003,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = OfficialGame.GameCategory.MainWindows
+					Category = Game.GameCategory.MainWindows
 				}
 			};
 		}
-		private List<OfficialGame> FilterOfficialGames(OfficialGame.GameCategory category) {
-			List<OfficialGame> games = new List<OfficialGame>();
-			foreach (var game in _officialGames) {
-				if (game.Category == category) {
+		public List<Game> FilterGames(Game.GameCategory category) {
+			List<Game> games = new List<Game>();
+			if (category != Game.GameCategory.FanGame) {
+				foreach (var game in _officialGames) {
+					if (game.Category == category) {
+						games.Add(game);
+					}
+				}
+			}
+			else {
+				foreach (var game in FanGames) {
 					games.Add(game);
 				}
 			}
