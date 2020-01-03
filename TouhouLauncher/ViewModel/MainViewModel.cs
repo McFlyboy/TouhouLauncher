@@ -28,7 +28,7 @@ namespace TouhouLauncher.ViewModel {
 				new HeaderButton("LAUNCH\nRANDOM GAME", "", "#4284C4", "#5395D5", LaunchRandom)
 			};
 			GameList = new ObservableCollection<GameButton>();
-			foreach (OfficialGame game in _gameModel.FilterGames(Game.GameCategory.MainPC98)) {
+			foreach (OfficialGame game in _gameModel.FilterGames(Game.GameCategory.First)) {
 				GameList.Add(new GameButton(game));
 			}
 		}
@@ -69,6 +69,11 @@ namespace TouhouLauncher.ViewModel {
 						return _game.Title + ":\n" + _game.Subtitle;
 					}
 					return _game.Title;
+				}
+			}
+			public string GameImage {
+				get {
+					return _game.ImageLocation;
 				}
 			}
 			public ICommand GameCommand { get; }

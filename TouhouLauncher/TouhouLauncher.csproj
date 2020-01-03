@@ -143,7 +143,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH01.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Cogwheel.png" />
   </ItemGroup>

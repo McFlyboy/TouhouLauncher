@@ -69,7 +69,11 @@
 					</ItemsControl.ItemsPanel>
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
-							<Button Content="{Binding GameName}" Command="{Binding GameCommand}" Cursor="Hand"  Width="170" Height="250" Margin="15, 20" Background="#FFFFFF">
+							<Button Command="{Binding GameCommand}" Cursor="Hand" Background="Gray" Width="170" Height="250" Margin="15, 20">
+								<Grid>
+									<Image Source="{Binding GameImage}"/>
+									<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap"/>
+								</Grid>
 								<Button.Effect>
 									<DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#766D82"/>
 								</Button.Effect>

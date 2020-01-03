@@ -12,7 +12,7 @@ namespace TouhouLauncher.Model {
 				new OfficialGame() {
 					Title = "Touhou 01",
 					Subtitle = "Highly Responsive to Prayers",
-					ImageLocation = "",
+					ImageLocation = "..\\Resources\\Images\\OfficialGames\\TH01.png",
 					AudioLocation = "",
 					ReleaseYear = 1996,
 					LocalFileLocation = "",
