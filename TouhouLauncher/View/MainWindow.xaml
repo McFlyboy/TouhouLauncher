@@ -69,7 +69,18 @@
 					</ItemsControl.ItemsPanel>
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
-							<Button Command="{Binding GameCommand}" Cursor="Hand" Background="Gray" Width="170" Height="250" Margin="15, 20">
+							<Button Command="{Binding GameCommand}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
+								<Button.Background>
+									<VisualBrush Viewbox="0.05, 0.05, 0.9, 0.9">
+										<VisualBrush.Visual>
+											<Image Source="{Binding GameImage}" Stretch="Fill">
+												<Image.Effect>
+													<BlurEffect Radius="50"/>
+												</Image.Effect>
+											</Image>
+										</VisualBrush.Visual>
+									</VisualBrush>
+								</Button.Background>
 								<Grid>
 									<Image Source="{Binding GameImage}"/>
 									<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap"/>
