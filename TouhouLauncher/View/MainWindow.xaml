@@ -70,30 +70,63 @@
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 							<Button Command="{Binding GameCommand}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
-								<Button.Background>
-									<VisualBrush Viewbox="0.05, 0.05, 0.9, 0.9">
-										<VisualBrush.Visual>
-											<Image Source="{Binding GameImage}" Stretch="Fill">
-												<Image.Effect>
-													<BlurEffect Radius="50"/>
-												</Image.Effect>
-											</Image>
-										</VisualBrush.Visual>
-									</VisualBrush>
-								</Button.Background>
-								<Grid>
-									<Image Source="{Binding GameImage}"/>
-									<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap"/>
-								</Grid>
-								<Button.Effect>
-									<DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#766D82"/>
-								</Button.Effect>
+								<Button.Template>
+									<ControlTemplate TargetType="Button">
+										<Grid>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="170"/>
+												<RowDefinition Height="80"/>
+											</Grid.RowDefinitions>
+											<Grid Grid.Row="0" Grid.RowSpan="2">
+												<Rectangle Fill="#342E30"/>
+												<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+												<Rectangle>
+													<Rectangle.Fill>
+														<VisualBrush Viewbox="0.1, 0.1, 0.8, 0.8">
+															<VisualBrush.Visual>
+																<Image Source="{Binding GameImage}">
+																	<Image.Effect>
+																		<BlurEffect Radius="50"/>
+																	</Image.Effect>
+																</Image>
+															</VisualBrush.Visual>
+														</VisualBrush>
+													</Rectangle.Fill>
+												</Rectangle>
+												<Rectangle>
+													<Rectangle.Fill>
+														<VisualBrush Stretch="Uniform">
+															<VisualBrush.Visual>
+																<Image Source="{Binding GameImage}"/>
+															</VisualBrush.Visual>
+														</VisualBrush>
+													</Rectangle.Fill>
+												</Rectangle>
+											</Grid>
+											<Rectangle Grid.Row="1">
+												<Rectangle.Fill>
+													<VisualBrush Stretch="None">
+														<VisualBrush.Visual>
+															<Grid>
+																<Rectangle Fill="#3F2E3F"/>
+																<DockPanel LastChildFill="False" Margin="10, 3" Width="150" Height="80">
+																	<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="15" TextWrapping="Wrap" DockPanel.Dock="Top"/>
+																	<TextBlock Text="{Binding GameReleaseYear}" Margin="0, 2" Foreground="#CCCCCC" FontSize="12" FontStyle="Italic" TextWrapping="Wrap" DockPanel.Dock="Bottom"/>
+																</DockPanel>
+															</Grid>
+														</VisualBrush.Visual>
+													</VisualBrush>
+												</Rectangle.Fill>
+											</Rectangle>
+										</Grid>
+									</ControlTemplate>
+								</Button.Template>
 							</Button>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
 			</ScrollViewer>
-			<Button Background="#2E2E2E" BorderThickness="0" Cursor="Hand" Width="60" Height="60" Margin="855, 530, 0, 0" Padding="10, 10">
+			<Button Background="#2E2E2E" BorderThickness="0" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" Padding="10, 10">
 				<Button.Resources>
 					<Style TargetType="Border">
 						<Setter Property="CornerRadius" Value="25"/>
