@@ -25,31 +25,25 @@
 					<Grid>
 						<Rectangle Width="140" Height="70" Fill="#3A3541" RadiusX="2" RadiusY="2" Margin="20, 20, 0, 0"/>
 						<Button Command="{Binding HeaderCommand}" Cursor="Hand" Width="140" Height="70" BorderThickness="0">
-							<Button.Style>
-								<Style TargetType="Button">
-									<Setter Property="Template">
-										<Setter.Value>
-											<ControlTemplate TargetType="Button">
-												<Border CornerRadius="2">
-													<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-													<Border.Style>
-														<Style TargetType="Border">
-															<Style.Triggers>
-																<Trigger Property="IsMouseOver" Value="True">
-																	<Setter Property="Background" Value="{Binding HeaderHoverColor}"/>
-																</Trigger>
-																<Trigger Property="IsMouseOver" Value="False">
-																	<Setter Property="Background" Value="{Binding HeaderColor}"/>
-																</Trigger>
-															</Style.Triggers>
-														</Style>
-													</Border.Style>
-												</Border>
-											</ControlTemplate>
-										</Setter.Value>
-									</Setter>
-								</Style>
-							</Button.Style>
+							<Button.Template>
+								<ControlTemplate TargetType="Button">
+									<Border CornerRadius="2">
+										<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										<Border.Style>
+											<Style TargetType="Border">
+												<Style.Triggers>
+													<Trigger Property="IsMouseOver" Value="True">
+														<Setter Property="Background" Value="{Binding HeaderHoverColor}"/>
+													</Trigger>
+													<Trigger Property="IsMouseOver" Value="False">
+														<Setter Property="Background" Value="{Binding HeaderColor}"/>
+													</Trigger>
+												</Style.Triggers>
+											</Style>
+										</Border.Style>
+									</Border>
+								</ControlTemplate>
+							</Button.Template>
 							<StackPanel>
 								<TextBlock Text="{Binding HeaderName}" TextAlignment="Center" Foreground="#FFFFFF" FontSize="17"/>
 								<TextBlock Text="{Binding HeaderDesc}" TextAlignment="Center" Height="{Binding HeaderDescHeight}" Foreground="#FFFFFF" FontSize="12"/>
@@ -72,47 +66,37 @@
 							<Button Command="{Binding GameCommand}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
 								<Button.Template>
 									<ControlTemplate TargetType="Button">
-										<Grid>
-											<Grid.RowDefinitions>
-												<RowDefinition Height="170"/>
-												<RowDefinition Height="80"/>
-											</Grid.RowDefinitions>
-											<Grid Grid.Row="0" Grid.RowSpan="2">
-												<Rectangle Fill="#342E30"/>
-												<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-												<Rectangle>
-													<Rectangle.Fill>
-														<VisualBrush Viewbox="0.1, 0.1, 0.8, 0.8">
-															<VisualBrush.Visual>
-																<Image Source="{Binding GameImage}">
-																	<Image.Effect>
-																		<BlurEffect Radius="50"/>
-																	</Image.Effect>
-																</Image>
-															</VisualBrush.Visual>
-														</VisualBrush>
-													</Rectangle.Fill>
-												</Rectangle>
-												<Rectangle>
-													<Rectangle.Fill>
-														<VisualBrush Stretch="Uniform">
-															<VisualBrush.Visual>
-																<Image Source="{Binding GameImage}"/>
-															</VisualBrush.Visual>
-														</VisualBrush>
-													</Rectangle.Fill>
-												</Rectangle>
-											</Grid>
-											<Rectangle Grid.Row="1">
+										<Grid Width="170" Height="250">
+											<Rectangle Fill="#342E30"/>
+											<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+											<Rectangle>
 												<Rectangle.Fill>
-													<VisualBrush Stretch="None">
+													<VisualBrush Viewbox="0.1, 0.1, 0.8, 0.8">
 														<VisualBrush.Visual>
-															<Grid>
+															<Image Source="{Binding GameImage}">
+																<Image.Effect>
+																	<BlurEffect Radius="50"/>
+																</Image.Effect>
+															</Image>
+														</VisualBrush.Visual>
+													</VisualBrush>
+												</Rectangle.Fill>
+											</Rectangle>
+											<Rectangle>
+												<Rectangle.Fill>
+													<VisualBrush Stretch="Uniform">
+														<VisualBrush.Visual>
+															<Image Source="{Binding GameImage}"/>
+														</VisualBrush.Visual>
+													</VisualBrush>
+												</Rectangle.Fill>
+											</Rectangle>
+											<Rectangle>
+												<Rectangle.Fill>
+													<VisualBrush Stretch="Uniform" Viewbox="0, -0.5, 1, 1">
+														<VisualBrush.Visual>
+															<Grid Width="170" Height="250">
 																<Rectangle Fill="#3F2E3F"/>
-																<DockPanel LastChildFill="False" Margin="10, 3" Width="150" Height="80">
-																	<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="15" TextWrapping="Wrap" DockPanel.Dock="Top"/>
-																	<TextBlock Text="{Binding GameReleaseYear}" Margin="0, 2" Foreground="#CCCCCC" FontSize="12" FontStyle="Italic" TextWrapping="Wrap" DockPanel.Dock="Bottom"/>
-																</DockPanel>
 															</Grid>
 														</VisualBrush.Visual>
 													</VisualBrush>
