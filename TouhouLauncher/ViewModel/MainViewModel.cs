@@ -76,6 +76,11 @@ namespace TouhouLauncher.ViewModel {
 					return _game.ImageLocation;
 				}
 			}
+			public string GameReleaseYear {
+				get {
+					return _game.ReleaseYear.ToString();
+				}
+			}
 			public ICommand GameCommand { get; }
 
 			private readonly Game _game;

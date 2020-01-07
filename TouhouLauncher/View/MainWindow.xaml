@@ -25,31 +25,29 @@
 					<Grid>
 						<Rectangle Width="140" Height="70" Fill="#3A3541" RadiusX="2" RadiusY="2" Margin="20, 20, 0, 0"/>
 						<Button Command="{Binding HeaderCommand}" Cursor="Hand" Width="140" Height="70" BorderThickness="0">
-							<Button.Style>
-								<Style TargetType="Button">
-									<Setter Property="Template">
-										<Setter.Value>
-											<ControlTemplate TargetType="Button">
-												<Border CornerRadius="2">
-													<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-													<Border.Style>
-														<Style TargetType="Border">
-															<Style.Triggers>
-																<Trigger Property="IsMouseOver" Value="True">
-																	<Setter Property="Background" Value="{Binding HeaderHoverColor}"/>
-																</Trigger>
-																<Trigger Property="IsMouseOver" Value="False">
-																	<Setter Property="Background" Value="{Binding HeaderColor}"/>
-																</Trigger>
-															</Style.Triggers>
-														</Style>
-													</Border.Style>
-												</Border>
-											</ControlTemplate>
-										</Setter.Value>
-									</Setter>
-								</Style>
-							</Button.Style>
+							<Button.Template>
+								<ControlTemplate TargetType="Button">
+									<Border CornerRadius="2" Background="{Binding HeaderColor}">
+										<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										<Border.Triggers>
+											<EventTrigger RoutedEvent="Mouse.MouseEnter">
+												<BeginStoryboard>
+													<Storyboard>
+														<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="{Binding HeaderHoverColor}"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+											<EventTrigger RoutedEvent="Mouse.MouseLeave">
+												<BeginStoryboard>
+													<Storyboard>
+														<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="{Binding HeaderColor}"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+										</Border.Triggers>
+									</Border>
+								</ControlTemplate>
+							</Button.Template>
 							<StackPanel>
 								<TextBlock Text="{Binding HeaderName}" TextAlignment="Center" Foreground="#FFFFFF" FontSize="17"/>
 								<TextBlock Text="{Binding HeaderDesc}" TextAlignment="Center" Height="{Binding HeaderDescHeight}" Foreground="#FFFFFF" FontSize="12"/>
@@ -70,30 +68,65 @@
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 							<Button Command="{Binding GameCommand}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
-								<Button.Background>
-									<VisualBrush Viewbox="0.05, 0.05, 0.9, 0.9">
-										<VisualBrush.Visual>
-											<Image Source="{Binding GameImage}" Stretch="Fill">
-												<Image.Effect>
-													<BlurEffect Radius="50"/>
-												</Image.Effect>
-											</Image>
-										</VisualBrush.Visual>
-									</VisualBrush>
-								</Button.Background>
-								<Grid>
-									<Image Source="{Binding GameImage}"/>
-									<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap"/>
-								</Grid>
-								<Button.Effect>
-									<DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#766D82"/>
-								</Button.Effect>
+								<Button.Template>
+									<ControlTemplate TargetType="Button">
+										<Grid ClipToBounds="True">
+											<Rectangle Fill="#342E30"/>
+											<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+											<Rectangle>
+												<Rectangle.Fill>
+													<VisualBrush Viewbox="0.1, 0.1, 0.8, 0.8">
+														<VisualBrush.Visual>
+															<Image Source="{Binding GameImage}">
+																<Image.Effect>
+																	<BlurEffect Radius="50"/>
+																</Image.Effect>
+															</Image>
+														</VisualBrush.Visual>
+													</VisualBrush>
+												</Rectangle.Fill>
+											</Rectangle>
+											<Rectangle>
+												<Rectangle.Fill>
+													<VisualBrush Stretch="Uniform">
+														<VisualBrush.Visual>
+															<Image Source="{Binding GameImage}"/>
+														</VisualBrush.Visual>
+													</VisualBrush>
+												</Rectangle.Fill>
+											</Rectangle>
+											<Grid>
+												<Grid.RenderTransform>
+													<TranslateTransform x:Name="GameButtonOverlayPosition" Y="250"/>
+												</Grid.RenderTransform>
+												<Rectangle Fill="#3F2E3F"/>
+												<TextBlock Text="{Binding GameName}" FontSize="16" TextWrapping="Wrap"/>
+											</Grid>
+										</Grid>
+										<ControlTemplate.Triggers>
+											<EventTrigger RoutedEvent="Mouse.MouseEnter">
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlayPosition" Storyboard.TargetProperty="(TranslateTransform.Y)" To="0"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+											<EventTrigger RoutedEvent="Mouse.MouseLeave">
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlayPosition" Storyboard.TargetProperty="(TranslateTransform.Y)" To="250"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Button.Template>
 							</Button>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
 			</ScrollViewer>
-			<Button Background="#2E2E2E" BorderThickness="0" Cursor="Hand" Width="60" Height="60" Margin="855, 530, 0, 0" Padding="10, 10">
+			<Button Background="#2E2E2E" BorderThickness="0" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" Padding="10, 10">
 				<Button.Resources>
 					<Style TargetType="Border">
 						<Setter Property="CornerRadius" Value="25"/>
