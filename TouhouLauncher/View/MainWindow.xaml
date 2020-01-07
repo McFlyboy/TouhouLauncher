@@ -99,8 +99,8 @@
 												<Grid.RenderTransform>
 													<TranslateTransform x:Name="GameButtonOverlayPosition" Y="250"/>
 												</Grid.RenderTransform>
-												<Rectangle Fill="#3F2E3F"/>
-												<TextBlock Text="{Binding GameName}" FontSize="16" TextWrapping="Wrap"/>
+												<Rectangle Fill="#3A2E3F"/>
+												<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="22" TextWrapping="Wrap"/>
 											</Grid>
 										</Grid>
 										<ControlTemplate.Triggers>
@@ -126,13 +126,30 @@
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
 			</ScrollViewer>
-			<Button Background="#2E2E2E" BorderThickness="0" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" Padding="10, 10">
-				<Button.Resources>
-					<Style TargetType="Border">
-						<Setter Property="CornerRadius" Value="25"/>
-					</Style>
-				</Button.Resources>
-				<Image Source="..\Resources\Images\Cogwheel.png"/>
+			<Button BorderThickness="0" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" Padding="10, 10" ToolTip="Settings">
+				<Button.Template>
+					<ControlTemplate TargetType="Button">
+						<Border Background="#342E30" CornerRadius="25">
+							<Image Source="..\Resources\Images\Cogwheel.png" Margin="10, 10"/>
+							<Border.Triggers>
+								<EventTrigger RoutedEvent="Mouse.MouseEnter">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#453F41"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+								<EventTrigger RoutedEvent="Mouse.MouseLeave">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#342E30"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+							</Border.Triggers>
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
 			</Button>
 		</Grid>
 	</Grid>
