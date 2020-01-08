@@ -144,10 +144,34 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\OfficialGames\TH01.png" />
+    <Resource Include="Resources\Images\OfficialGames\alts\TH01.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Cogwheel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\alts\TH02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH05.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH06.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH07.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

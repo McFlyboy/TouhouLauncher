@@ -78,7 +78,7 @@ namespace TouhouLauncher.ViewModel {
 			}
 			public string GameReleaseYear {
 				get {
-					return _game.ReleaseYear.ToString();
+					return "Release: " + _game.ReleaseYear.ToString();
 				}
 			}
 			public ICommand GameCommand { get; }
