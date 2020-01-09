@@ -20,24 +20,29 @@ namespace TouhouLauncher.ViewModel {
 		public MainViewModel() {
 			_gameModel = new GameModel();
 			HeaderList = new ObservableCollection<HeaderButton> {
-				new CategoryHeaderButton("MAIN GAMES", "(PC-98)", SetCurrentCategories, Game.GameCategory.MainPC98),
-				new CategoryHeaderButton("MAIN GAMES", "(WINDOWS)", SetCurrentCategories, Game.GameCategory.MainWindows),
-				new CategoryHeaderButton("FIGHTING\nGAMES", "", SetCurrentCategories, Game.GameCategory.FightingGame),
-				new CategoryHeaderButton("SPIN-OFFS", "", SetCurrentCategories, Game.GameCategory.SpinOff),
-				new CategoryHeaderButton("FAN GAMES", "", SetCurrentCategories, Game.GameCategory.FanGame),
+				new CategoryHeaderButton("MAIN GAMES", "(PC-98)", this, Game.GameCategory.MainPC98),
+				new CategoryHeaderButton("MAIN GAMES", "(WINDOWS)", this, Game.GameCategory.MainWindows),
+				new CategoryHeaderButton("FIGHTING\nGAMES", "", this, Game.GameCategory.FightingGame),
+				new CategoryHeaderButton("SPIN-OFFS", "", this, Game.GameCategory.SpinOff),
+				new CategoryHeaderButton("FAN GAMES", "", this, Game.GameCategory.FanGame),
 				new HeaderButton("LAUNCH\nRANDOM GAME", "", "#4284C4", "#5395D5", LaunchRandom)
 			};
 			GameList = new ObservableCollection<GameButton>();
-			foreach (OfficialGame game in _gameModel.FilterGames(Game.GameCategory.First)) {
-				GameList.Add(new GameButton(game));
-			}
+			CategoryHeaderButton firstCategoryButton = (CategoryHeaderButton)HeaderList[1];
+			SetCurrentCategories(firstCategoryButton.CategoryFlags);
+			firstCategoryButton.ActiveCategoryButton = true;
 		}
-		public class HeaderButton {
+		public class HeaderButton : ObservableObject {
 			public string HeaderName { get; }
 			public string HeaderDesc { get; }
 			public int HeaderDescHeight { get { return HeaderDesc.Length != 0 ? 15 : 0; } }
-			public string HeaderColor { get; }
-			public string HeaderHoverColor { get; }
+			public virtual string HeaderColor { get; }
+			public virtual string HeaderHoverColor { get; }
+			public virtual string HeaderTextColor {
+				get {
+					return "#FFFFFF";
+				}
+			}
 			public ICommand HeaderCommand { get; protected set; }
 			public HeaderButton(string name, string desc, string colorCode, string colorHoverCode, Action action) {
 				HeaderName = name;
@@ -50,15 +55,37 @@ namespace TouhouLauncher.ViewModel {
 			}
 		}
 		public class CategoryHeaderButton : HeaderButton {
-			private readonly Action<Game.GameCategory> _categoryAction;
-			private readonly Game.GameCategory _categoryFlags;
-			public CategoryHeaderButton(string name, string desc, Action<Game.GameCategory> action, Game.GameCategory categoryFlags) :
-				base(name, desc, "#342E30", "#453F41", null)
+			public bool ActiveCategoryButton { get; set; }
+			public override string HeaderColor {
+				get {
+					return ActiveCategoryButton ? "#FFFFFF" : "#342E30";
+				}
+			}
+			public override string HeaderHoverColor {
+				get {
+					return ActiveCategoryButton ? "#FFFFFF" : "#453F41";
+				}
+			}
+			public override string HeaderTextColor {
+				get {
+					return ActiveCategoryButton ? "#342E30" : "#FFFFFF";
+				}
+			}
+			public Game.GameCategory CategoryFlags { get; private set; }
+
+			private readonly MainViewModel _parent;
+
+			public CategoryHeaderButton(string name, string desc, MainViewModel parent, Game.GameCategory categoryFlags) :
+				base(name, desc, "", "", null)
 			{
-				_categoryFlags = categoryFlags;
-				_categoryAction = action;
+				_parent = parent;
+				CategoryFlags = categoryFlags;
 				HeaderCommand = new RelayCommand(() => {
-					_categoryAction(_categoryFlags);
+					_parent.SetCurrentCategories(CategoryFlags);
+					ActiveCategoryButton = true;
+					RaisePropertyChanged("HeaderColor");
+					RaisePropertyChanged("HeaderHoverColor");
+					RaisePropertyChanged("HeaderTextColor");
 				});
 			}
 		}
@@ -93,6 +120,15 @@ namespace TouhouLauncher.ViewModel {
 		}
 		private void SetCurrentCategories(Game.GameCategory categoryFlags) {
 			GameList.Clear();
+			foreach (HeaderButton button in HeaderList) {
+				if (button.GetType() == typeof(CategoryHeaderButton)) {
+					CategoryHeaderButton catButton = (CategoryHeaderButton)button;
+					catButton.ActiveCategoryButton = false;
+					catButton.RaisePropertyChanged("HeaderColor");
+					catButton.RaisePropertyChanged("HeaderHoverColor");
+					catButton.RaisePropertyChanged("HeaderTextColor");
+				}
+			}
 			for (int i = (int)Game.GameCategory.First; i < (int)Game.GameCategory.Last; i <<= 1) {
 				if ((i & (int)categoryFlags) == 0) {
 					continue;
@@ -103,7 +139,7 @@ namespace TouhouLauncher.ViewModel {
 			}
 		}
 		private void LaunchRandom() {
-
+			
 		}
 	}
 }

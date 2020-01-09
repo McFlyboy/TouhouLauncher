@@ -49,8 +49,8 @@
 								</ControlTemplate>
 							</Button.Template>
 							<StackPanel>
-								<TextBlock Text="{Binding HeaderName}" TextAlignment="Center" Foreground="#FFFFFF" FontSize="17"/>
-								<TextBlock Text="{Binding HeaderDesc}" TextAlignment="Center" Height="{Binding HeaderDescHeight}" Foreground="#FFFFFF" FontSize="12"/>
+								<TextBlock Text="{Binding HeaderName}" TextAlignment="Center" Foreground="{Binding HeaderTextColor}" FontSize="17"/>
+								<TextBlock Text="{Binding HeaderDesc}" TextAlignment="Center" Height="{Binding HeaderDescHeight}" Foreground="{Binding HeaderTextColor}" FontSize="12"/>
 							</StackPanel>
 						</Button>
 					</Grid>
