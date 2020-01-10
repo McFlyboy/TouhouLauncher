@@ -43,6 +43,11 @@ namespace TouhouLauncher.ViewModel {
 					return "#FFFFFF";
 				}
 			}
+			public virtual bool HeaderEnabled {
+				get {
+					return true;
+				}
+			}
 			public ICommand HeaderCommand { get; protected set; }
 			public HeaderButton(string name, string desc, string colorCode, string colorHoverCode, Action action) {
 				HeaderName = name;
@@ -71,6 +76,11 @@ namespace TouhouLauncher.ViewModel {
 					return ActiveCategoryButton ? "#342E30" : "#FFFFFF";
 				}
 			}
+			public override bool HeaderEnabled {
+				get {
+					return !ActiveCategoryButton;
+				}
+			}
 			public Game.GameCategory CategoryFlags { get; private set; }
 
 			private readonly MainViewModel _parent;
@@ -86,6 +96,7 @@ namespace TouhouLauncher.ViewModel {
 					RaisePropertyChanged("HeaderColor");
 					RaisePropertyChanged("HeaderHoverColor");
 					RaisePropertyChanged("HeaderTextColor");
+					RaisePropertyChanged("HeaderEnabled");
 				});
 			}
 		}
@@ -127,6 +138,7 @@ namespace TouhouLauncher.ViewModel {
 					catButton.RaisePropertyChanged("HeaderColor");
 					catButton.RaisePropertyChanged("HeaderHoverColor");
 					catButton.RaisePropertyChanged("HeaderTextColor");
+					catButton.RaisePropertyChanged("HeaderEnabled");
 				}
 			}
 			for (int i = (int)Game.GameCategory.First; i < (int)Game.GameCategory.Last; i <<= 1) {

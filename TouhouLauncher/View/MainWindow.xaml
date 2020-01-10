@@ -24,7 +24,7 @@
 				<DataTemplate>
 					<Grid>
 						<Rectangle Width="140" Height="70" Fill="#3A3541" RadiusX="2" RadiusY="2" Margin="20, 20, 0, 0"/>
-						<Button Command="{Binding HeaderCommand}" Cursor="Hand" Width="140" Height="70" BorderThickness="0">
+						<Button Command="{Binding HeaderCommand}" Cursor="Hand" Width="140" Height="70" BorderThickness="0" IsEnabled="{Binding HeaderEnabled}">
 							<Button.Template>
 								<ControlTemplate TargetType="Button">
 									<Border CornerRadius="2" Background="{Binding HeaderColor}">
@@ -50,7 +50,7 @@
 							</Button.Template>
 							<StackPanel>
 								<TextBlock Text="{Binding HeaderName}" TextAlignment="Center" Foreground="{Binding HeaderTextColor}" FontSize="17"/>
-								<TextBlock Text="{Binding HeaderDesc}" TextAlignment="Center" Height="{Binding HeaderDescHeight}" Foreground="{Binding HeaderTextColor}" FontSize="12"/>
+								<TextBlock Text="{Binding HeaderDesc}" TextAlignment="Center" Foreground="{Binding HeaderTextColor}" FontSize="12" Height="{Binding HeaderDescHeight}"/>
 							</StackPanel>
 						</Button>
 					</Grid>

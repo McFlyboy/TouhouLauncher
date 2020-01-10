@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 
 namespace TouhouLauncher.Model.GameInfo {
@@ -14,9 +15,9 @@ namespace TouhouLauncher.Model.GameInfo {
 			if (LocalFileLocation.Length == 0) {
 				return;
 			}
-			Process proc = new Process();
-			proc.StartInfo.FileName = LocalFileLocation;
-			proc.Start();
+			ProcessStartInfo startInfo = new ProcessStartInfo(LocalFileLocation);
+			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);
+			Process.Start(startInfo);
 			if (exitOnLaunch) {
 				Application.Current.Shutdown();
 			}

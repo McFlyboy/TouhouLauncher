@@ -72,7 +72,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\Resources\\Images\\OfficialGames\\TH06.png",
 					AudioLocation = "",
 					ReleaseYear = 2002,
-					LocalFileLocation = "",
+					LocalFileLocation = "D:\\Games\\Touhou\\Touhou 06 The Embodiment of Scarlet Devil\\th06e.exe",
 					DownloadableFileLocation = "",
 					Category = Game.GameCategory.MainWindows
 				},
@@ -82,7 +82,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\Resources\\Images\\OfficialGames\\TH07.png",
 					AudioLocation = "",
 					ReleaseYear = 2003,
-					LocalFileLocation = "",
+					LocalFileLocation = "D:\\Games\\Touhou\\Touhou 07 Perfect Cherry Blossom\\th07e.exe",
 					DownloadableFileLocation = "",
 					Category = Game.GameCategory.MainWindows
 				}
