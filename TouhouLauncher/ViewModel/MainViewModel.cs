@@ -16,25 +16,24 @@ namespace TouhouLauncher.ViewModel {
 		}
 		public ObservableCollection<GameButton> GameList { get; }
 
-		private readonly GameModel _gameModel;
+		private readonly MainModel _mainModel;
 		public MainViewModel() {
-			_gameModel = new GameModel();
-			HeaderList = new ObservableCollection<HeaderButton> {
-				new CategoryHeaderButton("MAIN GAMES", "(PC-98)", this, Game.GameCategory.MainPC98),
-				new CategoryHeaderButton("MAIN GAMES", "(WINDOWS)", this, Game.GameCategory.MainWindows),
-				new CategoryHeaderButton("FIGHTING\nGAMES", "", this, Game.GameCategory.FightingGame),
-				new CategoryHeaderButton("SPIN-OFFS", "", this, Game.GameCategory.SpinOff),
-				new CategoryHeaderButton("FAN GAMES", "", this, Game.GameCategory.FanGame),
-				new HeaderButton("LAUNCH\nRANDOM GAME", "", "#4284C4", "#5395D5", LaunchRandom)
-			};
+			_mainModel = new MainModel();
 			GameList = new ObservableCollection<GameButton>();
-			CategoryHeaderButton firstCategoryButton = (CategoryHeaderButton)HeaderList[1];
-			SetCurrentCategories(firstCategoryButton.CategoryFlags);
-			firstCategoryButton.ActiveCategoryButton = true;
+			HeaderList = new ObservableCollection<HeaderButton>();
+			for (int i = 0; i < _mainModel.Categories.Count; i++) {
+				var button = new CategoryHeaderButton(this, _mainModel.Categories[i]);
+				if (i == _mainModel.ActiveCategory) {
+					button.ActiveCategoryButton = true;
+					SetCurrentCategories(button.CategoryFlags);
+				}
+				HeaderList.Add(button);
+			}
+			HeaderList.Add(new HeaderButton("LAUNCH\nRANDOM GAME", "", "#4284C4", "#5395D5", LaunchRandom));
 		}
 		public class HeaderButton : ObservableObject {
-			public string HeaderName { get; }
-			public string HeaderDesc { get; }
+			public string HeaderName { get; protected set; }
+			public string HeaderDesc { get; protected set; }
 			public int HeaderDescHeight { get { return HeaderDesc.Length != 0 ? 15 : 0; } }
 			public virtual string HeaderColor { get; }
 			public virtual string HeaderHoverColor { get; }
@@ -81,15 +80,40 @@ namespace TouhouLauncher.ViewModel {
 					return !ActiveCategoryButton;
 				}
 			}
-			public Game.GameCategory CategoryFlags { get; private set; }
+			public Game.CategoryFlag CategoryFlags { get; private set; }
 
 			private readonly MainViewModel _parent;
 
-			public CategoryHeaderButton(string name, string desc, MainViewModel parent, Game.GameCategory categoryFlags) :
-				base(name, desc, "", "", null)
+			public CategoryHeaderButton(MainViewModel parent, Game.CategoryFlag categoryFlags) :
+				base("", "", "", "", null)
 			{
 				_parent = parent;
 				CategoryFlags = categoryFlags;
+				switch (CategoryFlags) {
+					case Game.CategoryFlag.MainPC98:
+						HeaderName = "MAIN GAMES";
+						HeaderDesc = "(PC-98)";
+						break;
+					case Game.CategoryFlag.MainWindows:
+						HeaderName = "MAIN GAMES";
+						HeaderDesc = "(WINDOWS)";
+						break;
+					case Game.CategoryFlag.MainPC98 | Game.CategoryFlag.MainWindows:
+						HeaderName = "MAIN GAMES";
+						break;
+					case Game.CategoryFlag.FightingGame:
+						HeaderName = "FIGHTING\nGAMES";
+						break;
+					case Game.CategoryFlag.SpinOff:
+						HeaderName = "SPIN-OFFS";
+						break;
+					case Game.CategoryFlag.FanGame:
+						HeaderName = "FAN GAMES";
+						break;
+					default:
+						HeaderName = "Un-named\ncategory";
+						break;
+				}
 				HeaderCommand = new RelayCommand(() => {
 					_parent.SetCurrentCategories(CategoryFlags);
 					ActiveCategoryButton = true;
@@ -129,7 +153,7 @@ namespace TouhouLauncher.ViewModel {
 				});
 			}
 		}
-		private void SetCurrentCategories(Game.GameCategory categoryFlags) {
+		private void SetCurrentCategories(Game.CategoryFlag categoryFlags) {
 			GameList.Clear();
 			foreach (HeaderButton button in HeaderList) {
 				if (button.GetType() == typeof(CategoryHeaderButton)) {
@@ -141,11 +165,11 @@ namespace TouhouLauncher.ViewModel {
 					catButton.RaisePropertyChanged("HeaderEnabled");
 				}
 			}
-			for (int i = (int)Game.GameCategory.First; i < (int)Game.GameCategory.Last; i <<= 1) {
+			for (int i = (int)Game.CategoryFlag.First; i < (int)Game.CategoryFlag.Last; i <<= 1) {
 				if ((i & (int)categoryFlags) == 0) {
 					continue;
 				}
-				foreach (Game game in _gameModel.FilterGames((Game.GameCategory)i)) {
+				foreach (Game game in _mainModel.FilterGames((Game.CategoryFlag)i)) {
 					GameList.Add(new GameButton(game));
 				}
 			}

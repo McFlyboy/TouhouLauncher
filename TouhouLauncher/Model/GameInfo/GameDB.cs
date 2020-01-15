@@ -24,7 +24,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1996,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.GameCategory.MainPC98
+					Category = Game.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 02",
@@ -34,7 +34,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1997,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.GameCategory.MainPC98
+					Category = Game.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 03",
@@ -44,7 +44,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1997,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.GameCategory.MainPC98
+					Category = Game.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 04",
@@ -54,7 +54,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1998,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.GameCategory.MainPC98
+					Category = Game.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 05",
@@ -64,7 +64,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1998,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.GameCategory.MainPC98
+					Category = Game.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 06",
@@ -74,7 +74,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 2002,
 					LocalFileLocation = "D:\\Games\\Touhou\\Touhou 06 The Embodiment of Scarlet Devil\\th06e.exe",
 					DownloadableFileLocation = "",
-					Category = Game.GameCategory.MainWindows
+					Category = Game.CategoryFlag.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 07",
@@ -84,7 +84,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 2003,
 					LocalFileLocation = "D:\\Games\\Touhou\\Touhou 07 Perfect Cherry Blossom\\th07e.exe",
 					DownloadableFileLocation = "",
-					Category = Game.GameCategory.MainWindows
+					Category = Game.CategoryFlag.MainWindows
 				}
 			};
 			FanGames = new List<FanGame>();
