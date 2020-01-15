@@ -19,17 +19,16 @@ namespace TouhouLauncher.ViewModel {
 		private readonly MainModel _mainModel;
 		public MainViewModel() {
 			_mainModel = new MainModel();
-			GameList = new ObservableCollection<GameButton>();
 			HeaderList = new ObservableCollection<HeaderButton>();
 			for (int i = 0; i < _mainModel.Categories.Count; i++) {
-				var button = new CategoryHeaderButton(this, _mainModel.Categories[i]);
-				if (i == _mainModel.ActiveCategory) {
-					button.ActiveCategoryButton = true;
-					SetCurrentCategories(button.CategoryFlags);
-				}
+				var button = new CategoryHeaderButton(i, this);
 				HeaderList.Add(button);
 			}
 			HeaderList.Add(new HeaderButton("LAUNCH\nRANDOM GAME", "", "#4284C4", "#5395D5", LaunchRandom));
+			GameList = new ObservableCollection<GameButton>();
+			for (int i = 0; i < _mainModel.GameList.Count; i++) {
+				GameList.Add(new GameButton(i, this));
+			}
 		}
 		public class HeaderButton : ObservableObject {
 			public string HeaderName { get; protected set; }
@@ -59,37 +58,33 @@ namespace TouhouLauncher.ViewModel {
 			}
 		}
 		public class CategoryHeaderButton : HeaderButton {
-			public bool ActiveCategoryButton { get; set; }
 			public override string HeaderColor {
 				get {
-					return ActiveCategoryButton ? "#FFFFFF" : "#342E30";
+					return _id == _parent._mainModel.ActiveCategoryId ? "#FFFFFF" : "#342E30";
 				}
 			}
 			public override string HeaderHoverColor {
 				get {
-					return ActiveCategoryButton ? "#FFFFFF" : "#453F41";
+					return _id == _parent._mainModel.ActiveCategoryId ? "#FFFFFF" : "#453F41";
 				}
 			}
 			public override string HeaderTextColor {
 				get {
-					return ActiveCategoryButton ? "#342E30" : "#FFFFFF";
+					return _id == _parent._mainModel.ActiveCategoryId ? "#342E30" : "#FFFFFF";
 				}
 			}
 			public override bool HeaderEnabled {
 				get {
-					return !ActiveCategoryButton;
+					return _id != _parent._mainModel.ActiveCategoryId;
 				}
 			}
-			public Game.CategoryFlag CategoryFlags { get; private set; }
 
+			private readonly int _id;
 			private readonly MainViewModel _parent;
-
-			public CategoryHeaderButton(MainViewModel parent, Game.CategoryFlag categoryFlags) :
-				base("", "", "", "", null)
-			{
+			public CategoryHeaderButton(int id, MainViewModel parent) : base("", "", "", "", null) {
+				_id = id;
 				_parent = parent;
-				CategoryFlags = categoryFlags;
-				switch (CategoryFlags) {
+				switch (_parent._mainModel.Categories[id]) {
 					case Game.CategoryFlag.MainPC98:
 						HeaderName = "MAIN GAMES";
 						HeaderDesc = "(PC-98)";
@@ -115,67 +110,56 @@ namespace TouhouLauncher.ViewModel {
 						break;
 				}
 				HeaderCommand = new RelayCommand(() => {
-					_parent.SetCurrentCategories(CategoryFlags);
-					ActiveCategoryButton = true;
-					RaisePropertyChanged("HeaderColor");
-					RaisePropertyChanged("HeaderHoverColor");
-					RaisePropertyChanged("HeaderTextColor");
-					RaisePropertyChanged("HeaderEnabled");
+					_parent.SetCurrentCategory(_id);
 				});
 			}
 		}
 		public class GameButton {
 			public string GameName {
 				get {
-					if (_game.Subtitle.Length != 0) {
-						return _game.Title + ":\n" + _game.Subtitle;
+					if (_parent._mainModel.GameList[_id].Subtitle.Length != 0) {
+						return _parent._mainModel.GameList[_id].Title + ":\n" + _parent._mainModel.GameList[_id].Subtitle;
 					}
-					return _game.Title;
+					return _parent._mainModel.GameList[_id].Title;
 				}
 			}
 			public string GameImage {
 				get {
-					return _game.ImageLocation;
+					return _parent._mainModel.GameList[_id].ImageLocation;
 				}
 			}
 			public string GameReleaseYear {
 				get {
-					return "Release: " + _game.ReleaseYear.ToString();
+					return "Release: " + _parent._mainModel.GameList[_id].ReleaseYear.ToString();
 				}
 			}
 			public ICommand GameCommand { get; }
 
-			private readonly Game _game;
-			public GameButton(Game game) {
-				_game = game;
+			private readonly int _id;
+			private readonly MainViewModel _parent;
+			public GameButton(int id, MainViewModel parent) {
+				_id = id;
+				_parent = parent;
 				GameCommand = new RelayCommand(() => {
-					_game.Launch();
+					_parent._mainModel.GameList[_id].Launch();
 				});
 			}
 		}
-		private void SetCurrentCategories(Game.CategoryFlag categoryFlags) {
-			GameList.Clear();
+		private void SetCurrentCategory(int id) {
+			_mainModel.SetCurrentCategory(id);
 			foreach (HeaderButton button in HeaderList) {
-				if (button.GetType() == typeof(CategoryHeaderButton)) {
-					CategoryHeaderButton catButton = (CategoryHeaderButton)button;
-					catButton.ActiveCategoryButton = false;
-					catButton.RaisePropertyChanged("HeaderColor");
-					catButton.RaisePropertyChanged("HeaderHoverColor");
-					catButton.RaisePropertyChanged("HeaderTextColor");
-					catButton.RaisePropertyChanged("HeaderEnabled");
-				}
+				button.RaisePropertyChanged("HeaderColor");
+				button.RaisePropertyChanged("HeaderHoverColor");
+				button.RaisePropertyChanged("HeaderTextColor");
+				button.RaisePropertyChanged("HeaderEnabled");
 			}
-			for (int i = (int)Game.CategoryFlag.First; i < (int)Game.CategoryFlag.Last; i <<= 1) {
-				if ((i & (int)categoryFlags) == 0) {
-					continue;
-				}
-				foreach (Game game in _mainModel.FilterGames((Game.CategoryFlag)i)) {
-					GameList.Add(new GameButton(game));
-				}
+			GameList.Clear();
+			for (int i = 0; i < _mainModel.GameList.Count; i++) {
+				GameList.Add(new GameButton(i, this));
 			}
 		}
 		private void LaunchRandom() {
-			
+			_mainModel.LaunchRandom();
 		}
 	}
 }
