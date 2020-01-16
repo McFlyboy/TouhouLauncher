@@ -3,12 +3,10 @@ using GalaSoft.MvvmLight.Ioc;
 
 namespace TouhouLauncher.ViewModel {
 	public class ViewModelLocator {
-		/// <summary>
-		/// Initializes a new instance of the ViewModelLocator class.
-		/// </summary>
 		public ViewModelLocator() {
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 			SimpleIoc.Default.Register<MainViewModel>();
+			SimpleIoc.Default.Register<GameConfigViewModel>();
 		}
 		
 		public MainViewModel Main {
@@ -16,7 +14,12 @@ namespace TouhouLauncher.ViewModel {
 				return ServiceLocator.Current.GetInstance<MainViewModel>();
 			}
 		}
-		
+		public GameConfigViewModel GameConfig {
+			get {
+				return ServiceLocator.Current.GetInstance<GameConfigViewModel>();
+			}
+		}
+
 		public static void Cleanup() {
 			// TODO Clear the ViewModels
 		}
