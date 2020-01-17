@@ -12,9 +12,6 @@ namespace TouhouLauncher.Model.GameInfo {
 		public string LocalFileLocation { get; set; }
 		public CategoryFlag Category { get; protected set; }
 		public void Launch(bool exitOnLaunch = false) {
-			if (LocalFileLocation.Length == 0) {
-				return;
-			}
 			ProcessStartInfo startInfo = new ProcessStartInfo(LocalFileLocation);
 			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);
 			Process.Start(startInfo);

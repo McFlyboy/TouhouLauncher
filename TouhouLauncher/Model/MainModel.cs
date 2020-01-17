@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TouhouLauncher.Model.GameInfo;
+using TouhouLauncher.View;
 
 namespace TouhouLauncher.Model {
 	public class MainModel {
@@ -30,6 +31,14 @@ namespace TouhouLauncher.Model {
 		public void SetCurrentCategory(int id) {
 			ActiveCategoryId = id;
 			UpdateGameList();
+		}
+		public void LaunchGame(int id) {
+			if (GameList[id].LocalFileLocation.Length != 0) {
+				GameList[id].Launch();
+			}
+			else {
+				new GameConfigWindow(GameList[id]).ShowDialog();
+			}
 		}
 		public void LaunchRandom() {
 

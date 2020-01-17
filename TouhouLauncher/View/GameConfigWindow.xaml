@@ -5,9 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TouhouLauncher.View"
         mc:Ignorable="d"
-        Title="Configure game" Height="450" Width="800"
-		DataContext="{Binding GameConfig, Source={StaticResource Locator}}">
-    <Grid>
-		
+		WindowStartupLocation="CenterScreen"
+		ResizeMode="CanMinimize"
+		x:Name="Window"
+		DataContext="{Binding GameConfig, Source={StaticResource Locator}}"
+		Title="{Binding WindowTitle}" Width="500" Height="130">
+	<Grid Background="#595362">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="1*"/>
+			<ColumnDefinition Width="1*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="2*"/>
+			<RowDefinition Height="2*"/>
+			<RowDefinition Height="3*"/>
+		</Grid.RowDefinitions>
+		<TextBlock Text="Game location:" Margin="5, 0" VerticalAlignment="Bottom" Foreground="White"/>
+		<TextBox Text="{Binding GameLocation}" Grid.Row="1" Grid.ColumnSpan="2" Margin="5, 2" Background="#342E30" Foreground="White"/>
+		<Button Content="Browse..." Command="{Binding BrowseCommand}" Grid.Row="1" Margin="5, 2" Grid.Column="2" Background="#342E30" Foreground="White"/>
+		<Button Content="OK" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=Window}" Grid.Row="2" Margin="5, 5" Grid.Column="1" Background="#342E30" Foreground="White"/>
+		<Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=Window}" Grid.Row="2" Margin="5, 5" Grid.Column="2" Background="#342E30" Foreground="White"/>
 	</Grid>
 </Window>

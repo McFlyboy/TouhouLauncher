@@ -97,6 +97,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\GameConfigModel.cs" />
     <Compile Include="Model\GameInfo\FanGame.cs" />
     <Compile Include="Model\GameInfo\Game.cs" />
     <Compile Include="Model\GameInfo\GameDB.cs" />

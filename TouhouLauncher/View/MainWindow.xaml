@@ -9,7 +9,7 @@
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="CanMinimize"
 		DataContext="{Binding Main, Source={StaticResource Locator}}">
-	<Grid Background="#4B4554">
+	<Grid Background="#595362">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="1*"/>
 			<RowDefinition Height="5*"/>
@@ -58,7 +58,7 @@
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
 		<Grid Grid.Row="1">
-			<ScrollViewer Background="#595362">
+			<ScrollViewer>
 				<ItemsControl ItemsSource="{Binding GameList}">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>

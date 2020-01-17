@@ -141,7 +141,7 @@ namespace TouhouLauncher.ViewModel {
 				_id = id;
 				_parent = parent;
 				GameCommand = new RelayCommand(() => {
-					_parent._mainModel.GameList[_id].Launch();
+					_parent._mainModel.LaunchGame(_id);
 				});
 			}
 		}
