@@ -10,7 +10,7 @@ namespace TouhouLauncher.Model.GameInfo {
 		public string AudioLocation { get; set; }
 		public int ReleaseYear { get; set; }
 		public string LocalFileLocation { get; set; }
-		public CategoryFlag Category { get; protected set; }
+		public CategoryFlag Category { get; set; }
 		public void Launch(bool exitOnLaunch = false) {
 			ProcessStartInfo startInfo = new ProcessStartInfo(LocalFileLocation);
 			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);

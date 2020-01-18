@@ -19,8 +19,9 @@ namespace TouhouLauncher.Model {
 			_game = null;
 		}
 		public void Browse() {
-			OpenFileDialog fileDialog = new OpenFileDialog();
-			fileDialog.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
+			OpenFileDialog fileDialog = new OpenFileDialog {
+				Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*"
+			};
 			fileDialog.ShowDialog();
 			if (fileDialog.FileName.Length == 0) {
 				return;
@@ -29,6 +30,7 @@ namespace TouhouLauncher.Model {
 		}
 		public void SaveGameConfig() {
 			_game.LocalFileLocation = GameLocation;
+			GameDB.Instance.SaveDBUserContent();
 		}
 		public void LoadGameConfig(Game game) {
 			_game = game;
