@@ -93,23 +93,5 @@ namespace TouhouLauncher.Model.GameInfo {
 			};
 			FanGames = new List<FanGame>();
 		}
-		public void LoadDBUserContent() {
-			XmlSerializer reader = new XmlSerializer(typeof(UserDefinedGameInfo));
-			if (!File.Exists("Game-info.xml")) {
-				return;
-			}
-			FileStream file = File.OpenRead("Game-info.xml");
-			UserDefinedGameInfo content = (UserDefinedGameInfo)reader.Deserialize(file);
-			file.Close();
-			FanGames = content.FanGames;
-			for (int i = 0; i < OfficialGames.Length; i++) {
-				OfficialGames[i].LocalFileLocation = content.LocalOfficialGameFileLocations[i];
-			}
-		}
-		[Serializable()]
-		public class UserDefinedGameInfo {
-			public string[] LocalOfficialGameFileLocations { get; set; }
-			public List<FanGame> FanGames { get; set; }
-		}
 	}
 }
