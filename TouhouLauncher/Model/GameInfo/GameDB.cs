@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using TouhouLauncher.Model.Serialization;
 
 namespace TouhouLauncher.Model.GameInfo {
 	public class GameDB {
@@ -16,16 +17,7 @@ namespace TouhouLauncher.Model.GameInfo {
 		private static GameDB _instance;
 
 		public OfficialGame[] OfficialGames { get; }
-		public List<FanGame> FanGames { get; private set; }
-		public string[] LocalOfficialGameFileLocations {
-			get {
-				string[] locations = new string[OfficialGames.Length];
-				for (int i = 0; i < OfficialGames.Length; i++) {
-					locations[i] = OfficialGames[i].LocalFileLocation;
-				}
-				return locations;
-			}
-		}
+		public List<FanGame> FanGames { get; set; }
 		private GameDB() {
 			OfficialGames = new OfficialGame[] {
 				new OfficialGame() {
@@ -36,7 +28,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1996,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.CategoryFlag.MainPC98
+					Category = OfficialGame.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 02",
@@ -46,7 +38,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1997,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.CategoryFlag.MainPC98
+					Category = OfficialGame.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 03",
@@ -56,7 +48,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1997,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.CategoryFlag.MainPC98
+					Category = OfficialGame.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 04",
@@ -66,7 +58,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1998,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.CategoryFlag.MainPC98
+					Category = OfficialGame.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 05",
@@ -76,7 +68,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 1998,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.CategoryFlag.MainPC98
+					Category = OfficialGame.CategoryFlag.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 06",
@@ -86,7 +78,7 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 2002,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.CategoryFlag.MainWindows
+					Category = OfficialGame.CategoryFlag.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 07",
@@ -96,21 +88,10 @@ namespace TouhouLauncher.Model.GameInfo {
 					ReleaseYear = 2003,
 					LocalFileLocation = "",
 					DownloadableFileLocation = "",
-					Category = Game.CategoryFlag.MainWindows
+					Category = OfficialGame.CategoryFlag.MainWindows
 				}
 			};
 			FanGames = new List<FanGame>();
-			LoadDBUserContent();
-		}
-		public void SaveDBUserContent() {
-			UserDefinedGameInfo content = new UserDefinedGameInfo {
-				LocalOfficialGameFileLocations = LocalOfficialGameFileLocations,
-				FanGames = FanGames
-			};
-			XmlSerializer writer = new XmlSerializer(typeof(UserDefinedGameInfo));
-			FileStream file = File.Create("Game-info.xml");
-			writer.Serialize(file, content);
-			file.Close();
 		}
 		public void LoadDBUserContent() {
 			XmlSerializer reader = new XmlSerializer(typeof(UserDefinedGameInfo));

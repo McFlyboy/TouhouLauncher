@@ -10,7 +10,6 @@ namespace TouhouLauncher.Model.GameInfo {
 		public string AudioLocation { get; set; }
 		public int ReleaseYear { get; set; }
 		public string LocalFileLocation { get; set; }
-		public CategoryFlag Category { get; set; }
 		public void Launch(bool exitOnLaunch = false) {
 			ProcessStartInfo startInfo = new ProcessStartInfo(LocalFileLocation);
 			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);
@@ -18,16 +17,6 @@ namespace TouhouLauncher.Model.GameInfo {
 			if (exitOnLaunch) {
 				Application.Current.Shutdown();
 			}
-		}
-		public enum CategoryFlag {
-			MainPC98     = 0x01,
-			MainWindows  = 0x02,
-			FightingGame = 0x04,
-			SpinOff      = 0x08,
-			FanGame      = 0x10,
-
-			First = MainPC98,
-			Last = FanGame
 		}
 	}
 }

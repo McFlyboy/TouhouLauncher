@@ -20,7 +20,7 @@ namespace TouhouLauncher.ViewModel {
 		public MainViewModel() {
 			_mainModel = new MainModel();
 			HeaderList = new ObservableCollection<HeaderButton>();
-			for (int i = 0; i < _mainModel.Categories.Count; i++) {
+			for (int i = 0; i < _mainModel.OfficialGameCategories.Count; i++) {
 				var button = new CategoryHeaderButton(i, this);
 				HeaderList.Add(button);
 			}
@@ -84,29 +84,29 @@ namespace TouhouLauncher.ViewModel {
 			public CategoryHeaderButton(int id, MainViewModel parent) : base("", "", "", "", null) {
 				_id = id;
 				_parent = parent;
-				switch (_parent._mainModel.Categories[id]) {
-					case Game.CategoryFlag.MainPC98:
+				switch (_parent._mainModel.OfficialGameCategories[id]) {
+					case OfficialGame.CategoryFlag.MainPC98:
 						HeaderName = "MAIN GAMES";
 						HeaderDesc = "(PC-98)";
 						break;
-					case Game.CategoryFlag.MainWindows:
+					case OfficialGame.CategoryFlag.MainWindows:
 						HeaderName = "MAIN GAMES";
 						HeaderDesc = "(WINDOWS)";
 						break;
-					case Game.CategoryFlag.MainPC98 | Game.CategoryFlag.MainWindows:
+					case OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows:
 						HeaderName = "MAIN GAMES";
 						break;
-					case Game.CategoryFlag.FightingGame:
+					case OfficialGame.CategoryFlag.FightingGame:
 						HeaderName = "FIGHTING\nGAMES";
 						break;
-					case Game.CategoryFlag.SpinOff:
+					case OfficialGame.CategoryFlag.SpinOff:
 						HeaderName = "SPIN-OFFS";
 						break;
-					case Game.CategoryFlag.FanGame:
+					case OfficialGame.CategoryFlag.None:
 						HeaderName = "FAN GAMES";
 						break;
 					default:
-						HeaderName = "Un-named\ncategory";
+						HeaderName = "ERROR!!";
 						break;
 				}
 				HeaderCommand = new RelayCommand(() => {

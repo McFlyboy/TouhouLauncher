@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using TouhouLauncher.Model.GameInfo;
+using TouhouLauncher.Model.Serialization;
 
 namespace TouhouLauncher.Model {
 	public class GameConfigModel {
@@ -30,7 +31,7 @@ namespace TouhouLauncher.Model {
 		}
 		public void SaveGameConfig() {
 			_game.LocalFileLocation = GameLocation;
-			GameDB.Instance.SaveDBUserContent();
+			Settings.Instance.Save();
 		}
 		public void LoadGameConfig(Game game) {
 			_game = game;

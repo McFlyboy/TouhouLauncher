@@ -103,6 +103,7 @@
     <Compile Include="Model\GameInfo\GameDB.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\GameInfo\OfficialGame.cs" />
+    <Compile Include="Model\Serialization\Settings.cs" />
     <Compile Include="ViewModel\GameConfigViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

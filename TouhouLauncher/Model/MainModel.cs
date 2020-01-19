@@ -1,30 +1,32 @@
 ﻿using System.Collections.Generic;
 using TouhouLauncher.Model.GameInfo;
+using TouhouLauncher.Model.Serialization;
 using TouhouLauncher.View;
 
 namespace TouhouLauncher.Model {
 	public class MainModel {
-		public List<Game.CategoryFlag> Categories { get; }
+		public List<OfficialGame.CategoryFlag> OfficialGameCategories { get; }
 		public int ActiveCategoryId { get; private set; }
 		public List<Game> GameList { get; }
 
 		private readonly GameDB _gameDB;
 		public MainModel() {
 			_gameDB = GameDB.Instance;
-			Categories = new List<Game.CategoryFlag>();
+			Settings.LoadInstance();
+			OfficialGameCategories = new List<OfficialGame.CategoryFlag>();
 			bool combineMainCategories = false;
 			if (combineMainCategories) {
-				Categories.Add(Game.CategoryFlag.MainPC98 | Game.CategoryFlag.MainWindows);
+				OfficialGameCategories.Add(OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows);
 				ActiveCategoryId = 0;
 			}
 			else {
-				Categories.Add(Game.CategoryFlag.MainPC98);
-				Categories.Add(Game.CategoryFlag.MainWindows);
+				OfficialGameCategories.Add(OfficialGame.CategoryFlag.MainPC98);
+				OfficialGameCategories.Add(OfficialGame.CategoryFlag.MainWindows);
 				ActiveCategoryId = 1;
 			}
-			Categories.Add(Game.CategoryFlag.FightingGame);
-			Categories.Add(Game.CategoryFlag.SpinOff);
-			Categories.Add(Game.CategoryFlag.FanGame);
+			OfficialGameCategories.Add(OfficialGame.CategoryFlag.FightingGame);
+			OfficialGameCategories.Add(OfficialGame.CategoryFlag.SpinOff);
+			OfficialGameCategories.Add(OfficialGame.CategoryFlag.None);
 			GameList = new List<Game>();
 			UpdateGameList();
 		}
@@ -34,7 +36,7 @@ namespace TouhouLauncher.Model {
 		}
 		public void LaunchGame(int id) {
 			if (GameList[id].LocalFileLocation.Length != 0) {
-				GameList[id].Launch();
+				GameList[id].Launch(Settings.Instance.CloseOnGameLaunch);
 			}
 			else {
 				new GameConfigWindow(GameList[id]).ShowDialog();
@@ -45,14 +47,14 @@ namespace TouhouLauncher.Model {
 		}
 		private void UpdateGameList() {
 			GameList.Clear();
-			if (Categories[ActiveCategoryId] == Game.CategoryFlag.FanGame) {
+			if (OfficialGameCategories[ActiveCategoryId] == OfficialGame.CategoryFlag.None) {
 				foreach (FanGame game in _gameDB.FanGames) {
 					GameList.Add(game);
 				}
 				return;
 			}
 			foreach (OfficialGame game in _gameDB.OfficialGames) {
-				if((game.Category & Categories[ActiveCategoryId]) != 0) {
+				if((game.Category & OfficialGameCategories[ActiveCategoryId]) != 0) {
 					GameList.Add(game);
 				}
 			}
