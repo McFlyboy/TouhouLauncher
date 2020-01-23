@@ -7,6 +7,7 @@ namespace TouhouLauncher.ViewModel {
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 			SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<GameConfigViewModel>();
+			SimpleIoc.Default.Register<HomePageViewModel>();
 		}
 		
 		public MainViewModel Main {
@@ -17,6 +18,11 @@ namespace TouhouLauncher.ViewModel {
 		public GameConfigViewModel GameConfig {
 			get {
 				return ServiceLocator.Current.GetInstance<GameConfigViewModel>();
+			}
+		}
+		public HomePageViewModel HomePage {
+			get {
+				return ServiceLocator.Current.GetInstance<HomePageViewModel>();
 			}
 		}
 
