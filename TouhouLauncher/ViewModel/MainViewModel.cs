@@ -13,5 +13,9 @@ namespace TouhouLauncher.ViewModel {
 		public MainViewModel() {
 			_mainModel = new MainModel();
 		}
+		public void SwitchPage() {
+			_mainModel.SwitchPage();
+			RaisePropertyChanged("Page");
+		}
 	}
 }

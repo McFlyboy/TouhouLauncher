@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 using TouhouLauncher.Model.GameInfo;
 using TouhouLauncher.Model.Serialization;
 using TouhouLauncher.View;
@@ -44,6 +45,9 @@ namespace TouhouLauncher.Model {
 		}
 		public void LaunchRandom() {
 
+		}
+		public void OpenSettings() {
+			((MainWindow)Application.Current.MainWindow).SwitchPage();
 		}
 		private void UpdateGameList() {
 			GameList.Clear();

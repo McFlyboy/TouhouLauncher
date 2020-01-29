@@ -86,6 +86,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\MainModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -113,7 +114,7 @@
     <Compile Include="Model\GameInfo\OfficialGame.cs" />
     <Compile Include="Model\Serialization\Settings.cs" />
     <Compile Include="ViewModel\GameConfigViewModel.cs" />
-    <Compile Include="ViewModel\HomePageViewModel.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\GameConfigWindow.xaml.cs">

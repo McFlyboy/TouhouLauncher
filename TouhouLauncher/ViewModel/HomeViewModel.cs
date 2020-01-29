@@ -7,7 +7,7 @@ using TouhouLauncher.Model;
 using TouhouLauncher.Model.GameInfo;
 
 namespace TouhouLauncher.ViewModel {
-	public class HomePageViewModel : ViewModelBase {
+	public class HomeViewModel : ViewModelBase {
 		public ObservableCollection<HeaderButton> HeaderList { get; }
 		public string HeaderPadding {
 			get {
@@ -15,9 +15,10 @@ namespace TouhouLauncher.ViewModel {
 			}
 		}
 		public ObservableCollection<GameButton> GameList { get; }
+		public ICommand OpenSettingsCommand { get; }
 
 		private readonly HomeModel _homeModel;
-		public HomePageViewModel() {
+		public HomeViewModel() {
 			_homeModel = new HomeModel();
 			HeaderList = new ObservableCollection<HeaderButton>();
 			for (int i = 0; i < _homeModel.OfficialGameCategories.Count; i++) {
@@ -29,6 +30,9 @@ namespace TouhouLauncher.ViewModel {
 			for (int i = 0; i < _homeModel.GameList.Count; i++) {
 				GameList.Add(new GameButton(i, this));
 			}
+			OpenSettingsCommand = new RelayCommand(() => {
+				_homeModel.OpenSettings();
+			});
 		}
 		public class HeaderButton : ObservableObject {
 			public string HeaderName { get; protected set; }
@@ -75,8 +79,8 @@ namespace TouhouLauncher.ViewModel {
 			}
 
 			private readonly int _id;
-			private readonly HomePageViewModel _parent;
-			public CategoryHeaderButton(int id, HomePageViewModel parent) : base("", "", "", "", null) {
+			private readonly HomeViewModel _parent;
+			public CategoryHeaderButton(int id, HomeViewModel parent) : base("", "", "", "", null) {
 				_id = id;
 				_parent = parent;
 				switch (_parent._homeModel.OfficialGameCategories[id]) {
@@ -131,8 +135,8 @@ namespace TouhouLauncher.ViewModel {
 			public ICommand GameCommand { get; }
 
 			private readonly int _id;
-			private readonly HomePageViewModel _parent;
-			public GameButton(int id, HomePageViewModel parent) {
+			private readonly HomeViewModel _parent;
+			public GameButton(int id, HomeViewModel parent) {
 				_id = id;
 				_parent = parent;
 				GameCommand = new RelayCommand(() => {

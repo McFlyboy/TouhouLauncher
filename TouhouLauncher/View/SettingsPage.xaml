@@ -5,9 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TouhouLauncher.View"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1000"
-      Title="SettingsPage">
-	<Grid Background="White">
-		<TextBlock Text="Test"/>
+      d:DesignWidth="1000" d:DesignHeight="800"
+      Title="SettingsPage"
+	  DataContext="{Binding Settings, Source={StaticResource Locator}}">
+	<Grid Background="#595362">
+		
 	</Grid>
 </Page>

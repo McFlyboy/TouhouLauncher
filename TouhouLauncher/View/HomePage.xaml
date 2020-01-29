@@ -5,9 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TouhouLauncher.View"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1000"
+      d:DesignWidth="1000" d:DesignHeight="800"
       Title="HomePage"
-	  DataContext="{Binding HomePage, Source={StaticResource Locator}}">
+	  DataContext="{Binding Home, Source={StaticResource Locator}}">
 	<Grid Background="#595362">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="1*"/>
@@ -119,7 +119,7 @@
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
 			</ScrollViewer>
-			<Button Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" ToolTip="Settings">
+			<Button Command="{Binding OpenSettingsCommand}" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" ToolTip="Settings">
 				<Button.Template>
 					<ControlTemplate TargetType="Button">
 						<Border Background="#342E30" CornerRadius="25">
