@@ -6,8 +6,8 @@ namespace TouhouLauncher.View {
 		public MainWindow() {
 			InitializeComponent();
 		}
-		public void SwitchPage() {
-			((MainViewModel)DataContext).SwitchPage();
+		public void ShowPage(string page) {
+			((MainViewModel)DataContext).Page = page;
 		}
 	}
 }

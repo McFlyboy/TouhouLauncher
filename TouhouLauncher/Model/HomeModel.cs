@@ -47,7 +47,7 @@ namespace TouhouLauncher.Model {
 
 		}
 		public void OpenSettings() {
-			((MainWindow)Application.Current.MainWindow).SwitchPage();
+			((MainWindow)Application.Current.MainWindow).ShowPage("SettingsPage.xaml");
 		}
 		private void UpdateGameList() {
 			GameList.Clear();

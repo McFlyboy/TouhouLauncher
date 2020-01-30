@@ -1,17 +1,8 @@
 ﻿namespace TouhouLauncher.Model {
 	public class MainModel {
-		public string Page {
-			get {
-				return _showHomePage ? "HomePage.xaml" : "SettingsPage.xaml";
-			}
-		}
-
-		private bool _showHomePage;
+		public string Page { get; set; }
 		public MainModel() {
-			_showHomePage = true;
-		}
-		public void SwitchPage() {
-			_showHomePage = !_showHomePage;
+			Page = "HomePage.xaml";
 		}
 	}
 }

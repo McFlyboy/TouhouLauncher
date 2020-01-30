@@ -7,15 +7,15 @@ namespace TouhouLauncher.ViewModel {
 			get {
 				return _mainModel.Page;
 			}
+			set {
+				_mainModel.Page = value;
+				RaisePropertyChanged("Page");
+			}
 		}
 
 		private readonly MainModel _mainModel;
 		public MainViewModel() {
 			_mainModel = new MainModel();
-		}
-		public void SwitchPage() {
-			_mainModel.SwitchPage();
-			RaisePropertyChanged("Page");
 		}
 	}
 }
