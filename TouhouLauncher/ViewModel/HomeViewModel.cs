@@ -64,7 +64,7 @@ namespace TouhouLauncher.ViewModel {
 		public class CategoryHeaderButton : HeaderButton {
 			public override string HeaderColor {
 				get {
-					return _id == _parent._homeModel.ActiveCategoryId ? "#453F41" : "#342E30";
+					return _id == _parent._homeModel.ActiveCategoryId ? "#694F77" : "#342E30";
 				}
 			}
 			public override string HeaderHoverColor {

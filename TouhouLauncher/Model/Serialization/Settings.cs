@@ -53,7 +53,8 @@ namespace TouhouLauncher.Model.Serialization {
 			file.Close();
 			_instance = instance;
 			GameDB gameDB = GameDB.Instance;
-			for (int i = 0; i < gameDB.OfficialGames.Length; i++) {
+			int locationSize = Math.Min(gameDB.OfficialGames.Length, _instance.LocalOfficialGameFileLocations.Length);
+			for (int i = 0; i < locationSize; i++) {
 				gameDB.OfficialGames[i].LocalFileLocation = _instance.LocalOfficialGameFileLocations[i];
 			}
 			gameDB.FanGames = _instance.FanGames;

@@ -1,4 +1,5 @@
-﻿using System.Windows.Navigation;
+﻿using System.Windows;
+using System.Windows.Navigation;
 using TouhouLauncher.ViewModel;
 
 namespace TouhouLauncher.View {
@@ -6,8 +7,8 @@ namespace TouhouLauncher.View {
 		public MainWindow() {
 			InitializeComponent();
 		}
-		public void ShowPage(string page) {
-			((MainViewModel)DataContext).Page = page;
+		public static void ShowPage(string page) {
+			((MainViewModel)((MainWindow)Application.Current.MainWindow).DataContext).Page = page;
 		}
 	}
 }
