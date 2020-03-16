@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using TouhouLauncher.View;
+﻿using TouhouLauncher.View;
 
 namespace TouhouLauncher.Model {
 	public class SettingsModel {

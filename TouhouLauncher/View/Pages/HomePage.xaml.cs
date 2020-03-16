@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TouhouLauncher.View {
+namespace TouhouLauncher.View.Pages {
 	/// <summary>
 	/// Interaction logic for HomePage.xaml
 	/// </summary>

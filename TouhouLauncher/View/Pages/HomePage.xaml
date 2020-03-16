@@ -1,9 +1,9 @@
-﻿<Page x:Class="TouhouLauncher.View.HomePage"
+﻿<Page x:Class="TouhouLauncher.View.Pages.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:TouhouLauncher.View"
+      xmlns:local="clr-namespace:TouhouLauncher.View.Pages"
       mc:Ignorable="d" 
       d:DesignWidth="1000" d:DesignHeight="800"
       Title="HomePage"
@@ -123,7 +123,7 @@
 				<Button.Template>
 					<ControlTemplate TargetType="Button">
 						<Border Background="#342E30" CornerRadius="25">
-							<Image Source="..\Resources\Images\Cogwheel.png" Margin="10, 10"/>
+							<Image Source="..\..\Resources\Images\Cogwheel.png" Margin="10, 10"/>
 							<Border.Triggers>
 								<EventTrigger RoutedEvent="Mouse.MouseEnter">
 									<BeginStoryboard>
