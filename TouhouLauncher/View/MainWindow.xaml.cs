@@ -8,7 +8,9 @@ namespace TouhouLauncher.View {
 			InitializeComponent();
 		}
 		public static void ShowPage(string page) {
-			((MainViewModel)((MainWindow)Application.Current.MainWindow).DataContext).Page = page;
+			var window = (MainWindow)Application.Current.MainWindow;
+			var vm = (MainViewModel)window.DataContext;
+			vm.Page = page;
 		}
 	}
 }

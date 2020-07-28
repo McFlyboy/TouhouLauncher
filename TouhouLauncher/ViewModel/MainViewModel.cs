@@ -5,17 +5,17 @@ namespace TouhouLauncher.ViewModel {
 	public class MainViewModel : ViewModelBase {
 		public string Page {
 			get {
-				return _mainModel.Page;
+				return "Pages/" + _page;
 			}
 			set {
-				_mainModel.Page = value;
+				_page = value;
 				RaisePropertyChanged("Page");
 			}
 		}
 
-		private readonly MainModel _mainModel;
+		private string _page;
 		public MainViewModel() {
-			_mainModel = new MainModel();
+			_page = "HomePage.xaml";
 		}
 	}
 }

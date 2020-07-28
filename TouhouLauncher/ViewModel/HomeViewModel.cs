@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Model;
 using TouhouLauncher.Model.GameInfo;
+using TouhouLauncher.View;
 
 namespace TouhouLauncher.ViewModel {
 	public class HomeViewModel : ViewModelBase {
@@ -31,7 +32,7 @@ namespace TouhouLauncher.ViewModel {
 				GameList.Add(new GameButton(i, this));
 			}
 			OpenSettingsCommand = new RelayCommand(() => {
-				_homeModel.OpenSettings();
+				MainWindow.ShowPage("SettingsPage.xaml");
 			});
 		}
 		public class HeaderButton : ObservableObject {

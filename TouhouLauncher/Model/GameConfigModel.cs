@@ -23,8 +23,7 @@ namespace TouhouLauncher.Model {
 			OpenFileDialog fileDialog = new OpenFileDialog {
 				Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*"
 			};
-			fileDialog.ShowDialog();
-			if (fileDialog.FileName.Length == 0) {
+			if (!(fileDialog.ShowDialog() ?? false)) {
 				return;
 			}
 			GameLocation = fileDialog.FileName;
