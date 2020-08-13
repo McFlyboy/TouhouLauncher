@@ -36,7 +36,7 @@ namespace TouhouLauncher.Model {
 		}
 		public void LaunchGame(int id) {
 			if (GameList[id].LocalFileLocation.Length != 0) {
-				GameList[id].Launch(Settings.Instance.CloseOnGameLaunch);
+				_gameDB.LaunchGame(GameList[id].LocalFileLocation, Settings.Instance.CloseOnGameLaunch);
 			}
 			else {
 				new GameConfigWindow(GameList[id]).ShowDialog();

@@ -6,10 +6,7 @@ namespace TouhouLauncher.Model {
 	public class GameConfigModel {
 		public string GameTitle {
 			get {
-				if (_game == null) {
-					return "";
-				}
-				return _game.Title + ": " + _game.Subtitle;
+				return _game == null ? "" : _game.Title + ": " + _game.Subtitle;
 			}
 		}
 		public string GameLocation { get; set; }

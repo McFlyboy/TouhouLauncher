@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 
 namespace TouhouLauncher.Model.GameInfo {
 	public class GameDB {
@@ -12,9 +15,21 @@ namespace TouhouLauncher.Model.GameInfo {
 		}
 		private static GameDB _instance;
 
-		public OfficialGame[] OfficialGames { get; }
+		public OfficialGame[] OfficialGames { get; private set; }
 		public List<FanGame> FanGames { get; set; }
 		private GameDB() {
+			InitOfficialGames();
+			FanGames = new List<FanGame>();
+		}
+		public void LaunchGame(string gameLocation, bool exitOnLaunch = false) {
+			var startInfo = new ProcessStartInfo(gameLocation);
+			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);
+			Process.Start(startInfo);
+			if (exitOnLaunch) {
+				Application.Current.Shutdown();
+			}
+		}
+		private void InitOfficialGames() {
 			OfficialGames = new OfficialGame[] {
 				new OfficialGame() {
 					Title = "Touhou 01",
@@ -297,7 +312,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					Category = OfficialGame.CategoryFlag.MainWindows
 				}
 			};
-			FanGames = new List<FanGame>();
 		}
 	}
 }
