@@ -1,6 +1,12 @@
-﻿namespace TouhouLauncher.Model.GameInfo {
+﻿using TouhouLauncher.Model.Serialization;
+
+namespace TouhouLauncher.Model.GameInfo {
 	public class OfficialGame : Game {
-		override public string LocalFileLocation { get; set; }
+		public int Index { get; set; }
+		override public string LocalFileLocation {
+			get { return Settings.Instance.LocalOfficialGameLocations[Index]; }
+			set { Settings.Instance.LocalOfficialGameLocations[Index] = value; }
+		}
 		public string DownloadableFileLocation { get; set; }
 		public CategoryFlag Category { get; set; }
 		public enum CategoryFlag {

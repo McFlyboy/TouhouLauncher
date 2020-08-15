@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using TouhouLauncher.Model.Serialization;
 
 namespace TouhouLauncher.Model.GameInfo {
 	public class GameDB {
@@ -16,10 +17,10 @@ namespace TouhouLauncher.Model.GameInfo {
 		private static GameDB _instance;
 
 		public OfficialGame[] OfficialGames { get; private set; }
-		public List<FanGame> FanGames { get; set; }
+		public List<FanGame> FanGames { get; }
 		private GameDB() {
 			InitOfficialGames();
-			FanGames = new List<FanGame>();
+			FanGames = Settings.Instance.FanGames;
 		}
 		public void LaunchGame(string gameLocation, bool exitOnLaunch = false) {
 			var startInfo = new ProcessStartInfo(gameLocation);
@@ -30,14 +31,13 @@ namespace TouhouLauncher.Model.GameInfo {
 			}
 		}
 		private void InitOfficialGames() {
-			OfficialGames = new OfficialGame[] {
+			OfficialGames = new OfficialGame[28] {
 				new OfficialGame() {
 					Title = "Touhou 01",
 					Subtitle = "Highly Responsive to Prayers",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH01.png",
 					AudioLocation = "",
 					ReleaseYear = 1996,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -47,7 +47,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH02.png",
 					AudioLocation = "",
 					ReleaseYear = 1997,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -57,7 +56,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH03.png",
 					AudioLocation = "",
 					ReleaseYear = 1997,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -67,7 +65,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH04.png",
 					AudioLocation = "",
 					ReleaseYear = 1998,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -77,7 +74,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH05.png",
 					AudioLocation = "",
 					ReleaseYear = 1998,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -87,7 +83,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH06.png",
 					AudioLocation = "",
 					ReleaseYear = 2002,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -97,7 +92,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH07.png",
 					AudioLocation = "",
 					ReleaseYear = 2003,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -107,7 +101,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2004,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -117,7 +110,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2004,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -127,7 +119,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2005,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -137,7 +128,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2005,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -147,7 +137,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2007,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -157,7 +146,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2008,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -167,7 +155,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2008,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -177,7 +164,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2009,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -187,7 +173,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2009,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -197,7 +182,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2010,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -207,7 +191,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2010,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -217,7 +200,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2011,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -227,7 +209,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2013,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -237,7 +218,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2013,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -247,7 +227,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2014,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -257,7 +236,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2015,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -267,7 +245,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2015,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -277,7 +254,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2017,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -287,7 +263,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2017,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -297,7 +272,6 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2018,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -307,11 +281,13 @@ namespace TouhouLauncher.Model.GameInfo {
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2019,
-					LocalFileLocation = "",
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				}
 			};
+			for (int i = 0; i < OfficialGames.Length; i++) {
+				OfficialGames[i].Index = i;
+			}
 		}
 	}
 }
