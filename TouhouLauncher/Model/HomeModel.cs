@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using TouhouLauncher.Model.GameInfo;
-using TouhouLauncher.Model.Serialization;
+using TouhouLauncher.Model.Settings;
 using TouhouLauncher.View;
 
 namespace TouhouLauncher.Model {
@@ -12,7 +12,6 @@ namespace TouhouLauncher.Model {
 		private readonly GameDB _gameDB;
 		public HomeModel() {
 			_gameDB = GameDB.Instance;
-			Settings.LoadInstance();
 			OfficialGameCategories = new List<OfficialGame.CategoryFlag>();
 			bool combineMainCategories = false;
 			if (combineMainCategories) {
@@ -36,7 +35,7 @@ namespace TouhouLauncher.Model {
 		}
 		public void LaunchGame(int id) {
 			if (GameList[id].LocalFileLocation.Length != 0) {
-				_gameDB.LaunchGame(GameList[id].LocalFileLocation, Settings.Instance.CloseOnGameLaunch);
+				_gameDB.LaunchGame(GameList[id].LocalFileLocation, GeneralSettings.Instance.CloseOnGameLaunch);
 			}
 			else {
 				new GameConfigWindow(GameList[id]).ShowDialog();

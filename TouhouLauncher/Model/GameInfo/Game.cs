@@ -5,6 +5,6 @@
 		public string ImageLocation { get; set; }
 		public string AudioLocation { get; set; }
 		public int ReleaseYear { get; set; }
-		public abstract string LocalFileLocation { get; set; }
+		public string LocalFileLocation { get; set; }
 	}
 }
