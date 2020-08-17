@@ -19,5 +19,16 @@ namespace TouhouLauncher.Model.Serialization.Yaml {
 				LocalFileLocation = LocalFileLocation
 			};
 		}
+
+		public static FanGameYaml FromDomain(FanGame domain) {
+			return new FanGameYaml() {
+				Title = domain.Title,
+				Subtitle = domain.Subtitle,
+				ImageLocation = domain.ImageLocation,
+				AudioLocation = domain.AudioLocation,
+				ReleaseYear = domain.ReleaseYear,
+				LocalFileLocation = domain.LocalFileLocation
+			};
+		}
 	}
 }

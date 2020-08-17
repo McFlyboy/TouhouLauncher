@@ -23,18 +23,13 @@ namespace TouhouLauncher.ViewModel {
 		}
 
 		private void InitApp() {
-			var yaml = SettingsSerializerService.Instance.DeserializeFromFile();
+			var (officialGames, fanGames, generalSettings) = SettingsSerializerService.Instance
+				.DeserializeFromFile()
+				.ToDomain();
 
-			SettingsManager.Instance.GeneralSettings = yaml.GeneralSettings.ToDomain();
-
-			int safeLength = Math.Min(GameDB.Instance.OfficialGames.Length, yaml.OfficialGames.Length);
-			for (int i = 0; i < safeLength; i++) {
-				GameDB.Instance.OfficialGames[i].LocalFileLocation = yaml.OfficialGames[i].LocalFileLocation;
-			}
-
-			foreach (var fanGame in yaml.FanGames) {
-				GameDB.Instance.FanGames.Add(fanGame.ToDomain());
-			}
+			GameDB.Instance.OfficialGames = officialGames;
+			GameDB.Instance.FanGames = fanGames;
+			SettingsManager.Instance.GeneralSettings = generalSettings;
 		}
 	}
 }

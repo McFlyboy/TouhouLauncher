@@ -9,5 +9,11 @@ namespace TouhouLauncher.Model.Serialization.Yaml {
 				CloseOnGameLaunch = CloseOnGameLaunch
 			};
 		}
+
+		public static GeneralSettingsYaml FromDomain(GeneralSettings domain) {
+			return new GeneralSettingsYaml() {
+				CloseOnGameLaunch = domain.CloseOnGameLaunch
+			};
+		}
 	}
 }

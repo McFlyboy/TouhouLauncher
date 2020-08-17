@@ -12,10 +12,8 @@ namespace TouhouLauncher.Model.GameInfo {
 
 		public OfficialGame[] OfficialGames { get; set; }
 		public List<FanGame> FanGames { get; set; }
-		private GameDB() {
-			OfficialGames = GameDBTemplate.CreateOfficialGamesFromTemplate();
-			FanGames = new List<FanGame>();
-		}
+
+		private GameDB() { }
 
 		public void LaunchGame(string gameLocation, bool exitOnLaunch = false) {
 			var startInfo = new ProcessStartInfo(gameLocation);

@@ -6,8 +6,8 @@
 			Instance = new SettingsManager();
 		}
 
-		private SettingsManager() { }
-
 		public GeneralSettings GeneralSettings { get; set; }
+
+		private SettingsManager() { }
 	}
 }

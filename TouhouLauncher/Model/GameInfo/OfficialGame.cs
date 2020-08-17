@@ -1,6 +1,4 @@
-﻿using TouhouLauncher.Model.Serialization;
-
-namespace TouhouLauncher.Model.GameInfo {
+﻿namespace TouhouLauncher.Model.GameInfo {
 	public class OfficialGame : Game {
 		public string DownloadableFileLocation { get; set; }
 		public CategoryFlag Category { get; set; }
