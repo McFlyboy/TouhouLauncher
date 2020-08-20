@@ -9,9 +9,7 @@ namespace TouhouLauncher.Model {
 		public int ActiveCategoryId { get; private set; }
 		public List<Game> GameList { get; }
 
-		private readonly GameDB _gameDB;
 		public HomeModel() {
-			_gameDB = GameDB.Instance;
 			OfficialGameCategories = new List<OfficialGame.CategoryFlag>();
 			bool combineMainCategories = false;
 			if (combineMainCategories) {
@@ -35,7 +33,7 @@ namespace TouhouLauncher.Model {
 		}
 		public void LaunchGame(int id) {
 			if (GameList[id].LocalFileLocation.Length != 0) {
-				_gameDB.LaunchGame(GameList[id].LocalFileLocation, SettingsManager.Instance.GeneralSettings.CloseOnGameLaunch);
+				GameDB.Instance.LaunchGame(GameList[id].LocalFileLocation, SettingsManager.Instance.GeneralSettings.CloseOnGameLaunch);
 			}
 			else {
 				new GameConfigWindow(GameList[id]).ShowDialog();
@@ -47,12 +45,12 @@ namespace TouhouLauncher.Model {
 		private void UpdateGameList() {
 			GameList.Clear();
 			if (OfficialGameCategories[ActiveCategoryId] == OfficialGame.CategoryFlag.None) {
-				foreach (FanGame game in _gameDB.FanGames) {
+				foreach (FanGame game in GameDB.Instance.FanGames) {
 					GameList.Add(game);
 				}
 				return;
 			}
-			foreach (OfficialGame game in _gameDB.OfficialGames) {
+			foreach (OfficialGame game in GameDB.Instance.OfficialGames) {
 				if((game.Category & OfficialGameCategories[ActiveCategoryId]) != 0) {
 					GameList.Add(game);
 				}

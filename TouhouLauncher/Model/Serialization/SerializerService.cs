@@ -1,16 +1,19 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace TouhouLauncher.Model.Serialization {
-	class SerializerService {
+	public class SerializerService {
 		private readonly ISerializer _serializer;
 		private readonly IDeserializer _deserializer;
 
 		public SerializerService() {
-			_serializer = new SerializerBuilder().Build();
+			_serializer = new SerializerBuilder()
+				.WithNamingConvention(HyphenatedNamingConvention.Instance)
+				.Build();
 			_deserializer = new DeserializerBuilder()
-				.WithNamingConvention(CamelCaseNamingConvention.Instance)
+				.WithNamingConvention(HyphenatedNamingConvention.Instance)
 				.Build();
 		}
 
@@ -22,8 +25,13 @@ namespace TouhouLauncher.Model.Serialization {
 			if(!File.Exists(filePath)) {
 				return default;
 			}
-			using var reader = new StreamReader(filePath);
-			return _deserializer.Deserialize<T>(reader);
+			try {
+				using var reader = new StreamReader(filePath);
+				return _deserializer.Deserialize<T>(reader);
+			}
+			catch (Exception) {
+				return default;
+			}
 		}
 	}
 }
