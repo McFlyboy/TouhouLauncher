@@ -14,8 +14,7 @@ namespace TouhouLauncher.Model {
 
 		public HomeModel() {
 			OfficialGameCategories = new List<OfficialGame.CategoryFlag>();
-			bool combineMainCategories = false;
-			if (combineMainCategories) {
+			if (SettingsManager.Instance.GeneralSettings.CombineMainCategories) {
 				OfficialGameCategories.Add(OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows);
 				ActiveCategoryId = 0;
 			}
