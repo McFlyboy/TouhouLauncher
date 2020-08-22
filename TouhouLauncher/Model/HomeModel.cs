@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using TouhouLauncher.Model.GameInfo;
-using TouhouLauncher.Model.Serialization;
+using TouhouLauncher.Model.Settings;
 using TouhouLauncher.View;
 
 namespace TouhouLauncher.Model {
@@ -9,13 +12,9 @@ namespace TouhouLauncher.Model {
 		public int ActiveCategoryId { get; private set; }
 		public List<Game> GameList { get; }
 
-		private readonly GameDB _gameDB;
 		public HomeModel() {
-			_gameDB = GameDB.Instance;
-			Settings.LoadInstance();
 			OfficialGameCategories = new List<OfficialGame.CategoryFlag>();
-			bool combineMainCategories = false;
-			if (combineMainCategories) {
+			if (SettingsManager.Instance.GeneralSettings.CombineMainCategories) {
 				OfficialGameCategories.Add(OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows);
 				ActiveCategoryId = 0;
 			}
@@ -35,25 +34,35 @@ namespace TouhouLauncher.Model {
 			UpdateGameList();
 		}
 		public void LaunchGame(int id) {
-			if (GameList[id].LocalFileLocation.Length != 0) {
-				GameList[id].Launch(Settings.Instance.CloseOnGameLaunch);
+			if (GameList[id].FileLocation.Length != 0) {
+				LaunchExistingGame(GameList[id].FileLocation, SettingsManager.Instance.GeneralSettings.CloseOnGameLaunch);
 			}
 			else {
 				new GameConfigWindow(GameList[id]).ShowDialog();
 			}
 		}
 		public void LaunchRandom() {
+			// TODO
+		}
+		private void LaunchExistingGame(string gameLocation, bool exitOnLaunch = false) {
+			var startInfo = new ProcessStartInfo(gameLocation);
+			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);
 
+			Process.Start(startInfo);
+
+			if (exitOnLaunch) {
+				Application.Current.Shutdown();
+			}
 		}
 		private void UpdateGameList() {
 			GameList.Clear();
 			if (OfficialGameCategories[ActiveCategoryId] == OfficialGame.CategoryFlag.None) {
-				foreach (FanGame game in _gameDB.FanGames) {
+				foreach (FanGame game in GameDB.Instance.FanGames) {
 					GameList.Add(game);
 				}
 				return;
 			}
-			foreach (OfficialGame game in _gameDB.OfficialGames) {
+			foreach (OfficialGame game in GameDB.Instance.OfficialGames) {
 				if((game.Category & OfficialGameCategories[ActiveCategoryId]) != 0) {
 					GameList.Add(game);
 				}

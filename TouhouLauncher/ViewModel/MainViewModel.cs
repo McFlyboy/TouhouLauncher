@@ -1,5 +1,8 @@
 using GalaSoft.MvvmLight;
-using TouhouLauncher.Model;
+using System.Collections.Generic;
+using TouhouLauncher.Model.GameInfo;
+using TouhouLauncher.Model.Serialization;
+using TouhouLauncher.Model.Settings;
 
 namespace TouhouLauncher.ViewModel {
 	public class MainViewModel : ViewModelBase {
@@ -16,6 +19,20 @@ namespace TouhouLauncher.ViewModel {
 		private string _page;
 		public MainViewModel() {
 			_page = "HomePage.xaml";
+			InitApp();
+		}
+
+		private void InitApp() {
+			var settings = SettingsSerializerService.Instance.DeserializeFromFile()
+				?? new Settings() {
+					OfficialGames = GameDBTemplate.CreateOfficialGamesFromTemplate(),
+					FanGames = new List<FanGame>(),
+					GeneralSettings = new GeneralSettings()
+				};
+
+			GameDB.Instance.OfficialGames = settings.OfficialGames;
+			GameDB.Instance.FanGames = settings.FanGames;
+			SettingsManager.Instance.GeneralSettings = settings.GeneralSettings;
 		}
 	}
 }

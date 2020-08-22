@@ -1,15 +1,13 @@
 ﻿using Microsoft.Win32;
 using TouhouLauncher.Model.GameInfo;
 using TouhouLauncher.Model.Serialization;
+using TouhouLauncher.Model.Settings;
 
 namespace TouhouLauncher.Model {
 	public class GameConfigModel {
 		public string GameTitle {
 			get {
-				if (_game == null) {
-					return "";
-				}
-				return _game.Title + ": " + _game.Subtitle;
+				return _game == null ? "" : _game.Title + ": " + _game.Subtitle;
 			}
 		}
 		public string GameLocation { get; set; }
@@ -29,12 +27,18 @@ namespace TouhouLauncher.Model {
 			GameLocation = fileDialog.FileName;
 		}
 		public void SaveGameConfig() {
-			_game.LocalFileLocation = GameLocation;
-			Settings.Instance.Save();
+			_game.FileLocation = GameLocation;
+			SettingsSerializerService.Instance.SerializeToFile(
+				new Settings.Settings() {
+					OfficialGames = GameDB.Instance.OfficialGames,
+					FanGames = GameDB.Instance.FanGames,
+					GeneralSettings = SettingsManager.Instance.GeneralSettings
+				}
+			);
 		}
 		public void LoadGameConfig(Game game) {
 			_game = game;
-			GameLocation = _game.LocalFileLocation;
+			GameLocation = _game.FileLocation;
 		}
 	}
 }
