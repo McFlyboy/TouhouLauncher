@@ -17,9 +17,15 @@ namespace TouhouLauncher.Model.Serialization {
 				.Build();
 		}
 
-		public void SerializeToFile<T> (T graph, string filePath) {
-			using var writer = File.CreateText(filePath);
-			_serializer.Serialize(writer, graph);
+		public bool SerializeToFile<T> (T graph, string filePath) {
+			try {
+				using var writer = File.CreateText(filePath);
+				_serializer.Serialize(writer, graph);
+				return true;
+			}
+			catch (Exception) {
+				return false;
+			}
 		}
 		public T DeserializeFromFile<T>(string filePath) {
 			if(!File.Exists(filePath)) {

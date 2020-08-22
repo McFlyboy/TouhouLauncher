@@ -1,8 +1,6 @@
 ﻿using Microsoft.Win32;
-using System;
 using TouhouLauncher.Model.GameInfo;
 using TouhouLauncher.Model.Serialization;
-using TouhouLauncher.Model.Serialization.Yaml;
 using TouhouLauncher.Model.Settings;
 
 namespace TouhouLauncher.Model {
@@ -29,20 +27,18 @@ namespace TouhouLauncher.Model {
 			GameLocation = fileDialog.FileName;
 		}
 		public void SaveGameConfig() {
-			_game.LocalFileLocation = GameLocation;
+			_game.FileLocation = GameLocation;
 			SettingsSerializerService.Instance.SerializeToFile(
-				SettingsYaml.FromDomain(
-					Tuple.Create(
-						GameDB.Instance.OfficialGames,
-						GameDB.Instance.FanGames,
-						SettingsManager.Instance.GeneralSettings
-					)
-				)
+				new Settings.Settings() {
+					OfficialGames = GameDB.Instance.OfficialGames,
+					FanGames = GameDB.Instance.FanGames,
+					GeneralSettings = SettingsManager.Instance.GeneralSettings
+				}
 			);
 		}
 		public void LoadGameConfig(Game game) {
 			_game = game;
-			GameLocation = _game.LocalFileLocation;
+			GameLocation = _game.FileLocation;
 		}
 	}
 }

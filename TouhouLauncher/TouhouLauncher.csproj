@@ -98,6 +98,7 @@
     <Compile Include="Model\Serialization\Yaml\FanGameYaml.cs" />
     <Compile Include="Model\Serialization\Yaml\OfficialGameYaml.cs" />
     <Compile Include="Model\Settings\GeneralSettings.cs" />
+    <Compile Include="Model\Settings\Settings.cs" />
     <Compile Include="Model\Settings\SettingsManager.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\Pages\SettingsPage.xaml.cs">

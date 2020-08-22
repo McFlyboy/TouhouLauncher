@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using TouhouLauncher.Model.GameInfo;
-using TouhouLauncher.Model.Settings;
 
 namespace TouhouLauncher.Model.Serialization.Yaml {
 	class SettingsYaml {
@@ -9,37 +8,39 @@ namespace TouhouLauncher.Model.Serialization.Yaml {
 		public List<FanGameYaml> FanGames { get; set; }
 		public GeneralSettingsYaml GeneralSettings { get; set; }
 
-		public Tuple<OfficialGame[], List<FanGame>, GeneralSettings> ToDomain() {
-			var officialGames = GameDBTemplate.CreateOfficialGamesFromTemplate();
-			int safeLength = Math.Min(officialGames.Length, OfficialGames.Length);
+		public Settings.Settings ToDomain() {
+			var domain = new Settings.Settings();
+
+			domain.OfficialGames = GameDBTemplate.CreateOfficialGamesFromTemplate();
+			int safeLength = Math.Min(domain.OfficialGames.Length, OfficialGames.Length);
 			for (int i = 0; i < safeLength; i++) {
-				officialGames[i].LocalFileLocation = OfficialGames[i].LocalFileLocation;
+				domain.OfficialGames[i].FileLocation = OfficialGames[i].FileLocation;
 			}
 
-			var fangames = new List<FanGame>();
+			domain.FanGames = new List<FanGame>();
 			foreach (var fanGame in FanGames) {
-				fangames.Add(fanGame.ToDomain());
+				domain.FanGames.Add(fanGame.ToDomain());
 			}
 
-			var generalSettings = GeneralSettings.ToDomain();
+			domain.GeneralSettings = GeneralSettings.ToDomain();
 
-			return Tuple.Create(officialGames, fangames, generalSettings);
+			return domain;
 		}
 
-		public static SettingsYaml FromDomain(Tuple<OfficialGame[], List<FanGame>, GeneralSettings> domain) {
+		public static SettingsYaml FromDomain(Settings.Settings domain) {
 			var yaml = new SettingsYaml();
 
-			yaml.OfficialGames = new OfficialGameYaml[domain.Item1.Length];
+			yaml.OfficialGames = new OfficialGameYaml[domain.OfficialGames.Length];
 			for(int i = 0; i < yaml.OfficialGames.Length; i++) {
-				yaml.OfficialGames[i] = OfficialGameYaml.FromDomain(domain.Item1[i]);
+				yaml.OfficialGames[i] = OfficialGameYaml.FromDomain(domain.OfficialGames[i]);
 			}
 
 			yaml.FanGames = new List<FanGameYaml>();
-			foreach (var fanGame in domain.Item2) {
+			foreach (var fanGame in domain.FanGames) {
 				yaml.FanGames.Add(FanGameYaml.FromDomain(fanGame));
 			}
 
-			yaml.GeneralSettings = GeneralSettingsYaml.FromDomain(domain.Item3);
+			yaml.GeneralSettings = GeneralSettingsYaml.FromDomain(domain.GeneralSettings);
 
 			return yaml;
 		}

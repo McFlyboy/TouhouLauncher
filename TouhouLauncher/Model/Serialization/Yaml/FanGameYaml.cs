@@ -16,7 +16,7 @@ namespace TouhouLauncher.Model.Serialization.Yaml {
 				ImageLocation = ImageLocation,
 				AudioLocation = AudioLocation,
 				ReleaseYear = ReleaseYear,
-				LocalFileLocation = LocalFileLocation
+				FileLocation = LocalFileLocation
 			};
 		}
 
@@ -27,7 +27,7 @@ namespace TouhouLauncher.Model.Serialization.Yaml {
 				ImageLocation = domain.ImageLocation,
 				AudioLocation = domain.AudioLocation,
 				ReleaseYear = domain.ReleaseYear,
-				LocalFileLocation = domain.LocalFileLocation
+				LocalFileLocation = domain.FileLocation
 			};
 		}
 	}

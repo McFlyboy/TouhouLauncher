@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using TouhouLauncher.Model.GameInfo;
 using TouhouLauncher.Model.Settings;
 using TouhouLauncher.View;
@@ -32,15 +35,25 @@ namespace TouhouLauncher.Model {
 			UpdateGameList();
 		}
 		public void LaunchGame(int id) {
-			if (GameList[id].LocalFileLocation.Length != 0) {
-				GameDB.Instance.LaunchGame(GameList[id].LocalFileLocation, SettingsManager.Instance.GeneralSettings.CloseOnGameLaunch);
+			if (GameList[id].FileLocation.Length != 0) {
+				LaunchExistingGame(GameList[id].FileLocation, SettingsManager.Instance.GeneralSettings.CloseOnGameLaunch);
 			}
 			else {
 				new GameConfigWindow(GameList[id]).ShowDialog();
 			}
 		}
 		public void LaunchRandom() {
+			// TODO
+		}
+		private void LaunchExistingGame(string gameLocation, bool exitOnLaunch = false) {
+			var startInfo = new ProcessStartInfo(gameLocation);
+			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);
 
+			Process.Start(startInfo);
+
+			if (exitOnLaunch) {
+				Application.Current.Shutdown();
+			}
 		}
 		private void UpdateGameList() {
 			GameList.Clear();

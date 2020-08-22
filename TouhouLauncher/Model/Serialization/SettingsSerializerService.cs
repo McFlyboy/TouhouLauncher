@@ -16,12 +16,12 @@ namespace TouhouLauncher.Model.Serialization {
 			serializerService = new SerializerService();
 		}
 
-		public void SerializeToFile(SettingsYaml yaml) {
-			serializerService.SerializeToFile(yaml, FILE_PATH);
+		public bool SerializeToFile(Settings.Settings settings) {
+			return serializerService.SerializeToFile(SettingsYaml.FromDomain(settings), FILE_PATH);
 		}
 
-		public SettingsYaml DeserializeFromFile() {
-			return serializerService.DeserializeFromFile<SettingsYaml>(FILE_PATH);
+		public Settings.Settings DeserializeFromFile() {
+			return serializerService.DeserializeFromFile<SettingsYaml>(FILE_PATH)?.ToDomain();
 		}
 	}
 }

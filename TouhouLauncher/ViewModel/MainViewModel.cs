@@ -1,5 +1,5 @@
 using GalaSoft.MvvmLight;
-using System;
+using System.Collections.Generic;
 using TouhouLauncher.Model.GameInfo;
 using TouhouLauncher.Model.Serialization;
 using TouhouLauncher.Model.Settings;
@@ -23,13 +23,16 @@ namespace TouhouLauncher.ViewModel {
 		}
 
 		private void InitApp() {
-			var (officialGames, fanGames, generalSettings) = SettingsSerializerService.Instance
-				.DeserializeFromFile()
-				.ToDomain();
+			var settings = SettingsSerializerService.Instance.DeserializeFromFile()
+				?? new Settings() {
+					OfficialGames = GameDBTemplate.CreateOfficialGamesFromTemplate(),
+					FanGames = new List<FanGame>(),
+					GeneralSettings = new GeneralSettings()
+				};
 
-			GameDB.Instance.OfficialGames = officialGames;
-			GameDB.Instance.FanGames = fanGames;
-			SettingsManager.Instance.GeneralSettings = generalSettings;
+			GameDB.Instance.OfficialGames = settings.OfficialGames;
+			GameDB.Instance.FanGames = settings.FanGames;
+			SettingsManager.Instance.GeneralSettings = settings.GeneralSettings;
 		}
 	}
 }

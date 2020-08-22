@@ -8,7 +8,7 @@
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH01.png",
 					AudioLocation = "",
 					ReleaseYear = 1996,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -18,7 +18,7 @@
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH02.png",
 					AudioLocation = "",
 					ReleaseYear = 1997,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -27,7 +27,7 @@
 					Subtitle = "Phantasmagoria of Dim. Dream",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH03.png",
 					AudioLocation = "",
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					ReleaseYear = 1997,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
@@ -38,7 +38,7 @@
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH04.png",
 					AudioLocation = "",
 					ReleaseYear = 1998,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -48,7 +48,7 @@
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH05.png",
 					AudioLocation = "",
 					ReleaseYear = 1998,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainPC98
 				},
@@ -58,7 +58,7 @@
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH06.png",
 					AudioLocation = "",
 					ReleaseYear = 2002,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -68,7 +68,7 @@
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH07.png",
 					AudioLocation = "",
 					ReleaseYear = 2003,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -78,7 +78,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2004,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -88,7 +88,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2004,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -98,7 +98,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2005,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -108,7 +108,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2005,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -118,7 +118,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2007,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -128,7 +128,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2008,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -138,7 +138,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2008,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -148,7 +148,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2009,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -158,7 +158,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2009,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -168,7 +168,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2010,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -178,7 +178,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2010,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -188,7 +188,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2011,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -198,7 +198,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2013,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -208,7 +208,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2013,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -218,7 +218,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2014,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -228,7 +228,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2015,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -238,7 +238,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2015,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -248,7 +248,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2017,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.FightingGame
 				},
@@ -258,7 +258,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2017,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				},
@@ -268,7 +268,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2018,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.SpinOff
 				},
@@ -278,7 +278,7 @@
 					ImageLocation = "",
 					AudioLocation = "",
 					ReleaseYear = 2019,
-					LocalFileLocation = string.Empty,
+					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Category = OfficialGame.CategoryFlag.MainWindows
 				}
