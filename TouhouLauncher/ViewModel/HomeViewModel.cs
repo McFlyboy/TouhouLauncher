@@ -1,11 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Model;
 using TouhouLauncher.Model.GameInfo;
-using TouhouLauncher.View;
 
 namespace TouhouLauncher.ViewModel {
 	public class HomeViewModel : ViewModelBase {
@@ -19,8 +19,11 @@ namespace TouhouLauncher.ViewModel {
 		public ICommand OpenSettingsCommand { get; }
 
 		private readonly HomeModel _homeModel;
-		public HomeViewModel() {
+		private readonly INavigationService _navigationService;
+
+		public HomeViewModel(INavigationService navigationService) {
 			_homeModel = new HomeModel();
+			_navigationService = navigationService;
 			HeaderList = new ObservableCollection<HeaderButton>();
 			for (int i = 0; i < _homeModel.OfficialGameCategories.Count; i++) {
 				var button = new CategoryHeaderButton(i, this);
@@ -32,7 +35,7 @@ namespace TouhouLauncher.ViewModel {
 				GameList.Add(new GameButton(i, this));
 			}
 			OpenSettingsCommand = new RelayCommand(() => {
-				MainWindow.ShowPage("SettingsPage.xaml");
+				_navigationService.NavigateTo("SettingsPage.xaml");
 			});
 		}
 		public class HeaderButton : ObservableObject {

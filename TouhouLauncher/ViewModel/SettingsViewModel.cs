@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System.Windows.Controls;
 using System.Windows.Input;
-using TouhouLauncher.View;
 using TouhouLauncher.View.UserControls;
 
 namespace TouhouLauncher.ViewModel {
@@ -17,13 +17,16 @@ namespace TouhouLauncher.ViewModel {
 
 		private readonly UserControl[] _settingsCategoryControls;
 		private int _categoryIndex;
-		public SettingsViewModel() {
+		private readonly INavigationService _navigationService;
+
+		public SettingsViewModel(INavigationService navigationService) {
+			_navigationService = navigationService;
 			_settingsCategoryControls = new UserControl[] {
 				new GameLocationsSettings()
 			};
 			_categoryIndex = 0;
 			BackCommand = new RelayCommand(() => {
-				MainWindow.ShowPage("HomePage.xaml");
+				_navigationService.NavigateTo("HomePage.xaml");
 			});
 		}
 		private void SetCategoryIndex(int index) {

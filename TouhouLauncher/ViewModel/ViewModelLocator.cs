@@ -1,10 +1,13 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
+using TouhouLauncher.Services;
 
 namespace TouhouLauncher.ViewModel {
 	public class ViewModelLocator {
 		public ViewModelLocator() {
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+			SimpleIoc.Default.Register<INavigationService, WpfNavigationService>();
 			SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<GameConfigViewModel>();
 			SimpleIoc.Default.Register<HomeViewModel>();
