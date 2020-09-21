@@ -75,7 +75,7 @@
 				new OfficialGame() {
 					Title = "Touhou 07.5",
 					Subtitle = "Immaterial and Missing Power",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH75.png",
 					AudioLocation = "",
 					ReleaseYear = 2004,
 					FileLocation = string.Empty,
@@ -85,7 +85,7 @@
 				new OfficialGame() {
 					Title = "Touhou 08",
 					Subtitle = "Imperishable Night",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH08.png",
 					AudioLocation = "",
 					ReleaseYear = 2004,
 					FileLocation = string.Empty,
@@ -95,7 +95,7 @@
 				new OfficialGame() {
 					Title = "Touhou 09",
 					Subtitle = "Phantasmagoria of Flower View",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH09.png",
 					AudioLocation = "",
 					ReleaseYear = 2005,
 					FileLocation = string.Empty,
@@ -105,7 +105,7 @@
 				new OfficialGame() {
 					Title = "Touhou 09.5",
 					Subtitle = "Shoot the Bullet",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH95.png",
 					AudioLocation = "",
 					ReleaseYear = 2005,
 					FileLocation = string.Empty,
@@ -115,7 +115,7 @@
 				new OfficialGame() {
 					Title = "Touhou 10",
 					Subtitle = "Mountain of Faith",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH10.png",
 					AudioLocation = "",
 					ReleaseYear = 2007,
 					FileLocation = string.Empty,
@@ -125,7 +125,7 @@
 				new OfficialGame() {
 					Title = "Touhou 10.5",
 					Subtitle = "Scarlet Weather Rhapsody",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH105.png",
 					AudioLocation = "",
 					ReleaseYear = 2008,
 					FileLocation = string.Empty,
@@ -135,7 +135,7 @@
 				new OfficialGame() {
 					Title = "Touhou 11",
 					Subtitle = "Subterranean Animism",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH11.png",
 					AudioLocation = "",
 					ReleaseYear = 2008,
 					FileLocation = string.Empty,
@@ -145,7 +145,7 @@
 				new OfficialGame() {
 					Title = "Touhou 12",
 					Subtitle = "Undefined Fantastic Object",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12.png",
 					AudioLocation = "",
 					ReleaseYear = 2009,
 					FileLocation = string.Empty,
@@ -155,7 +155,7 @@
 				new OfficialGame() {
 					Title = "Touhou 12.3",
 					Subtitle = "Hisoutensoku",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH123.png",
 					AudioLocation = "",
 					ReleaseYear = 2009,
 					FileLocation = string.Empty,
@@ -165,7 +165,7 @@
 				new OfficialGame() {
 					Title = "Touhou 12.5",
 					Subtitle = "Double Spoiler",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH125.png",
 					AudioLocation = "",
 					ReleaseYear = 2010,
 					FileLocation = string.Empty,
@@ -175,7 +175,7 @@
 				new OfficialGame() {
 					Title = "Touhou 12.8",
 					Subtitle = "Great Fairy Wars",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH128.png",
 					AudioLocation = "",
 					ReleaseYear = 2010,
 					FileLocation = string.Empty,
@@ -185,7 +185,7 @@
 				new OfficialGame() {
 					Title = "Touhou 13",
 					Subtitle = "Ten Desires",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH13.png",
 					AudioLocation = "",
 					ReleaseYear = 2011,
 					FileLocation = string.Empty,
@@ -195,7 +195,7 @@
 				new OfficialGame() {
 					Title = "Touhou 13.5",
 					Subtitle = "Hopeless Masquerade",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH135.png",
 					AudioLocation = "",
 					ReleaseYear = 2013,
 					FileLocation = string.Empty,
@@ -205,7 +205,7 @@
 				new OfficialGame() {
 					Title = "Touhou 14",
 					Subtitle = "Double Dealing Character",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH14.png",
 					AudioLocation = "",
 					ReleaseYear = 2013,
 					FileLocation = string.Empty,
@@ -215,7 +215,7 @@
 				new OfficialGame() {
 					Title = "Touhou 14.3",
 					Subtitle = "Impossible Spell Card",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH143.png",
 					AudioLocation = "",
 					ReleaseYear = 2014,
 					FileLocation = string.Empty,
@@ -225,7 +225,7 @@
 				new OfficialGame() {
 					Title = "Touhou 14.5",
 					Subtitle = "Urban Legend in Limbo",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH145.png",
 					AudioLocation = "",
 					ReleaseYear = 2015,
 					FileLocation = string.Empty,
@@ -235,7 +235,7 @@
 				new OfficialGame() {
 					Title = "Touhou 15",
 					Subtitle = "Legacy of Lunatic Kingdom",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH15.png",
 					AudioLocation = "",
 					ReleaseYear = 2015,
 					FileLocation = string.Empty,
@@ -245,7 +245,7 @@
 				new OfficialGame() {
 					Title = "Touhou 15.5",
 					Subtitle = "Antinomy of Common Flowers",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH155.png",
 					AudioLocation = "",
 					ReleaseYear = 2017,
 					FileLocation = string.Empty,
@@ -255,7 +255,7 @@
 				new OfficialGame() {
 					Title = "Touhou 16",
 					Subtitle = "Hidden Star in Four Seasons",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH16.png",
 					AudioLocation = "",
 					ReleaseYear = 2017,
 					FileLocation = string.Empty,
@@ -265,7 +265,7 @@
 				new OfficialGame() {
 					Title = "Touhou 16.5",
 					Subtitle = "Violet Detector",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH165.png",
 					AudioLocation = "",
 					ReleaseYear = 2018,
 					FileLocation = string.Empty,
@@ -275,7 +275,7 @@
 				new OfficialGame() {
 					Title = "Touhou 17",
 					Subtitle = "Wily Beast and Weakest Creature",
-					ImageLocation = "",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH17.png",
 					AudioLocation = "",
 					ReleaseYear = 2019,
 					FileLocation = string.Empty,
