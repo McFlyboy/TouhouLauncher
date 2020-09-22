@@ -228,5 +228,36 @@
   <ItemGroup>
     <None Include="Resources\Image1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH08.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH10.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH11.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH14.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH10_5.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH12_3.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH12_5.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH12_8.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH13_5.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH14_3.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH14_5.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH15_5.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH16_5.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH17.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH07_5.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH09_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH09.png" />
+    <Resource Include="Resources\Images\OfficialGames\TH12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\OfficialGames\TH13.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
