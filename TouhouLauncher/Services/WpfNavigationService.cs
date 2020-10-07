@@ -4,14 +4,23 @@ using TouhouLauncher.ViewModel;
 
 namespace TouhouLauncher.Services {
 	public class WpfNavigationService : INavigationService {
-		public string CurrentPageKey => throw new System.NotImplementedException();
+		private readonly MainViewModel _mainViewModel;
+		private string _previousPageKey;
+
+		public WpfNavigationService(MainViewModel mainViewModel) {
+			_mainViewModel = mainViewModel;
+			_previousPageKey = mainViewModel.Page;
+		}
+
+		public string CurrentPageKey => _mainViewModel.Page;
 
 		public void GoBack() {
-			throw new System.NotImplementedException();
+			_mainViewModel.Page = _previousPageKey;
 		}
 
 		public void NavigateTo(string pageKey) {
-			ServiceLocator.Current.GetInstance<MainViewModel>().Page = pageKey;
+			_previousPageKey = _mainViewModel.Page;
+			_mainViewModel.Page = pageKey;
 		}
 
 		public void NavigateTo(string pageKey, object parameter) {

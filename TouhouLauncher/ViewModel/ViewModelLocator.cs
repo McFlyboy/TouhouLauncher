@@ -5,9 +5,9 @@ using TouhouLauncher.Services;
 
 namespace TouhouLauncher.ViewModel {
 	public class ViewModelLocator {
-		public ViewModelLocator() {
+		static ViewModelLocator() {
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-			SimpleIoc.Default.Register<INavigationService, WpfNavigationService>();
+
 			SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<GameConfigViewModel>();
 			SimpleIoc.Default.Register<HomeViewModel>();

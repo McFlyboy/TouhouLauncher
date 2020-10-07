@@ -15,18 +15,18 @@ namespace TouhouLauncher.ViewModel {
 		}
 		public ICommand BackCommand { get; }
 
+		private readonly MainViewModel _mainViewModel;
 		private readonly UserControl[] _settingsCategoryControls;
 		private int _categoryIndex;
-		private readonly INavigationService _navigationService;
 
-		public SettingsViewModel(INavigationService navigationService) {
-			_navigationService = navigationService;
+		public SettingsViewModel(MainViewModel mainViewModel) {
+			_mainViewModel = mainViewModel;
 			_settingsCategoryControls = new UserControl[] {
 				new GameLocationsSettings()
 			};
 			_categoryIndex = 0;
 			BackCommand = new RelayCommand(() => {
-				_navigationService.NavigateTo("HomePage.xaml");
+				_mainViewModel.Page = "HomePage.xaml";
 			});
 		}
 		private void SetCategoryIndex(int index) {

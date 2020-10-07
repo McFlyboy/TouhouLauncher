@@ -19,11 +19,11 @@ namespace TouhouLauncher.ViewModel {
 		public ICommand OpenSettingsCommand { get; }
 
 		private readonly HomeModel _homeModel;
-		private readonly INavigationService _navigationService;
+		private readonly MainViewModel _mainViewModel;
 
-		public HomeViewModel(INavigationService navigationService) {
+		public HomeViewModel(MainViewModel mainViewModel) {
 			_homeModel = new HomeModel();
-			_navigationService = navigationService;
+			_mainViewModel = mainViewModel;
 			HeaderList = new ObservableCollection<HeaderButton>();
 			for (int i = 0; i < _homeModel.OfficialGameCategories.Count; i++) {
 				var button = new CategoryHeaderButton(i, this);
@@ -35,7 +35,7 @@ namespace TouhouLauncher.ViewModel {
 				GameList.Add(new GameButton(i, this));
 			}
 			OpenSettingsCommand = new RelayCommand(() => {
-				_navigationService.NavigateTo("SettingsPage.xaml");
+				_mainViewModel.Page = "SettingsPage.xaml";
 			});
 		}
 		public class HeaderButton : ObservableObject {
