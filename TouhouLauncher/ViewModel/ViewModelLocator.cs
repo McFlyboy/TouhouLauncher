@@ -1,7 +1,5 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
-using TouhouLauncher.Services;
 
 namespace TouhouLauncher.ViewModel {
 	public class ViewModelLocator {

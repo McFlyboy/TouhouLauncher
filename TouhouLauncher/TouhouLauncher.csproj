@@ -100,7 +100,6 @@
     <Compile Include="Model\Settings\GeneralSettings.cs" />
     <Compile Include="Model\Settings\Settings.cs" />
     <Compile Include="Model\Settings\SettingsManager.cs" />
-    <Compile Include="Services\WpfNavigationService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -224,10 +223,7 @@
     <Resource Include="Resources\Images\OfficialGames\TH07.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Celle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Image1.png" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
