@@ -91,31 +91,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\GameInfo\GameDBTemplate.cs" />
-    <Compile Include="Model\Serialization\SerializerService.cs" />
-    <Compile Include="Model\Serialization\SettingsSerializerService.cs" />
-    <Compile Include="Model\Serialization\Yaml\GeneralSettingsYaml.cs" />
-    <Compile Include="Model\Serialization\Yaml\FanGameYaml.cs" />
-    <Compile Include="Model\Serialization\Yaml\OfficialGameYaml.cs" />
-    <Compile Include="Model\Settings\GeneralSettings.cs" />
-    <Compile Include="Model\Settings\Settings.cs" />
-    <Compile Include="Model\Settings\SettingsManager.cs" />
-    <Compile Include="ViewModel\SettingsViewModel.cs" />
-    <Compile Include="View\Pages\SettingsPage.xaml.cs">
+    <Compile Include="Models\GameInfo\GameDBTemplate.cs" />
+    <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Services\Serialization\IFileSerializerService.cs" />
+    <Compile Include="Services\Serialization\YamlFileSerializerService.cs" />
+    <Compile Include="Services\Serialization\SettingsSerializerService.cs" />
+    <Compile Include="Models\Serialization\SerializableGeneralSettings.cs" />
+    <Compile Include="Models\Serialization\SerializableFanGame.cs" />
+    <Compile Include="Models\Serialization\SerializableOfficialGame.cs" />
+    <Compile Include="Models\Settings\GeneralSettings.cs" />
+    <Compile Include="Models\Settings\Settings.cs" />
+    <Compile Include="Models\Settings\SettingsContainer.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Views\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\GameLocationsSettings.xaml.cs">
+    <Compile Include="Views\UserControls\GameLocationsSettings.xaml.cs">
       <DependentUpon>GameLocationsSettings.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\GameConfigWindow.xaml">
+    <Page Include="Views\GameConfigWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Pages\HomePage.xaml">
+    <Page Include="Views\Pages\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -123,32 +125,32 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\GameConfigModel.cs" />
-    <Compile Include="Model\GameInfo\FanGame.cs" />
-    <Compile Include="Model\GameInfo\Game.cs" />
-    <Compile Include="Model\GameInfo\GameDB.cs" />
-    <Compile Include="Model\HomeModel.cs" />
-    <Compile Include="Model\GameInfo\OfficialGame.cs" />
-    <Compile Include="Model\Serialization\Yaml\SettingsYaml.cs" />
-    <Compile Include="ViewModel\GameConfigViewModel.cs" />
-    <Compile Include="ViewModel\HomeViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\GameConfigWindow.xaml.cs">
+    <Compile Include="Models\GameConfigModel.cs" />
+    <Compile Include="Models\GameInfo\FanGame.cs" />
+    <Compile Include="Models\GameInfo\Game.cs" />
+    <Compile Include="Models\GameInfo\GameDB.cs" />
+    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\GameInfo\OfficialGame.cs" />
+    <Compile Include="Models\Serialization\SerializableSettings.cs" />
+    <Compile Include="ViewModels\GameConfigViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="DependencyLocator.cs" />
+    <Compile Include="Views\GameConfigWindow.xaml.cs">
       <DependentUpon>GameConfigWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\HomePage.xaml.cs">
+    <Compile Include="Views\Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Pages\SettingsPage.xaml">
+    <Page Include="Views\Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\GameLocationsSettings.xaml">
+    <Page Include="Views\UserControls\GameLocationsSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,8 +224,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\OfficialGames\TH07.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
