@@ -1,0 +1,10 @@
+﻿<NavigationWindow x:Class="TouhouLauncher.Views.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		Title="Touhou Launcher" Width="1000" Height="800"
+		WindowStartupLocation="CenterScreen"
+		ResizeMode="CanMinimize"
+		DataContext="{Binding MainVM, Source={StaticResource Locator}}"
+		ShowsNavigationUI="False"
+		Source="{Binding Page}">
+</NavigationWindow>

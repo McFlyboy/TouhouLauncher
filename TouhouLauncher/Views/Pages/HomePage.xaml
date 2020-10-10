@@ -1,0 +1,149 @@
+﻿<Page x:Class="TouhouLauncher.Views.Pages.HomePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  xmlns:local="clr-namespace:TouhouLauncher.Views.Pages"
+	  mc:Ignorable="d" 
+	  d:DesignWidth="1000" d:DesignHeight="800"
+	  Title="HomePage"
+	  DataContext="{Binding HomeVM, Source={StaticResource Locator}}">
+	<Grid Background="#595362">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="1*"/>
+			<RowDefinition Height="5*"/>
+		</Grid.RowDefinitions>
+		<ItemsControl ItemsSource="{Binding HeaderList}" Background="#4B4554" Padding="{Binding HeaderPadding}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Rows="1"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Rectangle Width="140" Height="70" Fill="#3A3541" RadiusX="2" RadiusY="2" Margin="20, 20, 0, 0"/>
+						<Button Command="{Binding HeaderCommand}" Cursor="Hand" Width="140" Height="70" BorderThickness="0" IsEnabled="{Binding HeaderEnabled}">
+							<Button.Template>
+								<ControlTemplate TargetType="Button">
+									<Border CornerRadius="2" Background="{Binding HeaderColor}">
+										<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										<Border.Triggers>
+											<EventTrigger RoutedEvent="Mouse.MouseEnter">
+												<BeginStoryboard>
+													<Storyboard>
+														<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="{Binding HeaderHoverColor}"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+											<EventTrigger RoutedEvent="Mouse.MouseLeave">
+												<BeginStoryboard>
+													<Storyboard>
+														<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="{Binding HeaderColor}"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+										</Border.Triggers>
+									</Border>
+								</ControlTemplate>
+							</Button.Template>
+							<StackPanel>
+								<TextBlock Text="{Binding HeaderName}" TextAlignment="Center" Foreground="{Binding HeaderTextColor}" FontSize="17"/>
+								<TextBlock Text="{Binding HeaderDesc}" TextAlignment="Center" Foreground="{Binding HeaderTextColor}" FontSize="12" Height="{Binding HeaderDescHeight}"/>
+							</StackPanel>
+						</Button>
+					</Grid>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+		<Grid Grid.Row="1">
+			<ScrollViewer>
+				<ItemsControl ItemsSource="{Binding GameList}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<WrapPanel Width="800" Margin="0, 25"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Button Command="{Binding GameCommand}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
+								<Button.Template>
+									<ControlTemplate TargetType="Button">
+										<Grid ClipToBounds="True" Background="#342E30">
+											<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+											<Image Source="{Binding GameImage}" RenderTransformOrigin="0.5, 0.5">
+												<Image.Effect>
+													<BlurEffect Radius="20"/>
+												</Image.Effect>
+												<Image.RenderTransform>
+													<ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+												</Image.RenderTransform>
+											</Image>
+											<Image Source="{Binding GameImage}" RenderTransformOrigin="0.5, 0.5">
+												<Image.RenderTransform>
+													<ScaleTransform x:Name="GameImageScale"/>
+												</Image.RenderTransform>
+											</Image>
+											<Grid x:Name="GameButtonOverlay" Opacity="0" Background="#3A2E3F">
+												<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+												<TextBlock Text="{Binding GameReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5, 5"/>
+											</Grid>
+										</Grid>
+										<ControlTemplate.Triggers>
+											<EventTrigger RoutedEvent="Mouse.MouseEnter">
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlay" Storyboard.TargetProperty="Opacity" To="0.85"/>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleX" To="1.1"/>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleY" To="1.1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+											<EventTrigger RoutedEvent="Mouse.MouseLeave">
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlay" Storyboard.TargetProperty="Opacity" To="0"/>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleX" To="1"/>
+														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleY" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</EventTrigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Button.Template>
+								<Button.Effect>
+									<DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#726D82"/>
+								</Button.Effect>
+							</Button>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+			<Button Command="{Binding OpenSettingsCommand}" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" ToolTip="Settings">
+				<Button.Template>
+					<ControlTemplate TargetType="Button">
+						<Border Background="#342E30" CornerRadius="25">
+							<Image Source="..\..\Resources\Images\Cogwheel.png" Margin="10, 10"/>
+							<Border.Triggers>
+								<EventTrigger RoutedEvent="Mouse.MouseEnter">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#453F41"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+								<EventTrigger RoutedEvent="Mouse.MouseLeave">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#342E30"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+							</Border.Triggers>
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
+		</Grid>
+	</Grid>
+</Page>
