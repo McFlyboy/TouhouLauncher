@@ -17,6 +17,7 @@ namespace TouhouLauncher.Models {
 		) {
 			_gameDB = gameDB;
 			_settingsContainer = settingsContainer;
+
 			OfficialGameCategories = new List<OfficialGame.CategoryFlag>();
 			if (_settingsContainer.GeneralSettings.CombineMainCategories) {
 				OfficialGameCategories.Add(OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows);

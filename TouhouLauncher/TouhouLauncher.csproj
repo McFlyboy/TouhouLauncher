@@ -92,6 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\GameInfo\GameDBTemplate.cs" />
+    <Compile Include="Models\GamePickerModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Services\Serialization\IFileSerializerService.cs" />
     <Compile Include="Services\Serialization\YamlFileSerializerService.cs" />
@@ -102,12 +103,16 @@
     <Compile Include="Models\Settings\GeneralSettings.cs" />
     <Compile Include="Models\Settings\Settings.cs" />
     <Compile Include="Models\Settings\SettingsContainer.cs" />
+    <Compile Include="ViewModels\GamePickerViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\GameLocationsSettings.xaml.cs">
       <DependentUpon>GameLocationsSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\GamePicker.xaml.cs">
+      <DependentUpon>GamePicker.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\GameConfigWindow.xaml">
       <SubType>Designer</SubType>
@@ -151,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\GameLocationsSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\GamePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

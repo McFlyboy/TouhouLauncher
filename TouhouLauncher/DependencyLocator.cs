@@ -16,6 +16,7 @@ namespace TouhouLauncher {
 			SimpleIoc.Default.Register<GameConfigViewModel>();
 			SimpleIoc.Default.Register<HomeViewModel>();
 			SimpleIoc.Default.Register<SettingsViewModel>();
+			SimpleIoc.Default.Register<GamePickerViewModel>();
 
 			/* ------ MODELS ------ */
 			SimpleIoc.Default.Register<MainModel>();
@@ -23,6 +24,7 @@ namespace TouhouLauncher {
 			SimpleIoc.Default.Register<HomeModel>();
 			SimpleIoc.Default.Register<GameDB>();
 			SimpleIoc.Default.Register<SettingsContainer>();
+			SimpleIoc.Default.Register<GamePickerModel>();
 
 			/* ------ SERVICES ------ */
 			SimpleIoc.Default.Register<IFileSerializerService, YamlFileSerializerService>();
@@ -37,5 +39,7 @@ namespace TouhouLauncher {
 			ServiceLocator.Current.GetInstance<HomeViewModel>();
 		public SettingsViewModel SettingsVM =>
 			ServiceLocator.Current.GetInstance<SettingsViewModel>();
+		public GamePickerViewModel GamePickerVM =>
+			ServiceLocator.Current.GetInstance<GamePickerViewModel>();
 	}
 }

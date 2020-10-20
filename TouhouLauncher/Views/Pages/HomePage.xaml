@@ -4,6 +4,7 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  xmlns:local="clr-namespace:TouhouLauncher.Views.Pages"
+	  xmlns:uc="clr-namespace:TouhouLauncher.Views.UserControls"
 	  mc:Ignorable="d" 
 	  d:DesignWidth="1000" d:DesignHeight="800"
 	  Title="HomePage"
@@ -58,66 +59,7 @@
 		</ItemsControl>
 		<Grid Grid.Row="1">
 			<ScrollViewer>
-				<ItemsControl ItemsSource="{Binding GameList}">
-					<ItemsControl.ItemsPanel>
-						<ItemsPanelTemplate>
-							<WrapPanel Width="800" Margin="0, 25"/>
-						</ItemsPanelTemplate>
-					</ItemsControl.ItemsPanel>
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-							<Button Command="{Binding GameCommand}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
-								<Button.Template>
-									<ControlTemplate TargetType="Button">
-										<Grid ClipToBounds="True" Background="#342E30">
-											<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-											<Image Source="{Binding GameImage}" RenderTransformOrigin="0.5, 0.5">
-												<Image.Effect>
-													<BlurEffect Radius="20"/>
-												</Image.Effect>
-												<Image.RenderTransform>
-													<ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
-												</Image.RenderTransform>
-											</Image>
-											<Image Source="{Binding GameImage}" RenderTransformOrigin="0.5, 0.5">
-												<Image.RenderTransform>
-													<ScaleTransform x:Name="GameImageScale"/>
-												</Image.RenderTransform>
-											</Image>
-											<Grid x:Name="GameButtonOverlay" Opacity="0" Background="#3A2E3F">
-												<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-												<TextBlock Text="{Binding GameReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5, 5"/>
-											</Grid>
-										</Grid>
-										<ControlTemplate.Triggers>
-											<EventTrigger RoutedEvent="Mouse.MouseEnter">
-												<BeginStoryboard>
-													<Storyboard>
-														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlay" Storyboard.TargetProperty="Opacity" To="0.85"/>
-														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleX" To="1.1"/>
-														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleY" To="1.1"/>
-													</Storyboard>
-												</BeginStoryboard>
-											</EventTrigger>
-											<EventTrigger RoutedEvent="Mouse.MouseLeave">
-												<BeginStoryboard>
-													<Storyboard>
-														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlay" Storyboard.TargetProperty="Opacity" To="0"/>
-														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleX" To="1"/>
-														<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleY" To="1"/>
-													</Storyboard>
-												</BeginStoryboard>
-											</EventTrigger>
-										</ControlTemplate.Triggers>
-									</ControlTemplate>
-								</Button.Template>
-								<Button.Effect>
-									<DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#726D82"/>
-								</Button.Effect>
-							</Button>
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
+				<uc:GamePicker/>
 			</ScrollViewer>
 			<Button Command="{Binding OpenSettingsCommand}" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" ToolTip="Settings">
 				<Button.Template>

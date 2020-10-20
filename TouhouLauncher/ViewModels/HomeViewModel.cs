@@ -8,15 +8,15 @@ using TouhouLauncher.Models.GameInfo;
 
 namespace TouhouLauncher.ViewModels {
 	public class HomeViewModel : ViewModelBase {
-		private readonly HomeModel _homeModel;
 		private readonly MainViewModel _mainViewModel;
+		private readonly HomeModel _homeModel;
 
 		public HomeViewModel(
 			MainViewModel mainViewModel,
 			HomeModel homeModel
 		) {
-			_homeModel = homeModel;
 			_mainViewModel = mainViewModel;
+			_homeModel = homeModel;
 
 			HeaderList = new ObservableCollection<HeaderButton>();
 			for (int i = 0; i < _homeModel.OfficialGameCategories.Count; i++) {
@@ -24,6 +24,7 @@ namespace TouhouLauncher.ViewModels {
 				HeaderList.Add(button);
 			}
 			HeaderList.Add(new HeaderButton("LAUNCH\nRANDOM GAME", "", "#4284C4", "#5395D5", LaunchRandom));
+
 			GameList = new ObservableCollection<GameButton>();
 			for (int i = 0; i < _homeModel.GameList.Count; i++) {
 				GameList.Add(new GameButton(i, this));
