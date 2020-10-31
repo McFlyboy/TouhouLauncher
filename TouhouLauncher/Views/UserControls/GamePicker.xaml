@@ -4,11 +4,11 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls"
-		mc:Ignorable="d" 
+		mc:Ignorable="d"
 		d:DesignWidth="1000"
 		DataContext="{Binding GamePickerVM, Source={StaticResource Locator}}">
 	<Grid>
-		<ItemsControl ItemsSource="{Binding GameList}">
+		<ItemsControl ItemsSource="{Binding GameButtons}">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel Width="800" Margin="0, 25"/>
@@ -16,12 +16,12 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Button Command="{Binding GameCommand}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
+					<Button Command="{Binding Command}" Cursor="Hand" Width="170" Height="250" Margin="15, 20">
 						<Button.Template>
 							<ControlTemplate TargetType="Button">
 								<Grid ClipToBounds="True" Background="#342E30">
-									<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-									<Image Source="{Binding GameImage}" RenderTransformOrigin="0.5, 0.5">
+									<TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+									<Image Source="{Binding Image}" RenderTransformOrigin="0.5, 0.5">
 										<Image.Effect>
 											<BlurEffect Radius="20"/>
 										</Image.Effect>
@@ -29,14 +29,14 @@
 											<ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
 										</Image.RenderTransform>
 									</Image>
-									<Image Source="{Binding GameImage}" RenderTransformOrigin="0.5, 0.5">
+									<Image Source="{Binding Image}" RenderTransformOrigin="0.5, 0.5">
 										<Image.RenderTransform>
 											<ScaleTransform x:Name="GameImageScale"/>
 										</Image.RenderTransform>
 									</Image>
 									<Grid x:Name="GameButtonOverlay" Opacity="0" Background="#3A2E3F">
-										<TextBlock Text="{Binding GameName}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-										<TextBlock Text="{Binding GameReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5, 5"/>
+										<TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+										<TextBlock Text="{Binding ReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5, 5"/>
 									</Grid>
 								</Grid>
 								<ControlTemplate.Triggers>

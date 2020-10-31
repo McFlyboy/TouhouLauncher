@@ -92,8 +92,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\GameInfo\GameDBTemplate.cs" />
-    <Compile Include="Models\GamePickerModel.cs" />
+    <Compile Include="Models\GamePickerList.cs" />
     <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Services\ActivateGameService.cs" />
+    <Compile Include="Services\GameCategoryService.cs" />
     <Compile Include="Services\Serialization\IFileSerializerService.cs" />
     <Compile Include="Services\Serialization\YamlFileSerializerService.cs" />
     <Compile Include="Services\Serialization\SettingsSerializerService.cs" />
@@ -134,7 +136,7 @@
     <Compile Include="Models\GameInfo\FanGame.cs" />
     <Compile Include="Models\GameInfo\Game.cs" />
     <Compile Include="Models\GameInfo\GameDB.cs" />
-    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\ActiveGameCategory.cs" />
     <Compile Include="Models\GameInfo\OfficialGame.cs" />
     <Compile Include="Models\Serialization\SerializableSettings.cs" />
     <Compile Include="ViewModels\GameConfigViewModel.cs" />

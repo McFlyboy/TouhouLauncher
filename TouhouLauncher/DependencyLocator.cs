@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Ioc;
 using TouhouLauncher.Models;
 using TouhouLauncher.Models.GameInfo;
 using TouhouLauncher.Models.Settings;
+using TouhouLauncher.Services;
 using TouhouLauncher.Services.Serialization;
 using TouhouLauncher.ViewModels;
 
@@ -21,12 +22,14 @@ namespace TouhouLauncher {
 			/* ------ MODELS ------ */
 			SimpleIoc.Default.Register<MainModel>();
 			SimpleIoc.Default.Register<GameConfigModel>();
-			SimpleIoc.Default.Register<HomeModel>();
+			SimpleIoc.Default.Register<ActiveGameCategory>();
 			SimpleIoc.Default.Register<GameDB>();
 			SimpleIoc.Default.Register<SettingsContainer>();
-			SimpleIoc.Default.Register<GamePickerModel>();
+			SimpleIoc.Default.Register<GamePickerList>();
 
 			/* ------ SERVICES ------ */
+			SimpleIoc.Default.Register<ActivateGameService>();
+			SimpleIoc.Default.Register<GameCategoryService>();
 			SimpleIoc.Default.Register<IFileSerializerService, YamlFileSerializerService>();
 			SimpleIoc.Default.Register<SettingsSerializerService>();
 		}

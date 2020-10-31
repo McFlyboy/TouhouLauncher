@@ -1,44 +1,72 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models;
+using TouhouLauncher.Models.GameInfo;
+using TouhouLauncher.Services;
 
 namespace TouhouLauncher.ViewModels {
 	public class GamePickerViewModel : ViewModelBase {
-		private readonly GamePickerModel _gamePickerModel;
+		private readonly GamePickerList _gamePickerList;
+		private readonly ActiveGameCategory _activeGameCategory;
+		private readonly ActivateGameService _activateGameService;
 
-		public GamePickerViewModel(GamePickerModel gamePickerModel) {
-			_gamePickerModel = gamePickerModel;
+		public GamePickerViewModel(
+			GamePickerList gamePickerList,
+			ActiveGameCategory activeGameCategory,
+			ActivateGameService activateGameService
+		) {
+			_gamePickerList = gamePickerList;
+			_activeGameCategory = activeGameCategory;
+			_activateGameService = activateGameService;
 
-			GameButtonList = new ObservableCollection<GameButton>();
-			for (int i = 0; i < _gamePickerModel.GameList.Count; i++) {
-				GameButtonList.Add(new GameButton(i, this));
+			GameButtons = new ObservableCollection<GameButton>();
+
+			UpdateGames();
+		}
+
+		public ObservableCollection<GameButton> GameButtons { get; }
+
+		public void UpdateGames() {
+			_gamePickerList.PopulateGameList(_activeGameCategory.CurrentCategory);
+			CreateGameButtons(_gamePickerList.GameList);
+		}
+
+		private void CreateGameButtons(List<Game> games) {
+			GameButtons.Clear();
+			foreach (var game in games) {
+				GameButtons.Add(
+					new GameButton(game, _activateGameService)
+				);
 			}
 		}
 
-		public ObservableCollection<GameButton> GameButtonList { get; }
-
 		public class GameButton {
-			private readonly int _id;
-			private readonly GamePickerViewModel _parent;
+			private readonly ActivateGameService _activateGameService;
+			private readonly Game _game;
 
-			public GameButton(int id, GamePickerViewModel parent) {
-				_id = id;
-				_parent = parent;
+			public GameButton(
+				Game game,
+				ActivateGameService activateGameService
+			) {
+				_activateGameService = activateGameService;
+				_game = game;
 
-				GameCommand = new RelayCommand(() => {
-					//_parent._gamePickerModel.LaunchGame(_id);
+				Command = new RelayCommand(() => {
+					_activateGameService.ActivateGame(_game);
 				});
 			}
 
-			public string GameName =>
-				_parent._gamePickerModel.GameList[_id].Title +
-				(!_parent._gamePickerModel.GameList[_id].Subtitle.Equals(string.Empty) ? ":\n" : string.Empty) +
-				_parent._gamePickerModel.GameList[_id].Subtitle;
-			public string GameImage => _parent._gamePickerModel.GameList[_id].ImageLocation;
-			public string GameReleaseYear => "Release: " + _parent._gamePickerModel.GameList[_id].ReleaseYear;
-			public ICommand GameCommand { get; }
+			public string Name =>
+				_game.Title + (!_game.Subtitle.Equals(string.Empty) ? ":\n" : string.Empty) + _game.Subtitle;
+
+			public string Image => _game.ImageLocation;
+
+			public string ReleaseYear => "Release: " + _game.ReleaseYear;
+
+			public ICommand Command { get; }
 		}
 	}
 }
