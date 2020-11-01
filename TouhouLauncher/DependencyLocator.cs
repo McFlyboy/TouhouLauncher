@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Ioc;
 using TouhouLauncher.Models;
 using TouhouLauncher.Models.GameInfo;
 using TouhouLauncher.Models.Settings;
+using TouhouLauncher.Services;
 using TouhouLauncher.Services.Serialization;
 using TouhouLauncher.ViewModels;
 
@@ -16,15 +17,19 @@ namespace TouhouLauncher {
 			SimpleIoc.Default.Register<GameConfigViewModel>();
 			SimpleIoc.Default.Register<HomeViewModel>();
 			SimpleIoc.Default.Register<SettingsViewModel>();
+			SimpleIoc.Default.Register<GamePickerViewModel>();
 
 			/* ------ MODELS ------ */
 			SimpleIoc.Default.Register<MainModel>();
 			SimpleIoc.Default.Register<GameConfigModel>();
-			SimpleIoc.Default.Register<HomeModel>();
+			SimpleIoc.Default.Register<ActiveGameCategory>();
 			SimpleIoc.Default.Register<GameDB>();
 			SimpleIoc.Default.Register<SettingsContainer>();
+			SimpleIoc.Default.Register<GamePickerList>();
 
 			/* ------ SERVICES ------ */
+			SimpleIoc.Default.Register<ActivateGameService>();
+			SimpleIoc.Default.Register<GameCategoryService>();
 			SimpleIoc.Default.Register<IFileSerializerService, YamlFileSerializerService>();
 			SimpleIoc.Default.Register<SettingsSerializerService>();
 		}
@@ -37,5 +42,7 @@ namespace TouhouLauncher {
 			ServiceLocator.Current.GetInstance<HomeViewModel>();
 		public SettingsViewModel SettingsVM =>
 			ServiceLocator.Current.GetInstance<SettingsViewModel>();
+		public GamePickerViewModel GamePickerVM =>
+			ServiceLocator.Current.GetInstance<GamePickerViewModel>();
 	}
 }
