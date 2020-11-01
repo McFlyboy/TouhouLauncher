@@ -106,7 +106,10 @@ namespace TouhouLauncher.ViewModels {
 			private readonly OfficialGame.CategoryFlag _categoryFlags;
 			private readonly HomeViewModel _parent;
 
-			public CategoryHeaderButton(OfficialGame.CategoryFlag categoryFlags, HomeViewModel parent) : base() {
+			public CategoryHeaderButton(
+				OfficialGame.CategoryFlag categoryFlags,
+				HomeViewModel parent
+			) : base() {
 				_categoryFlags = categoryFlags;
 				_parent = parent;
 				switch (_categoryFlags) {
@@ -131,7 +134,7 @@ namespace TouhouLauncher.ViewModels {
 						HeaderName = "FAN GAMES";
 						break;
 					default:
-						HeaderName = "UNKNOWN CATEGORY";
+						HeaderName = "UNKNOWN\nCATEGORY";
 						break;
 				}
 				HeaderCommand = new RelayCommand(() => {
