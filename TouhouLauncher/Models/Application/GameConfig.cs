@@ -1,24 +1,24 @@
 ﻿using Microsoft.Win32;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.Settings;
-using TouhouLauncher.Services.Application.Serialization;
+using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.Models.Application {
 	public class GameConfig {
 		private readonly GameDB _gameDB;
 		private readonly SettingsContainer _settingsContainer;
-		private readonly ISettingsSerializerService _settingsSerializerService;
+		private readonly ISettingsService _settingsService;
 
 		private Game _game;
 
 		public GameConfig(
 			GameDB gameDB,
 			SettingsContainer settingsContainer,
-			ISettingsSerializerService settingsSerializerService
+			ISettingsService settingsService
 		) {
 			_gameDB = gameDB;
 			_settingsContainer = settingsContainer;
-			_settingsSerializerService = settingsSerializerService;
+			_settingsService = settingsService;
 
 			_game = null;
 			GameLocation = "";
@@ -39,14 +39,13 @@ namespace TouhouLauncher.Models.Application {
 			}
 		}
 
-		public void SaveGameConfig() {
+		public void SaveGameLocation() {
 			_game.FileLocation = GameLocation;
-			_settingsSerializerService.Serialize(
-				new Settings.Settings() {
-					OfficialGames = _gameDB.OfficialGames,
-					FanGames = _gameDB.FanGames,
-					GeneralSettings = _settingsContainer.GeneralSettings
-				}
+
+			_settingsService.Save(
+				_gameDB.OfficialGames,
+				_gameDB.FanGames,
+				_settingsContainer.GeneralSettings
 			);
 		}
 

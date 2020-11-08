@@ -5,10 +5,10 @@ namespace TouhouLauncher.ViewModels {
 	public class MainViewModel : ViewModelBase {
 		private string _page;
 
-		public MainViewModel(InitAllSettingsService mainModel) {
+		public MainViewModel(InitAllSettingsService initAllSettingsService) {
 			_page = "HomePage.xaml";
 
-			mainModel.InitAllSettings();
+			initAllSettingsService.InitAllSettings();
 		}
 
 		public string Page {

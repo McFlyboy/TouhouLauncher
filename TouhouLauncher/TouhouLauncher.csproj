@@ -93,18 +93,17 @@
     </ApplicationDefinition>
     <Compile Include="Services\Application\OfficialGamesTemplateService.cs" />
     <Compile Include="Models\Application\GamePickerList.cs" />
-    <Compile Include="Services\Application\Serialization\ISettingsSerializerService.cs" />
+    <Compile Include="Services\Application\ISettingsService.cs" />
     <Compile Include="Services\Application\InitAllSettingsService.cs" />
     <Compile Include="Services\Application\ActivateGameService.cs" />
     <Compile Include="Services\Application\GameCategoryService.cs" />
     <Compile Include="Services\Infrastructure\Serialization\IFileSerializerService.cs" />
     <Compile Include="Services\Infrastructure\Serialization\YamlFileSerializerService.cs" />
-    <Compile Include="Services\Infrastructure\Serialization\SettingsSerializerService.cs" />
+    <Compile Include="Services\Infrastructure\FileSettingsService.cs" />
     <Compile Include="Models\Infrastructure\Serialization\SerializableGeneralSettings.cs" />
     <Compile Include="Models\Infrastructure\Serialization\SerializableFanGame.cs" />
     <Compile Include="Models\Infrastructure\Serialization\SerializableOfficialGame.cs" />
     <Compile Include="Models\Application\Settings\GeneralSettings.cs" />
-    <Compile Include="Models\Application\Settings\Settings.cs" />
     <Compile Include="Models\Application\Settings\SettingsContainer.cs" />
     <Compile Include="ViewModels\GamePickerViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />

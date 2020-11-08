@@ -18,7 +18,7 @@ namespace TouhouLauncher.ViewModels {
 			});
 
 			OKCommand = new RelayCommand<Window>((Window window) => {
-				_gameConfig.SaveGameConfig();
+				_gameConfig.SaveGameLocation();
 				window.Close();
 			});
 

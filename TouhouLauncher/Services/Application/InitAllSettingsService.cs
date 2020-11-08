@@ -1,38 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.Settings;
-using TouhouLauncher.Services.Application.Serialization;
 
 namespace TouhouLauncher.Services.Application {
 	public class InitAllSettingsService {
 		private readonly GameDB _gameDB;
-		private readonly OfficialGamesTemplateService _officialGamesTemplateService;
 		private readonly SettingsContainer _settingsContainer;
-		private readonly ISettingsSerializerService _settingsSerializerService;
+		private readonly ISettingsService _settingsService;
+		private readonly OfficialGamesTemplateService _officialGamesTemplateService;
 
 		public InitAllSettingsService(
 			GameDB gameDB,
-			OfficialGamesTemplateService officialGamesTemplateService,
 			SettingsContainer settingsContainer,
-			ISettingsSerializerService settingsSerializerService
+			ISettingsService settingsService,
+			OfficialGamesTemplateService officialGamesTemplateService
 		) {
 			_gameDB = gameDB;
-			_officialGamesTemplateService = officialGamesTemplateService;
 			_settingsContainer = settingsContainer;
-			_settingsSerializerService = settingsSerializerService;
+			_settingsService = settingsService;
+			_officialGamesTemplateService = officialGamesTemplateService;
 		}
 
 		public void InitAllSettings() {
-			var settings = _settingsSerializerService.Deserialize()
-				?? new Settings() {
-					OfficialGames = _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
-					FanGames = new List<FanGame>(),
-					GeneralSettings = new GeneralSettings()
-				};
+			var (officialGames, fanGames, generalSettings) = _settingsService.Load();
 
-			_gameDB.OfficialGames = settings.OfficialGames;
-			_gameDB.FanGames = settings.FanGames;
-			_settingsContainer.GeneralSettings = settings.GeneralSettings;
+			_gameDB.OfficialGames = officialGames ?? _officialGamesTemplateService.CreateOfficialGamesFromTemplate();
+			_gameDB.FanGames = fanGames ?? new List<FanGame>();
+			_settingsContainer.GeneralSettings = generalSettings ?? new GeneralSettings();
 		}
 	}
 }

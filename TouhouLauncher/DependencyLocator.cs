@@ -4,7 +4,7 @@ using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.Settings;
 using TouhouLauncher.Services.Application;
-using TouhouLauncher.Services.Application.Serialization;
+using TouhouLauncher.Services.Infrastructure;
 using TouhouLauncher.Services.Infrastructure.Serialization;
 using TouhouLauncher.ViewModels;
 
@@ -32,8 +32,8 @@ namespace TouhouLauncher {
 			SimpleIoc.Default.Register<ActivateGameService>();
 			SimpleIoc.Default.Register<GameCategoryService>();
 			SimpleIoc.Default.Register<OfficialGamesTemplateService>();
+			SimpleIoc.Default.Register<ISettingsService, FileSettingsService>();
 			SimpleIoc.Default.Register<IFileSerializerService, YamlFileSerializerService>();
-			SimpleIoc.Default.Register<ISettingsSerializerService, SettingsSerializerService>();
 		}
 		
 		public MainViewModel MainVM =>

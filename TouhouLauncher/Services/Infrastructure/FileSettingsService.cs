@@ -1,15 +1,18 @@
 ﻿using TouhouLauncher.Models.Infrastructure.Serialization;
 using TouhouLauncher.Models.Application.Settings;
 using TouhouLauncher.Services.Application;
-using TouhouLauncher.Services.Application.Serialization;
+using TouhouLauncher.Models.Application.GameInfo;
+using System.Collections.Generic;
+using System;
+using TouhouLauncher.Services.Infrastructure.Serialization;
 
-namespace TouhouLauncher.Services.Infrastructure.Serialization {
-	public class SettingsSerializerService : ISettingsSerializerService {
+namespace TouhouLauncher.Services.Infrastructure {
+	public class FileSettingsService : ISettingsService {
 		private readonly IFileSerializerService _fileSerializerService;
 		private readonly OfficialGamesTemplateService _officialGamesTemplateService;
 		private readonly string filePath;
 
-		public SettingsSerializerService(
+		public FileSettingsService(
 			IFileSerializerService fileSerializerService,
 			OfficialGamesTemplateService officialGamesTemplateService
 		) {
@@ -18,11 +21,18 @@ namespace TouhouLauncher.Services.Infrastructure.Serialization {
 			filePath = "Settings." + fileSerializerService.FileLastName;
 		}
 
-		public bool Serialize(Settings settings) {
-			return _fileSerializerService.SerializeToFile(SerializableSettings.FromDomain(settings), filePath);
+		public bool Save(
+			OfficialGame[] officialGames,
+			List<FanGame> fanGames,
+			GeneralSettings generalSettings
+		) {
+			return _fileSerializerService.SerializeToFile(
+				SerializableSettings.FromDomain(officialGames, fanGames, generalSettings),
+				filePath
+			);
 		}
 
-		public Settings Deserialize() {
+		public Tuple<OfficialGame[], List<FanGame>, GeneralSettings> Load() {
 			return _fileSerializerService.DeserializeFromFile<SerializableSettings>(filePath)
 				?.ToDomain(_officialGamesTemplateService.CreateOfficialGamesFromTemplate());
 		}
