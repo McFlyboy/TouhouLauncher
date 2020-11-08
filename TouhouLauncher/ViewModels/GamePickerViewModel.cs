@@ -3,9 +3,9 @@ using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using TouhouLauncher.Models;
-using TouhouLauncher.Models.GameInfo;
-using TouhouLauncher.Services;
+using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class GamePickerViewModel : ViewModelBase {

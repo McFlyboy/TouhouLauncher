@@ -3,7 +3,7 @@ using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace TouhouLauncher.Services.Serialization {
+namespace TouhouLauncher.Services.Infrastructure.Serialization {
 	public class YamlFileSerializerService : IFileSerializerService {
 		private readonly ISerializer _serializer;
 		private readonly IDeserializer _deserializer;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using TouhouLauncher.Models.GameInfo;
-using TouhouLauncher.Models.Settings;
+using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Application.Settings;
 
-namespace TouhouLauncher.Services {
+namespace TouhouLauncher.Services.Application {
 	public class GameCategoryService {
 		private readonly SettingsContainer _settingsContainer;
 

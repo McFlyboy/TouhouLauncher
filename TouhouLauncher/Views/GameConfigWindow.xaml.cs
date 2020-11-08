@@ -1,12 +1,9 @@
 ﻿using System.Windows;
-using TouhouLauncher.Models.GameInfo;
-using TouhouLauncher.ViewModels;
 
 namespace TouhouLauncher.Views {
 	public partial class GameConfigWindow : Window {
-		public GameConfigWindow(Game game) {
+		public GameConfigWindow() {
 			InitializeComponent();
-			((GameConfigViewModel)DataContext).LoadGameConfig(game);
 		}
 	}
 }

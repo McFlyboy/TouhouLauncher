@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TouhouLauncher.Models.GameInfo;
+using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.Models {
+namespace TouhouLauncher.Models.Application {
 	public class GamePickerList {
 		private readonly GameDB _gameDB;
 

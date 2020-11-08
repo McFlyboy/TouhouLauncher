@@ -1,6 +1,6 @@
-﻿using TouhouLauncher.Models.GameInfo;
+﻿using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.Models.Serialization {
+namespace TouhouLauncher.Models.Infrastructure.Serialization {
 	public class SerializableOfficialGame {
 		public string FileLocation { get; set; }
 

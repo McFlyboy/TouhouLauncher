@@ -1,16 +1,21 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Windows;
-using TouhouLauncher.Models.GameInfo;
-using TouhouLauncher.Models.Settings;
+using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Application.Settings;
 using TouhouLauncher.Views;
 
-namespace TouhouLauncher.Services {
+namespace TouhouLauncher.Services.Application {
 	public class ActivateGameService {
 		private readonly SettingsContainer _settingsContainer;
+		private readonly GameConfig _gameConfig;
 
-		public ActivateGameService(SettingsContainer settingsContainer) {
+		public ActivateGameService(
+			SettingsContainer settingsContainer,
+			GameConfig gameConfig
+		) {
 			_settingsContainer = settingsContainer;
+			_gameConfig = gameConfig;
 		}
 
 		public void ActivateGame(Game game) {
@@ -29,12 +34,13 @@ namespace TouhouLauncher.Services {
 			Process.Start(startInfo);
 
 			if (_settingsContainer.GeneralSettings.CloseOnGameLaunch) {
-				Application.Current.Shutdown();
+				System.Windows.Application.Current.Shutdown();
 			}
 		}
 
 		private void ConfigureGame(Game game) {
-			new GameConfigWindow(game).ShowDialog();
+			_gameConfig.SetGameToConfigure(game);
+			new GameConfigWindow().ShowDialog();
 		}
 	}
 }

@@ -2,15 +2,15 @@
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using System.Windows.Input;
-using TouhouLauncher.Models;
-using TouhouLauncher.Models.GameInfo;
+using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameConfigViewModel : ViewModelBase {
-		private readonly GameConfigModel _gameConfig;
+		private readonly GameConfig _gameConfig;
 
-		public GameConfigViewModel(GameConfigModel gameConfigModel) {
-			_gameConfig = gameConfigModel;
+		public GameConfigViewModel(GameConfig gameConfig) {
+			_gameConfig = gameConfig;
 
 			BrowseCommand = new RelayCommand(() => {
 				_gameConfig.Browse();
@@ -28,18 +28,16 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		public string WindowTitle => "Configure " + _gameConfig.GameTitle;
+
 		public string GameLocation {
 			get => _gameConfig.GameLocation;
 			set => _gameConfig.GameLocation = value;
 		}
-		public ICommand BrowseCommand { get; }
-		public ICommand OKCommand { get; }
-		public ICommand CancelCommand { get; }
 
-		public void LoadGameConfig(Game game) {
-			_gameConfig.LoadGameConfig(game);
-			RaisePropertyChanged("WindowTitle");
-			RaisePropertyChanged("GameLocation");
-		}
+		public ICommand BrowseCommand { get; }
+
+		public ICommand OKCommand { get; }
+
+		public ICommand CancelCommand { get; }
 	}
 }

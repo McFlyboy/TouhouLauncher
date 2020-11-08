@@ -1,30 +1,33 @@
 ﻿using Microsoft.Win32;
-using TouhouLauncher.Models.GameInfo;
-using TouhouLauncher.Models.Settings;
-using TouhouLauncher.Services.Serialization;
+using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Application.Settings;
+using TouhouLauncher.Services.Application.Serialization;
 
-namespace TouhouLauncher.Models {
-	public class GameConfigModel {
-		private Game _game;
+namespace TouhouLauncher.Models.Application {
+	public class GameConfig {
 		private readonly GameDB _gameDB;
 		private readonly SettingsContainer _settingsContainer;
-		private readonly SettingsSerializerService _settingsSerializerService;
+		private readonly ISettingsSerializerService _settingsSerializerService;
 
-		public GameConfigModel(
+		private Game _game;
+
+		public GameConfig(
 			GameDB gameDB,
 			SettingsContainer settingsContainer,
-			SettingsSerializerService settingsSerializerService
+			ISettingsSerializerService settingsSerializerService
 		) {
-			_game = null;
 			_gameDB = gameDB;
 			_settingsContainer = settingsContainer;
 			_settingsSerializerService = settingsSerializerService;
+
+			_game = null;
 			GameLocation = "";
 		}
 
 		public string GameTitle => _game != null
 			? $"{_game.Title}: {_game.Subtitle}"
 			: string.Empty;
+
 		public string GameLocation { get; set; }
 
 		public void Browse() {
@@ -38,7 +41,7 @@ namespace TouhouLauncher.Models {
 
 		public void SaveGameConfig() {
 			_game.FileLocation = GameLocation;
-			_settingsSerializerService.SerializeToFile(
+			_settingsSerializerService.Serialize(
 				new Settings.Settings() {
 					OfficialGames = _gameDB.OfficialGames,
 					FanGames = _gameDB.FanGames,
@@ -47,7 +50,7 @@ namespace TouhouLauncher.Models {
 			);
 		}
 
-		public void LoadGameConfig(Game game) {
+		public void SetGameToConfigure(Game game) {
 			_game = game;
 			GameLocation = _game.FileLocation;
 		}

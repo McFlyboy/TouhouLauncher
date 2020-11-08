@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TouhouLauncher.Models.GameInfo;
+using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.Models.Settings {
+namespace TouhouLauncher.Models.Application.Settings {
 	public class Settings {
 		public OfficialGame[] OfficialGames { get; set; }
 		public List<FanGame> FanGames { get; set; }

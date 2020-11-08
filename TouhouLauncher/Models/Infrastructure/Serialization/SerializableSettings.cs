@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using TouhouLauncher.Models.GameInfo;
+using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Application.Settings;
+using TouhouLauncher.Services;
 
-namespace TouhouLauncher.Models.Serialization {
+namespace TouhouLauncher.Models.Infrastructure.Serialization {
 	class SerializableSettings {
 		public SerializableOfficialGame[] OfficialGames { get; set; }
 		public List<SerializableFanGame> FanGames { get; set; }
 		public SerializableGeneralSettings GeneralSettings { get; set; }
 
-		public Settings.Settings ToDomain() {
-			var domain = new Settings.Settings();
+		public Settings ToDomain(OfficialGame[] officialGamesTemplate) {
+			var domain = new Settings();
 
-			domain.OfficialGames = GameDBTemplate.CreateOfficialGamesFromTemplate();
+			domain.OfficialGames = officialGamesTemplate;
 			int safeLength = Math.Min(domain.OfficialGames.Length, OfficialGames.Length);
 			for (int i = 0; i < safeLength; i++) {
 				domain.OfficialGames[i].FileLocation = OfficialGames[i].FileLocation;
@@ -27,7 +29,7 @@ namespace TouhouLauncher.Models.Serialization {
 			return domain;
 		}
 
-		public static SerializableSettings FromDomain(Settings.Settings domain) {
+		public static SerializableSettings FromDomain(Settings domain) {
 			var serializable = new SerializableSettings();
 
 			serializable.OfficialGames = new SerializableOfficialGame[domain.OfficialGames.Length];
