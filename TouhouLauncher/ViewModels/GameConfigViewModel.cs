@@ -19,13 +19,16 @@ namespace TouhouLauncher.ViewModels {
 
 			BrowseCommand = new RelayCommand(() => {
 				_gameConfig.GameLocation = _fileBrowserService.BrowseFiles(
-					"Executable files (*.exe)|*.exe|All files (*.*)|*.*"
+					new FileBrowserService.Filter(
+						new FileBrowserService.Filter.FileType("Executable files", "*.exe"),
+						new FileBrowserService.Filter.FileType("All files", "*.*")
+					)
 				);
 				RaisePropertyChanged("GameLocation");
 			});
 
 			OKCommand = new RelayCommand<Window>((Window window) => {
-				_gameConfig.SaveGameLocation();
+				_gameConfig.Save();
 				window.Close();
 			});
 
@@ -34,7 +37,7 @@ namespace TouhouLauncher.ViewModels {
 			});
 		}
 
-		public string WindowTitle => "Configure " + _gameConfig.GameTitle;
+		public string WindowTitle => "Configure " + _gameConfig.Game.FullTitle;
 
 		public string GameLocation {
 			get => _gameConfig.GameLocation;
