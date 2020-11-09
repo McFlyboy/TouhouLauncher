@@ -8,7 +8,7 @@ using TouhouLauncher.ViewModels;
 
 namespace TouhouLauncher {
 	public class DependencyLocator {
-		static DependencyLocator() {
+		public DependencyLocator() {
 
 			/* ------ VIEW MODELS ------ */
 			SimpleIoc.Default.Register<MainViewModel>();
