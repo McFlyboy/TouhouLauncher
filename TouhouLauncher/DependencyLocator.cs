@@ -1,10 +1,10 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
-using TouhouLauncher.Models;
-using TouhouLauncher.Models.GameInfo;
-using TouhouLauncher.Models.Settings;
-using TouhouLauncher.Services;
-using TouhouLauncher.Services.Serialization;
+using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Application.Settings;
+using TouhouLauncher.Services.Application;
+using TouhouLauncher.Services.Infrastructure;
+using TouhouLauncher.Services.Infrastructure.Serialization;
 using TouhouLauncher.ViewModels;
 
 namespace TouhouLauncher {
@@ -20,18 +20,18 @@ namespace TouhouLauncher {
 			SimpleIoc.Default.Register<GamePickerViewModel>();
 
 			/* ------ MODELS ------ */
-			SimpleIoc.Default.Register<MainModel>();
-			SimpleIoc.Default.Register<GameConfigModel>();
+			SimpleIoc.Default.Register<SettingsManager>();
+			SimpleIoc.Default.Register<GameConfig>();
 			SimpleIoc.Default.Register<ActiveGameCategory>();
-			SimpleIoc.Default.Register<GameDB>();
-			SimpleIoc.Default.Register<SettingsContainer>();
 			SimpleIoc.Default.Register<GamePickerList>();
 
 			/* ------ SERVICES ------ */
 			SimpleIoc.Default.Register<ActivateGameService>();
 			SimpleIoc.Default.Register<GameCategoryService>();
+			SimpleIoc.Default.Register<OfficialGamesTemplateService>();
+			SimpleIoc.Default.Register<FileBrowserService>();
+			SimpleIoc.Default.Register<ISettingsService, FileSettingsService>();
 			SimpleIoc.Default.Register<IFileSerializerService, YamlFileSerializerService>();
-			SimpleIoc.Default.Register<SettingsSerializerService>();
 		}
 		
 		public MainViewModel MainVM =>

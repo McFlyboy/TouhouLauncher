@@ -2,23 +2,33 @@
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using System.Windows.Input;
-using TouhouLauncher.Models;
-using TouhouLauncher.Models.GameInfo;
+using TouhouLauncher.Models.Application;
+using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameConfigViewModel : ViewModelBase {
-		private readonly GameConfigModel _gameConfig;
+		private readonly GameConfig _gameConfig;
+		private readonly FileBrowserService _fileBrowserService;
 
-		public GameConfigViewModel(GameConfigModel gameConfigModel) {
-			_gameConfig = gameConfigModel;
+		public GameConfigViewModel(
+			GameConfig gameConfig,
+			FileBrowserService fileBrowserService
+		) {
+			_gameConfig = gameConfig;
+			_fileBrowserService = fileBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				_gameConfig.Browse();
+				_gameConfig.GameLocation = _fileBrowserService.BrowseFiles(
+					new FileBrowserService.Filter(
+						new FileBrowserService.Filter.FileType("Executable files", "*.exe"),
+						new FileBrowserService.Filter.FileType("All files", "*.*")
+					)
+				);
 				RaisePropertyChanged("GameLocation");
 			});
 
 			OKCommand = new RelayCommand<Window>((Window window) => {
-				_gameConfig.SaveGameConfig();
+				_gameConfig.Save();
 				window.Close();
 			});
 
@@ -27,19 +37,17 @@ namespace TouhouLauncher.ViewModels {
 			});
 		}
 
-		public string WindowTitle => "Configure " + _gameConfig.GameTitle;
+		public string WindowTitle => "Configure " + _gameConfig.Game.FullTitle;
+
 		public string GameLocation {
 			get => _gameConfig.GameLocation;
 			set => _gameConfig.GameLocation = value;
 		}
-		public ICommand BrowseCommand { get; }
-		public ICommand OKCommand { get; }
-		public ICommand CancelCommand { get; }
 
-		public void LoadGameConfig(Game game) {
-			_gameConfig.LoadGameConfig(game);
-			RaisePropertyChanged("WindowTitle");
-			RaisePropertyChanged("GameLocation");
-		}
+		public ICommand BrowseCommand { get; }
+
+		public ICommand OKCommand { get; }
+
+		public ICommand CancelCommand { get; }
 	}
 }

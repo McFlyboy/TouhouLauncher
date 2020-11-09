@@ -51,6 +51,9 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TouhouLauncher.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
@@ -91,20 +94,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\GameInfo\GameDBTemplate.cs" />
-    <Compile Include="Models\GamePickerList.cs" />
-    <Compile Include="Models\MainModel.cs" />
-    <Compile Include="Services\ActivateGameService.cs" />
-    <Compile Include="Services\GameCategoryService.cs" />
-    <Compile Include="Services\Serialization\IFileSerializerService.cs" />
-    <Compile Include="Services\Serialization\YamlFileSerializerService.cs" />
-    <Compile Include="Services\Serialization\SettingsSerializerService.cs" />
-    <Compile Include="Models\Serialization\SerializableGeneralSettings.cs" />
-    <Compile Include="Models\Serialization\SerializableFanGame.cs" />
-    <Compile Include="Models\Serialization\SerializableOfficialGame.cs" />
-    <Compile Include="Models\Settings\GeneralSettings.cs" />
-    <Compile Include="Models\Settings\Settings.cs" />
-    <Compile Include="Models\Settings\SettingsContainer.cs" />
+    <Compile Include="Services\Application\FileBrowserService.cs" />
+    <Compile Include="Services\Application\OfficialGamesTemplateService.cs" />
+    <Compile Include="Models\Application\GamePickerList.cs" />
+    <Compile Include="Services\Application\ISettingsService.cs" />
+    <Compile Include="Services\Application\ActivateGameService.cs" />
+    <Compile Include="Services\Application\GameCategoryService.cs" />
+    <Compile Include="Services\Infrastructure\Serialization\IFileSerializerService.cs" />
+    <Compile Include="Services\Infrastructure\Serialization\YamlFileSerializerService.cs" />
+    <Compile Include="Services\Infrastructure\FileSettingsService.cs" />
+    <Compile Include="Models\Infrastructure\Serialization\SerializableGeneralSettings.cs" />
+    <Compile Include="Models\Infrastructure\Serialization\SerializableFanGame.cs" />
+    <Compile Include="Models\Infrastructure\Serialization\SerializableOfficialGame.cs" />
+    <Compile Include="Models\Application\Settings\GeneralSettings.cs" />
+    <Compile Include="Models\Application\Settings\SettingsManager.cs" />
     <Compile Include="ViewModels\GamePickerViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\Pages\SettingsPage.xaml.cs">
@@ -132,13 +135,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\GameConfigModel.cs" />
-    <Compile Include="Models\GameInfo\FanGame.cs" />
-    <Compile Include="Models\GameInfo\Game.cs" />
-    <Compile Include="Models\GameInfo\GameDB.cs" />
-    <Compile Include="Models\ActiveGameCategory.cs" />
-    <Compile Include="Models\GameInfo\OfficialGame.cs" />
-    <Compile Include="Models\Serialization\SerializableSettings.cs" />
+    <Compile Include="Models\Application\GameConfig.cs" />
+    <Compile Include="Models\Application\GameInfo\FanGame.cs" />
+    <Compile Include="Models\Application\GameInfo\Game.cs" />
+    <Compile Include="Models\Application\ActiveGameCategory.cs" />
+    <Compile Include="Models\Application\GameInfo\OfficialGame.cs" />
+    <Compile Include="Models\Infrastructure\Serialization\SerializableSettings.cs" />
     <Compile Include="ViewModels\GameConfigViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -206,13 +208,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\OfficialGames\alts\TH01.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Cogwheel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\OfficialGames\alts\TH02.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\OfficialGames\TH01.png" />
@@ -266,5 +262,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\OfficialGames\TH13.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

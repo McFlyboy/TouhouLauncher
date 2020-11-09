@@ -1,12 +1,17 @@
-﻿using TouhouLauncher.Models.GameInfo;
+﻿using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.Models.Serialization {
+namespace TouhouLauncher.Models.Infrastructure.Serialization {
 	public class SerializableFanGame {
 		public string Title { get; set; }
+
 		public string Subtitle { get; set; }
+
 		public string ImageLocation { get; set; }
+
 		public string AudioLocation { get; set; }
+
 		public int ReleaseYear { get; set; }
+
 		public string LocalFileLocation { get; set; }
 
 		public FanGame ToDomain() {

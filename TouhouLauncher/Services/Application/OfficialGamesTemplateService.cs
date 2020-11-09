@@ -1,6 +1,8 @@
-﻿namespace TouhouLauncher.Models.GameInfo {
-	sealed class GameDBTemplate {
-		public static OfficialGame[] CreateOfficialGamesFromTemplate() {
+﻿using TouhouLauncher.Models.Application.GameInfo;
+
+namespace TouhouLauncher.Services.Application {
+	public class OfficialGamesTemplateService {
+		public OfficialGame[] CreateOfficialGamesFromTemplate() {
 			return new OfficialGame[] {
 				new OfficialGame() {
 					Title = "Touhou 01",

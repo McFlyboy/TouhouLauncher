@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonTestTools.cs" />
-    <Compile Include="Services\Serialization\SerializerServiceTest.cs" />
+    <Compile Include="Services\Infrastructure\Serialization\YamlFileSerializerServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

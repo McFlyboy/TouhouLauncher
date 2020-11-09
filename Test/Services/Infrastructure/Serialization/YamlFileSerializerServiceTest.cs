@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using TouhouLauncher.Services.Serialization;
+using TouhouLauncher.Services.Infrastructure.Serialization;
 
-namespace Test.Services.Serialization {
+namespace Test.Services.Infrastructure.Serialization {
 	[TestClass]
-	public class SerializerServiceTest {
+	public class YamlFileSerializerServiceTest {
 		private readonly YamlFileSerializerService _fileSerializerService = new YamlFileSerializerService();
 
 		[TestMethod]
