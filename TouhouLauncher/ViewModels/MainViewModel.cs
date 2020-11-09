@@ -1,14 +1,14 @@
 using GalaSoft.MvvmLight;
-using TouhouLauncher.Services.Application;
+using TouhouLauncher.Models.Application.Settings;
 
 namespace TouhouLauncher.ViewModels {
 	public class MainViewModel : ViewModelBase {
 		private string _page;
 
-		public MainViewModel(InitAllSettingsService initAllSettingsService) {
+		public MainViewModel(SettingsManager settingsManager) {
 			_page = "HomePage.xaml";
 
-			initAllSettingsService.InitAllSettings();
+			settingsManager.Load();
 		}
 
 		public string Page {

@@ -1,7 +1,6 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using TouhouLauncher.Models.Application;
-using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.Settings;
 using TouhouLauncher.Services.Application;
 using TouhouLauncher.Services.Infrastructure;
@@ -21,17 +20,16 @@ namespace TouhouLauncher {
 			SimpleIoc.Default.Register<GamePickerViewModel>();
 
 			/* ------ MODELS ------ */
+			SimpleIoc.Default.Register<SettingsManager>();
 			SimpleIoc.Default.Register<GameConfig>();
 			SimpleIoc.Default.Register<ActiveGameCategory>();
-			SimpleIoc.Default.Register<GameDB>();
-			SimpleIoc.Default.Register<SettingsContainer>();
 			SimpleIoc.Default.Register<GamePickerList>();
 
 			/* ------ SERVICES ------ */
-			SimpleIoc.Default.Register<InitAllSettingsService>();
 			SimpleIoc.Default.Register<ActivateGameService>();
 			SimpleIoc.Default.Register<GameCategoryService>();
 			SimpleIoc.Default.Register<OfficialGamesTemplateService>();
+			SimpleIoc.Default.Register<FileBrowserService>();
 			SimpleIoc.Default.Register<ISettingsService, FileSettingsService>();
 			SimpleIoc.Default.Register<IFileSerializerService, YamlFileSerializerService>();
 		}

@@ -4,16 +4,16 @@ using TouhouLauncher.Models.Application.Settings;
 
 namespace TouhouLauncher.Services.Application {
 	public class GameCategoryService {
-		private readonly SettingsContainer _settingsContainer;
+		private readonly SettingsManager _settingsManager;
 
-		public GameCategoryService(SettingsContainer settingsContainer) {
-			_settingsContainer = settingsContainer;
+		public GameCategoryService(SettingsManager settingsManager) {
+			_settingsManager = settingsManager;
 		}
 		
 		public List<OfficialGame.CategoryFlag> CreateGameCategoryList() {
 			var gameCategories = new List<OfficialGame.CategoryFlag>();
 
-			if (_settingsContainer.GeneralSettings.CombineMainCategories) {
+			if (_settingsManager.GeneralSettings.CombineMainCategories) {
 				gameCategories.Add(OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows);
 			}
 			else {
@@ -28,7 +28,7 @@ namespace TouhouLauncher.Services.Application {
 		}
 
 		public OfficialGame.CategoryFlag GetDefaultGameCategory() {
-			return _settingsContainer.GeneralSettings.CombineMainCategories
+			return _settingsManager.GeneralSettings.CombineMainCategories
 				? OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows
 				: OfficialGame.CategoryFlag.MainWindows;
 		}

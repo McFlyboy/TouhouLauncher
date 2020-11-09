@@ -3,17 +3,24 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
-using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameConfigViewModel : ViewModelBase {
 		private readonly GameConfig _gameConfig;
+		private readonly FileBrowserService _fileBrowserService;
 
-		public GameConfigViewModel(GameConfig gameConfig) {
+		public GameConfigViewModel(
+			GameConfig gameConfig,
+			FileBrowserService fileBrowserService
+		) {
 			_gameConfig = gameConfig;
+			_fileBrowserService = fileBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				_gameConfig.Browse();
+				_gameConfig.GameLocation = _fileBrowserService.BrowseFiles(
+					"Executable files (*.exe)|*.exe|All files (*.*)|*.*"
+				);
 				RaisePropertyChanged("GameLocation");
 			});
 

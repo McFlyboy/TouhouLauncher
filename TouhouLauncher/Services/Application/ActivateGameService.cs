@@ -7,14 +7,14 @@ using TouhouLauncher.Views;
 
 namespace TouhouLauncher.Services.Application {
 	public class ActivateGameService {
-		private readonly SettingsContainer _settingsContainer;
+		private readonly SettingsManager _settingsManager;
 		private readonly GameConfig _gameConfig;
 
 		public ActivateGameService(
-			SettingsContainer settingsContainer,
+			SettingsManager settingsManager,
 			GameConfig gameConfig
 		) {
-			_settingsContainer = settingsContainer;
+			_settingsManager = settingsManager;
 			_gameConfig = gameConfig;
 		}
 
@@ -33,7 +33,7 @@ namespace TouhouLauncher.Services.Application {
 
 			Process.Start(startInfo);
 
-			if (_settingsContainer.GeneralSettings.CloseOnGameLaunch) {
+			if (_settingsManager.GeneralSettings.CloseOnGameLaunch) {
 				System.Windows.Application.Current.Shutdown();
 			}
 		}
