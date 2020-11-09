@@ -1,4 +1,3 @@
-using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.Settings;
@@ -10,7 +9,6 @@ using TouhouLauncher.ViewModels;
 namespace TouhouLauncher {
 	public class DependencyLocator {
 		static DependencyLocator() {
-			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
 			/* ------ VIEW MODELS ------ */
 			SimpleIoc.Default.Register<MainViewModel>();
@@ -35,14 +33,18 @@ namespace TouhouLauncher {
 		}
 		
 		public MainViewModel MainVM =>
-			ServiceLocator.Current.GetInstance<MainViewModel>();
+			SimpleIoc.Default.GetInstance<MainViewModel>();
+
 		public GameConfigViewModel GameConfigVM =>
-			ServiceLocator.Current.GetInstance<GameConfigViewModel>();
+			SimpleIoc.Default.GetInstance<GameConfigViewModel>();
+
 		public HomeViewModel HomeVM =>
-			ServiceLocator.Current.GetInstance<HomeViewModel>();
+			SimpleIoc.Default.GetInstance<HomeViewModel>();
+
 		public SettingsViewModel SettingsVM =>
-			ServiceLocator.Current.GetInstance<SettingsViewModel>();
+			SimpleIoc.Default.GetInstance<SettingsViewModel>();
+
 		public GamePickerViewModel GamePickerVM =>
-			ServiceLocator.Current.GetInstance<GamePickerViewModel>();
+			SimpleIoc.Default.GetInstance<GamePickerViewModel>();
 	}
 }
