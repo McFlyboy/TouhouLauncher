@@ -1,28 +1,37 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 using TouhouLauncher.Services.Infrastructure.Serialization;
+using Xunit;
 
 namespace Test.Services.Infrastructure.Serialization {
-	[TestClass]
-	public class YamlFileSerializerServiceTest {
-		private readonly YamlFileSerializerService _fileSerializerService = new YamlFileSerializerService();
+	public class YamlFileSerializerServiceTest : IDisposable {
+		private readonly YamlFileSerializerService _fileSerializerService;
+		private const string _testDir = "TestObjects";
+		private const string _testFile = "SerializedObject.yaml";
 
-		[TestMethod]
+		public YamlFileSerializerServiceTest() {
+			_fileSerializerService = new YamlFileSerializerService();
+			if (!Directory.Exists(_testDir)) {
+				Directory.CreateDirectory(_testDir);
+			}
+		}
+
+		[Fact]
 		public void ShouldReturnDefaultWhenUnableToSerialize() {
-			string filePath = "TestObjects\\NonExistingFile";
+			string filePath = $"{_testDir}\\NonExistingFile";
 
-			Assert.IsFalse(File.Exists(filePath));
+			Assert.False(File.Exists(filePath));
 
 			var failedObject = _fileSerializerService
 				.DeserializeFromFile<CommonTestTools.SerializableClass>(filePath);
 
-			Assert.AreEqual(failedObject, default);
-			Assert.IsNull(failedObject);
+			Assert.Equal(default, failedObject);
+			Assert.Null(failedObject);
 		}
 
-		[TestMethod]
+		[Fact]
 		public void ShouldSerializeObjectToFile() {
-			string filePath = "TestObjects\\SerializedObject.yaml";
+			string filePath = $"{_testDir}\\{_testFile}";
 
 			var testObject = new CommonTestTools.SerializableClass() {
 				Number = 3,
@@ -36,14 +45,18 @@ namespace Test.Services.Infrastructure.Serialization {
 			};
 
 			_fileSerializerService.SerializeToFile(testObject, filePath);
-			
-			Assert.IsTrue(File.Exists(filePath));
+
+			Assert.True(File.Exists(filePath));
 
 			var sameTestObject = _fileSerializerService
 				.DeserializeFromFile<CommonTestTools.SerializableClass>(filePath);
 
-			Assert.IsNotNull(sameTestObject);
-			Assert.AreEqual(testObject, sameTestObject);
+			Assert.NotNull(sameTestObject);
+			Assert.Equal(testObject, sameTestObject);
+		}
+
+		public void Dispose() {
+			Directory.Delete(_testDir, true);
 		}
 	}
 }

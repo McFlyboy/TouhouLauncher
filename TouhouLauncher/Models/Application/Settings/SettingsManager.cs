@@ -28,11 +28,16 @@ namespace TouhouLauncher.Models.Application.Settings {
 
 		public bool Load() {
 			var result = _settingsService.Load();
-			var (officialGames, fanGames, generalSettings) = result;
+			var (officialGames, fanGames, generalSettings) = result
+				?? new Tuple<OfficialGame[], List<FanGame>, GeneralSettings>(
+					_officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
+					new List<FanGame>(),
+					new GeneralSettings()
+				);
 
-			OfficialGames = officialGames ?? _officialGamesTemplateService.CreateOfficialGamesFromTemplate();
-			FanGames = fanGames ?? new List<FanGame>();
-			GeneralSettings = generalSettings ?? new GeneralSettings();
+			OfficialGames = officialGames;
+			FanGames = fanGames;
+			GeneralSettings = generalSettings;
 
 			return result != null;
 		}
