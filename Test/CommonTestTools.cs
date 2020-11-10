@@ -1,4 +1,4 @@
-﻿namespace TestCore {
+﻿namespace Test {
 	class CommonTestTools {
 		public class SerializableClass {
 			public int Number { get; set; }
