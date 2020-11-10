@@ -1,26 +1,29 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using TouhouLauncher.Services.Infrastructure.Serialization;
+using Xunit;
 
-namespace Test.Services.Infrastructure.Serialization {
-	[TestClass]
+namespace TestCore.Services.Infrastructure.Serialization {
 	public class YamlFileSerializerServiceTest {
-		private readonly YamlFileSerializerService _fileSerializerService = new YamlFileSerializerService();
+		private readonly YamlFileSerializerService _fileSerializerService;
 
-		[TestMethod]
+		public YamlFileSerializerServiceTest() {
+			_fileSerializerService = new YamlFileSerializerService();
+		}
+
+		[Fact]
 		public void ShouldReturnDefaultWhenUnableToSerialize() {
 			string filePath = "TestObjects\\NonExistingFile";
 
-			Assert.IsFalse(File.Exists(filePath));
+			Assert.False(File.Exists(filePath));
 
 			var failedObject = _fileSerializerService
 				.DeserializeFromFile<CommonTestTools.SerializableClass>(filePath);
 
-			Assert.AreEqual(failedObject, default);
-			Assert.IsNull(failedObject);
+			Assert.Equal(default, failedObject);
+			Assert.Null(failedObject);
 		}
 
-		[TestMethod]
+		[Fact]
 		public void ShouldSerializeObjectToFile() {
 			string filePath = "TestObjects\\SerializedObject.yaml";
 
@@ -36,14 +39,14 @@ namespace Test.Services.Infrastructure.Serialization {
 			};
 
 			_fileSerializerService.SerializeToFile(testObject, filePath);
-			
-			Assert.IsTrue(File.Exists(filePath));
+
+			Assert.True(File.Exists(filePath));
 
 			var sameTestObject = _fileSerializerService
 				.DeserializeFromFile<CommonTestTools.SerializableClass>(filePath);
 
-			Assert.IsNotNull(sameTestObject);
-			Assert.AreEqual(testObject, sameTestObject);
+			Assert.NotNull(sameTestObject);
+			Assert.Equal(testObject, sameTestObject);
 		}
 	}
 }
