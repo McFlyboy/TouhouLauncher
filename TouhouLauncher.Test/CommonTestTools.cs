@@ -1,9 +1,12 @@
-﻿namespace Test {
+﻿namespace TouhouLauncher.Test {
 	class CommonTestTools {
 		public class SerializableClass {
 			public int Number { get; set; }
+
 			public string Text { get; set; }
+
 			public SerializableSubClass SubClass { get; set; }
+
 			public bool Bool { get; set; }
 
 			public override bool Equals(object obj) {
@@ -23,7 +26,9 @@
 
 			public class SerializableSubClass {
 				public float DecimalNumber { get; set; }
+
 				public long LongNumber { get; set; }
+
 				public char Letter { get; set; }
 
 				public override bool Equals(object obj) {

@@ -4,7 +4,7 @@ using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.Settings;
 
 namespace TouhouLauncher.Models.Infrastructure.Serialization {
-	class SerializableSettings {
+	public class SerializableSettings {
 		public SerializableOfficialGame[] OfficialGames { get; set; }
 		public List<SerializableFanGame> FanGames { get; set; }
 		public SerializableGeneralSettings GeneralSettings { get; set; }

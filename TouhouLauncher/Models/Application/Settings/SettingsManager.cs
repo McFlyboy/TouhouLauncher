@@ -16,11 +16,11 @@ namespace TouhouLauncher.Models.Application.Settings {
 			_officialGamesTemplateService = officialGamesTemplateService;
 		}
 
-		public OfficialGame[] OfficialGames { get; set; }
+		public virtual OfficialGame[] OfficialGames { get; set; }
 
-		public List<FanGame> FanGames { get; set; }
+		public virtual List<FanGame> FanGames { get; set; }
 
-		public GeneralSettings GeneralSettings { get; set; }
+		public virtual GeneralSettings GeneralSettings { get; set; }
 
 		public bool Save() {
 			return _settingsService.Save(OfficialGames, FanGames, GeneralSettings);
