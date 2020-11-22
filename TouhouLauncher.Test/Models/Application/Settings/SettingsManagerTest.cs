@@ -12,14 +12,12 @@ namespace TouhouLauncher.Test.Models.Application.Settings {
 	public class SettingsManagerTest {
 		private readonly SettingsManager _settingsManager;
 
-		private readonly Mock<YamlFileSerializerService> _yamlFileSerializerServiceMock;
 		private readonly Mock<FileSettingsService> _fileSettingsServiceMock;
 		private readonly OfficialGamesTemplateService _officialGamesTemplateService;
 
 		public SettingsManagerTest() {
-			_yamlFileSerializerServiceMock = new Mock<YamlFileSerializerService>();
 			_fileSettingsServiceMock = new Mock<FileSettingsService>(
-				_yamlFileSerializerServiceMock.Object,
+				new Mock<YamlFileSerializerService>().Object,
 				null
 			);
 			_officialGamesTemplateService = new OfficialGamesTemplateService();
