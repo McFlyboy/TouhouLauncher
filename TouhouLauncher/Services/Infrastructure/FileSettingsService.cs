@@ -21,7 +21,7 @@ namespace TouhouLauncher.Services.Infrastructure {
 			filePath = "Settings." + fileSerializerService.FileLastName;
 		}
 
-		public bool Save(
+		public virtual bool Save(
 			OfficialGame[] officialGames,
 			List<FanGame> fanGames,
 			GeneralSettings generalSettings
@@ -32,7 +32,7 @@ namespace TouhouLauncher.Services.Infrastructure {
 			);
 		}
 
-		public Tuple<OfficialGame[], List<FanGame>, GeneralSettings> Load() {
+		public virtual Tuple<OfficialGame[], List<FanGame>, GeneralSettings> Load() {
 			return _fileSerializerService.DeserializeFromFile<SerializableSettings>(filePath)
 				?.ToDomain(_officialGamesTemplateService.CreateOfficialGamesFromTemplate());
 		}

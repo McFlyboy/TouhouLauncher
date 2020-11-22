@@ -3,7 +3,7 @@ using System.IO;
 using TouhouLauncher.Services.Infrastructure.Serialization;
 using Xunit;
 
-namespace Test.Services.Infrastructure.Serialization {
+namespace TouhouLauncher.Test.Services.Infrastructure.Serialization {
 	public class YamlFileSerializerServiceTest : IDisposable {
 		private readonly YamlFileSerializerService _fileSerializerService;
 		private const string _testDir = "TestObjects";
@@ -17,7 +17,7 @@ namespace Test.Services.Infrastructure.Serialization {
 		}
 
 		[Fact]
-		public void ShouldReturnDefaultWhenUnableToSerialize() {
+		public void Returns_default_when_unable_to_deserialize() {
 			string filePath = $"{_testDir}\\NonExistingFile";
 
 			Assert.False(File.Exists(filePath));
@@ -30,7 +30,7 @@ namespace Test.Services.Infrastructure.Serialization {
 		}
 
 		[Fact]
-		public void ShouldSerializeObjectToFile() {
+		public void Serializes_object_to_file() {
 			string filePath = $"{_testDir}\\{_testFile}";
 
 			var testObject = new CommonTestTools.SerializableClass() {

@@ -19,7 +19,7 @@ namespace TouhouLauncher.Services.Infrastructure.Serialization {
 
 		public string FileLastName => "yaml";
 
-		public bool SerializeToFile<T>(T graph, string filePath) {
+		public virtual bool SerializeToFile<T>(T graph, string filePath) {
 			try {
 				using var writer = File.CreateText(filePath);
 				_serializer.Serialize(writer, graph);
@@ -30,7 +30,7 @@ namespace TouhouLauncher.Services.Infrastructure.Serialization {
 			}
 		}
 
-		public T DeserializeFromFile<T>(string filePath) {
+		public virtual T DeserializeFromFile<T>(string filePath) {
 			if(!File.Exists(filePath)) {
 				return default;
 			}

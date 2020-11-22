@@ -1,7 +1,7 @@
 ﻿using TouhouLauncher.Models.Application.Settings;
 
 namespace TouhouLauncher.Models.Infrastructure.Serialization {
-	class SerializableGeneralSettings {
+	public class SerializableGeneralSettings {
 		public bool CloseOnGameLaunch { get; set; }
 		public bool CombineMainCategories { get; set; }
 
