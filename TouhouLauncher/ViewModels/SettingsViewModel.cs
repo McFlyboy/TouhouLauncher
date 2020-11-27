@@ -7,13 +7,10 @@ using TouhouLauncher.Views.UserControls.Settings;
 
 namespace TouhouLauncher.ViewModels {
 	public class SettingsViewModel : ViewModelBase {
-		private readonly MainViewModel _mainViewModel;
 
 		private SettingsCategory _category;
 
-		public SettingsViewModel(MainViewModel mainViewModel) {
-			_mainViewModel = mainViewModel;
-
+		public SettingsViewModel() {
 			_category = SettingsCategory.General;
 
 			SetCategoryToGeneralCommand = new RelayCommand(() => {
@@ -25,7 +22,9 @@ namespace TouhouLauncher.ViewModels {
 			});
 
 			BackCommand = new RelayCommand(() => {
-				_mainViewModel.Page = "HomePage.xaml";
+				MessengerInstance.Send(
+					new MainViewModel.ChangePageMessage() { NewPage = "HomePage.xaml" }
+				);
 			});
 		}
 
