@@ -6,6 +6,8 @@ namespace TouhouLauncher.ViewModels {
 		private string _page;
 
 		public MainViewModel(SettingsManager settingsManager) {
+			MessengerInstance.Register<ChangePageMessage>(this, ChangePage);
+
 			_page = "HomePage.xaml";
 
 			settingsManager.Load();
@@ -13,10 +15,15 @@ namespace TouhouLauncher.ViewModels {
 
 		public string Page {
 			get => "Pages/" + _page;
-			set {
-				_page = value;
-				RaisePropertyChanged(nameof(Page));
-			}
+		}
+
+		private void ChangePage(ChangePageMessage pageChangeMessage) {
+			_page = pageChangeMessage.NewPage;
+			RaisePropertyChanged(nameof(Page));
+		}
+
+		public class ChangePageMessage {
+			public string NewPage { get; init; }
 		}
 	}
 }

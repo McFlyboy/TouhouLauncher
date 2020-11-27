@@ -9,18 +9,15 @@ using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class HomeViewModel : ViewModelBase {
-		private readonly MainViewModel _mainViewModel;
 		private readonly GamePickerViewModel _gamePickerViewModel;
 		private readonly ActiveGameCategory _activeGameCategory;
 		private readonly GameCategoryService _gameCategoryService;
 
 		public HomeViewModel(
-			MainViewModel mainViewModel,
 			GamePickerViewModel gamePickerViewModel,
 			ActiveGameCategory activeGameCategory,
 			GameCategoryService gameCategoryService
 		) {
-			_mainViewModel = mainViewModel;
 			_gamePickerViewModel = gamePickerViewModel;
 			_activeGameCategory = activeGameCategory;
 			_gameCategoryService = gameCategoryService;
@@ -41,7 +38,9 @@ namespace TouhouLauncher.ViewModels {
 			));
 
 			OpenSettingsCommand = new RelayCommand(() => {
-				_mainViewModel.Page = "SettingsPage.xaml";
+				MessengerInstance.Send(
+					new MainViewModel.ChangePageMessage() { NewPage = "SettingsPage.xaml" }
+				);
 			});
 		}
 
