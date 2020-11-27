@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TouhouLauncher.Views.UserControls {
+namespace TouhouLauncher.Views.UserControls.Settings {
 	/// <summary>
 	/// Interaction logic for GameLocationsSettingsControl.xaml
 	/// </summary>
