@@ -24,7 +24,7 @@ namespace TouhouLauncher.ViewModels {
 						new FileBrowserService.Filter.FileType("All files", "*.*")
 					)
 				);
-				RaisePropertyChanged("GameLocation");
+				RaisePropertyChanged(nameof(GameLocation));
 			});
 
 			OKCommand = new RelayCommand<Window>((Window window) => {

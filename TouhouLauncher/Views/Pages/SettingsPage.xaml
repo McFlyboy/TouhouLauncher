@@ -16,14 +16,11 @@
 		</Grid.ColumnDefinitions>
 		<Grid Background="#4B4554">
 			<StackPanel Margin="0, 100, 0, 0">
-				<Button Content="Settings page 1" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
-				<Button Content="Settings page 2" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
-				<Button Content="Settings page 3" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
-				<Button Content="Settings page 4" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
-				<Button Content="Settings page 5" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
+				<Button Command="{Binding SetCategoryToGeneralCommand}" Content="General settings" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
+				<Button Command="{Binding SetCategoryToGameLocationsCommand}" Content="Game locations" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
 			</StackPanel>
 		</Grid>
-		<UserControl Grid.Column="1" Content="{Binding DisplayedSettings}"/>
+		<UserControl Grid.Column="1" Content="{Binding CurrentSettingsCategory}"/>
 		<Button Grid.Column="2" Command="{Binding BackCommand}" Content="Back" Cursor="Hand" Width="50" Height="50" Margin="0, 650, 0, 0" Background="Transparent" Foreground="White" FontSize="20" BorderBrush="White"/>
 	</Grid>
 </Page>

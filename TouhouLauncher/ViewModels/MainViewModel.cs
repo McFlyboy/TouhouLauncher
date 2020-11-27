@@ -15,7 +15,7 @@ namespace TouhouLauncher.ViewModels {
 			get => "Pages/" + _page;
 			set {
 				_page = value;
-				RaisePropertyChanged("Page");
+				RaisePropertyChanged(nameof(Page));
 			}
 		}
 	}
