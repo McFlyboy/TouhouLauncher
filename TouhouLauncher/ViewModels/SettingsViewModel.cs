@@ -22,9 +22,7 @@ namespace TouhouLauncher.ViewModels {
 			});
 
 			BackCommand = new RelayCommand(() => {
-				MessengerInstance.Send(
-					new MainViewModel.ChangePageMessage() { NewPage = "HomePage.xaml" }
-				);
+				MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken);
 			});
 		}
 

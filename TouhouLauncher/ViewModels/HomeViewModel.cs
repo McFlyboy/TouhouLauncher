@@ -38,9 +38,7 @@ namespace TouhouLauncher.ViewModels {
 			));
 
 			OpenSettingsCommand = new RelayCommand(() => {
-				MessengerInstance.Send(
-					new MainViewModel.ChangePageMessage() { NewPage = "SettingsPage.xaml" }
-				);
+				MessengerInstance.Send("SettingsPage.xaml", MainViewModel.ChangePageMessageToken);
 			});
 		}
 
