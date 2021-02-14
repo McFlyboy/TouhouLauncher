@@ -4,14 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls.Settings"
-             mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400">
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="600"
+             DataContext="{Binding GeneralSettingsVM, Source={StaticResource Locator}}">
     <Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-		<Button Content="Test 1"/>
-		<Button Content="Test 2" Grid.Row="1"/>
-	</Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock
+            Text="Settings"
+            Foreground="White"
+            FontSize="22"
+            FontWeight="Bold"
+            VerticalAlignment="Center"
+        />
+        
+        <StackPanel Grid.Row="1">
+            <CheckBox
+                Style="{DynamicResource DarkCheckbox}"
+                Content="Close launcher on game launch"
+                IsChecked="{Binding CloseOnGameLaunchChecked}"
+                Margin="10"
+                FontSize="15"
+            />
+            <CheckBox
+                Style="{DynamicResource DarkCheckbox}"
+                Content="Combine main categories"
+                IsChecked="{Binding CombineMainCategoriesChecked}"
+                Margin="10"
+                FontSize="15"
+            />
+        </StackPanel>
+    </Grid>
 </UserControl>

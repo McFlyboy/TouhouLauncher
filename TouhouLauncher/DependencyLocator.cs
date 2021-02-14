@@ -14,8 +14,9 @@ namespace TouhouLauncher {
 			SimpleIoc.Default.Register<MainViewModel>();
 			SimpleIoc.Default.Register<GameConfigViewModel>();
 			SimpleIoc.Default.Register<HomeViewModel>();
-			SimpleIoc.Default.Register<SettingsViewModel>();
 			SimpleIoc.Default.Register<GamePickerViewModel>();
+			SimpleIoc.Default.Register<SettingsViewModel>();
+			SimpleIoc.Default.Register<GeneralSettingsViewModel>();
 
 			/* ------ MODELS ------ */
 			SimpleIoc.Default.Register<SettingsManager>();
@@ -41,10 +42,13 @@ namespace TouhouLauncher {
 		public HomeViewModel HomeVM =>
 			SimpleIoc.Default.GetInstance<HomeViewModel>();
 
+		public GamePickerViewModel GamePickerVM =>
+			SimpleIoc.Default.GetInstance<GamePickerViewModel>();
+
 		public SettingsViewModel SettingsVM =>
 			SimpleIoc.Default.GetInstance<SettingsViewModel>();
 
-		public GamePickerViewModel GamePickerVM =>
-			SimpleIoc.Default.GetInstance<GamePickerViewModel>();
+		public GeneralSettingsViewModel GeneralSettingsVM =>
+			SimpleIoc.Default.GetInstance<GeneralSettingsViewModel>();
 	}
 }

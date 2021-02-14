@@ -22,6 +22,8 @@ namespace TouhouLauncher.ViewModels {
 			_activeGameCategory = activeGameCategory;
 			_gameCategoryService = gameCategoryService;
 
+			MessengerInstance.Register<object>(this, RebuildHeadersMessageToken, RebuildHeaders);
+
 			HeaderList = new ObservableCollection<HeaderButton>();
 
 			var gameCategoryList = _gameCategoryService.CreateGameCategoryList();
@@ -30,12 +32,7 @@ namespace TouhouLauncher.ViewModels {
 				HeaderList.Add(new CategoryHeaderButton(category, this));
 			}
 
-			HeaderList.Add(new HeaderButton(
-				name: "LAUNCH\nRANDOM GAME",
-				colorCode: "#4284C4",
-				colorHoverCode: "#5395D5",
-				action: LaunchRandom
-			));
+			HeaderList.Add(CreateRandomGameHeader());
 
 			OpenSettingsCommand = new RelayCommand(() => {
 				MessengerInstance.Send("SettingsPage.xaml", MainViewModel.ChangePageMessageToken);
@@ -47,6 +44,34 @@ namespace TouhouLauncher.ViewModels {
 		public string HeaderPadding => $"{(HeaderList.Count > 5 ? 10 : 30)}, 0";
 
 		public ICommand OpenSettingsCommand { get; }
+
+		private HeaderButton CreateRandomGameHeader() {
+			return new HeaderButton(
+				name: "LAUNCH\nRANDOM GAME",
+				colorCode: "#4284C4",
+				colorHoverCode: "#5395D5",
+				action: LaunchRandom
+			);
+		}
+
+		private void RebuildHeaders(object _ = null) {
+			var gameCategoryList = _gameCategoryService.CreateGameCategoryList();
+
+			HeaderList.Clear();
+
+			foreach (var category in gameCategoryList) {
+				HeaderList.Add(new CategoryHeaderButton(category, this));
+			}
+
+			HeaderList.Add(CreateRandomGameHeader());
+
+			if (
+				(_activeGameCategory.CurrentCategory & OfficialGame.CategoryFlag.MainPC98) != OfficialGame.CategoryFlag.None
+				|| (_activeGameCategory.CurrentCategory & OfficialGame.CategoryFlag.MainWindows) != OfficialGame.CategoryFlag.None
+			) {
+				SetCurrentCategory(_gameCategoryService.GetDefaultGameCategory());
+			}
+		}
 
 		private void SetCurrentCategory(OfficialGame.CategoryFlag categoryFlags) {
 			_activeGameCategory.CurrentCategory = categoryFlags;
@@ -64,6 +89,8 @@ namespace TouhouLauncher.ViewModels {
 		private void LaunchRandom() {
 			//TODO
 		}
+
+		public static object RebuildHeadersMessageToken { get; } = new();
 
 		public class HeaderButton : ObservableObject {
 			public HeaderButton(
