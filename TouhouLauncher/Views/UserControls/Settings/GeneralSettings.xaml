@@ -9,7 +9,7 @@
              DataContext="{Binding GeneralSettingsVM, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         
