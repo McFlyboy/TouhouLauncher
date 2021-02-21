@@ -41,7 +41,7 @@ namespace TouhouLauncher.ViewModels {
 
 		public ObservableCollection<HeaderButton> HeaderList { get; }
 
-		public string HeaderPadding => $"{(HeaderList.Count > 5 ? 10 : 30)}, 0";
+		public string HeaderPadding => $"{(HeaderList.Count > 5 ? 10 : 30)} 0";
 
 		public ICommand OpenSettingsCommand { get; }
 
@@ -66,14 +66,14 @@ namespace TouhouLauncher.ViewModels {
 			HeaderList.Add(CreateRandomGameHeader());
 
 			if (
-				(_activeGameCategory.CurrentCategory & OfficialGame.CategoryFlag.MainPC98) != OfficialGame.CategoryFlag.None
-				|| (_activeGameCategory.CurrentCategory & OfficialGame.CategoryFlag.MainWindows) != OfficialGame.CategoryFlag.None
+				(_activeGameCategory.CurrentCategory & GameCategories.MainPC98) != GameCategories.None
+				|| (_activeGameCategory.CurrentCategory & GameCategories.MainWindows) != GameCategories.None
 			) {
 				SetCurrentCategory(_gameCategoryService.GetDefaultGameCategory());
 			}
 		}
 
-		private void SetCurrentCategory(OfficialGame.CategoryFlag categoryFlags) {
+		private void SetCurrentCategory(GameCategories categoryFlags) {
 			_activeGameCategory.CurrentCategory = categoryFlags;
 
 			_gamePickerViewModel.UpdateGames();
@@ -127,34 +127,34 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		public class CategoryHeaderButton : HeaderButton {
-			private readonly OfficialGame.CategoryFlag _categoryFlags;
+			private readonly GameCategories _categories;
 			private readonly HomeViewModel _parent;
 
 			public CategoryHeaderButton(
-				OfficialGame.CategoryFlag categoryFlags,
+				GameCategories categories,
 				HomeViewModel parent
 			) : base() {
-				_categoryFlags = categoryFlags;
+				_categories = categories;
 				_parent = parent;
-				switch (_categoryFlags) {
-					case OfficialGame.CategoryFlag.MainPC98:
+				switch (_categories) {
+					case GameCategories.MainPC98:
 						HeaderName = "MAIN GAMES";
 						HeaderDesc = "(PC-98)";
 						break;
-					case OfficialGame.CategoryFlag.MainWindows:
+					case GameCategories.MainWindows:
 						HeaderName = "MAIN GAMES";
 						HeaderDesc = "(WINDOWS)";
 						break;
-					case OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows:
+					case GameCategories.MainGame:
 						HeaderName = "MAIN GAMES";
 						break;
-					case OfficialGame.CategoryFlag.FightingGame:
+					case GameCategories.FightingGame:
 						HeaderName = "FIGHTING\nGAMES";
 						break;
-					case OfficialGame.CategoryFlag.SpinOff:
+					case GameCategories.SpinOff:
 						HeaderName = "SPIN-OFFS";
 						break;
-					case OfficialGame.CategoryFlag.None:
+					case GameCategories.FanGame:
 						HeaderName = "FAN GAMES";
 						break;
 					default:
@@ -162,19 +162,19 @@ namespace TouhouLauncher.ViewModels {
 						break;
 				}
 				HeaderCommand = new RelayCommand(() => {
-					_parent.SetCurrentCategory(_categoryFlags);
+					_parent.SetCurrentCategory(_categories);
 				});
 			}
 
 			public override string HeaderColor =>
-				_categoryFlags == _parent._activeGameCategory.CurrentCategory
+				_categories == _parent._activeGameCategory.CurrentCategory
 					? "#694F77"
 					: "#342E30";
 
 			public override string HeaderHoverColor => "#453F41";
 
 			public override bool HeaderEnabled =>
-				_categoryFlags != _parent._activeGameCategory.CurrentCategory;
+				_categories != _parent._activeGameCategory.CurrentCategory;
 		}
 	}
 }

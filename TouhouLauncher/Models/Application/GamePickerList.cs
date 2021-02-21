@@ -14,15 +14,15 @@ namespace TouhouLauncher.Models.Application {
 
 		public List<Game> GameList { get; }
 
-		public void PopulateGameList(OfficialGame.CategoryFlag categoryflags) {
+		public void PopulateGameList(GameCategories categories) {
 			GameList.Clear();
-			switch (categoryflags) {
-				case OfficialGame.CategoryFlag.None:
+			switch (categories) {
+				case GameCategories.FanGame:
 					GameList.AddRange(_settingsManager.FanGames);
 					break;
 				default:
 					foreach (var game in _settingsManager.OfficialGames) {
-						if ((game.Category & categoryflags) != OfficialGame.CategoryFlag.None) {
+						if ((game.Categories & categories) != GameCategories.None) {
 							GameList.Add(game);
 						}
 					}

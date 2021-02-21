@@ -17,7 +17,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public void Populates_game_list_with_fan_games_when_none_official_game_flags() {
+		public void Populates_game_list_with_fan_games_when_fan_game_flag_selected() {
 			_settingsManagerMock
 				.SetupGet(obj => obj.FanGames)
 				.Returns(new List<FanGame>() {
@@ -26,7 +26,7 @@ namespace TouhouLauncher.Test.Models.Application {
 					new() { Title = "another game title" }
 				});
 
-			_gamePickerList.PopulateGameList(OfficialGame.CategoryFlag.None);
+			_gamePickerList.PopulateGameList(GameCategories.FanGame);
 
 			Assert.Equal(3, _gamePickerList.GameList.Count);
 			Assert.Equal("some game title", _gamePickerList.GameList[0].Title);
@@ -41,20 +41,20 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(new OfficialGame[] {
 					new() {
 						Title = "some game title",
-						Category = OfficialGame.CategoryFlag.MainWindows
+						Categories = GameCategories.MainWindows
 					},
 					new() {
 						Title = "some spinoff title",
-						Category = OfficialGame.CategoryFlag.SpinOff
+						Categories = GameCategories.SpinOff
 					},
 					new() {
 						Title = "an old game title",
-						Category = OfficialGame.CategoryFlag.MainPC98
+						Categories = GameCategories.MainPC98
 					}
 				});
 
 			_gamePickerList.PopulateGameList(
-				OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows
+				GameCategories.MainGame
 			);
 
 			Assert.Equal(2, _gamePickerList.GameList.Count);

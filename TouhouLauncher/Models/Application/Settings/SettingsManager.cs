@@ -28,6 +28,7 @@ namespace TouhouLauncher.Models.Application.Settings {
 
 		public bool Load() {
 			var result = _settingsService.Load();
+
 			var (officialGames, fanGames, generalSettings) = result
 				?? new Tuple<OfficialGame[], List<FanGame>, GeneralSettings>(
 					_officialGamesTemplateService.CreateOfficialGamesFromTemplate(),

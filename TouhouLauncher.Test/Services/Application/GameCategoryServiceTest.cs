@@ -22,12 +22,12 @@ namespace TouhouLauncher.Test.Services.Application {
 				.Returns(new GeneralSettings() { CombineMainCategories = true });
 
 			Assert.Equal(
-				OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows,
+				GameCategories.MainPC98 | GameCategories.MainWindows,
 				_gameCategoryService.CreateGameCategoryList()[0]
 			);
 
 			Assert.Equal(
-				OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows,
+				GameCategories.MainPC98 | GameCategories.MainWindows,
 				_gameCategoryService.GetDefaultGameCategory()
 			);
 		}
@@ -39,11 +39,11 @@ namespace TouhouLauncher.Test.Services.Application {
 				.Returns(new GeneralSettings() { CombineMainCategories = false });
 
 			var categoryList = _gameCategoryService.CreateGameCategoryList();
-			Assert.Equal(OfficialGame.CategoryFlag.MainPC98, categoryList[0]);
-			Assert.Equal(OfficialGame.CategoryFlag.MainWindows, categoryList[1]);
+			Assert.Equal(GameCategories.MainPC98, categoryList[0]);
+			Assert.Equal(GameCategories.MainWindows, categoryList[1]);
 
 			Assert.Equal(
-				OfficialGame.CategoryFlag.MainWindows,
+				GameCategories.MainWindows,
 				_gameCategoryService.GetDefaultGameCategory()
 			);
 		}

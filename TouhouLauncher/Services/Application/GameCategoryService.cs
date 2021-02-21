@@ -10,27 +10,26 @@ namespace TouhouLauncher.Services.Application {
 			_settingsManager = settingsManager;
 		}
 		
-		public List<OfficialGame.CategoryFlag> CreateGameCategoryList() {
-			var gameCategories = new List<OfficialGame.CategoryFlag>();
+		public List<GameCategories> CreateGameCategoryList() {
+			var gameCategories = new List<GameCategories>();
 
 			if (_settingsManager.GeneralSettings.CombineMainCategories) {
-				gameCategories.Add(OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows);
+				gameCategories.Add(GameCategories.MainGame);
 			}
 			else {
-				gameCategories.Add(OfficialGame.CategoryFlag.MainPC98);
-				gameCategories.Add(OfficialGame.CategoryFlag.MainWindows);
+				gameCategories.Add(GameCategories.MainPC98);
+				gameCategories.Add(GameCategories.MainWindows);
 			}
-			gameCategories.Add(OfficialGame.CategoryFlag.FightingGame);
-			gameCategories.Add(OfficialGame.CategoryFlag.SpinOff);
-			gameCategories.Add(OfficialGame.CategoryFlag.None);
+			gameCategories.Add(GameCategories.FightingGame);
+			gameCategories.Add(GameCategories.SpinOff);
+			gameCategories.Add(GameCategories.FanGame);
 
 			return gameCategories;
 		}
 
-		public OfficialGame.CategoryFlag GetDefaultGameCategory() {
+		public GameCategories GetDefaultGameCategory() {
 			return _settingsManager.GeneralSettings.CombineMainCategories
-				? OfficialGame.CategoryFlag.MainPC98 | OfficialGame.CategoryFlag.MainWindows
-				: OfficialGame.CategoryFlag.MainWindows;
+				? GameCategories.MainGame : GameCategories.MainWindows;
 		}
 	}
 }
