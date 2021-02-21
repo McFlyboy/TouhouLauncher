@@ -8,6 +8,6 @@ namespace TouhouLauncher.Models.Application {
 			CurrentCategory = gameCategoryService.GetDefaultGameCategory();
 		}
 
-		public OfficialGame.CategoryFlag CurrentCategory { get; set; }
+		public GameCategories CurrentCategory { get; set; }
 	}
 }

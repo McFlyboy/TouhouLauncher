@@ -12,7 +12,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 1996,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainPC98
+					Categories = GameCategories.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 02",
@@ -22,7 +22,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 1997,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainPC98
+					Categories = GameCategories.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 03",
@@ -32,7 +32,7 @@ namespace TouhouLauncher.Services.Application {
 					FileLocation = string.Empty,
 					ReleaseYear = 1997,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainPC98
+					Categories = GameCategories.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 04",
@@ -42,7 +42,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 1998,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainPC98
+					Categories = GameCategories.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 05",
@@ -52,7 +52,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 1998,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainPC98
+					Categories = GameCategories.MainPC98
 				},
 				new OfficialGame() {
 					Title = "Touhou 06",
@@ -62,7 +62,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2002,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 07",
@@ -72,7 +72,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2003,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 07.5",
@@ -82,7 +82,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2004,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.FightingGame
+					Categories = GameCategories.FightingGame
 				},
 				new OfficialGame() {
 					Title = "Touhou 08",
@@ -92,7 +92,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2004,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 09",
@@ -102,7 +102,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2005,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 09.5",
@@ -112,7 +112,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2005,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.SpinOff
+					Categories = GameCategories.SpinOff
 				},
 				new OfficialGame() {
 					Title = "Touhou 10",
@@ -122,7 +122,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2007,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 10.5",
@@ -132,7 +132,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2008,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.FightingGame
+					Categories = GameCategories.FightingGame
 				},
 				new OfficialGame() {
 					Title = "Touhou 11",
@@ -142,7 +142,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2008,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 12",
@@ -152,7 +152,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2009,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 12.3",
@@ -162,7 +162,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2009,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.FightingGame
+					Categories = GameCategories.FightingGame
 				},
 				new OfficialGame() {
 					Title = "Touhou 12.5",
@@ -172,7 +172,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2010,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.SpinOff
+					Categories = GameCategories.SpinOff
 				},
 				new OfficialGame() {
 					Title = "Touhou 12.8",
@@ -182,7 +182,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2010,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.SpinOff
+					Categories = GameCategories.SpinOff
 				},
 				new OfficialGame() {
 					Title = "Touhou 13",
@@ -192,7 +192,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2011,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 13.5",
@@ -202,7 +202,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2013,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.FightingGame
+					Categories = GameCategories.FightingGame
 				},
 				new OfficialGame() {
 					Title = "Touhou 14",
@@ -212,7 +212,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2013,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 14.3",
@@ -222,7 +222,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2014,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.SpinOff
+					Categories = GameCategories.SpinOff
 				},
 				new OfficialGame() {
 					Title = "Touhou 14.5",
@@ -232,7 +232,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2015,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.FightingGame
+					Categories = GameCategories.FightingGame
 				},
 				new OfficialGame() {
 					Title = "Touhou 15",
@@ -242,7 +242,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2015,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 15.5",
@@ -252,7 +252,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2017,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.FightingGame
+					Categories = GameCategories.FightingGame
 				},
 				new OfficialGame() {
 					Title = "Touhou 16",
@@ -262,7 +262,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2017,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				},
 				new OfficialGame() {
 					Title = "Touhou 16.5",
@@ -272,7 +272,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2018,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.SpinOff
+					Categories = GameCategories.SpinOff
 				},
 				new OfficialGame() {
 					Title = "Touhou 17",
@@ -282,7 +282,7 @@ namespace TouhouLauncher.Services.Application {
 					ReleaseYear = 2019,
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
-					Category = OfficialGame.CategoryFlag.MainWindows
+					Categories = GameCategories.MainWindows
 				}
 			};
 		}
