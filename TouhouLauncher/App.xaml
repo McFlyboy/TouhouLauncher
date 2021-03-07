@@ -8,8 +8,7 @@
 			 xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
 	<Application.Resources>
 		<ResourceDictionary>
-			
-			<local:DependencyLocator x:Key="Locator" />
+			<local:DependencyLocator x:Key="Locator"/>
 			
 			<Style x:Key="FocusVisual">
 				<Setter Property="Control.Template">
@@ -22,7 +21,7 @@
 			</Style>
 
             <SolidColorBrush x:Key="TextBox.Static.Border" Color="#453F41"/>
-            <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#635B5E"/>
+			<SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#666666"/>
             <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#7F7579"/>
             <Style x:Key="DarkTextbox" TargetType="{x:Type TextBox}">
                 <Setter Property="Background" Value="#342E30"/>
@@ -91,7 +90,7 @@
 				<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
 				<Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}"/>
 				<Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
-                <Setter Property="Foreground" Value="{StaticResource OptionMark.Static.Glyph}"/>
+				<Setter Property="Foreground" Value="{StaticResource OptionMark.Static.Glyph}"/>
 				<Setter Property="BorderThickness" Value="1"/>
 				<Setter Property="Template">
 					<Setter.Value>
@@ -107,7 +106,7 @@
 										<Rectangle x:Name="indeterminateMark" Fill="{StaticResource OptionMark.Static.Glyph}" Margin="2" Opacity="0" Width="12" Height="12"/>
 									</Grid>
 								</Border>
-                                <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="10 0 0 0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
+								<ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="10 0 0 0" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
 							</Grid>
 							<ControlTemplate.Triggers>
 								<Trigger Property="HasContent" Value="true">
@@ -145,7 +144,6 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
-            
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>
