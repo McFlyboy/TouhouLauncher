@@ -8,7 +8,7 @@
 	  mc:Ignorable="d"
 	  d:DesignWidth="1000" d:DesignHeight="800"
 	  Title="HomePage"
-	  DataContext="{Binding HomeVM, Source={StaticResource Locator}}">
+	  DataContext="{Binding HomeVM, Source={StaticResource Dependencies}}">
 	<Grid Background="#595362">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="1*"/>

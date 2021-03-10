@@ -8,7 +8,7 @@
 			 xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
 	<Application.Resources>
 		<ResourceDictionary>
-			<local:DependencyLocator x:Key="Locator"/>
+            <local:AppDependencies x:Key="Dependencies"/>
 			
 			<Style x:Key="FocusVisual">
 				<Setter Property="Control.Template">

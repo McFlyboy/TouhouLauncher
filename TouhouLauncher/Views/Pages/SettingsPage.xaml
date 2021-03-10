@@ -7,7 +7,7 @@
 	  mc:Ignorable="d"
 	  d:DesignWidth="1000" d:DesignHeight="800"
 	  Title="SettingsPage"
-	  DataContext="{Binding SettingsVM, Source={StaticResource Locator}}">
+	  DataContext="{Binding SettingsVM, Source={StaticResource Dependencies}}">
 	<Grid Background="#595362">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="2*"/>

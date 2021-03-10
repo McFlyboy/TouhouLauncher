@@ -8,7 +8,7 @@
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="CanMinimize"
 		x:Name="Window"
-		DataContext="{Binding GameConfigVM, Source={StaticResource Locator}}"
+		DataContext="{Binding GameConfigVM, Source={StaticResource Dependencies}}"
 		Title="{Binding WindowTitle}" Width="500" Height="130">
     <Grid Background="#595362">
         <Grid.ColumnDefinitions>

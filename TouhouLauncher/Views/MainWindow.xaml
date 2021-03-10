@@ -5,7 +5,7 @@
 		Width="1000" Height="800"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="CanMinimize"
-		DataContext="{Binding MainVM, Source={StaticResource Locator}}"
+		DataContext="{Binding MainVM, Source={StaticResource Dependencies}}"
 		ShowsNavigationUI="False"
 		Source="{Binding Page}">
 </NavigationWindow>

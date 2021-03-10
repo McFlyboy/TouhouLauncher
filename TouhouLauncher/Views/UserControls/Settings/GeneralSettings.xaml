@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls.Settings"
              mc:Ignorable="d"
              d:DesignHeight="800" d:DesignWidth="600"
-             DataContext="{Binding GeneralSettingsVM, Source={StaticResource Locator}}">
+             DataContext="{Binding GeneralSettingsVM, Source={StaticResource Dependencies}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
