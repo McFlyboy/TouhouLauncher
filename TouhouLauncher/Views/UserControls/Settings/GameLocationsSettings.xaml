@@ -20,5 +20,47 @@
             FontWeight="Bold"
             VerticalAlignment="Center"
         />
+
+        <ItemsControl ItemsSource="{Binding GameLocations}" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Foreground="White"
+                            Grid.ColumnSpan="2"
+                            Text="{Binding Name}"
+                        />
+                        
+                        <TextBox
+                            Style="{StaticResource DarkTextbox}"
+                            Grid.Row="1"
+                            Text="{Binding Location}"
+                        />
+
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Content="Browse..."
+                            Background="#342E30"
+                            Foreground="White"
+                        />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>
