@@ -22,17 +22,12 @@
         />
 
         <ItemsControl ItemsSource="{Binding GameLocations}" Grid.Row="1">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Margin="0 5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -40,23 +35,26 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock
-                            Foreground="White"
                             Grid.ColumnSpan="2"
+                            Foreground="White"
                             Text="{Binding Name}"
                         />
                         
                         <TextBox
-                            Style="{StaticResource DarkTextbox}"
                             Grid.Row="1"
+                            Style="{StaticResource DarkTextbox}"
                             Text="{Binding Location}"
+                            Padding="5"
                         />
 
                         <Button
+                            Style="{StaticResource DarkButton}"
                             Grid.Row="1"
                             Grid.Column="1"
                             Content="Browse..."
-                            Background="#342E30"
-                            Foreground="White"
+                            Command="{Binding BrowseCommand}"
+                            Width="100"
+                            Margin="10 0 0 0"
                         />
                     </Grid>
                 </DataTemplate>
