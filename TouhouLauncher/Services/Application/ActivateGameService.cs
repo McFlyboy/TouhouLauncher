@@ -28,6 +28,10 @@ namespace TouhouLauncher.Services.Application {
 		}
 
 		private void LaunchGame(Game game) {
+			if (!File.Exists(game.FileLocation)) {
+				return;
+            }
+
 			var startInfo = new ProcessStartInfo(game.FileLocation);
 			startInfo.WorkingDirectory = Path.GetDirectoryName(startInfo.FileName);
 

@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls"
 		mc:Ignorable="d"
 		d:DesignWidth="1000"
-		DataContext="{Binding GamePickerVM, Source={StaticResource Locator}}">
+		DataContext="{Binding GamePickerVM, Source={StaticResource Dependencies}}">
 	<Grid>
 		<ItemsControl ItemsSource="{Binding GameButtons}">
 			<ItemsControl.ItemsPanel>

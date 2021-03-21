@@ -4,7 +4,7 @@
 
 		public string Subtitle { get; init; }
 
-		public string FullTitle => Title + Subtitle != null ? $": {Subtitle}" : string.Empty;
+		public string FullTitle => Title + (Subtitle != null ? $": {Subtitle}" : string.Empty);
 
 		public string ImageLocation { get; init; }
 

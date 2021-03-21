@@ -8,7 +8,7 @@
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="CanMinimize"
 		x:Name="Window"
-		DataContext="{Binding GameConfigVM, Source={StaticResource Locator}}"
+		DataContext="{Binding GameConfigVM, Source={StaticResource Dependencies}}"
 		Title="{Binding WindowTitle}" Width="500" Height="130">
     <Grid Background="#595362">
         <Grid.ColumnDefinitions>
@@ -24,80 +24,28 @@
         <TextBlock Text="Game location:" Margin="5, 0" VerticalAlignment="Bottom" Foreground="White"/>
         <TextBox Style="{DynamicResource DarkTextbox}" Text="{Binding GameLocation}"  Grid.Row="1" Grid.ColumnSpan="2" Margin="5, 2"/>
 
-        <Button Content="Browse..." Command="{Binding BrowseCommand}" Grid.Row="1" Margin="5, 2" Grid.Column="2" Background="#342E30" Foreground="White">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="2" Background="#342E30">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#453F41"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#342E30"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Border.Triggers>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Content="OK" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=Window}" Grid.Row="2" Margin="5, 5" Grid.Column="1" Background="#342E30" Foreground="White">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="2" Background="#342E30">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#453F41"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#342E30"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Border.Triggers>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=Window}" Grid.Row="2" Margin="5, 5" Grid.Column="2" Background="#342E30" Foreground="White">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="2" Background="#342E30">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="Mouse.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#453F41"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#342E30"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Border.Triggers>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <Button
+            Style="{DynamicResource DarkButton}"
+            Content="Browse..."
+            Command="{Binding BrowseCommand}"
+            Grid.Column="2"
+            Grid.Row="1"
+            Margin="5, 2"/>
+        <Button
+            Style="{DynamicResource DarkButton}"
+            Content="OK"
+            Command="{Binding OKCommand}"
+            CommandParameter="{Binding ElementName=Window}"
+            Grid.Column="1"
+            Grid.Row="2"
+            Margin="5, 5"/>
+        <Button
+            Style="{DynamicResource DarkButton}"
+            Content="Cancel"
+            Command="{Binding CancelCommand}"
+            CommandParameter="{Binding ElementName=Window}"
+            Grid.Column="2"
+            Grid.Row="2"
+            Margin="5, 5"/>
     </Grid>
 </Window>
