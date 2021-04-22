@@ -283,6 +283,16 @@ namespace TouhouLauncher.Services.Application {
 					FileLocation = string.Empty,
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
+				},
+				new OfficialGame() {
+					Title = "Touhou 18",
+					Subtitle = "Unconnected Marketeers",
+					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH18.png",
+					AudioLocation = "",
+					ReleaseYear = 2021,
+					FileLocation = string.Empty,
+					DownloadableFileLocation = "",
+					Categories = GameCategories.MainWindows
 				}
 			};
 		}

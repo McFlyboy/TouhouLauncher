@@ -54,7 +54,7 @@ namespace TouhouLauncher.Test.Models.Application.Settings {
 			Assert.False(result);
 
 			Assert.NotNull(_settingsManager.OfficialGames);
-			Assert.Equal(28, _settingsManager.OfficialGames.Length);
+			Assert.Equal(29, _settingsManager.OfficialGames.Length);
 			Assert.Equal(1996, _settingsManager.OfficialGames[0].ReleaseYear);
 			Assert.NotNull(_settingsManager.FanGames);
 			Assert.Empty(_settingsManager.FanGames);
