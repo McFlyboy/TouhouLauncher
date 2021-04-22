@@ -11,7 +11,7 @@ namespace TouhouLauncher.Test.Services.Application {
 
 		[Fact]
 		public void Returns_all_official_games() {
-			Assert.Equal(28, _officialGamesTemplateService.CreateOfficialGamesFromTemplate().Length);
+			Assert.Equal(29, _officialGamesTemplateService.CreateOfficialGamesFromTemplate().Length);
 		}
 	}
 }
