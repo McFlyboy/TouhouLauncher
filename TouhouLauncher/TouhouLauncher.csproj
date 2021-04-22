@@ -16,8 +16,4 @@
     <Resource Include="Resources\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\Images\OfficialGames\TH18.png" />
-  </ItemGroup>
-
 </Project>
