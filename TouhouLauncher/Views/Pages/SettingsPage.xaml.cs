@@ -21,5 +21,5 @@ namespace TouhouLauncher.Views.Pages {
 		public SettingsPage() {
 			InitializeComponent();
 		}
-	}
+    }
 }
