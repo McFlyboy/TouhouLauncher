@@ -11,30 +11,23 @@ namespace TouhouLauncher.ViewModels {
 		private SettingsCategory _category;
 
 		public SettingsViewModel() {
-			_category = SettingsCategory.General;
-
-			SetCategoryToGeneralCommand = new RelayCommand(() => {
-				ChangeCategory(SettingsCategory.General);
-			});
-
-			SetCategoryToGameLocationsCommand = new RelayCommand(() => {
-				ChangeCategory(SettingsCategory.GameLocations);
-			});
+			_category = SettingsCategory.GeneralSettings;
 
 			BackCommand = new RelayCommand(() => {
 				MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken);
 			});
 		}
 
+		public int CurrentSettingsCategoryIndex {
+			get => (int)_category;
+			set => ChangeCategory((SettingsCategory)value);
+		}
+
 		public UserControl CurrentSettingsCategory => _category switch {
-			SettingsCategory.General => new GeneralSettings(),
+			SettingsCategory.GeneralSettings => new GeneralSettings(),
 			SettingsCategory.GameLocations => new GameLocationsSettings(),
 			_ => throw new InvalidEnumArgumentException(),
 		};
-
-		public ICommand SetCategoryToGeneralCommand { get; }
-
-		public ICommand SetCategoryToGameLocationsCommand { get; }
 
 		public ICommand BackCommand { get; }
 
@@ -44,7 +37,7 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		private enum SettingsCategory {
-			General,
+			GeneralSettings,
 			GameLocations
 		}
 	}
