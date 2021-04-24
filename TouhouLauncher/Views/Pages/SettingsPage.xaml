@@ -27,8 +27,16 @@
 			BorderThickness="0"
 			Padding="-1, 99, -1, -1"
 		>
-            <ListBoxItem Content="General settings" BorderThickness="0"/>
-            <ListBoxItem Content="General settings" BorderThickness="0"/>
+            <ListBoxItem x:Name="Test" BorderThickness="0" Foreground="White">
+                <Grid>
+                    <Border/>
+                    <TextBlock Text="General settings"/>
+                </Grid>
+            </ListBoxItem>
+            
+            <ListBoxItem BorderThickness="0" Foreground="White" Padding="50, 10, 0, 10">
+                Game locations
+            </ListBoxItem>
         </ListBox>
         
 		<ScrollViewer Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Visible">
