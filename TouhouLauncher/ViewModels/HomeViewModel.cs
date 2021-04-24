@@ -114,8 +114,9 @@ namespace TouhouLauncher.ViewModels {
 			allGames.AddRange(fanGames);
 			int availGames = allGames.Count;
 			//add check if there is no games
-			if(availGames == 0) {
+			if (availGames == 0) {
 				//TODO
+				return;
 			}
 			//generate random number from 1 to number of games available
 			int randomNum = random.Next(availGames);
