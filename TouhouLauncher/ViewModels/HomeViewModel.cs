@@ -1,10 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Application.Settings;
 using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.ViewModels {
@@ -12,15 +15,21 @@ namespace TouhouLauncher.ViewModels {
 		private readonly GamePickerViewModel _gamePickerViewModel;
 		private readonly ActiveGameCategory _activeGameCategory;
 		private readonly GameCategoryService _gameCategoryService;
+		private readonly SettingsManager _settingsManager;
+		private readonly ActivateGameService _activateGameService;
 
 		public HomeViewModel(
 			GamePickerViewModel gamePickerViewModel,
 			ActiveGameCategory activeGameCategory,
-			GameCategoryService gameCategoryService
+			GameCategoryService gameCategoryService,
+			SettingsManager settingsManager,
+			ActivateGameService activateGameService
 		) {
 			_gamePickerViewModel = gamePickerViewModel;
 			_activeGameCategory = activeGameCategory;
 			_gameCategoryService = gameCategoryService;
+			_settingsManager = settingsManager;
+			_activateGameService = activateGameService;
 
 			MessengerInstance.Register<object>(this, RebuildHeadersMessageToken, RebuildHeaders);
 
@@ -87,7 +96,32 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		private void LaunchRandom() {
-			//TODO
+			//instantiate Random
+			var random = new Random();
+			//get # of games available
+			var officialGames = _settingsManager.OfficialGames
+				.Where(game => game.FileLocation != string.Empty)
+				//TODO: remove after adding support for neko project 2
+				.Where(game => game.Categories != GameCategories.MainPC98)
+				.Select(game => (Game)game)
+				.ToList();
+			var fanGames = _settingsManager.FanGames
+				.Where(game => game.FileLocation != string.Empty)
+				.Select(game => (Game)game)
+				.ToList();
+			var allGames = new List<Game>();
+			allGames.AddRange(officialGames);
+			allGames.AddRange(fanGames);
+			int availGames = allGames.Count;
+			//add check if there is no games
+			if(availGames == 0) {
+				//TODO
+			}
+			//generate random number from 1 to number of games available
+			int randomNum = random.Next(availGames);
+			var selectedGame = allGames[randomNum];
+			//launch the game
+			_activateGameService.LaunchGame(selectedGame);
 		}
 
 		public static object RebuildHeadersMessageToken { get; } = new();
