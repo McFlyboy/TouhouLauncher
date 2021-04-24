@@ -9,18 +9,11 @@
 	  Title="SettingsPage"
 	  DataContext="{Binding SettingsVM, Source={StaticResource Dependencies}}">
 	<Grid Background="#595362">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="2*"/>
-			<ColumnDefinition Width="4*"/>
-			<ColumnDefinition Width="1*"/>
-		</Grid.ColumnDefinitions>
-        
-		<!--<Grid Background="#4B4554">
-			<StackPanel Margin="0, 100, 0, 0">
-				<Button Command="{Binding SetCategoryToGeneralCommand}" Content="General settings" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
-				<Button Command="{Binding SetCategoryToGameLocationsCommand}" Content="Game locations" Padding="0, 7" Margin="20, 5" FontSize="22" Foreground="White" Background="Transparent" BorderThickness="0"/>
-			</StackPanel>
-		</Grid>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
         <ListBox
 			Background="#4B4554"
