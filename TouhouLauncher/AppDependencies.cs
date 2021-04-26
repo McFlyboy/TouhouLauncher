@@ -1,4 +1,5 @@
 using GalaSoft.MvvmLight.Ioc;
+using System;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.Settings;
 using TouhouLauncher.Services.Application;
@@ -35,6 +36,8 @@ namespace TouhouLauncher {
 			dependencies.Register<FileBrowserService>();
 			dependencies.Register<ISettingsService, FileSettingsService>();
 			dependencies.Register<IFileSerializerService, YamlFileSerializerService>();
+			dependencies.Register<LaunchRandomGameService>();
+			dependencies.Register(() => new Random());
 		}
 		
 		public MainViewModel MainVM =>
