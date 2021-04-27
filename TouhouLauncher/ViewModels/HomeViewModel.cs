@@ -12,15 +12,18 @@ namespace TouhouLauncher.ViewModels {
 		private readonly GamePickerViewModel _gamePickerViewModel;
 		private readonly ActiveGameCategory _activeGameCategory;
 		private readonly GameCategoryService _gameCategoryService;
+		private readonly LaunchRandomGameService _launchRandomGameService;
 
 		public HomeViewModel(
 			GamePickerViewModel gamePickerViewModel,
 			ActiveGameCategory activeGameCategory,
-			GameCategoryService gameCategoryService
+			GameCategoryService gameCategoryService,
+			LaunchRandomGameService launchRandomGameService
 		) {
 			_gamePickerViewModel = gamePickerViewModel;
 			_activeGameCategory = activeGameCategory;
 			_gameCategoryService = gameCategoryService;
+			_launchRandomGameService = launchRandomGameService;
 
 			MessengerInstance.Register<object>(this, RebuildHeadersMessageToken, RebuildHeaders);
 
@@ -87,7 +90,7 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		private void LaunchRandom() {
-			//TODO
+			_launchRandomGameService.LaunchRandomGame();
 		}
 
 		public static object RebuildHeadersMessageToken { get; } = new();
