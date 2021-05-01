@@ -1,7 +1,6 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.Settings;
 using TouhouLauncher.Services.Application;
