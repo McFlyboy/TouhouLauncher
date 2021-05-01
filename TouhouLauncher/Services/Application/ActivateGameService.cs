@@ -27,7 +27,7 @@ namespace TouhouLauncher.Services.Application {
 			}
 		}
 
-		public void LaunchGame(Game game) {
+		public virtual void LaunchGame(Game game) {
 			if (!File.Exists(game.FileLocation)) {
 				return;
             }

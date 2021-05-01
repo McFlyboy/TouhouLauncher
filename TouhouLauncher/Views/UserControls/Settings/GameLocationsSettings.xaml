@@ -21,7 +21,7 @@
             VerticalAlignment="Center"
         />
 
-        <ItemsControl ItemsSource="{Binding GameLocations}" Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding GameLocations}" Grid.Row="1" Margin="0, 0, 0, 50">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0 5">
@@ -39,7 +39,7 @@
                             Foreground="White"
                             Text="{Binding Name}"
                         />
-                        
+
                         <TextBox
                             Grid.Row="1"
                             Style="{StaticResource DarkTextbox}"

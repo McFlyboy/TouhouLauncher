@@ -4,10 +4,8 @@ using System.Linq;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.Settings;
 
-namespace TouhouLauncher.Services.Application
-{
-    public class LaunchRandomGameService
-    {
+namespace TouhouLauncher.Services.Application {
+	public class LaunchRandomGameService {
 		private readonly SettingsManager _settingsManager;
 		private readonly ActivateGameService _activateGameService;
 		private readonly Random _random;
@@ -16,15 +14,13 @@ namespace TouhouLauncher.Services.Application
 			SettingsManager settingsManager,
 			ActivateGameService activateGameService,
 			Random random
-		)
-        {
+		) {
 			_settingsManager = settingsManager;
 			_activateGameService = activateGameService;
 			_random = random;
 		}
 
-        public bool LaunchRandomGame()
-        {
+		public bool LaunchRandomGame() {
 			var officialGames = _settingsManager.OfficialGames
 				.Where(game => game.FileLocation != string.Empty)
 				.Select(game => (Game)game)
@@ -38,9 +34,7 @@ namespace TouhouLauncher.Services.Application
 			allGames.AddRange(officialGames);
 			allGames.AddRange(fanGames);
 
-			if (allGames.Count == 0)
-			{
-				//TODO: show error
+			if (allGames.Count == 0) {
 				return false;
 			}
 
@@ -50,5 +44,5 @@ namespace TouhouLauncher.Services.Application
 			_activateGameService.LaunchGame(selectedGame);
 			return true;
 		}
-    }
+	}
 }
