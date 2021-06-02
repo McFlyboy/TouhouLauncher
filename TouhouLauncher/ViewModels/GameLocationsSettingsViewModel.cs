@@ -41,7 +41,13 @@ namespace TouhouLauncher.ViewModels {
 				_game = game;
 
 				BrowseCommand = new RelayCommand(() => {
-					Location = BrowseForGame();
+					var browseResult = BrowseForGame();
+
+					if (browseResult == null) {
+						return;
+					}
+
+					Location = browseResult;
 					RaisePropertyChanged(nameof(Location));
 				});
 			}
