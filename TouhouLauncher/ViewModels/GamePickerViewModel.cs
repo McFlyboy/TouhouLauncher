@@ -5,21 +5,25 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Views;
 
 namespace TouhouLauncher.ViewModels {
 	public class GamePickerViewModel : ViewModelBase {
 		private readonly GamePickerList _gamePickerList;
 		private readonly ActiveGameCategory _activeGameCategory;
-		private readonly ActivateGameService _activateGameService;
+		private readonly LaunchGameService _launchGameService;
+		private readonly GameConfig _gameConfig;
 
 		public GamePickerViewModel(
 			GamePickerList gamePickerList,
 			ActiveGameCategory activeGameCategory,
-			ActivateGameService activateGameService
+			LaunchGameService launchGameService,
+			GameConfig gameConfig
 		) {
 			_gamePickerList = gamePickerList;
 			_activeGameCategory = activeGameCategory;
-			_activateGameService = activateGameService;
+			_launchGameService = launchGameService;
+			_gameConfig = gameConfig;
 
 			GameButtons = new ObservableCollection<GameButton>();
 
@@ -37,24 +41,33 @@ namespace TouhouLauncher.ViewModels {
 			GameButtons.Clear();
 			foreach (var game in games) {
 				GameButtons.Add(
-					new GameButton(game, _activateGameService)
+					new GameButton(game, _launchGameService, _gameConfig)
 				);
 			}
 		}
 
 		public class GameButton {
-			private readonly ActivateGameService _activateGameService;
+			private readonly LaunchGameService _launchGameService;
+			private readonly GameConfig _gameConfig;
 			private readonly Game _game;
 
 			public GameButton(
 				Game game,
-				ActivateGameService activateGameService
+				LaunchGameService launchGameService,
+				GameConfig gameConfig
 			) {
-				_activateGameService = activateGameService;
+				_launchGameService = launchGameService;
+				_gameConfig = gameConfig;
 				_game = game;
 
 				Command = new RelayCommand(() => {
-					_activateGameService.ActivateGame(_game);
+					if (!_game.FileLocation.Equals(string.Empty)) {
+						_launchGameService.LaunchGame(_game);
+					}
+					else {
+						_gameConfig.SetGameToConfigure(_game);
+						new GameConfigWindow().ShowDialog();
+					}
 				});
 			}
 

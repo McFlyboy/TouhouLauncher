@@ -25,7 +25,7 @@ namespace TouhouLauncher {
 			dependencies.Register<GameConfig>();
 			dependencies.Register<ActiveGameCategory>();
 			dependencies.Register<GamePickerList>();
-			dependencies.Register<ActivateGameService>();
+			dependencies.Register<LaunchGameService>();
 			dependencies.Register<GameCategoryService>();
 			dependencies.Register<OfficialGamesTemplateService>();
 			dependencies.Register<FileBrowserService>();
