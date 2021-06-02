@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class HomeViewModel : ViewModelBase {
@@ -53,7 +52,7 @@ namespace TouhouLauncher.ViewModels {
 				name: "LAUNCH\nRANDOM GAME",
 				colorCode: "#4284C4",
 				colorHoverCode: "#5395D5",
-				action: LaunchRandom
+				action: LaunchRandomGame
 			);
 		}
 
@@ -69,8 +68,8 @@ namespace TouhouLauncher.ViewModels {
 			HeaderList.Add(CreateRandomGameHeader());
 
 			if (
-				(_activeGameCategory.CurrentCategory & GameCategories.MainPC98) != GameCategories.None
-				|| (_activeGameCategory.CurrentCategory & GameCategories.MainWindows) != GameCategories.None
+				_activeGameCategory.CurrentCategory.HasFlag(GameCategories.MainPC98)
+				|| _activeGameCategory.CurrentCategory.HasFlag(GameCategories.MainWindows)
 			) {
 				SetCurrentCategory(_gameCategoryService.GetDefaultGameCategory());
 			}
@@ -89,7 +88,7 @@ namespace TouhouLauncher.ViewModels {
 			}
 		}
 
-		private void LaunchRandom() {
+		private void LaunchRandomGame() {
 			_launchRandomGameService.LaunchRandomGame();
 		}
 
@@ -170,9 +169,7 @@ namespace TouhouLauncher.ViewModels {
 			}
 
 			public override string HeaderColor =>
-				_categories == _parent._activeGameCategory.CurrentCategory
-					? "#694F77"
-					: "#342E30";
+				_categories == _parent._activeGameCategory.CurrentCategory ? "#694F77" : "#342E30";
 
 			public override string HeaderHoverColor => "#453F41";
 

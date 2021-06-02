@@ -1,10 +1,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using System;
 using TouhouLauncher.Models.Application;
-using TouhouLauncher.Models.Application.Settings;
-using TouhouLauncher.Services.Application;
-using TouhouLauncher.Services.Infrastructure;
-using TouhouLauncher.Services.Infrastructure.Serialization;
+using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using TouhouLauncher.ViewModels;
 
 namespace TouhouLauncher {
@@ -24,20 +21,18 @@ namespace TouhouLauncher {
 			dependencies.Register<GameLocationsSettingsViewModel>();
 
 			/* ------ MODELS ------ */
-			dependencies.Register<SettingsManager>();
+			dependencies.Register<SettingsAndGamesManager>();
 			dependencies.Register<GameConfig>();
 			dependencies.Register<ActiveGameCategory>();
 			dependencies.Register<GamePickerList>();
-
-			/* ------ SERVICES ------ */
 			dependencies.Register<ActivateGameService>();
 			dependencies.Register<GameCategoryService>();
 			dependencies.Register<OfficialGamesTemplateService>();
 			dependencies.Register<FileBrowserService>();
-			dependencies.Register<ISettingsService, FileSettingsService>();
-			dependencies.Register<IFileSerializerService, YamlFileSerializerService>();
+			dependencies.Register<FileAccessService>();
+			dependencies.Register<ISettingsAndGamesService, FileSystemSettingsAndGamesService>();
 			dependencies.Register<LaunchRandomGameService>();
-			dependencies.Register(() => new Random());
+			dependencies.Register<Random>(() => new());
 		}
 		
 		public MainViewModel MainVM =>

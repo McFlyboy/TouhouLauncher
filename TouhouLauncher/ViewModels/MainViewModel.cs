@@ -1,16 +1,16 @@
 using GalaSoft.MvvmLight;
-using TouhouLauncher.Models.Application.Settings;
+using TouhouLauncher.Models.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class MainViewModel : ViewModelBase {
 		private string _page;
 
-		public MainViewModel(SettingsManager settingsManager) {
+		public MainViewModel(SettingsAndGamesManager settingsAndGamesManager) {
 			MessengerInstance.Register<string>(this, ChangePageMessageToken, ChangePage);
 
 			_page = "HomePage.xaml";
 
-			settingsManager.Load();
+			_ = settingsAndGamesManager.LoadAsync();
 		}
 
 		public string Page {

@@ -1,27 +1,27 @@
 ﻿using GalaSoft.MvvmLight;
-using TouhouLauncher.Models.Application.Settings;
+using TouhouLauncher.Models.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class GeneralSettingsViewModel : ViewModelBase {
-		private readonly SettingsManager _settingsManager;
+		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
-		public GeneralSettingsViewModel(SettingsManager settingsManager) {
-			_settingsManager = settingsManager;
+		public GeneralSettingsViewModel(SettingsAndGamesManager settingsAndGamesManager) {
+			_settingsAndGamesManager = settingsAndGamesManager;
 		}
 
 		public bool CloseOnGameLaunchChecked {
-			get => _settingsManager.GeneralSettings.CloseOnGameLaunch;
+			get => _settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch;
 			set {
-				_settingsManager.GeneralSettings.CloseOnGameLaunch = value;
-				_settingsManager.Save();
+				_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch = value;
+				_ = _settingsAndGamesManager.SaveAsync();
 			}
 		}
 
 		public bool CombineMainCategoriesChecked {
-			get => _settingsManager.GeneralSettings.CombineMainCategories;
+			get => _settingsAndGamesManager.GeneralSettings.CombineMainCategories;
 			set {
-				_settingsManager.GeneralSettings.CombineMainCategories = value;
-				_settingsManager.Save();
+				_settingsAndGamesManager.GeneralSettings.CombineMainCategories = value;
+				_ = _settingsAndGamesManager.SaveAsync();
 
 				MessengerInstance.Send<object>(null, HomeViewModel.RebuildHeadersMessageToken);
 			}

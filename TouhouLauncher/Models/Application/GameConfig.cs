@@ -1,29 +1,33 @@
-﻿using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Models.Application.Settings;
+﻿using System.Threading.Tasks;
+using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
 	public class GameConfig {
-		private readonly SettingsManager _settingsManager;
+		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
-		public GameConfig(SettingsManager settingsManager) {
-			_settingsManager = settingsManager;
+		public GameConfig(SettingsAndGamesManager settingsAndGamesManager) {
+			_settingsAndGamesManager = settingsAndGamesManager;
 
-			Game = null;
-			GameLocation = "";
+			TargetGame = null;
+			GameLocation = string.Empty;
 		}
 		
-		public Game Game { get; private set; }
+		public Game TargetGame { get; private set; }
 
 		public string GameLocation { get; set; }
 
-		public void Save() {
-			Game.FileLocation = GameLocation;
-			_settingsManager.Save();
+		public async Task<bool> SaveAsync() {
+			if (TargetGame == null) {
+				return false;
+			}
+
+			TargetGame.FileLocation = GameLocation;
+			return await _settingsAndGamesManager.SaveAsync();
 		}
 
 		public void SetGameToConfigure(Game game) {
-			Game = game;
-			GameLocation = Game.FileLocation;
+			TargetGame = game;
+			GameLocation = TargetGame.FileLocation;
 		}
 	}
 }

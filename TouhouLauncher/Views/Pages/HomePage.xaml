@@ -65,7 +65,7 @@
 				<Button.Template>
 					<ControlTemplate TargetType="Button">
 						<Border Background="#342E30" CornerRadius="25">
-							<Image Source="..\..\Resources\Images\Cogwheel.png" Margin="10, 10"/>
+							<Image Source="..\..\Resources\Images\Icons\Cogwheel.png" Margin="10, 10"/>
 							<Border.Triggers>
 								<EventTrigger RoutedEvent="Mouse.MouseEnter">
 									<BeginStoryboard>
