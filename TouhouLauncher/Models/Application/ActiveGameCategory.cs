@@ -1,5 +1,4 @@
 ﻿using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.Models.Application {
 	public class ActiveGameCategory {

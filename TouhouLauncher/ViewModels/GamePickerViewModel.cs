@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Services.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class GamePickerViewModel : ViewModelBase {
@@ -59,8 +58,7 @@ namespace TouhouLauncher.ViewModels {
 				});
 			}
 
-			public string Name =>
-				_game.Title + (!_game.Subtitle.Equals(string.Empty) ? ":\n" : string.Empty) + _game.Subtitle;
+			public string Name => string.Join(":\n", _game.Title.Split(": "));
 
 			public string Image => _game.ImageLocation;
 

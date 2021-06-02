@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Models.Application.Settings;
 
 namespace TouhouLauncher.Models.Application {
 	public class GamePickerList {
-		private readonly SettingsManager _settingsManager;
+		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
-		public GamePickerList(SettingsManager settingsManager) {
-			_settingsManager = settingsManager;
+		public GamePickerList(SettingsAndGamesManager settingsAndGamesManager) {
+			_settingsAndGamesManager = settingsAndGamesManager;
 
 			GameList = new List<Game>();
 		}
@@ -16,18 +16,13 @@ namespace TouhouLauncher.Models.Application {
 
 		public void PopulateGameList(GameCategories categories) {
 			GameList.Clear();
-			switch (categories) {
-				case GameCategories.FanGame:
-					GameList.AddRange(_settingsManager.FanGames);
-					break;
-				default:
-					foreach (var game in _settingsManager.OfficialGames) {
-						if ((game.Categories & categories) != GameCategories.None) {
-							GameList.Add(game);
-						}
-					}
-					break;
-			}
+			GameList.AddRange(
+				categories switch {
+					GameCategories.FanGame => _settingsAndGamesManager.FanGames,
+					_ => _settingsAndGamesManager.OfficialGames
+						.Where(game => categories.HasFlag(game.Categories))
+				}
+			);
 		}
 	}
 }

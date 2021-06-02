@@ -1,9 +1,9 @@
 ﻿namespace TouhouLauncher.Models.Application.GameInfo {
-	public class FanGame : Game {
+	public record FanGame : Game {
 		public FanGame() {
-			Categories = GameCategories.FanGame;
+			base.Categories = GameCategories.FanGame;
         }
 
-		public GameCategories Categories { get; }
+		public new GameCategories Categories => base.Categories;
 	}
 }

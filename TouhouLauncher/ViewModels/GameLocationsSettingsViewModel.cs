@@ -3,25 +3,24 @@ using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Models.Application.Settings;
-using TouhouLauncher.Services.Application;
+using TouhouLauncher.Models.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameLocationsSettingsViewModel : ViewModelBase {
 		private readonly FileBrowserService _fileBrowserService;
-		private readonly SettingsManager _settingsManager;
+		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
 		public GameLocationsSettingsViewModel(
 			FileBrowserService fileBrowserService,
-			SettingsManager settingsManager
+			SettingsAndGamesManager settingsAndGamesManager
 		) {
 			_fileBrowserService = fileBrowserService;
-			_settingsManager = settingsManager;
+			_settingsAndGamesManager = settingsAndGamesManager;
 
             GameLocations = new ObservableCollection<GameLocation>();
 
-			foreach (var game in _settingsManager.OfficialGames) {
-				GameLocations.Add(new(_fileBrowserService, _settingsManager, game));
+			foreach (var game in _settingsAndGamesManager.OfficialGames) {
+				GameLocations.Add(new(_fileBrowserService, _settingsAndGamesManager, game));
             }
 		}
 
@@ -29,16 +28,16 @@ namespace TouhouLauncher.ViewModels {
 
 		public class GameLocation : ObservableObject {
 			private readonly FileBrowserService _fileBrowserService;
-			private readonly SettingsManager _settingsManager;
+			private readonly SettingsAndGamesManager _settingsAndGamesManager;
 			private readonly OfficialGame _game;
 
 			public GameLocation(
 				FileBrowserService fileBrowserService,
-				SettingsManager settingsManager,
+				SettingsAndGamesManager settingsAndGamesManager,
 				OfficialGame game
 			) {
 				_fileBrowserService = fileBrowserService;
-				_settingsManager = settingsManager;
+				_settingsAndGamesManager = settingsAndGamesManager;
 				_game = game;
 
 				BrowseCommand = new RelayCommand(() => {
@@ -47,13 +46,13 @@ namespace TouhouLauncher.ViewModels {
 				});
 			}
 
-			public string Name => _game.FullTitle;
+			public string Name => _game.Title;
 
 			public string Location {
 				get => _game.FileLocation;
 				set {
 					_game.FileLocation = value;
-					_settingsManager.Save();
+					_ = _settingsAndGamesManager.SaveAsync();
 				}
 			}
 
@@ -61,10 +60,8 @@ namespace TouhouLauncher.ViewModels {
 
 			private string BrowseForGame() {
 				return _fileBrowserService.BrowseFiles(
-					new FileBrowserService.Filter(
-						new FileBrowserService.Filter.FileType("Executable files", "*.exe"),
-						new FileBrowserService.Filter.FileType("All files", "*.*")
-					)
+					new("Executable files", "*.exe"),
+					new("All files", "*.*")
 				);
 			}
 		}
