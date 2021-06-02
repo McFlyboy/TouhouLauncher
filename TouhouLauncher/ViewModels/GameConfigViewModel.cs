@@ -17,10 +17,16 @@ namespace TouhouLauncher.ViewModels {
 			_fileBrowserService = fileBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				_gameConfig.GameLocation = _fileBrowserService.BrowseFiles(
+				var browseResult = _fileBrowserService.BrowseFiles(
 					new("Executable files", "*.exe"),
 					new("All files", "*.*")
 				);
+
+				if (browseResult == null) {
+					return;
+				}
+
+				GameLocation = browseResult;
 				RaisePropertyChanged(nameof(GameLocation));
 			});
 

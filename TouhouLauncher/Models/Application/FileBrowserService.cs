@@ -7,7 +7,7 @@ namespace TouhouLauncher.Models.Application {
 			var fileDialog = new OpenFileDialog {
 				Filter = CreateFilterString(filters)
 			};
-			return (fileDialog.ShowDialog() ?? false) ? fileDialog.FileName : string.Empty;
+			return (fileDialog.ShowDialog() ?? false) ? fileDialog.FileName : null;
 		}
 
 		public string CreateFilterString(Filter[] filters) {
