@@ -10,10 +10,12 @@ namespace TouhouLauncher.Models.Infrastructure {
 		private YamlSerializerService() {
 			_serializer = new SerializerBuilder()
 				.WithNamingConvention(HyphenatedNamingConvention.Instance)
+				.DisableAliases()
 				.Build();
 
 			_deserializer = new DeserializerBuilder()
 				.WithNamingConvention(HyphenatedNamingConvention.Instance)
+				.IgnoreUnmatchedProperties()
 				.Build();
 		}
 

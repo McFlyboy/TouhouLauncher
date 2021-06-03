@@ -44,13 +44,13 @@ namespace TouhouLauncher.Test.Models.Application {
 
 			Assert.False(result);
 
+			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
+
 			Assert.NotNull(_settingsAndGamesManager.OfficialGames);
 			Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);
 
 			Assert.NotNull(_settingsAndGamesManager.FanGames);
 			Assert.Empty(_settingsAndGamesManager.FanGames);
-
-			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
 		}
 
 		[Fact]
@@ -63,13 +63,13 @@ namespace TouhouLauncher.Test.Models.Application {
 
 			Assert.True(result);
 
+			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
+
 			Assert.NotNull(_settingsAndGamesManager.OfficialGames);
 			Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);
 
 			Assert.NotNull(_settingsAndGamesManager.FanGames);
 			Assert.NotEmpty(_settingsAndGamesManager.FanGames);
-
-			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
 		}
 	}
 }

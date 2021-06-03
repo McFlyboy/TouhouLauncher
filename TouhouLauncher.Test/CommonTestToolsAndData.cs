@@ -7,6 +7,11 @@ using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes;
 
 namespace TouhouLauncher.Test {
 	public static class CommonTestToolsAndData {
+		public static readonly GeneralSettings testGeneralSettings = new() {
+			CloseOnGameLaunch = true,
+			CombineMainCategories = false
+		};
+
 		public static readonly OfficialGame testOfficialGame1 = new() {
 			Title = "Test Game 1",
 			ImageLocation = "",
@@ -64,15 +69,15 @@ namespace TouhouLauncher.Test {
 			testFangame2
 		};
 
-		public static readonly GeneralSettings testGeneralSettings = new() {
-			CloseOnGameLaunch = true,
-			CombineMainCategories = false
+		public static readonly SettingsAndGames testSettingsAndGames = new() {
+			GeneralSettings = testGeneralSettings,
+			OfficialGames = testOfficialGames,
+			FanGames = testFanGames
 		};
 
-		public static readonly SettingsAndGames testSettingsAndGames = new() {
-			OfficialGames = testOfficialGames,
-			FanGames = testFanGames,
-			GeneralSettings = testGeneralSettings
+		public static readonly GeneralSettingsYaml testGeneralSettingsYaml = new() {
+			CloseOnGameLaunch = true,
+			CombineMainCategories = false
 		};
 
 		public static readonly OfficialGameYaml testOfficialGameYaml1 = new() {
@@ -114,15 +119,10 @@ namespace TouhouLauncher.Test {
 			testFanGameYaml2
 		};
 
-		public static readonly GeneralSettingsYaml testGeneralSettingsYaml = new() {
-			CloseOnGameLaunch = true,
-			CombineMainCategories = false
-		};
-
 		public static readonly SettingsAndGamesYaml testSettingsAndGamesYaml = new() {
+			GeneralSettings = testGeneralSettingsYaml,
 			OfficialGames = testOfficialGameYamls,
-			FanGames = testFanGameYamls,
-			GeneralSettings = testGeneralSettingsYaml
+			FanGames = testFanGameYamls
 		};
 
 		public static readonly YamlTestType yamlTestTypeObject = new() {
