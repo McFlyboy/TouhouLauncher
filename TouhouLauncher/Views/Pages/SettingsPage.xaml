@@ -9,33 +9,39 @@
 	  Title="SettingsPage"
 	  DataContext="{Binding SettingsVM, Source={StaticResource Dependencies}}">
 	<Grid Background="#595362">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="4*"/>
+			<ColumnDefinition Width="1*"/>
+		</Grid.ColumnDefinitions>
 
-        <ListBox
+		<ListBox
 			Background="#4B4554"
 			BorderThickness="0"
 			Padding="-1, 99, -1, -1"
-            SelectedIndex="{Binding CurrentSettingsCategoryIndex}"
+			SelectedIndex="{Binding CurrentSettingsCategoryIndex}"
 		>
-            <ListBoxItem
-                Style="{DynamicResource SettingsCategoryMenuItem}"
-                Content="General settings"
-            />
+			<ListBoxItem
+				Style="{DynamicResource SettingsCategoryMenuItem}"
+				Content="General settings"
+			/>
 
-            <ListBoxItem
-                Style="{DynamicResource SettingsCategoryMenuItem}"
-                Content="Game locations"
-            />
-        </ListBox>
-        
+			<ListBoxItem
+				Style="{DynamicResource SettingsCategoryMenuItem}"
+				Content="Game locations"
+			/>
+		</ListBox>
+		
 		<ScrollViewer Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Visible">
 			<UserControl Content="{Binding CurrentSettingsCategory}" Margin="40 80 130 0"/>
 		</ScrollViewer>
-        
-		<Button Grid.Column="2" Command="{Binding BackCommand}" Content="Back" Cursor="Hand" Width="50" Height="50" Margin="0, 650, 0, 0" Background="Transparent" Foreground="White" FontSize="20" BorderBrush="White"/>
+		
+		<Button
+			Style="{DynamicResource CrossButton}"
+			Grid.Column="2"
+			Command="{Binding BackCommand}"
+			Margin="12, 658, 0, 0"
+            ToolTip="Back"
+		/>
 	</Grid>
 </Page>
