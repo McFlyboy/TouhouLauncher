@@ -46,6 +46,8 @@ namespace TouhouLauncher.Test.Models.Application {
 
 			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
 
+			Assert.NotNull(_settingsAndGamesManager.EmulatorSettings);
+
 			Assert.NotNull(_settingsAndGamesManager.OfficialGames);
 			Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);
 
@@ -64,6 +66,8 @@ namespace TouhouLauncher.Test.Models.Application {
 			Assert.True(result);
 
 			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
+
+			Assert.NotNull(_settingsAndGamesManager.EmulatorSettings);
 
 			Assert.NotNull(_settingsAndGamesManager.OfficialGames);
 			Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);

@@ -22,6 +22,8 @@ namespace TouhouLauncher.Models.Application {
 
 		public virtual GeneralSettings GeneralSettings => _settingsAndGames?.GeneralSettings;
 
+		public virtual EmulatorSettings EmulatorSettings => _settingsAndGames?.EmulatorSettings;
+
 		public virtual OfficialGame[] OfficialGames => _settingsAndGames?.OfficialGames;
 
 		public virtual List<FanGame> FanGames => _settingsAndGames?.FanGames;
@@ -33,11 +35,14 @@ namespace TouhouLauncher.Models.Application {
 		public async Task<bool> LoadAsync() {
 			var result = await _settingsAndGamesService.LoadAsync();
 
-			_settingsAndGames = result ?? new SettingsAndGames() {
-				GeneralSettings = new GeneralSettings(),
-				OfficialGames = _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
-				FanGames = new List<FanGame>()
-			};
+			_settingsAndGames = result ?? new SettingsAndGames(
+				GeneralSettings: new GeneralSettings(),
+				EmulatorSettings: new EmulatorSettings() {
+					FolderLocation = string.Empty
+				},
+				OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
+				FanGames: new List<FanGame>()
+			);
 
 			return result != null;
 		}
