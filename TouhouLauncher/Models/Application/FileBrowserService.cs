@@ -14,7 +14,10 @@ namespace TouhouLauncher.Models.Application {
 			return string.Join("|", filters.Select(filter => filter.ToString()));
 		}
 
-		public record Filter(string Label, params string[] Extensions) {
+		public record Filter(
+			string Label,
+			params string[] Extensions
+		) {
 			public override string ToString() {
 				return $"{Label}|{string.Join(";", Extensions)}";
 			}

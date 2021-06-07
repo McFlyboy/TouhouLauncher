@@ -12,6 +12,10 @@ namespace TouhouLauncher.Test {
 			CombineMainCategories = false
 		};
 
+		public static readonly EmulatorSettings testEmulatorSettings = new() {
+			FolderLocation = "C:\\test\\emulator\\location"
+		};
+
 		public static readonly OfficialGame testOfficialGame1 = new() {
 			Title = "Test Game 1",
 			ImageLocation = "",
@@ -64,20 +68,25 @@ namespace TouhouLauncher.Test {
 			FileLocation = ""
 		};
 
-		public static readonly List<FanGame> testFanGames = new List<FanGame>() {
+		public static readonly List<FanGame> testFanGames = new() {
 			testFangame1,
 			testFangame2
 		};
 
-		public static readonly SettingsAndGames testSettingsAndGames = new() {
-			GeneralSettings = testGeneralSettings,
-			OfficialGames = testOfficialGames,
-			FanGames = testFanGames
-		};
+		public static readonly SettingsAndGames testSettingsAndGames = new(
+			GeneralSettings: testGeneralSettings,
+			EmulatorSettings: testEmulatorSettings,
+			OfficialGames: testOfficialGames,
+			FanGames: testFanGames
+		);
 
 		public static readonly GeneralSettingsYaml testGeneralSettingsYaml = new() {
 			CloseOnGameLaunch = true,
 			CombineMainCategories = false
+		};
+
+		public static readonly EmulatorSettingsYaml testEmulatorSettingsYaml = new() {
+			FolderLocation = "C:\\test\\emulator\\location"
 		};
 
 		public static readonly OfficialGameYaml testOfficialGameYaml1 = new() {
@@ -114,13 +123,14 @@ namespace TouhouLauncher.Test {
 			FileLocation = ""
 		};
 
-		public static readonly List<FanGameYaml> testFanGameYamls = new List<FanGameYaml>() {
+		public static readonly List<FanGameYaml> testFanGameYamls = new() {
 			testFanGameYaml1,
 			testFanGameYaml2
 		};
 
 		public static readonly SettingsAndGamesYaml testSettingsAndGamesYaml = new() {
 			GeneralSettings = testGeneralSettingsYaml,
+			EmulatorSettings = testEmulatorSettingsYaml,
 			OfficialGames = testOfficialGameYamls,
 			FanGames = testFanGameYamls
 		};

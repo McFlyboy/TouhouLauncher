@@ -45,6 +45,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			Assert.NotNull(result);
 			Assert.Equal(testSettingsAndGames.GeneralSettings, result.GeneralSettings);
+			Assert.Equal(testSettingsAndGames.EmulatorSettings, result.EmulatorSettings);
 			Assert.Equal(testSettingsAndGames.OfficialGames[0], result.OfficialGames[0]);
 			Assert.Equal(testSettingsAndGames.OfficialGames[1], result.OfficialGames[1]);
 			Assert.Equal(testSettingsAndGames.OfficialGames[2], result.OfficialGames[2]);
