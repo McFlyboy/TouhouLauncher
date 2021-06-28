@@ -6,6 +6,11 @@
     <UseWPF>true</UseWPF>
     <StartupObject>TouhouLauncher.App</StartupObject>
     <ApplicationIcon>Resources\Images\Icons\AppIcon.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +20,10 @@
 
   <ItemGroup>
     <Resource Include="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TouhouLauncher.WpfExtensions\TouhouLauncher.WpfExtensions.csproj" />
   </ItemGroup>
 
 </Project>

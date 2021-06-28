@@ -20,24 +20,24 @@ namespace TouhouLauncher.ViewModels {
 
 		public int CurrentSettingsCategoryIndex {
 			get => (int)_category;
-			set => ChangeCategory((SettingsCategory)value);
+			set {
+				_category = (SettingsCategory)value;
+				RaisePropertyChanged(nameof(CurrentSettingsCategory));
+			}
 		}
 
 		public UserControl CurrentSettingsCategory => _category switch {
 			SettingsCategory.GeneralSettings => new GeneralSettings(),
+			SettingsCategory.EmulatorSettings => new EmulatorSettings(),
 			SettingsCategory.GameLocations => new GameLocationsSettings(),
-			_ => throw new InvalidEnumArgumentException(),
+			_ => new UserControl(),
 		};
 
 		public ICommand BackCommand { get; }
 
-		private void ChangeCategory(SettingsCategory category) {
-			_category = category;
-			RaisePropertyChanged(nameof(CurrentSettingsCategory));
-		}
-
 		private enum SettingsCategory {
 			GeneralSettings,
+			EmulatorSettings,
 			GameLocations
 		}
 	}

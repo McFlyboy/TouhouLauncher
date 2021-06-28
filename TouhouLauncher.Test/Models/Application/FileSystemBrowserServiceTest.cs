@@ -1,14 +1,14 @@
 ﻿using TouhouLauncher.Models.Application;
 using Xunit;
-using static TouhouLauncher.Models.Application.FileBrowserService;
+using static TouhouLauncher.Models.Application.FileSystemBrowserService;
 
 namespace TouhouLauncher.Test.Models.Application {
-	public class FileBrowserServiceTest {
-		private readonly FileBrowserService _fileBrowserService = new();
+	public class FileSystemBrowserServiceTest {
+		private readonly FileSystemBrowserService _fileSystemBrowserService = new();
 
 		[Fact]
 		public void Formats_filter_string_correctly() {
-			var result = _fileBrowserService.CreateFilterString(new Filter[] {
+			var result = _fileSystemBrowserService.CreateFileFilterString(new Filter[] {
 				new("Executable files", "*.exe"),
 				new("HTML files", "*.htm", "*.html")
 			});
