@@ -6,7 +6,7 @@
 			 xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls.Settings"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="800" d:DesignWidth="600"
-             DataContext="{Binding EmulatorSettingsVM, Source={StaticResource Dependencies}}">
+			 DataContext="{Binding EmulatorSettingsVM, Source={StaticResource Dependencies}}">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="60"/>
@@ -48,7 +48,7 @@
 				Style="{StaticResource DarkButton}"
 				Grid.Row="1"
 				Grid.Column="1"
-                Command="{Binding BrowseCommand}"
+				Command="{Binding BrowseCommand}"
 				Content="Browse..."
 				Width="100"
 				Margin="10 0 0 0"

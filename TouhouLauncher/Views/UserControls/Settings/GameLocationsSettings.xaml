@@ -6,59 +6,59 @@
 		xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls.Settings"
 		mc:Ignorable="d" 
 		d:DesignHeight="800" d:DesignWidth="600"
-        DataContext="{Binding GameLocationsSettingsVM, Source={StaticResource Dependencies}}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+		DataContext="{Binding GameLocationsSettingsVM, Source={StaticResource Dependencies}}">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
 
-        <TextBlock
-            Text="Game locations"
-            Foreground="White"
-            FontSize="22"
-            FontWeight="Bold"
-            VerticalAlignment="Center"
-        />
+		<TextBlock
+			Text="Game locations"
+			Foreground="White"
+			FontSize="22"
+			FontWeight="Bold"
+			VerticalAlignment="Center"
+		/>
 
-        <ItemsControl ItemsSource="{Binding GameLocations}" Grid.Row="1" Margin="0, 0, 0, 50">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                        </Grid.RowDefinitions>
+		<ItemsControl ItemsSource="{Binding GameLocations}" Grid.Row="1" Margin="0, 0, 0, 50">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Grid Margin="0 5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="auto"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="1*"/>
+						</Grid.RowDefinitions>
 
-                        <TextBlock
-                            Grid.ColumnSpan="2"
-                            Foreground="White"
-                            Text="{Binding Name}"
-                        />
+						<TextBlock
+							Grid.ColumnSpan="2"
+							Foreground="White"
+							Text="{Binding Name}"
+						/>
 
-                        <TextBox
-                            Grid.Row="1"
-                            Style="{StaticResource DarkTextbox}"
-                            Text="{Binding Location}"
-                            Padding="5"
-                        />
+						<TextBox
+							Grid.Row="1"
+							Style="{StaticResource DarkTextbox}"
+							Text="{Binding Location}"
+							Padding="5"
+						/>
 
-                        <Button
-                            Style="{StaticResource DarkButton}"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Content="Browse..."
-                            Command="{Binding BrowseCommand}"
-                            Width="100"
-                            Margin="10 0 0 0"
-                        />
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+						<Button
+							Style="{StaticResource DarkButton}"
+							Grid.Row="1"
+							Grid.Column="1"
+							Content="Browse..."
+							Command="{Binding BrowseCommand}"
+							Width="100"
+							Margin="10 0 0 0"
+						/>
+					</Grid>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</Grid>
 </UserControl>

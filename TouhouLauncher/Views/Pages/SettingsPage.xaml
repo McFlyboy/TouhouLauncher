@@ -31,11 +31,11 @@
 				Content="PC-98 emulator settings"
 			/>
 
-            <ListBoxItem
+			<ListBoxItem
 				Style="{DynamicResource SettingsCategoryMenuItem}"
 				Content="Game locations"
 			/>
-        </ListBox>
+		</ListBox>
 		
 		<ScrollViewer Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Visible">
 			<UserControl Content="{Binding CurrentSettingsCategory}" Margin="40 80 130 0"/>
@@ -46,7 +46,7 @@
 			Grid.Column="2"
 			Command="{Binding BackCommand}"
 			Margin="12, 658, 0, 0"
-            ToolTip="Back"
+			ToolTip="Back"
 		/>
 	</Grid>
 </Page>

@@ -54,7 +54,7 @@
 					<Setter.Value>
 						<Canvas>
 							<Line X1="-12" Y1="-12" X2="12" Y2="12" Stroke="White" StrokeThickness="2" SnapsToDevicePixels="True"/>
-                            <Line X1="12" Y1="-12" X2="-12" Y2="12" Stroke="White" StrokeThickness="2" SnapsToDevicePixels="True"/>
+							<Line X1="12" Y1="-12" X2="-12" Y2="12" Stroke="White" StrokeThickness="2" SnapsToDevicePixels="True"/>
 						</Canvas>
 					</Setter.Value>
 				</Setter>
