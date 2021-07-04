@@ -1,14 +1,14 @@
 ﻿using Microsoft.Win32;
 using System.Linq;
-using TouhouLauncher.WpfExtensions;
 
 namespace TouhouLauncher.Models.Application {
 	public class FileSystemBrowserService {
 		public string BrowseFolders() {
-			var folderDialog = new OpenFolderDialog() {
-				Title = "Select emulator folder"
+			var folderDialog = new System.Windows.Forms.FolderBrowserDialog() {
+				Description = "Select emulator folder",
+				UseDescriptionForTitle = true
 			};
-			return (folderDialog.ShowDialog() ?? false) ? folderDialog.FolderName : null;
+			return (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? folderDialog.SelectedPath : null;
 		}
 
 		public string BrowseFiles(params Filter[] filters) {
