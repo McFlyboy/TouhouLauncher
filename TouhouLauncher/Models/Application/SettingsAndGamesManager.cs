@@ -5,16 +5,16 @@ using TouhouLauncher.Models.Application.SettingsInfo;
 
 namespace TouhouLauncher.Models.Application {
 	public class SettingsAndGamesManager {
-		private readonly ISettingsAndGamesService _settingsAndGamesService;
+		private readonly ISettingsAndGamesRepository _settingsAndGamesRepository;
 		private readonly OfficialGamesTemplateService _officialGamesTemplateService;
 
 		private SettingsAndGames _settingsAndGames;
 
 		public SettingsAndGamesManager(
-			ISettingsAndGamesService settingsAndGamesService,
+			ISettingsAndGamesRepository settingsAndGamesRepository,
 			OfficialGamesTemplateService officialGamesTemplateService
 		) {
-			_settingsAndGamesService = settingsAndGamesService;
+			_settingsAndGamesRepository = settingsAndGamesRepository;
 			_officialGamesTemplateService = officialGamesTemplateService;
 
 			_settingsAndGames = null;
@@ -29,11 +29,11 @@ namespace TouhouLauncher.Models.Application {
 		public virtual List<FanGame> FanGames => _settingsAndGames?.FanGames;
 
 		public async virtual Task<bool> SaveAsync() {
-			return await _settingsAndGamesService.SaveAsync(_settingsAndGames);
+			return await _settingsAndGamesRepository.SaveAsync(_settingsAndGames);
 		}
 
 		public async Task<bool> LoadAsync() {
-			var result = await _settingsAndGamesService.LoadAsync();
+			var result = await _settingsAndGamesRepository.LoadAsync();
 
 			_settingsAndGames = result ?? new SettingsAndGames(
 				GeneralSettings: new GeneralSettings(),

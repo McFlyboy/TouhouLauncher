@@ -7,7 +7,7 @@ using Xunit;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class SettingsAndGamesManagerTest {
-		private readonly Mock<FileSystemSettingsAndGamesService> _fileSystemSettingsAndGamesServiceMock = new(null, null);
+		private readonly Mock<FileSystemSettingsAndGamesRepository> _fileSystemSettingsAndGamesServiceMock = new(null, null);
 		private readonly Mock<OfficialGamesTemplateService> _officialGamesTemplateServiceMock = new();
 
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;

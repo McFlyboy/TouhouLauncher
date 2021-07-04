@@ -4,13 +4,13 @@ using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes.Extensions;
 
 namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
-	public class FileSystemSettingsAndGamesService : ISettingsAndGamesService {
+	public class FileSystemSettingsAndGamesRepository : ISettingsAndGamesRepository {
 		private readonly FileAccessService _fileAccessService;
 		private readonly OfficialGamesTemplateService _officialGamesTemplateService;
 
 		private readonly string filePath;
 
-		public FileSystemSettingsAndGamesService(
+		public FileSystemSettingsAndGamesRepository(
 			FileAccessService fileAccessService,
 			OfficialGamesTemplateService officialGamesTemplateService
 		) {

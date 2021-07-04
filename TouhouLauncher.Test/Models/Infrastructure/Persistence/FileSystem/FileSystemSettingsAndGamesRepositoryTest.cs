@@ -7,14 +7,14 @@ using Xunit;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 
 namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
-	public class FileSystemSettingsAndGamesServiceTest {
+	public class FileSystemSettingsAndGamesRepositoryTest {
 		private readonly Mock<FileAccessService> fileAccessServiceMock = new();
 		private readonly Mock<OfficialGamesTemplateService> officialGamesTemplateServiceMock = new();
 
-		private readonly FileSystemSettingsAndGamesService _fileSystemSettingsAndGamesService;
+		private readonly FileSystemSettingsAndGamesRepository _fileSystemSettingsAndGamesRepository;
 
-		public FileSystemSettingsAndGamesServiceTest() {
-			_fileSystemSettingsAndGamesService = new(
+		public FileSystemSettingsAndGamesRepositoryTest() {
+			_fileSystemSettingsAndGamesRepository = new(
 				fileAccessServiceMock.Object,
 				officialGamesTemplateServiceMock.Object
 			);
@@ -26,7 +26,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 				.Setup(obj => obj.WriteFileFromYamlAsync(It.IsAny<string>(), It.IsAny<SettingsAndGamesYaml>()))
 				.Returns(Task.FromResult(true));
 
-			var result = await _fileSystemSettingsAndGamesService.SaveAsync(testSettingsAndGames);
+			var result = await _fileSystemSettingsAndGamesRepository.SaveAsync(testSettingsAndGames);
 
 			Assert.True(result);
 		}
@@ -41,7 +41,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 				.Setup(obj => obj.CreateOfficialGamesFromTemplate())
 				.Returns(testOfficialGames);
 
-			var result = await _fileSystemSettingsAndGamesService.LoadAsync();
+			var result = await _fileSystemSettingsAndGamesRepository.LoadAsync();
 
 			Assert.NotNull(result);
 			Assert.Equal(testSettingsAndGames.GeneralSettings, result.GeneralSettings);

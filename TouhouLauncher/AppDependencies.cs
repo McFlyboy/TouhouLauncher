@@ -31,7 +31,7 @@ namespace TouhouLauncher {
 			dependencies.Register<OfficialGamesTemplateService>();
 			dependencies.Register<FileSystemBrowserService>();
 			dependencies.Register<FileAccessService>();
-			dependencies.Register<ISettingsAndGamesService, FileSystemSettingsAndGamesService>();
+			dependencies.Register<ISettingsAndGamesRepository, FileSystemSettingsAndGamesRepository>();
 			dependencies.Register<LaunchRandomGameService>();
 			dependencies.Register<Random>(() => new());
 		}
