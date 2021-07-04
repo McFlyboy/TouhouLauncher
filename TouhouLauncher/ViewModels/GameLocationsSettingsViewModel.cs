@@ -7,36 +7,36 @@ using TouhouLauncher.Models.Application;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameLocationsSettingsViewModel : ViewModelBase {
-		private readonly FileBrowserService _fileBrowserService;
+		private readonly FileSystemBrowserService _fileSystemBrowserService;
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
 		public GameLocationsSettingsViewModel(
-			FileBrowserService fileBrowserService,
+			FileSystemBrowserService fileSystemBrowserService,
 			SettingsAndGamesManager settingsAndGamesManager
 		) {
-			_fileBrowserService = fileBrowserService;
+			_fileSystemBrowserService = fileSystemBrowserService;
 			_settingsAndGamesManager = settingsAndGamesManager;
 
             GameLocations = new ObservableCollection<GameLocation>();
 
 			foreach (var game in _settingsAndGamesManager.OfficialGames) {
-				GameLocations.Add(new(_fileBrowserService, _settingsAndGamesManager, game));
+				GameLocations.Add(new(_fileSystemBrowserService, _settingsAndGamesManager, game));
             }
 		}
 
         public ObservableCollection<GameLocation> GameLocations { get; }
 
 		public class GameLocation : ObservableObject {
-			private readonly FileBrowserService _fileBrowserService;
+			private readonly FileSystemBrowserService _fileSystemBrowserService;
 			private readonly SettingsAndGamesManager _settingsAndGamesManager;
 			private readonly OfficialGame _game;
 
 			public GameLocation(
-				FileBrowserService fileBrowserService,
+				FileSystemBrowserService fileSystemBrowserService,
 				SettingsAndGamesManager settingsAndGamesManager,
 				OfficialGame game
 			) {
-				_fileBrowserService = fileBrowserService;
+				_fileSystemBrowserService = fileSystemBrowserService;
 				_settingsAndGamesManager = settingsAndGamesManager;
 				_game = game;
 
@@ -65,7 +65,7 @@ namespace TouhouLauncher.ViewModels {
 			public ICommand BrowseCommand { get; }
 
 			private string BrowseForGame() {
-				return _fileBrowserService.BrowseFiles(
+				return _fileSystemBrowserService.BrowseFiles(
 					new("Executable files", "*.exe"),
 					new("All files", "*.*")
 				);

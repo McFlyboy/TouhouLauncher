@@ -7,17 +7,17 @@ using TouhouLauncher.Models.Application;
 namespace TouhouLauncher.ViewModels {
 	public class GameConfigViewModel : ViewModelBase {
 		private readonly GameConfig _gameConfig;
-		private readonly FileBrowserService _fileBrowserService;
+		private readonly FileSystemBrowserService _fileSystemBrowserService;
 
 		public GameConfigViewModel(
 			GameConfig gameConfig,
-			FileBrowserService fileBrowserService
+			FileSystemBrowserService fileSystemBrowserService
 		) {
 			_gameConfig = gameConfig;
-			_fileBrowserService = fileBrowserService;
+			_fileSystemBrowserService = fileSystemBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				var browseResult = _fileBrowserService.BrowseFiles(
+				var browseResult = _fileSystemBrowserService.BrowseFiles(
 					new("Executable files", "*.exe"),
 					new("All files", "*.*")
 				);

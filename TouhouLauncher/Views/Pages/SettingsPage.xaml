@@ -28,9 +28,14 @@
 
 			<ListBoxItem
 				Style="{DynamicResource SettingsCategoryMenuItem}"
+				Content="PC-98 emulator settings"
+			/>
+
+            <ListBoxItem
+				Style="{DynamicResource SettingsCategoryMenuItem}"
 				Content="Game locations"
 			/>
-		</ListBox>
+        </ListBox>
 		
 		<ScrollViewer Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Visible">
 			<UserControl Content="{Binding CurrentSettingsCategory}" Margin="40 80 130 0"/>

@@ -18,6 +18,7 @@ namespace TouhouLauncher {
 			dependencies.Register<GamePickerViewModel>();
 			dependencies.Register<SettingsViewModel>();
 			dependencies.Register<GeneralSettingsViewModel>();
+			dependencies.Register<EmulatorSettingsViewModel>();
 			dependencies.Register<GameLocationsSettingsViewModel>();
 
 			/* ------ MODELS ------ */
@@ -28,13 +29,13 @@ namespace TouhouLauncher {
 			dependencies.Register<LaunchGameService>();
 			dependencies.Register<GameCategoryService>();
 			dependencies.Register<OfficialGamesTemplateService>();
-			dependencies.Register<FileBrowserService>();
+			dependencies.Register<FileSystemBrowserService>();
 			dependencies.Register<FileAccessService>();
 			dependencies.Register<ISettingsAndGamesService, FileSystemSettingsAndGamesService>();
 			dependencies.Register<LaunchRandomGameService>();
 			dependencies.Register<Random>(() => new());
 		}
-		
+
 		public MainViewModel MainVM =>
 			dependencies.GetInstance<MainViewModel>();
 
@@ -52,6 +53,9 @@ namespace TouhouLauncher {
 
 		public GeneralSettingsViewModel GeneralSettingsVM =>
 			dependencies.GetInstance<GeneralSettingsViewModel>();
+
+		public EmulatorSettingsViewModel EmulatorSettingsVM =>
+			dependencies.GetInstance<EmulatorSettingsViewModel>();
 
 		public GameLocationsSettingsViewModel GameLocationsSettingsVM =>
 			dependencies.GetInstance<GameLocationsSettingsViewModel>();

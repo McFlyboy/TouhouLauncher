@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>TouhouLauncher.App</StartupObject>
     <ApplicationIcon>Resources\Images\Icons\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
