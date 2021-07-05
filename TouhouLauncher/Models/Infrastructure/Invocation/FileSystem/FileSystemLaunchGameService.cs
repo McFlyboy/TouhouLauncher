@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.Models.Application {
-	public class LaunchGameService {
+namespace TouhouLauncher.Models.Infrastructure.Invocation.FileSystem {
+	public class FileSystemLaunchGameService : ILaunchGameService {
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
-		public LaunchGameService(SettingsAndGamesManager settingsAndGamesManager) {
+		public FileSystemLaunchGameService(SettingsAndGamesManager settingsAndGamesManager) {
 			_settingsAndGamesManager = settingsAndGamesManager;
 		}
 
