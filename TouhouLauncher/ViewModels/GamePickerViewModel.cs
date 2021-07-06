@@ -11,13 +11,13 @@ namespace TouhouLauncher.ViewModels {
 	public class GamePickerViewModel : ViewModelBase {
 		private readonly GamePickerList _gamePickerList;
 		private readonly ActiveGameCategory _activeGameCategory;
-		private readonly ILaunchGameService _launchGameService;
+		private readonly LaunchGameService _launchGameService;
 		private readonly GameConfig _gameConfig;
 
 		public GamePickerViewModel(
 			GamePickerList gamePickerList,
 			ActiveGameCategory activeGameCategory,
-			ILaunchGameService launchGameService,
+			LaunchGameService launchGameService,
 			GameConfig gameConfig
 		) {
 			_gamePickerList = gamePickerList;
@@ -47,13 +47,13 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		public class GameButton {
-			private readonly ILaunchGameService _launchGameService;
+			private readonly LaunchGameService _launchGameService;
 			private readonly GameConfig _gameConfig;
 			private readonly Game _game;
 
 			public GameButton(
 				Game game,
-				ILaunchGameService launchGameService,
+				LaunchGameService launchGameService,
 				GameConfig gameConfig
 			) {
 				_launchGameService = launchGameService;

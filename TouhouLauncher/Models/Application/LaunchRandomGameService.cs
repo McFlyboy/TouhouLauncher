@@ -5,12 +5,12 @@ using TouhouLauncher.Models.Application.GameInfo;
 namespace TouhouLauncher.Models.Application {
 	public class LaunchRandomGameService {
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
-		private readonly ILaunchGameService _launchGameService;
+		private readonly LaunchGameService _launchGameService;
 		private readonly Random _random;
 
 		public LaunchRandomGameService(
 			SettingsAndGamesManager settingsAndGamesManager,
-			ILaunchGameService launchGameService,
+			LaunchGameService launchGameService,
 			Random random
 		) {
 			_settingsAndGamesManager = settingsAndGamesManager;

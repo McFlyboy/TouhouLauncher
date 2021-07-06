@@ -3,14 +3,13 @@ using System;
 using System.Collections.Generic;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Models.Infrastructure.Invocation.FileSystem;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchRandomGameServiceTest {
 		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
-		private readonly Mock<FileSystemLaunchGameService> _fileSystemLaunchGameServiceMock = new(null);
+		private readonly Mock<LaunchGameService> _fileSystemLaunchGameServiceMock = new(null);
 		private readonly Mock<Random> _randomMock = new();
 
 		private readonly LaunchRandomGameService _launchRandomGameService;
