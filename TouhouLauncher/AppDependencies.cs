@@ -1,7 +1,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using System;
 using TouhouLauncher.Models.Application;
-using TouhouLauncher.Models.Infrastructure.Invocation.FileSystem;
+using TouhouLauncher.Models.Infrastructure.Execution.FileSystem;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using TouhouLauncher.ViewModels;
 
@@ -27,12 +27,13 @@ namespace TouhouLauncher {
 			dependencies.Register<GameConfig>();
 			dependencies.Register<ActiveGameCategory>();
 			dependencies.Register<GamePickerList>();
-			dependencies.Register<ILaunchGameService, FileSystemLaunchGameService>();
+			dependencies.Register<IExecutorService, FileSystemExecutorService>();
 			dependencies.Register<GameCategoryService>();
 			dependencies.Register<OfficialGamesTemplateService>();
 			dependencies.Register<FileSystemBrowserService>();
 			dependencies.Register<FileAccessService>();
 			dependencies.Register<ISettingsAndGamesRepository, FileSystemSettingsAndGamesRepository>();
+			dependencies.Register<LaunchGameService>();
 			dependencies.Register<LaunchRandomGameService>();
 			dependencies.Register<Random>(() => new());
 		}

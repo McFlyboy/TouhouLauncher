@@ -3,14 +3,13 @@ using System;
 using System.Collections.Generic;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Models.Infrastructure.Invocation.FileSystem;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchRandomGameServiceTest {
 		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
-		private readonly Mock<FileSystemLaunchGameService> _fileSystemLaunchGameServiceMock = new(null);
+		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null);
 		private readonly Mock<Random> _randomMock = new();
 
 		private readonly LaunchRandomGameService _launchRandomGameService;
@@ -18,7 +17,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		public LaunchRandomGameServiceTest() {
 			_launchRandomGameService = new(
 				_settingsAndGamesManagerMock.Object,
-				_fileSystemLaunchGameServiceMock.Object,
+				_launchGameServiceMock.Object,
 				_randomMock.Object
 			);
 		}
@@ -47,12 +46,12 @@ namespace TouhouLauncher.Test.Models.Application {
 			_randomMock.Setup(obj => obj.Next(It.IsAny<int>()))
 				.Returns(1);
 
-			_fileSystemLaunchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
+			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
 				.Returns(true);
 
 			var result = _launchRandomGameService.LaunchRandomGame();
 
-			_fileSystemLaunchGameServiceMock
+			_launchGameServiceMock
 				.Verify(obj => obj.LaunchGame(It.IsAny<Game>()), Times.Once());
 
 			Assert.True(result);
