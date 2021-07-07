@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameConfigViewModel : ViewModelBase {
@@ -17,10 +18,15 @@ namespace TouhouLauncher.ViewModels {
 			_fileSystemBrowserService = fileSystemBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				var browseResult = _fileSystemBrowserService.BrowseFiles(
-					new("Executable files", "*.exe"),
-					new("All files", "*.*")
-				);
+				string browseResult = _gameConfig.TargetGame.Categories.HasFlag(GameCategories.MainPC98) 
+					? _fileSystemBrowserService.BrowseFiles(
+						new("Hard disk image files", "*.hdi"),
+						new("All files", "*.*")
+					)
+					: _fileSystemBrowserService.BrowseFiles(
+						new("Executable files", "*.exe"),
+						new("All files", "*.*")
+					);
 
 				if (browseResult == null) {
 					return;
