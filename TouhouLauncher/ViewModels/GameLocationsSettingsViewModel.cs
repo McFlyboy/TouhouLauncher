@@ -17,14 +17,14 @@ namespace TouhouLauncher.ViewModels {
 			_fileSystemBrowserService = fileSystemBrowserService;
 			_settingsAndGamesManager = settingsAndGamesManager;
 
-            GameLocations = new ObservableCollection<GameLocation>();
+			GameLocations = new ObservableCollection<GameLocation>();
 
 			foreach (var game in _settingsAndGamesManager.OfficialGames) {
 				GameLocations.Add(new(_fileSystemBrowserService, _settingsAndGamesManager, game));
-            }
+			}
 		}
 
-        public ObservableCollection<GameLocation> GameLocations { get; }
+		public ObservableCollection<GameLocation> GameLocations { get; }
 
 		public class GameLocation : ObservableObject {
 			private readonly FileSystemBrowserService _fileSystemBrowserService;
