@@ -65,10 +65,15 @@ namespace TouhouLauncher.ViewModels {
 			public ICommand BrowseCommand { get; }
 
 			private string BrowseForGame() {
-				return _fileSystemBrowserService.BrowseFiles(
-					new("Executable files", "*.exe"),
-					new("All files", "*.*")
-				);
+				return _game.Categories.HasFlag(GameCategories.MainPC98)
+					? _fileSystemBrowserService.BrowseFiles(
+						new("Hard disk image files", "*.hdi"),
+						new("All files", "*.*")
+					)
+					: _fileSystemBrowserService.BrowseFiles(
+						new("Executable files", "*.exe"),
+						new("All files", "*.*")
+					);
 			}
 		}
 	}

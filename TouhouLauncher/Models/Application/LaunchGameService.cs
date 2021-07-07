@@ -14,14 +14,9 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		public virtual bool LaunchGame(Game game) {
-			string executableLocation;
-
-			if (game.Categories.HasFlag(GameCategories.MainPC98)) {
-				executableLocation = $"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.exe";
-			}
-			else {
-				executableLocation = game.FileLocation;
-			}
+			string executableLocation = game.Categories.HasFlag(GameCategories.MainPC98)
+				? $"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.exe"
+				: game.FileLocation;
 
 			var process = _executorService.StartExecutable(executableLocation);
 
