@@ -47,6 +47,10 @@ namespace TouhouLauncher.Models.Infrastructure {
 	}
 
 	public abstract record Ini {
+		public Ini() {
+			Data = new();
+		}
+
 		public IniData Data { get; init; }
 
 		public string ToIniString() {

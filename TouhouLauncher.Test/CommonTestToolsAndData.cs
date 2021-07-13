@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using IniParser.Model;
+using System.Collections.Generic;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.SettingsInfo;
@@ -142,6 +143,27 @@ namespace TouhouLauncher.Test {
 
 		public static readonly string yamlTestTypeObjectAsString = $"text: Test{LineBreak}number: 3{LineBreak}";
 
+		public static readonly IniTestType iniTestTypeObject = new() {
+			Data = new() {
+				Sections = new() {
+					new Section("Test") {
+						Properties = new() {
+							new Property("text", "Hello"),
+							new Property("number", "3")
+						}
+					},
+					new Section("More test") {
+						Properties = new() {
+							new Property("is_test", "true")
+						}
+					}
+				}
+			}
+		};
+
+		public static readonly string iniTestTypeObjectAsString =
+			$"[Test]{LineBreak}text=Hello{LineBreak}number=3{LineBreak}[More test]{LineBreak}is_test=true";
+
 		public static string LineBreak => "\r\n";
 
 		public record SimpleType {
@@ -155,5 +177,7 @@ namespace TouhouLauncher.Test {
 
 			public int Number { get; init; }
 		}
+
+		public record IniTestType : Ini;
 	}
 }

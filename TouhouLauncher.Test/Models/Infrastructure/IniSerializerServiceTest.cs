@@ -1,6 +1,7 @@
 ﻿using IniParser;
 using IniParser.Model;
 using TouhouLauncher.Models.Infrastructure;
+using TouhouLauncher.Models.Infrastructure.Extensions;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
 
@@ -10,22 +11,31 @@ namespace TouhouLauncher.Test.Models.Infrastructure {
 
 		[Fact]
 		public void Serializes_IniData_to_ini_formatted_strings() {
-			var sectionsWithEmptySection = new SectionCollection();
-			sectionsWithEmptySection.Add(new Section("Test section"));
-
 			var iniDataWithProperty = new IniData();
 			iniDataWithProperty.Global.Add(new Property("Test property", "Hello"));
 
-			var sectionsWithNonEmptySection = new SectionCollection();
-			sectionsWithNonEmptySection.Add(new Section("Test section"));
-			sectionsWithNonEmptySection["Test section"].Add(new Property("Test property", "Hello"));
-			sectionsWithNonEmptySection["Test section"].Add(new Property("Test property 2", "Goodbye"));
-
 			var resultFromNull = _iniSerializerService.Serialize(null);
 			var resultFromNew = _iniSerializerService.Serialize(new());
-			var resultFromIniWithEmptySection = _iniSerializerService.Serialize(new() { Sections = sectionsWithEmptySection });
+			var resultFromIniWithEmptySection = _iniSerializerService.Serialize(
+				new() {
+					Sections = new() {
+						new Section("Test section")
+					}
+				}
+			);
 			var resultFromIniWithProperty = _iniSerializerService.Serialize(iniDataWithProperty);
-			var resultFromIniWithNonEmptySection = _iniSerializerService.Serialize(new() { Sections = sectionsWithNonEmptySection });
+			var resultFromIniWithNonEmptySection = _iniSerializerService.Serialize(
+				new() {
+					Sections = new() {
+						new Section("Test section") {
+							Properties = new() {
+								new Property("Test property", "Hello"),
+								new Property("Test property 2", "Goodbye")
+							}
+						}
+					}
+				}
+			);
 
 			Assert.Equal(string.Empty, resultFromNull);
 			Assert.Equal(string.Empty, resultFromNew);
@@ -49,6 +59,25 @@ namespace TouhouLauncher.Test.Models.Infrastructure {
 			Assert.NotNull(sectionResult.Sections["Test section"]);
 			Assert.Equal("Hello", propertyResult.Global["Test property"]);
 			Assert.Equal("Goodbye", sectionWithPropertiesResult.Sections["Test section"]["Test property 2"]);
+		}
+
+		[Fact]
+		public void Ini_object_turns_into_ini_string() {
+			var iniObject = iniTestTypeObject;
+
+			var result = iniObject.ToIniString();
+
+			Assert.Equal(iniTestTypeObjectAsString, result);
+		}
+
+		[Fact]
+		public void Ini_string_turns_into_ini_object() {
+			var iniString = iniTestTypeObjectAsString;
+
+			var result = iniString.ToIniObject<IniTestType>();
+
+			Assert.Equal(iniTestTypeObject.Data.Global.Count, result.Data.Global.Count);
+			Assert.Equal(iniTestTypeObject.Data.Sections.Count, result.Data.Sections.Count);
 		}
 	}
 }
