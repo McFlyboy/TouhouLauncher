@@ -20,20 +20,20 @@ namespace TouhouLauncher.Models.Infrastructure {
 		}
 
 		public string Serialize(object graph) {
-			return _serializer.Serialize(graph!);
+			return _serializer.Serialize(graph);
 		}
 
 		public T Deserialize<T>(string yaml) {
 			try {
 				return _deserializer.Deserialize<T>(yaml);
 			}
-			catch(Exception) {
+			catch (Exception) {
 				return default;
 			}
 		}
 
 		static YamlSerializerService() {
-			Instance = new YamlSerializerService();
+			Instance = new();
 		}
 
 		public static YamlSerializerService Instance { get; }
@@ -46,7 +46,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 	}
 
 	namespace Extensions {
-		public static class StringExtensions {
+		public static partial class StringExtensions {
 			public static TYaml ToYamlObject<TYaml>(this string yamlString) where TYaml : Yaml {
 				return YamlSerializerService.Instance.Deserialize<TYaml>(yamlString);
 			}
