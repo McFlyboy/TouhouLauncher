@@ -46,6 +46,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure {
 
 		[Fact]
 		public void Deserializes_ini_formatted_strings_to_IniData() {
+			var nullResult = _iniSerializerService.Deserialize(null);
 			var emptyResult = _iniSerializerService.Deserialize("");
 			var nonsenseResult = _iniSerializerService.Deserialize("grer43t4q3g43rab b fewfe2");
 			var sectionResult = _iniSerializerService.Deserialize("[Test section]");
@@ -54,6 +55,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure {
 				$"[Test section]{LineBreak}Test property=Hello{LineBreak}Test property 2=Goodbye"
 			);
 
+			Assert.Null(nullResult);
 			Assert.Empty(emptyResult.Global);
 			Assert.Empty(nonsenseResult.Global);
 			Assert.NotNull(sectionResult.Sections["Test section"]);

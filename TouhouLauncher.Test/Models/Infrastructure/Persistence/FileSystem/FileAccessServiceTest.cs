@@ -74,5 +74,43 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			Assert.True(result);
 		}
+
+
+
+
+
+		[Fact]
+		public async void Returns_null_when_trying_to_read_nonexisting_file_async_to_ini() {
+			var result = await _fileAccessService.ReadFileToIniAsync<IniTestType>("Non-existing file.txt");
+
+			Assert.Null(result);
+		}
+
+		[Fact]
+		public async void Returns_read_content_async_from_file_as_ini() {
+			File.WriteAllText("Existing file.txt", yamlTestTypeObjectAsString);
+
+			var result = await _fileAccessService.ReadFileToIniAsync<IniTestType>("Existing file.txt");
+
+			File.Delete("Existing file.txt");
+
+			Assert.Equal(iniTestTypeObject, result);
+		}
+
+		[Fact]
+		public async void Returns_false_when_failing_to_create_file_to_write_to_from_ini_async_when_file_path_is_not_provided() {
+			bool result = await _fileAccessService.WriteFileFromIniAsync(null, iniTestTypeObject);
+
+			Assert.False(result);
+		}
+
+		[Fact]
+		public async void Returns_true_when_writing_ini_content_async_to_file() {
+			bool result = await _fileAccessService.WriteFileFromIniAsync("Test file.txt", iniTestTypeObject);
+
+			File.Delete("Test file.txt");
+
+			Assert.True(result);
+		}
 	}
 }
