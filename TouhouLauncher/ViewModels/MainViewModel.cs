@@ -13,9 +13,7 @@ namespace TouhouLauncher.ViewModels {
 			_ = settingsAndGamesManager.LoadAsync();
 		}
 
-		public string Page {
-			get => "Pages/" + _page;
-		}
+		public string Page => "Pages/" + _page;
 
 		private void ChangePage(string page) {
 			_page = page;

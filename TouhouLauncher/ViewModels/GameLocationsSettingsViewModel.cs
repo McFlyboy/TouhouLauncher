@@ -64,8 +64,8 @@ namespace TouhouLauncher.ViewModels {
 
 			public ICommand BrowseCommand { get; }
 
-			private string BrowseForGame() {
-				return _game.Categories.HasFlag(GameCategories.MainPC98)
+			private string BrowseForGame() =>
+				_game.Categories.HasFlag(GameCategories.MainPC98)
 					? _fileSystemBrowserService.BrowseFiles(
 						new("Hard disk image files", "*.hdi"),
 						new("All files", "*.*")
@@ -74,7 +74,6 @@ namespace TouhouLauncher.ViewModels {
 						new("Executable files", "*.exe"),
 						new("All files", "*.*")
 					);
-			}
 		}
 	}
 }

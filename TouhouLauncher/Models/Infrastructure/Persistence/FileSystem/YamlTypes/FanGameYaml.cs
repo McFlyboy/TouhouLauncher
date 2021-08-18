@@ -12,28 +12,24 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes 
 
 		public string FileLocation { get; init; }
 
-		public FanGame ToDomain() {
-			return new FanGame() {
-				Title = Title,
-				ImageLocation = ImageLocation,
-				AudioLocation = AudioLocation,
-				ReleaseYear = ReleaseYear,
-				FileLocation = FileLocation
-			};
-		}
+		public FanGame ToDomain() => new() {
+			Title = Title,
+			ImageLocation = ImageLocation,
+			AudioLocation = AudioLocation,
+			ReleaseYear = ReleaseYear,
+			FileLocation = FileLocation
+		};
 	}
 
 	namespace Extensions {
 		public static class FanGameExtensionsForFanGameYaml {
-			public static FanGameYaml ToYaml(this FanGame domain) {
-				return new FanGameYaml() {
-					Title = domain.Title,
-					ImageLocation = domain.ImageLocation,
-					AudioLocation = domain.AudioLocation,
-					ReleaseYear = domain.ReleaseYear,
-					FileLocation = domain.FileLocation
-				};
-			}
+			public static FanGameYaml ToYaml(this FanGame domain) => new() {
+				Title = domain.Title,
+				ImageLocation = domain.ImageLocation,
+				AudioLocation = domain.AudioLocation,
+				ReleaseYear = domain.ReleaseYear,
+				FileLocation = domain.FileLocation
+			};
 		}
 
 	}

@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TouhouLauncher.Views.UserControls.Settings;

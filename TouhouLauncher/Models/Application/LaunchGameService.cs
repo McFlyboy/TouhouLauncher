@@ -4,7 +4,6 @@ namespace TouhouLauncher.Models.Application {
 	public class LaunchGameService {
 		private readonly IExecutorService _executorService;
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
-
 		public LaunchGameService(
 			IExecutorService executorService,
 			SettingsAndGamesManager settingsAndGamesManager

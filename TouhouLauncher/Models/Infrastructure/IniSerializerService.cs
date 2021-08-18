@@ -39,9 +39,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 			}
 		}
 
-		static IniSerializerService() {
-			Instance = new();
-		}
+		static IniSerializerService() => Instance = new();
 
 		public static IniSerializerService Instance { get; }
 	}
@@ -49,9 +47,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 	public abstract record Ini {
 		public IniData Data { get; init; }
 
-		public string ToIniString() {
-			return IniSerializerService.Instance.Serialize(Data);
-		}
+		public string ToIniString() => IniSerializerService.Instance.Serialize(Data);
 	}
 
 	namespace Extensions {
@@ -60,7 +56,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 				var data = IniSerializerService.Instance.Deserialize(iniString);
 
 				return data != null
-					? new TIni() { Data = data }
+					? new() { Data = data }
 					: null;
 			}
 		}
