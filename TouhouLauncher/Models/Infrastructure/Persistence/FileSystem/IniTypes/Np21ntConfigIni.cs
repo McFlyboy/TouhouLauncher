@@ -142,7 +142,7 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 			new Np21ntConfig.NP2ToolSection() {
 				WindPosX = Data["NP2 tool"]["WindposX"].ParseInt(),
 				WindPosY = Data["NP2 tool"]["WindposY"].ParseInt(),
-				WindType = Data["NP2 tool"]["windtype"].ParseBool(),
+				WindType = Data["NP2 tool"]["WindType"].ParseBool(),
 				SkinFile = Data["NP2 tool"]["SkinFile"],
 				SkinMru0 = Data["NP2 tool"]["SkinMRU0"],
 				SkinMru1 = Data["NP2 tool"]["SkinMRU1"],
@@ -448,14 +448,14 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 			private static DipSwitch[] ParseDipSwitches(this string input) =>
 				input.ParseBytes()
 					.Select(dipSwitchSegment => new DipSwitch() {
-						Switch1 = (dipSwitchSegment & (1 << 7)) == 1,
-						Switch2 = (dipSwitchSegment & (1 << 6)) == 1,
-						Switch3 = (dipSwitchSegment & (1 << 5)) == 1,
-						Switch4 = (dipSwitchSegment & (1 << 4)) == 1,
-						Switch5 = (dipSwitchSegment & (1 << 3)) == 1,
-						Switch6 = (dipSwitchSegment & (1 << 2)) == 1,
-						Switch7 = (dipSwitchSegment & (1 << 1)) == 1,
-						Switch8 = (dipSwitchSegment & 1) == 1
+						Switch1 = (dipSwitchSegment & (1 << 7)) != 0,
+						Switch2 = (dipSwitchSegment & (1 << 6)) != 0,
+						Switch3 = (dipSwitchSegment & (1 << 5)) != 0,
+						Switch4 = (dipSwitchSegment & (1 << 4)) != 0,
+						Switch5 = (dipSwitchSegment & (1 << 3)) != 0,
+						Switch6 = (dipSwitchSegment & (1 << 2)) != 0,
+						Switch7 = (dipSwitchSegment & (1 << 1)) != 0,
+						Switch8 = (dipSwitchSegment & 1)        != 0
 					}).ToArray();
 
 			private static int ToBinaryValue(this bool value) => value ? 1 : 0;
