@@ -87,7 +87,7 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		private void LaunchRandomGame() {
-			_launchRandomGameService.LaunchRandomGame();
+			_ = _launchRandomGameService.LaunchRandomGame();
 		}
 
 		public static object RebuildHeadersMessageToken { get; } = new();

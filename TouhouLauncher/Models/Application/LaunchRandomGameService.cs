@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
@@ -18,7 +19,7 @@ namespace TouhouLauncher.Models.Application {
 			_random = random;
 		}
 
-		public bool LaunchRandomGame() {
+		public async Task<bool> LaunchRandomGame() {
 			var officialGames = _settingsAndGamesManager.OfficialGames
 				.Where(game => game.FileLocation != string.Empty)
 				.Select(game => (Game)game)
@@ -38,7 +39,7 @@ namespace TouhouLauncher.Models.Application {
 			int randomNumber = _random.Next(allGames.Count);
 			var selectedGame = allGames[randomNumber];
 
-			return _launchGameService.LaunchGame(selectedGame);
+			return await _launchGameService.LaunchGame(selectedGame);
 		}
 	}
 }
