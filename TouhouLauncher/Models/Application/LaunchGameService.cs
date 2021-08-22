@@ -19,13 +19,9 @@ namespace TouhouLauncher.Models.Application {
 
 		public virtual async Task<bool> LaunchGame(Game game) {
 			if (game.Categories.HasFlag(GameCategories.MainPC98)) {
-				var config = await _np21ntConfigRepository.LoadAsync();
+				var configSuccess = await ConfigureEmulatorForGame(game);
 
-				config.NekoProject21.Hdd1File = game.FileLocation;
-
-				var saveResult = await _np21ntConfigRepository.SaveAsync(config);
-
-				if (saveResult == false) {
+				if (!configSuccess) {
 					return false;
 				}
 			}
@@ -45,6 +41,20 @@ namespace TouhouLauncher.Models.Application {
 			}
 
 			return true;
+		}
+
+		private async Task<bool> ConfigureEmulatorForGame(Game game) {
+			var config = await _np21ntConfigRepository.LoadAsync();
+
+			if (config.NekoProject21.Hdd1File == game.FileLocation) {
+				return true;
+			}
+
+			config.NekoProject21.Hdd1File = game.FileLocation;
+
+			var saveSuccess = await _np21ntConfigRepository.SaveAsync(config);
+
+			return saveSuccess;
 		}
 	}
 }
