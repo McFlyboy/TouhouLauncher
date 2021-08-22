@@ -36,6 +36,7 @@ namespace TouhouLauncher {
 			dependencies.Register<LaunchGameService>();
 			dependencies.Register<LaunchRandomGameService>();
 			dependencies.Register<Random>(() => new());
+			dependencies.Register<INp21ntConfigRepository, FileSystemNp21ntConfigRepository>();
 		}
 
 		public MainViewModel MainVM =>

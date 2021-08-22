@@ -35,14 +35,13 @@ namespace TouhouLauncher.Models.Application {
 		public async Task<bool> LoadAsync() {
 			var result = await _settingsAndGamesRepository.LoadAsync();
 
-			_settingsAndGames = result ?? new SettingsAndGames(
-				GeneralSettings: new GeneralSettings(),
-				EmulatorSettings: new EmulatorSettings() {
-					FolderLocation = string.Empty
-				},
-				OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
-				FanGames: new List<FanGame>()
-			);
+			_settingsAndGames = result
+				?? new(
+					GeneralSettings: new(),
+					EmulatorSettings: new() { FolderLocation = string.Empty },
+					OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
+					FanGames: new()
+				);
 
 			return result != null;
 		}

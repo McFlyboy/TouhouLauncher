@@ -62,7 +62,7 @@ namespace TouhouLauncher.ViewModels {
 
 				Command = new RelayCommand(() => {
 					if (!_game.FileLocation.Equals(string.Empty)) {
-						_launchGameService.LaunchGame(_game);
+						_ = _launchGameService.LaunchGame(_game);
 					}
 					else {
 						_gameConfig.SetGameToConfigure(_game);

@@ -19,9 +19,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 				.Build();
 		}
 
-		public string Serialize(object graph) {
-			return _serializer.Serialize(graph);
-		}
+		public string Serialize(object graph) => _serializer.Serialize(graph);
 
 		public T Deserialize<T>(string yaml) {
 			try {
@@ -32,24 +30,19 @@ namespace TouhouLauncher.Models.Infrastructure {
 			}
 		}
 
-		static YamlSerializerService() {
-			Instance = new();
-		}
+		static YamlSerializerService() => Instance = new();
 
 		public static YamlSerializerService Instance { get; }
 	}
 
 	public abstract record Yaml {
-		public string ToYamlString() {
-			return YamlSerializerService.Instance.Serialize(this);
-		}
+		public string ToYamlString() => YamlSerializerService.Instance.Serialize(this);
 	}
 
 	namespace Extensions {
 		public static partial class StringExtensions {
-			public static TYaml ToYamlObject<TYaml>(this string yamlString) where TYaml : Yaml {
-				return YamlSerializerService.Instance.Deserialize<TYaml>(yamlString);
-			}
+			public static TYaml ToYamlObject<TYaml>(this string yamlString) where TYaml : Yaml =>
+				YamlSerializerService.Instance.Deserialize<TYaml>(yamlString);
 		}
 	}
 }

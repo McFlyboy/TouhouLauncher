@@ -4,7 +4,7 @@ namespace TouhouLauncher.Models.Application {
 	public class OfficialGamesTemplateService {
 		public virtual OfficialGame[] CreateOfficialGamesFromTemplate() {
 			return new OfficialGame[] {
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 01: Highly Responsive to Prayers",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH01.png",
 					AudioLocation = "",
@@ -13,7 +13,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainPC98
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 02: Story of Eastern Wonderland",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH02.png",
 					AudioLocation = "",
@@ -22,7 +22,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainPC98
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 03: Phantasmagoria of Dim. Dream",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH03.png",
 					AudioLocation = "",
@@ -31,7 +31,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainPC98
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 04: Lotus Land Story",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH04.png",
 					AudioLocation = "",
@@ -40,7 +40,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainPC98
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 05: Mystic Square",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH05.png",
 					AudioLocation = "",
@@ -49,7 +49,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainPC98
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 06: Embodyment of Scarlet Devil",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH06.png",
 					AudioLocation = "",
@@ -58,7 +58,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 07: Perfect Cherry Blossom",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH07.png",
 					AudioLocation = "",
@@ -67,7 +67,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 07.5: Immaterial and Missing Power",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH07_5.png",
 					AudioLocation = "",
@@ -76,7 +76,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.FightingGame
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 08: Imperishable Night",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH08.png",
 					AudioLocation = "",
@@ -85,7 +85,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 09: Phantasmagoria of Flower View",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH09.png",
 					AudioLocation = "",
@@ -94,7 +94,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 09.5: Shoot the Bullet",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH09_5.png",
 					AudioLocation = "",
@@ -103,7 +103,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.SpinOff
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 10: Mountain of Faith",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH10.png",
 					AudioLocation = "",
@@ -112,7 +112,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 10.5: Scarlet Weather Rhapsody",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH10_5.png",
 					AudioLocation = "",
@@ -121,7 +121,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.FightingGame
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 11: Subterranean Animism",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH11.png",
 					AudioLocation = "",
@@ -130,7 +130,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 12: Undefined Fantastic Object",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12.png",
 					AudioLocation = "",
@@ -139,7 +139,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 12.3: Hisoutensoku",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12_3.png",
 					AudioLocation = "",
@@ -148,7 +148,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.FightingGame
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 12.5: Double Spoiler",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12_5.png",
 					AudioLocation = "",
@@ -157,7 +157,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.SpinOff
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 12.8: Great Fairy Wars",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12_8.png",
 					AudioLocation = "",
@@ -166,7 +166,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.SpinOff
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 13: Ten Desires",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH13.png",
 					AudioLocation = "",
@@ -175,7 +175,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 13.5: Hopeless Masquerade",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH13_5.png",
 					AudioLocation = "",
@@ -184,7 +184,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.FightingGame
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 14: Double Dealing Character",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH14.png",
 					AudioLocation = "",
@@ -193,7 +193,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 14.3: Impossible Spell Card",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH14_3.png",
 					AudioLocation = "",
@@ -202,7 +202,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.SpinOff
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 14.5: Urban Legend in Limbo",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH14_5.png",
 					AudioLocation = "",
@@ -211,7 +211,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.FightingGame
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 15: Legacy of Lunatic Kingdom",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH15.png",
 					AudioLocation = "",
@@ -220,7 +220,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 15.5: Antinomy of Common Flowers",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH15_5.png",
 					AudioLocation = "",
@@ -229,7 +229,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.FightingGame
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 16: Hidden Star in Four Seasons",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH16.png",
 					AudioLocation = "",
@@ -238,7 +238,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 16.5: Violet Detector",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH16_5.png",
 					AudioLocation = "",
@@ -247,7 +247,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.SpinOff
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 17: Wily Beast and Weakest Creature",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH17.png",
 					AudioLocation = "",
@@ -256,7 +256,7 @@ namespace TouhouLauncher.Models.Application {
 					DownloadableFileLocation = "",
 					Categories = GameCategories.MainWindows
 				},
-				new OfficialGame() {
+				new() {
 					Title = "Touhou 18: Unconnected Marketeers",
 					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH18.png",
 					AudioLocation = "",

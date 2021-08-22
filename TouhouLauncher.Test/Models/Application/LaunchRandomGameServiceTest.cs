@@ -1,6 +1,7 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
@@ -9,7 +10,7 @@ using Xunit;
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchRandomGameServiceTest {
 		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
-		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null);
+		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null, null);
 		private readonly Mock<Random> _randomMock = new();
 
 		private readonly LaunchRandomGameService _launchRandomGameService;
@@ -23,20 +24,20 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public void Does_not_start_a_game_when_no_games_exist() {
+		public async void Does_not_start_a_game_when_no_games_exist() {
 			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
 				.Returns(Array.Empty<OfficialGame>());
 
 			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
 				.Returns(new List<FanGame>());
 
-			var result = _launchRandomGameService.LaunchRandomGame();
+			var result = await _launchRandomGameService.LaunchRandomGame();
 
 			Assert.False(result);
 		}
 
 		[Fact]
-		public void Starts_a_game_when_games_exist() {
+		public async void Starts_a_game_when_games_exist() {
 			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
 				.Returns(testOfficialGames);
 
@@ -47,9 +48,9 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(1);
 
 			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
-				.Returns(true);
+				.Returns(Task.FromResult(true));
 
-			var result = _launchRandomGameService.LaunchRandomGame();
+			var result = await _launchRandomGameService.LaunchRandomGame();
 
 			_launchGameServiceMock
 				.Verify(obj => obj.LaunchGame(It.IsAny<Game>()), Times.Once());

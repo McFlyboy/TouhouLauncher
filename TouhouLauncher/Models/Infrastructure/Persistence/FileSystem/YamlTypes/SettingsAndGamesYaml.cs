@@ -14,49 +14,41 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes 
 
 		public List<FanGameYaml> FanGames { get; init; }
 
-		public SettingsAndGames ToDomain(OfficialGame[] officialGamesTemplate) {
-			return new SettingsAndGames(
-				GeneralSettings
-					?.ToDomain()
-					?? new GeneralSettings(),
-				EmulatorSettings
-					?.ToDomain()
-					?? new EmulatorSettings() {
-						FolderLocation = string.Empty
-					},
-				officialGamesTemplate
-					.Select((template, index) =>
-						OfficialGames?.ElementAtOrDefault(index)
-							?.ToDomain(template)
-							?? template
-					).ToArray(),
-				FanGames
-					?.Select(game => game.ToDomain())
-					?.ToList()
-					?? new List<FanGame>()
-			);
-		}
+		public SettingsAndGames ToDomain(OfficialGame[] officialGamesTemplate) => new(
+			GeneralSettings: GeneralSettings?.ToDomain()
+				?? new(),
+			EmulatorSettings: EmulatorSettings?.ToDomain()
+				?? new() {
+					FolderLocation = string.Empty
+				},
+			OfficialGames: officialGamesTemplate.Select((template, index) =>
+				OfficialGames?.ElementAtOrDefault(index)
+					?.ToDomain(template)
+					?? template
+			).ToArray(),
+			FanGames: FanGames?.Select(game => game.ToDomain())
+				?.ToList()
+				?? new()
+		);
 	}
 
 	namespace Extensions {
 		public static class SettingsAndGamesExtensionsForSettingsAndGamesYaml {
-			public static SettingsAndGamesYaml ToYaml(this SettingsAndGames settingsAndGames) {
-				return new SettingsAndGamesYaml() {
-					GeneralSettings = settingsAndGames.GeneralSettings
-						.ToYaml(),
+			public static SettingsAndGamesYaml ToYaml(this SettingsAndGames settingsAndGames) => new() {
+				GeneralSettings = settingsAndGames.GeneralSettings
+					.ToYaml(),
 
-					EmulatorSettings = settingsAndGames.EmulatorSettings
-						.ToYaml(),
+				EmulatorSettings = settingsAndGames.EmulatorSettings
+					.ToYaml(),
 
-					OfficialGames = settingsAndGames.OfficialGames
-						.Select(game => game.ToYaml())
-						.ToArray(),
+				OfficialGames = settingsAndGames.OfficialGames
+					.Select(game => game.ToYaml())
+					.ToArray(),
 
-					FanGames = settingsAndGames.FanGames
-						.Select(game => game.ToYaml())
-						.ToList()
-				};
-			}
+				FanGames = settingsAndGames.FanGames
+					.Select(game => game.ToYaml())
+					.ToList()
+			};
 		}
 	}
 }

@@ -8,21 +8,21 @@ using static TouhouLauncher.Test.CommonTestToolsAndData;
 
 namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 	public class FileSystemSettingsAndGamesRepositoryTest {
-		private readonly Mock<FileAccessService> fileAccessServiceMock = new();
-		private readonly Mock<OfficialGamesTemplateService> officialGamesTemplateServiceMock = new();
+		private readonly Mock<FileAccessService> _fileAccessServiceMock = new();
+		private readonly Mock<OfficialGamesTemplateService> _officialGamesTemplateServiceMock = new();
 
 		private readonly FileSystemSettingsAndGamesRepository _fileSystemSettingsAndGamesRepository;
 
 		public FileSystemSettingsAndGamesRepositoryTest() {
 			_fileSystemSettingsAndGamesRepository = new(
-				fileAccessServiceMock.Object,
-				officialGamesTemplateServiceMock.Object
+				_fileAccessServiceMock.Object,
+				_officialGamesTemplateServiceMock.Object
 			);
 		}
 
 		[Fact]
 		public async void Saves_settings_and_games_to_file_system_async_and_returns_result() {
-			fileAccessServiceMock
+			_fileAccessServiceMock
 				.Setup(obj => obj.WriteFileFromYamlAsync(It.IsAny<string>(), It.IsAny<SettingsAndGamesYaml>()))
 				.Returns(Task.FromResult(true));
 
@@ -33,11 +33,11 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 		[Fact]
 		public async void Loads_settings_and_games_from_file_system_async_and_returns_result() {
-			fileAccessServiceMock
+			_fileAccessServiceMock
 				.Setup(obj => obj.ReadFileToYamlAsync<SettingsAndGamesYaml>(It.IsAny<string>()))
 				.Returns(Task.FromResult(testSettingsAndGamesYaml));
 
-			officialGamesTemplateServiceMock
+			_officialGamesTemplateServiceMock
 				.Setup(obj => obj.CreateOfficialGamesFromTemplate())
 				.Returns(testOfficialGames);
 

@@ -26,9 +26,9 @@ namespace TouhouLauncher.Models.Application {
 			return gameCategories;
 		}
 
-		public GameCategories GetDefaultGameCategory() {
-			return _settingsAndGamesManager.GeneralSettings.CombineMainCategories
-				? GameCategories.MainGame : GameCategories.MainWindows;
-		}
+		public GameCategories GetDefaultGameCategory() =>
+			_settingsAndGamesManager.GeneralSettings.CombineMainCategories
+				? GameCategories.MainGame
+				: GameCategories.MainWindows;
 	}
 }

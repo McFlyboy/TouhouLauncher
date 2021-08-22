@@ -47,14 +47,12 @@ namespace TouhouLauncher.ViewModels {
 
 		public ICommand OpenSettingsCommand { get; }
 
-		private HeaderButton CreateRandomGameHeader() {
-			return new HeaderButton(
-				name: "LAUNCH\nRANDOM GAME",
-				colorCode: "#4284C4",
-				colorHoverCode: "#5395D5",
-				action: LaunchRandomGame
-			);
-		}
+		private HeaderButton CreateRandomGameHeader() => new(
+			name: "LAUNCH\nRANDOM GAME",
+			colorCode: "#4284C4",
+			colorHoverCode: "#5395D5",
+			action: LaunchRandomGame
+		);
 
 		private void RebuildHeaders(object _ = null) {
 			var gameCategoryList = _gameCategoryService.CreateGameCategoryList();
@@ -80,7 +78,7 @@ namespace TouhouLauncher.ViewModels {
 
 			_gamePickerViewModel.UpdateGames();
 
-			foreach (HeaderButton button in HeaderList) {
+			foreach (var button in HeaderList) {
 				button.RaisePropertyChanged("HeaderColor");
 				button.RaisePropertyChanged("HeaderHoverColor");
 				button.RaisePropertyChanged("HeaderTextColor");
@@ -89,7 +87,7 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		private void LaunchRandomGame() {
-			_launchRandomGameService.LaunchRandomGame();
+			_ = _launchRandomGameService.LaunchRandomGame();
 		}
 
 		public static object RebuildHeadersMessageToken { get; } = new();

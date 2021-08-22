@@ -1,19 +1,31 @@
-﻿using TouhouLauncher.Models.Application.GameInfo;
+﻿using System.Threading.Tasks;
+using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
 	public class LaunchGameService {
 		private readonly IExecutorService _executorService;
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
+		private readonly INp21ntConfigRepository _np21ntConfigRepository;
 
 		public LaunchGameService(
 			IExecutorService executorService,
-			SettingsAndGamesManager settingsAndGamesManager
+			SettingsAndGamesManager settingsAndGamesManager,
+			INp21ntConfigRepository np21ntConfigRepository
 		) {
 			_executorService = executorService;
 			_settingsAndGamesManager = settingsAndGamesManager;
+			_np21ntConfigRepository = np21ntConfigRepository;
 		}
 
-		public virtual bool LaunchGame(Game game) {
+		public virtual async Task<bool> LaunchGame(Game game) {
+			if (game.Categories.HasFlag(GameCategories.MainPC98)) {
+				var configSuccess = await ConfigureEmulatorForGame(game);
+
+				if (!configSuccess) {
+					return false;
+				}
+			}
+
 			var executableLocation = game.Categories.HasFlag(GameCategories.MainPC98)
 				? $"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.exe"
 				: game.FileLocation;
@@ -29,6 +41,20 @@ namespace TouhouLauncher.Models.Application {
 			}
 
 			return true;
+		}
+
+		private async Task<bool> ConfigureEmulatorForGame(Game game) {
+			var config = await _np21ntConfigRepository.LoadAsync();
+
+			if (config.NekoProject21.Hdd1File == game.FileLocation) {
+				return true;
+			}
+
+			config.NekoProject21.Hdd1File = game.FileLocation;
+
+			var saveSuccess = await _np21ntConfigRepository.SaveAsync(config);
+
+			return saveSuccess;
 		}
 	}
 }
