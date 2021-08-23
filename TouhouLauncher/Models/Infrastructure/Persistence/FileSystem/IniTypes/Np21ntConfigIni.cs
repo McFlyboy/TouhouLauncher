@@ -137,7 +137,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 				SKeyDisp = Data["NekoProject21"]["skeydisp"].ParseBool(),
 				Function = Data["NekoProject21"]["Function"].ParseBytes(),
 				DllList  = Data["NekoProject21"]["Dll_List"].ParseInt(),
-				FdlFile  = Data["NekoProject21"]["FDL_FILE"]
+				FdlFile  = Data["NekoProject21"]["FDL_FILE"],
+				FdCache  = Data["NekoProject21"]["FD_CACHE"].ParseInt()
 			},
 			new Np21ntConfig.NP2ToolSection() {
 				WindPosX = Data["NP2 tool"]["WindposX"].ParseInt(),
@@ -331,7 +332,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 									function => BitConverter.ToString(function).Replace("-", " ")
 								)),
 								new Property("Dll_List", domain.NekoProject21.DllList.ToString()),
-								new Property("FDL_FILE", domain.NekoProject21.FdlFile)
+								new Property("FDL_FILE", domain.NekoProject21.FdlFile),
+								new Property("FD_CACHE", domain.NekoProject21.FdCache.ToString())
 							}
 						},
 						new Section("NP2 tool") {

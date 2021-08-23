@@ -538,7 +538,8 @@ namespace TouhouLauncher.Test {
 					0x00
 				},
 				DllList = 5,
-				FdlFile = "some text..."
+				FdlFile = "some text...",
+				FdCache = 5
 			},
 			new Np21ntConfig.NP2ToolSection() {
 				WindPosX = 5,
@@ -717,7 +718,8 @@ namespace TouhouLauncher.Test {
 							new Property("skeydisp", "true"),
 							new Property("Function", "55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 55 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"),
 							new Property("Dll_List", "5"),
-							new Property("FDL_FILE", "some text...")
+							new Property("FDL_FILE", "some text..."),
+							new Property("FD_CACHE", "5")
 						}
 					},
 					new Section("NP2 tool") {

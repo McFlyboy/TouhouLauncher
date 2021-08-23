@@ -266,6 +266,8 @@ namespace TouhouLauncher.Models.Application {
 			public int DllList { get; set; }
 
 			public string FdlFile { get; set; }
+
+			public int FdCache { get; set; }
 		}
 
 		public record NP2ToolSection {
