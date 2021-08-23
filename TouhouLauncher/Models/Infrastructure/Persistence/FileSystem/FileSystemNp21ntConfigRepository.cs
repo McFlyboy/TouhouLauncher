@@ -16,13 +16,13 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 			_settingsAndGamesManager = settingsAndGamesManager;
 		}
 
-		public async Task<bool> SaveAsync(Np21ntConfig config) =>
+		public virtual async Task<bool> SaveAsync(Np21ntConfig config) =>
 			await _fileAccessService.WriteFileFromIniAsync(
 				$"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.ini",
 				config?.ToIni()
 			);
 
-		public async Task<Np21ntConfig> LoadAsync() =>
+		public virtual async Task<Np21ntConfig> LoadAsync() =>
 			(await _fileAccessService.ReadFileToIniAsync<Np21ntConfigIni>(
 				$"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.ini"
 			))?.ToDomain();

@@ -3,9 +3,10 @@ using System.Diagnostics;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.SettingsInfo;
 using TouhouLauncher.Models.Infrastructure.Execution.FileSystem;
+using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
-using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
+using System.Threading.Tasks;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchGameServiceTest {
@@ -21,6 +22,19 @@ namespace TouhouLauncher.Test.Models.Application {
 				_settingsAndGamesManagerMock.Object,
 				_fileSystemNp21ntConfigRepository.Object
 			);
+		}
+
+		[Fact]
+		public async void Returns_false_when_saving_emulator_config_fails() {
+			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
+				.Returns(Task.FromResult(testNp21ntConfig));
+
+			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig>()))
+				.Returns(Task.FromResult(false));
+
+			var result = await _launchGameService.LaunchGame(testOfficialGame2);
+
+			Assert.False(result);
 		}
 
 		[Fact]
