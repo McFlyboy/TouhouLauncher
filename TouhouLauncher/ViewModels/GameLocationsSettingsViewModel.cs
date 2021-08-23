@@ -67,7 +67,7 @@ namespace TouhouLauncher.ViewModels {
 			private string BrowseForGame() =>
 				_game.Categories.HasFlag(GameCategories.MainPC98)
 					? _fileSystemBrowserService.BrowseFiles(
-						new("Hard disk image files", "*.hdi"),
+						new("Hard disk image files", "*.hdi", "*.t98"),
 						new("All files", "*.*")
 					)
 					: _fileSystemBrowserService.BrowseFiles(

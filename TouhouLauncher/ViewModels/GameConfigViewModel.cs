@@ -20,7 +20,7 @@ namespace TouhouLauncher.ViewModels {
 			BrowseCommand = new RelayCommand(() => {
 				var browseResult = _gameConfig.TargetGame.Categories.HasFlag(GameCategories.MainPC98) 
 					? _fileSystemBrowserService.BrowseFiles(
-						new("Hard disk image files", "*.hdi"),
+						new("Hard disk image files", "*.hdi", "*.t98"),
 						new("All files", "*.*")
 					)
 					: _fileSystemBrowserService.BrowseFiles(
