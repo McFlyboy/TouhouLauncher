@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TouhouLauncher.Models.Application {
+﻿namespace TouhouLauncher.Models.Application {
 	public record Np21ntConfig(
 		Np21ntConfig.NekoProject21Section NekoProject21,
 		Np21ntConfig.NP2ToolSection NP2Tool,
@@ -59,15 +57,15 @@ namespace TouhouLauncher.Models.Application {
 
 			public byte[] Snd14Vol { get; set; }
 
-			public string Opt26Brd { get; set; }
+			public byte Opt26Brd { get; set; }
 
-			public string Opt86Brd { get; set; }
+			public byte Opt86Brd { get; set; }
 
-			public string OptSpbrd { get; set; }
+			public byte OptSpbrd { get; set; }
 
-			public string OptSpbvr { get; set; }
+			public int OptSpbvr { get; set; }
 
-			public string OptSpbvl { get; set; }
+			public int OptSpbvl { get; set; }
 
 			public bool OptSpbX { get; set; }
 

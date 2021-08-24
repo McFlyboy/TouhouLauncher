@@ -34,11 +34,11 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 				SndBoard = Data["NekoProject21"]["SNDboard"].ParseInt(),
 				BeepVol  = Data["NekoProject21"]["BEEP_vol"].ParseInt(),
 				Snd14Vol = Data["NekoProject21"]["SND14vol"].ParseBytes(),
-				Opt26Brd = Data["NekoProject21"]["opt26BRD"],
-				Opt86Brd = Data["NekoProject21"]["opt86BRD"],
-				OptSpbrd = Data["NekoProject21"]["optSPBRD"],
-				OptSpbvr = Data["NekoProject21"]["optSPBVR"],
-				OptSpbvl = Data["NekoProject21"]["optSPBVL"],
+				Opt26Brd = Data["NekoProject21"]["opt26BRD"].ParseByte(),
+				Opt86Brd = Data["NekoProject21"]["opt86BRD"].ParseByte(),
+				OptSpbrd = Data["NekoProject21"]["optSPBRD"].ParseByte(),
+				OptSpbvr = Data["NekoProject21"]["optSPBVR"].ParseInt(),
+				OptSpbvl = Data["NekoProject21"]["optSPBVL"].ParseInt(),
 				OptSpbX  = Data["NekoProject21"]["optSPB_X"].ParseBool(),
 				OptMpu98 = Data["NekoProject21"]["optMPU98"].ParseInt(),
 				VolumeF  = Data["NekoProject21"]["volume_F"].ParseInt(),
@@ -216,14 +216,12 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 								new Property("Latencys", domain.NekoProject21.LatencyS.ToString()),
 								new Property("SNDboard", domain.NekoProject21.SndBoard.ToString()),
 								new Property("BEEP_vol", domain.NekoProject21.BeepVol.ToString()),
-								new Property("SND14vol", domain.NekoProject21.Snd14Vol.Transform(
-									snd14Vol => BitConverter.ToString(snd14Vol).Replace("-", " ")
-								)),
-								new Property("opt26BRD", domain.NekoProject21.Opt26Brd),
-								new Property("opt86BRD", domain.NekoProject21.Opt86Brd),
-								new Property("optSPBRD", domain.NekoProject21.OptSpbrd),
-								new Property("optSPBVR", domain.NekoProject21.OptSpbvr),
-								new Property("optSPBVL", domain.NekoProject21.OptSpbvl),
+								new Property("SND14vol", domain.NekoProject21.Snd14Vol.ToHexString()),
+								new Property("opt26BRD", domain.NekoProject21.Opt26Brd.ToHexString()),
+								new Property("opt86BRD", domain.NekoProject21.Opt86Brd.ToHexString()),
+								new Property("optSPBRD", domain.NekoProject21.OptSpbrd.ToHexString()),
+								new Property("optSPBVR", domain.NekoProject21.OptSpbvr.ToString()),
+								new Property("optSPBVL", domain.NekoProject21.OptSpbvl.ToString()),
 								new Property("optSPB_X", domain.NekoProject21.OptSpbX.ToString()),
 								new Property("optMPU98", domain.NekoProject21.OptMpu98.ToString()),
 								new Property("volume_F", domain.NekoProject21.VolumeF.ToString()),
@@ -238,9 +236,7 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 								new Property("Mouse_sw", domain.NekoProject21.MouseSw.ToString()),
 								new Property("MS_RAPID", domain.NekoProject21.MsRapid.ToString()),
 								new Property("backgrnd", domain.NekoProject21.Backgrnd.ToString()),
-								new Property("VRAMwait", domain.NekoProject21.VramWait.Transform(
-									vramWait => BitConverter.ToString(vramWait).Replace("-", " ")
-								)),
+								new Property("VRAMwait", domain.NekoProject21.VramWait.ToHexString()),
 								new Property("DspClock", domain.NekoProject21.DspClock.ToString()),
 								new Property("DispSync", domain.NekoProject21.DispSync.ToString()),
 								new Property("Real_Pal", domain.NekoProject21.RealPal.ToString()),
@@ -254,12 +250,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 								new Property("skplight", domain.NekoProject21.SkpLight.ToString()),
 								new Property("LCD_MODE", domain.NekoProject21.LcdMode.ToString()),
 								new Property("pc9861_e", domain.NekoProject21.Pc9861E.ToString()),
-								new Property("pc9861_s", domain.NekoProject21.Pc9861S.Transform(
-									pc9861S => BitConverter.ToString(pc9861S).Replace("-", " ")
-								)),
-								new Property("pc9861_j", domain.NekoProject21.Pc9861J.Transform(
-									pc9861J => BitConverter.ToString(pc9861J).Replace("-", " ")
-								)),
+								new Property("pc9861_s", domain.NekoProject21.Pc9861S.ToHexString()),
+								new Property("pc9861_j", domain.NekoProject21.Pc9861J.ToHexString()),
 								new Property("calendar", domain.NekoProject21.Calendar.ToString()),
 								new Property("USE144FD", domain.NekoProject21.Use144Fd.ToString()),
 								new Property("DrawType", domain.NekoProject21.DrawType.ToString()),
@@ -286,9 +278,7 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 								new Property("volume_V", domain.NekoProject21.VolumeV.ToString()),
 								new Property("F12_COPY", domain.NekoProject21.F12Copy.ToString()),
 								new Property("Joystick", domain.NekoProject21.Joystick.ToString()),
-								new Property("Joy1_btn", domain.NekoProject21.Joy1Btn.Transform(
-									joy1Btn => BitConverter.ToString(joy1Btn).Replace("-", " ")
-								)),
+								new Property("Joy1_btn", domain.NekoProject21.Joy1Btn.ToHexString()),
 								new Property("clocknow", domain.NekoProject21.ClockNow.ToString()),
 								new Property("clockfnt", domain.NekoProject21.ClockFnt.ToString()),
 								new Property("use_sstp", domain.NekoProject21.UseSstp.ToString()),
@@ -328,9 +318,7 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 								new Property("thickfrm", domain.NekoProject21.ThickFrm.ToString()),
 								new Property("fscrnmod", domain.NekoProject21.FScrnMod.ToString()),
 								new Property("skeydisp", domain.NekoProject21.SKeyDisp.ToString()),
-								new Property("Function", domain.NekoProject21.Function.Transform(
-									function => BitConverter.ToString(function).Replace("-", " ")
-								)),
+								new Property("Function", domain.NekoProject21.Function.ToHexString()),
 								new Property("Dll_List", domain.NekoProject21.DllList.ToString()),
 								new Property("FDL_FILE", domain.NekoProject21.FdlFile),
 								new Property("FD_CACHE", domain.NekoProject21.FdCache.ToString())
@@ -394,9 +382,11 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 
 			public static bool ParseBool(this string input) => bool.Parse(input);
 
+			public static byte ParseByte(this string input) => Convert.ToByte(input, 16);
+
 			public static byte[] ParseBytes(this string input) =>
 				input.Split(" ")
-					.Select(hexString => Convert.ToByte(hexString, 16))
+					.Select(hexString => hexString.ParseByte())
 					.ToArray();
 
 			public static DipSwitch3 ParseDipSwitch3(this string input) =>
@@ -419,6 +409,11 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 						Segment7 = dipSwitchSegments[6],
 						Segment8 = dipSwitchSegments[7]
 					});
+
+			public static string ToHexString(this byte value) => value.ToString("x");
+
+			public static string ToHexString(this byte[] bytes) =>
+				string.Join(' ', bytes.Select(value => value.ToString("x")));
 
 			public static string ToHexString(this DipSwitch dipSwitch) =>
 				(
