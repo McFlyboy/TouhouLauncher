@@ -255,7 +255,7 @@
 
 			public bool ThickFrm { get; set; }
 
-			public int FScrnMod { get; set; }
+			public byte FScrnMod { get; set; }
 
 			public bool SKeyDisp { get; set; }
 

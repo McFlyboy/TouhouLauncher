@@ -133,12 +133,12 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 				JastSnd  = Data["NekoProject21"]["jast_snd"].ParseBool(),
 				UseRomeo = Data["NekoProject21"]["useromeo"].ParseBool(),
 				ThickFrm = Data["NekoProject21"]["thickfrm"].ParseBool(),
-				FScrnMod = Data["NekoProject21"]["fscrnmod"].ParseInt(),
+				FScrnMod = Data["NekoProject21"]["fscrnmod"].ParseByte(),
 				SKeyDisp = Data["NekoProject21"]["skeydisp"].ParseBool(),
 				Function = Data["NekoProject21"]["Function"].ParseBytes(),
 				DllList  = Data["NekoProject21"]["Dll_List"].ParseInt(),
 				FdlFile  = Data["NekoProject21"]["FDL_FILE"],
-				FdCache  = Data["NekoProject21"]["FD_CACHE"].ParseInt()
+				FdCache = Data["NekoProject21"]["FD_CACHE"].ParseInt()
 			},
 			new Np21ntConfig.NP2ToolSection() {
 				WindPosX = Data["NP2 tool"]["WindposX"].ParseInt(),
@@ -316,7 +316,7 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 								new Property("jast_snd", domain.NekoProject21.JastSnd.ToString()),
 								new Property("useromeo", domain.NekoProject21.UseRomeo.ToString()),
 								new Property("thickfrm", domain.NekoProject21.ThickFrm.ToString()),
-								new Property("fscrnmod", domain.NekoProject21.FScrnMod.ToString()),
+								new Property("fscrnmod", domain.NekoProject21.FScrnMod.ToHexString()),
 								new Property("skeydisp", domain.NekoProject21.SKeyDisp.ToString()),
 								new Property("Function", domain.NekoProject21.Function.ToHexString()),
 								new Property("Dll_List", domain.NekoProject21.DllList.ToString()),
