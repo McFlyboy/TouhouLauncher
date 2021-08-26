@@ -51,7 +51,7 @@
 
 			public int LatencyS { get; set; }
 
-			public int SndBoard { get; set; }
+			public byte SndBoard { get; set; }
 
 			public int BeepVol { get; set; }
 
@@ -63,13 +63,13 @@
 
 			public byte OptSpbrd { get; set; }
 
-			public int OptSpbvr { get; set; }
+			public byte OptSpbvr { get; set; }
 
 			public int OptSpbvl { get; set; }
 
 			public bool OptSpbX { get; set; }
 
-			public int OptMpu98 { get; set; }
+			public byte OptMpu98 { get; set; }
 
 			public int VolumeF { get; set; }
 
@@ -191,7 +191,7 @@
 
 			public bool Comfirm { get; set; }
 
-			public int Shortcut { get; set; }
+			public byte Shortcut { get; set; }
 
 			public string Mpu98Map { get; set; }
 
