@@ -346,6 +346,19 @@
 	}
 
 	public record DipSwitch {
+		public DipSwitch() { }
+
+		public DipSwitch(byte binaryValue) {
+			Switch1 = (binaryValue & (1 << 7)) != 0;
+			Switch2 = (binaryValue & (1 << 6)) != 0;
+			Switch3 = (binaryValue & (1 << 5)) != 0;
+			Switch4 = (binaryValue & (1 << 4)) != 0;
+			Switch5 = (binaryValue & (1 << 3)) != 0;
+			Switch6 = (binaryValue & (1 << 2)) != 0;
+			Switch7 = (binaryValue & (1 << 1)) != 0;
+			Switch8 = (binaryValue & 1)        != 0;
+		}
+
 		public bool Switch1 { get; set; }
 
 		public bool Switch2 { get; set; }
@@ -364,6 +377,18 @@
 	}
 
 	public record DipSwitch3 {
+		public DipSwitch3() { }
+
+		public DipSwitch3(
+			byte segment1,
+			byte segment2,
+			byte segment3
+		) {
+			Segment1 = new(segment1);
+			Segment2 = new(segment2);
+			Segment3 = new(segment3);
+		}
+
 		public DipSwitch Segment1 { get; set; }
 
 		public DipSwitch Segment2 { get; set; }
@@ -372,6 +397,28 @@
 	}
 
 	public record DipSwitch8 {
+		public DipSwitch8() { }
+
+		public DipSwitch8(
+			byte binarySegment1,
+			byte binarySegment2,
+			byte binarySegment3,
+			byte binarySegment4,
+			byte binarySegment5,
+			byte binarySegment6,
+			byte binarySegment7,
+			byte binarySegment8
+		) {
+			Segment1 = new(binarySegment1);
+			Segment2 = new(binarySegment2);
+			Segment3 = new(binarySegment3);
+			Segment4 = new(binarySegment4);
+			Segment5 = new(binarySegment5);
+			Segment6 = new(binarySegment6);
+			Segment7 = new(binarySegment7);
+			Segment8 = new(binarySegment8);
+		}
+
 		public DipSwitch Segment1 { get; set; }
 
 		public DipSwitch Segment2 { get; set; }

@@ -10,13 +10,15 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 	public class FileSystemNp21ntConfigRepositoryTest {
 		private readonly Mock<FileAccessService> _fileAccessServiceMock = new();
 		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
+		private readonly Mock<Np21ntConfigDefaultsService> _np21ntConfigDefaultsService = new();
 
 		private readonly FileSystemNp21ntConfigRepository _fileSystemNp21ntConfigRepository;
 
 		public FileSystemNp21ntConfigRepositoryTest() {
 			_fileSystemNp21ntConfigRepository = new(
 				_fileAccessServiceMock.Object,
-				_settingsAndGamesManagerMock.Object
+				_settingsAndGamesManagerMock.Object,
+				_np21ntConfigDefaultsService.Object
 			);
 		}
 
@@ -45,129 +47,21 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 				.Setup(obj => obj.ReadFileToIniAsync<Np21ntConfigIni>(It.IsAny<string>()))
 				.Returns(Task.FromResult(testNp21ntConfigIni));
 
+			_np21ntConfigDefaultsService
+				.Setup(obj => obj.CreateNp21ntConfigDefaults())
+				.Returns(testNp21ntConfig);
+
 			var result = await _fileSystemNp21ntConfigRepository.LoadAsync();
 
 			Assert.Equal(5, result.NekoProject21.WindPosX);
 			Assert.True(result.NekoProject21.WinSnap);
 			Assert.Equal("some text...", result.NekoProject21.FdFolder);
 			Assert.Equal(
-				new DipSwitch3 {
-					Segment1 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = false,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = false,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment2 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment3 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = true,
-						Switch8 = true
-					}
-				},
+				new DipSwitch3(0xab, 0xcd, 0xef),
 				result.NekoProject21.DipSwtch
 			);
 			Assert.Equal(
-				new DipSwitch8 {
-					Segment1 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = false,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = false,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment2 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = false,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = false,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment3 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = true,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = true,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment4 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = true,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = true,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment5 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = false,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = false,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment6 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = false,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = false,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment7 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment8 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = true,
-						Switch8 = true
-					}
-				},
+				new DipSwitch8(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef),
 				result.NekoProject21.MemSwtch
 			);
 			Assert.Equal(
