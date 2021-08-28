@@ -6,15 +6,18 @@ namespace TouhouLauncher.Models.Application {
 		private readonly IExecutorService _executorService;
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 		private readonly INp21ntConfigRepository _np21ntConfigRepository;
+		private readonly Np21ntConfigDefaultsService _np21ntConfigDefaultsService;
 
 		public LaunchGameService(
 			IExecutorService executorService,
 			SettingsAndGamesManager settingsAndGamesManager,
-			INp21ntConfigRepository np21ntConfigRepository
+			INp21ntConfigRepository np21ntConfigRepository,
+			Np21ntConfigDefaultsService np21ntConfigDefaultsService
 		) {
 			_executorService = executorService;
 			_settingsAndGamesManager = settingsAndGamesManager;
 			_np21ntConfigRepository = np21ntConfigRepository;
+			_np21ntConfigDefaultsService = np21ntConfigDefaultsService;
 		}
 
 		public virtual async Task<bool> LaunchGame(Game game) {
@@ -44,7 +47,8 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		private async Task<bool> ConfigureEmulatorForGame(Game game) {
-			var config = await _np21ntConfigRepository.LoadAsync();
+			var config = (await _np21ntConfigRepository.LoadAsync())
+				?? _np21ntConfigDefaultsService.CreateNp21ntConfigDefaults();
 
 			if (config.NekoProject21.Hdd1File == game.FileLocation) {
 				return true;
