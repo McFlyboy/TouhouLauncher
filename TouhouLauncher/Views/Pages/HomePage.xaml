@@ -64,7 +64,7 @@
 			<Button Command="{Binding OpenSettingsCommand}" Cursor="Hand" Margin="855, 530, 0, 0" Width="60" Height="60" ToolTip="Settings">
 				<Button.Template>
 					<ControlTemplate TargetType="Button">
-						<Border Background="#342E30" CornerRadius="25">
+						<Border Background="#342E30" CornerRadius="30">
 							<Image Source="..\..\Resources\Images\Icons\Cogwheel.png" Margin="10, 10"/>
 							<Border.Triggers>
 								<EventTrigger RoutedEvent="Mouse.MouseEnter">
