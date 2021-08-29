@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Models.Application.SettingsInfo;
 
 namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes {
 	public record SettingsAndGamesYaml : Yaml {
@@ -18,11 +17,14 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes 
 
 		public SettingsAndGames ToDomain(OfficialGame[] officialGamesTemplate) => new(
 			GeneralSettings: GeneralSettings?.ToDomain()
-				?? new(),
+				?? new(
+					closeOnGameLaunch: false,
+					combineMainCategories: false
+				),
 			EmulatorSettings: EmulatorSettings?.ToDomain()
-				?? new() {
-					FolderLocation = string.Empty
-				},
+				?? new(
+					folderLocation: string.Empty
+				),
 			OfficialGames: officialGamesTemplate.Select((template, index) =>
 				OfficialGames?.ElementAtOrDefault(index)
 					?.ToDomain(template)

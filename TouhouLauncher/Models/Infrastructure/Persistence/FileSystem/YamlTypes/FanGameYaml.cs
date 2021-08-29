@@ -14,13 +14,13 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes 
 
 		public string FileLocation { get; init; }
 
-		public FanGame ToDomain() => new() {
-			Title = Title,
-			ImageLocation = ImageLocation,
-			AudioLocation = AudioLocation,
-			ReleaseYear = ReleaseYear,
-			FileLocation = FileLocation
-		};
+		public FanGame ToDomain() => new(
+			title: Title,
+			imageLocation: ImageLocation,
+			audioLocation: AudioLocation,
+			releaseYear: ReleaseYear,
+			fileLocation: FileLocation
+		);
 	}
 
 	namespace Extensions {

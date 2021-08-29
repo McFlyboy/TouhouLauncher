@@ -1,7 +1,21 @@
-﻿#nullable disable
-
-namespace TouhouLauncher.Models.Application.GameInfo {
+﻿namespace TouhouLauncher.Models.Application.GameInfo {
 	public abstract record Game {
+		public Game(
+			string title,
+			string imageLocation,
+			string audioLocation,
+			int releaseYear,
+			string fileLocation,
+			GameCategories categories
+		) {
+			Title = title;
+			ImageLocation = imageLocation;
+			AudioLocation = audioLocation;
+			ReleaseYear = releaseYear;
+			FileLocation = fileLocation;
+			Categories = categories;
+		}
+
 		public string Title { get; set; }
 
 		public string ImageLocation { get; set; }

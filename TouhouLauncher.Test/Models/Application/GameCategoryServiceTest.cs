@@ -21,7 +21,12 @@ namespace TouhouLauncher.Test.Models.Application {
 		public void Combines_main_categories_when_combine_setting_is_enabled() {
 			_settingsAndGamesManagerMock
 				.SetupGet(obj => obj.GeneralSettings)
-				.Returns(new GeneralSettings() { CombineMainCategories = true });
+				.Returns(
+					new GeneralSettings(
+						closeOnGameLaunch: false,
+						combineMainCategories: true
+					)
+				);
 
 			Assert.Equal(
 				GameCategories.MainGame,
@@ -38,7 +43,12 @@ namespace TouhouLauncher.Test.Models.Application {
 		public void Separates_main_categories_when_combine_setting_is_disabled() {
 			_settingsAndGamesManagerMock
 				.SetupGet(obj => obj.GeneralSettings)
-				.Returns(new GeneralSettings() { CombineMainCategories = false });
+				.Returns(
+					new GeneralSettings(
+						closeOnGameLaunch: false,
+						combineMainCategories: false
+					)
+				);
 
 			var categoryList = _gameCategoryService.CreateGameCategoryList();
 			Assert.Equal(GameCategories.MainPC98, categoryList[0]);

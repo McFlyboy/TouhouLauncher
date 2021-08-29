@@ -8,10 +8,10 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes 
 
 		public bool CombineMainCategories { get; init; }
 
-		public GeneralSettings ToDomain() => new() {
-			CloseOnGameLaunch = CloseOnGameLaunch,
-			CombineMainCategories = CombineMainCategories
-		};
+		public GeneralSettings ToDomain() => new(
+			closeOnGameLaunch: CloseOnGameLaunch,
+			combineMainCategories: CombineMainCategories
+		);
 	}
 
 	namespace Extensions {

@@ -6,7 +6,7 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes 
 	public record EmulatorSettingsYaml : Yaml {
 		public string FolderLocation { get; init; }
 
-		public EmulatorSettings ToDomain() => new() { FolderLocation = FolderLocation };
+		public EmulatorSettings ToDomain() => new(folderLocation: FolderLocation);
 	}
 
 	namespace Extensions {

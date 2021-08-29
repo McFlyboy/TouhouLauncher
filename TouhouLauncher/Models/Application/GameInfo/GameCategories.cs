@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System;
+﻿using System;
 
 namespace TouhouLauncher.Models.Application.GameInfo {
 	[Flags]

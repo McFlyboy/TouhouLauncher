@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.SettingsInfo;
 

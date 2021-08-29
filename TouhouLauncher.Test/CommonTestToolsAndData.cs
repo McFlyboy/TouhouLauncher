@@ -11,44 +11,44 @@ using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes;
 
 namespace TouhouLauncher.Test {
 	public static class CommonTestToolsAndData {
-		public static readonly GeneralSettings testGeneralSettings = new() {
-			CloseOnGameLaunch = true,
-			CombineMainCategories = false
-		};
+		public static readonly GeneralSettings testGeneralSettings = new(
+			closeOnGameLaunch: true,
+			combineMainCategories: false
+		);
 
-		public static readonly EmulatorSettings testEmulatorSettings = new() {
-			FolderLocation = "C:\\test\\emulator\\location"
-		};
+		public static readonly EmulatorSettings testEmulatorSettings = new(
+			folderLocation: "C:\\test\\emulator\\location"
+		);
 
-		public static readonly OfficialGame testOfficialGame1 = new() {
-			Title = "Test Game 1",
-			ImageLocation = "",
-			AudioLocation = "",
-			ReleaseYear = 2000,
-			Categories = GameCategories.MainWindows,
-			DownloadableFileLocation = "",
-			FileLocation = "C:\\test\\location.exe"
-		};
+		public static readonly OfficialGame testOfficialGame1 = new(
+			title: "Test Game 1",
+			imageLocation: "",
+			audioLocation: "",
+			releaseYear: 2000,
+			fileLocation: "C:\\test\\location.exe",
+			categories: GameCategories.MainWindows,
+			downloadableFileLocation: ""
+		);
 
-		public static readonly OfficialGame testOfficialGame2 = new() {
-			Title = "Test Game 2",
-			ImageLocation = "",
-			AudioLocation = "",
-			ReleaseYear = 2001,
-			Categories = GameCategories.MainPC98,
-			DownloadableFileLocation = "",
-			FileLocation = ""
-		};
+		public static readonly OfficialGame testOfficialGame2 = new(
+			title: "Test Game 2",
+			imageLocation: "",
+			audioLocation: "",
+			releaseYear: 2001,
+			fileLocation: "",
+			categories: GameCategories.MainPC98,
+			downloadableFileLocation: ""
+		);
 
-		public static readonly OfficialGame testOfficialGame3 = new() {
-			Title = "Test Game 3",
-			ImageLocation = "",
-			AudioLocation = "",
-			ReleaseYear = 2002,
-			Categories = GameCategories.FightingGame,
-			DownloadableFileLocation = "",
-			FileLocation = ""
-		};
+		public static readonly OfficialGame testOfficialGame3 = new(
+			title: "Test Game 3",
+			imageLocation: "",
+			audioLocation: "",
+			releaseYear: 2002,
+			fileLocation: "",
+			categories: GameCategories.FightingGame,
+			downloadableFileLocation: ""
+		);
 
 		public static readonly OfficialGame[] testOfficialGames = new OfficialGame[] {
 			testOfficialGame1,
@@ -56,21 +56,21 @@ namespace TouhouLauncher.Test {
 			testOfficialGame3
 		};
 
-		public static readonly FanGame testFangame1 = new() {
-			Title = "Test Fan Game 1",
-			ImageLocation = "",
-			AudioLocation = "",
-			ReleaseYear = 2003,
-			FileLocation = ""
-		};
+		public static readonly FanGame testFangame1 = new(
+			title: "Test Fan Game 1",
+			imageLocation: "",
+			audioLocation: "",
+			releaseYear: 2003,
+			fileLocation: ""
+		);
 
-		public static readonly FanGame testFangame2 = new() {
-			Title = "Test Fan Game 2",
-			ImageLocation = "",
-			AudioLocation = "",
-			ReleaseYear = 2004,
-			FileLocation = ""
-		};
+		public static readonly FanGame testFangame2 = new(
+			title: "Test Fan Game 2",
+			imageLocation: "",
+			audioLocation: "",
+			releaseYear: 2004,
+			fileLocation: ""
+		);
 
 		public static readonly List<FanGame> testFanGames = new() {
 			testFangame1,
@@ -151,120 +151,8 @@ namespace TouhouLauncher.Test {
 				PcModel  = "some text...",
 				ClkBase  = 5,
 				ClkMult  = 5,
-				DipSwtch = new DipSwitch3 {
-					Segment1 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = false,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = false,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment2 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment3 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = true,
-						Switch8 = true
-					}
-				},
-				MemSwtch = new DipSwitch8 {
-					Segment1 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = false,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = false,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment2 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = false,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = false,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment3 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = true,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = true,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment4 = new DipSwitch() {
-						Switch1 = false,
-						Switch2 = true,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = false,
-						Switch6 = true,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment5 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = false,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = false,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment6 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = false,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = false,
-						Switch7 = true,
-						Switch8 = true
-					},
-					Segment7 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = false,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = false,
-						Switch8 = true
-					},
-					Segment8 = new DipSwitch() {
-						Switch1 = true,
-						Switch2 = true,
-						Switch3 = true,
-						Switch4 = false,
-						Switch5 = true,
-						Switch6 = true,
-						Switch7 = true,
-						Switch8 = true
-					}
-				},
+				DipSwtch = new DipSwitch3(0xab, 0xcd, 0xef),
+				MemSwtch = new DipSwitch8(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef),
 				ExMemory = 5,
 				Hdd1File = "some text...",
 				Hdd2File = "some text...",

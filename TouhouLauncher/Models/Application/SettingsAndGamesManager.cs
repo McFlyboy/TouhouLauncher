@@ -39,8 +39,13 @@ namespace TouhouLauncher.Models.Application {
 
 			_settingsAndGames = result
 				?? new(
-					GeneralSettings: new(),
-					EmulatorSettings: new() { FolderLocation = string.Empty },
+					GeneralSettings: new(
+						closeOnGameLaunch: false,
+						combineMainCategories: false
+					),
+					EmulatorSettings: new(
+						folderLocation: string.Empty
+					),
 					OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
 					FanGames: new()
 				);

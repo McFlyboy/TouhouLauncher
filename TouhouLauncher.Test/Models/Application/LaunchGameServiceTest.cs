@@ -57,7 +57,12 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(new Process());
 
 			_settingsAndGamesManagerMock.SetupGet(obj => obj.GeneralSettings)
-				.Returns(new GeneralSettings() { CloseOnGameLaunch = false });
+				.Returns(
+					new GeneralSettings(
+						closeOnGameLaunch: false,
+						combineMainCategories: false
+					)
+				);
 
 			var result = await _launchGameService.LaunchGame(testOfficialGame1);
 
@@ -82,7 +87,12 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(testEmulatorSettings);
 
 			_settingsAndGamesManagerMock.SetupGet(obj => obj.GeneralSettings)
-				.Returns(new GeneralSettings() { CloseOnGameLaunch = false });
+				.Returns(
+					new GeneralSettings(
+						closeOnGameLaunch: false,
+						combineMainCategories: false
+					)
+				);
 
 			var result = await _launchGameService.LaunchGame(testOfficialGame2);
 
