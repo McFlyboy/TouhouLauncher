@@ -1,4 +1,6 @@
-﻿using IniParser;
+﻿#nullable disable
+
+using IniParser;
 using System;
 
 namespace TouhouLauncher.Models.Infrastructure {

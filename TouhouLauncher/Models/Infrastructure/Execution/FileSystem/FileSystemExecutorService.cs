@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable disable
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using TouhouLauncher.Models.Application;

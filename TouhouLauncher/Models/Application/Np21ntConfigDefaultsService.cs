@@ -1,4 +1,6 @@
-﻿namespace TouhouLauncher.Models.Application {
+﻿#nullable disable
+
+namespace TouhouLauncher.Models.Application {
 	public class Np21ntConfigDefaultsService {
 		public virtual Np21ntConfig CreateNp21ntConfigDefaults() => new(
 			new Np21ntConfig.NekoProject21Section() {

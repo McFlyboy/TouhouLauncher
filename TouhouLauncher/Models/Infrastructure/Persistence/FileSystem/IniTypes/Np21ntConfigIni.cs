@@ -1,4 +1,6 @@
-﻿using IniParser.Model;
+﻿#nullable disable
+
+using IniParser.Model;
 using System;
 using System.Linq;
 using TouhouLauncher.Models.Application;

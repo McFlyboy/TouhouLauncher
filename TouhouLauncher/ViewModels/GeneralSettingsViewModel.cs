@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿#nullable disable
+
+using GalaSoft.MvvmLight;
 using TouhouLauncher.Models.Application;
 
 namespace TouhouLauncher.ViewModels {

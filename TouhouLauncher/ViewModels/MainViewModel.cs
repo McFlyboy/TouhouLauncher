@@ -1,3 +1,5 @@
+#nullable disable
+
 using GalaSoft.MvvmLight;
 using TouhouLauncher.Models.Application;
 

@@ -1,4 +1,6 @@
-﻿namespace TouhouLauncher.Models.Application.SettingsInfo {
+﻿#nullable disable
+
+namespace TouhouLauncher.Models.Application.SettingsInfo {
 	public record GeneralSettings {
 		public bool CloseOnGameLaunch { get; set; }
 

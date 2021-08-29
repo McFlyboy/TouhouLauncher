@@ -1,4 +1,6 @@
-﻿using TouhouLauncher.Models.Application.SettingsInfo;
+﻿#nullable disable
+
+using TouhouLauncher.Models.Application.SettingsInfo;
 
 namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes {
 	public record GeneralSettingsYaml : Yaml {

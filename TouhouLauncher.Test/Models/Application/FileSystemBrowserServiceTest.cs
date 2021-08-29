@@ -1,4 +1,6 @@
-﻿using TouhouLauncher.Models.Application;
+﻿#nullable disable
+
+using TouhouLauncher.Models.Application;
 using Xunit;
 using static TouhouLauncher.Models.Application.FileSystemBrowserService;
 

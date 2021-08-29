@@ -1,4 +1,6 @@
-﻿using TouhouLauncher.Models.Infrastructure;
+﻿#nullable disable
+
+using TouhouLauncher.Models.Infrastructure;
 using TouhouLauncher.Models.Infrastructure.Extensions;
 using Xunit;
 using static TouhouLauncher.Test.CommonTestToolsAndData;

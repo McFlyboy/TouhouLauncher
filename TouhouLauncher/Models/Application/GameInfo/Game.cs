@@ -1,4 +1,6 @@
-﻿namespace TouhouLauncher.Models.Application.GameInfo {
+﻿#nullable disable
+
+namespace TouhouLauncher.Models.Application.GameInfo {
 	public abstract record Game {
 		public string Title { get; set; }
 

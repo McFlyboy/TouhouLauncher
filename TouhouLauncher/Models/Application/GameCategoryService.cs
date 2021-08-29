@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#nullable disable
+
+using System.Collections.Generic;
 using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {

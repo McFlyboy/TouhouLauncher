@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable disable
+
+using System;
 
 namespace TouhouLauncher.Models.Common.Extensions {
 	public static class GenericExtensions {

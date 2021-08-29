@@ -1,4 +1,6 @@
-﻿namespace TouhouLauncher.Models.Application {
+﻿#nullable disable
+
+namespace TouhouLauncher.Models.Application {
 	public record Np21ntConfig(
 		Np21ntConfig.NekoProject21Section NekoProject21,
 		Np21ntConfig.NP2ToolSection NP2Tool,

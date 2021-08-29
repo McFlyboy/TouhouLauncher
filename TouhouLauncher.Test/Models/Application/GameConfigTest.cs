@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿#nullable disable
+
+using Moq;
 using TouhouLauncher.Models.Application;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;

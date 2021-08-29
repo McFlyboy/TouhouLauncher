@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿#nullable disable
+
+using Moq;
 using System.Diagnostics;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.SettingsInfo;

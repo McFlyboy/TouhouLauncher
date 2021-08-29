@@ -1,4 +1,6 @@
-﻿using TouhouLauncher.Models.Application.GameInfo;
+﻿#nullable disable
+
+using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
 	public class OfficialGamesTemplateService {

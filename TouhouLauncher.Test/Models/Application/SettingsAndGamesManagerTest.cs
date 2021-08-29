@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿#nullable disable
+
+using Moq;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;

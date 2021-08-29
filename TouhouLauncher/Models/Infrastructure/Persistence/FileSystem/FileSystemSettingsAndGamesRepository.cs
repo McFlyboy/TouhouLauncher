@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#nullable disable
+
+using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes.Extensions;

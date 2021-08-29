@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿#nullable disable
+
+using System.IO;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using Xunit;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
