@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System;
+﻿using System;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -23,7 +21,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 
 		public string Serialize(object graph) => _serializer.Serialize(graph);
 
-		public T Deserialize<T>(string yaml) {
+		public T? Deserialize<T>(string yaml) {
 			try {
 				return _deserializer.Deserialize<T>(yaml);
 			}
@@ -43,7 +41,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 
 	namespace Extensions {
 		public static partial class StringExtensions {
-			public static TYaml ToYamlObject<TYaml>(this string yamlString) where TYaml : Yaml =>
+			public static TYaml? ToYamlObject<TYaml>(this string yamlString) where TYaml : Yaml =>
 				YamlSerializerService.Instance.Deserialize<TYaml>(yamlString);
 		}
 	}

@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using TouhouLauncher.Models.Application;
+﻿using TouhouLauncher.Models.Application;
 using Xunit;
 using static TouhouLauncher.Models.Application.FileSystemBrowserService;
 
@@ -10,7 +8,7 @@ namespace TouhouLauncher.Test.Models.Application {
 
 		[Fact]
 		public void Formats_filter_string_correctly() {
-			var result = _fileSystemBrowserService.CreateFileFilterString(new Filter[] {
+			string result = _fileSystemBrowserService.CreateFileFilterString(new Filter[] {
 				new("Executable files", "*.exe"),
 				new("HTML files", "*.htm", "*.html")
 			});

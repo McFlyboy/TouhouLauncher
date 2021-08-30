@@ -1,12 +1,10 @@
-﻿#nullable disable
-
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System.Linq;
 
 namespace TouhouLauncher.Models.Application {
 	public class FileSystemBrowserService {
-		public string BrowseFolders() {
-			var folderDialog = new System.Windows.Forms.FolderBrowserDialog() {
+		public string? BrowseFolders() {
+			System.Windows.Forms.FolderBrowserDialog folderDialog = new() {
 				Description = "Select emulator folder",
 				UseDescriptionForTitle = true
 			};
@@ -14,8 +12,8 @@ namespace TouhouLauncher.Models.Application {
 			return (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? folderDialog.SelectedPath : null;
 		}
 
-		public string BrowseFiles(params Filter[] filters) {
-			var fileDialog = new OpenFileDialog() {
+		public string? BrowseFiles(params Filter[] filters) {
+			OpenFileDialog fileDialog = new() {
 				Title = "Select game",
 				Filter = CreateFileFilterString(filters),
 			};
