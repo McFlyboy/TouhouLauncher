@@ -1,12 +1,10 @@
-﻿#nullable disable
-
-using TouhouLauncher.Models.Application.SettingsInfo;
+﻿using TouhouLauncher.Models.Application.SettingsInfo;
 
 namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes {
 	public record EmulatorSettingsYaml : Yaml {
-		public string FolderLocation { get; init; }
+		public string? FolderLocation { get; init; }
 
-		public EmulatorSettings ToDomain() => new(folderLocation: FolderLocation);
+		public EmulatorSettings ToDomain() => new(folderLocation: FolderLocation ?? string.Empty);
 	}
 
 	namespace Extensions {

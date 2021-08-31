@@ -26,10 +26,10 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 			}
 		}
 
-		public virtual async Task<TYaml> ReadFileToYamlAsync<TYaml>(string path) where TYaml : Yaml =>
+		public virtual async Task<TYaml> ReadFileToYamlAsync<TYaml>(string path) where TYaml : Yaml, new() =>
 			(await ReadFileToStringAsync(path)).ToYamlObject<TYaml>();
 
-		public virtual async Task<bool> WriteFileFromYamlAsync<TYaml>(string path, TYaml content) where TYaml : Yaml =>
+		public virtual async Task<bool> WriteFileFromYamlAsync<TYaml>(string path, TYaml content) where TYaml : Yaml, new() =>
 			await WriteFileFromStringAsync(path, content?.ToYamlString());
 
 		public virtual async Task<TIni> ReadFileToIniAsync<TIni>(string path) where TIni : Ini, new() =>

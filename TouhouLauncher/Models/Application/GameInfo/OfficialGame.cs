@@ -2,10 +2,10 @@
 	public record OfficialGame : Game {
 		public OfficialGame(
 			string title,
-			string imageLocation,
-			string audioLocation,
-			int releaseYear,
-			string fileLocation,
+			string? imageLocation,
+			string? audioLocation,
+			int? releaseYear,
+			string? fileLocation,
 			GameCategories categories,
 			string downloadableFileLocation
 		) : base(
