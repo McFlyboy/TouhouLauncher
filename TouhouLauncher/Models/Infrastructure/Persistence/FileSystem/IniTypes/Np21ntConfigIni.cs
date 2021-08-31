@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using IniParser.Model;
+﻿using IniParser.Model;
 using System;
 using System.Linq;
 using TouhouLauncher.Models.Application;
@@ -407,10 +405,10 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 				}
 			}
 
-			public static byte[] ParseBytes(this string input) {
+			public static byte[]? ParseBytes(this string input) {
 				try {
 					return input.Split(" ")
-						.Select(hexString => (byte)hexString.ParseByte())
+						.Select(hexString => (byte)hexString.ParseByte()!)
 						.ToArray();
 				}
 				catch (Exception) {
