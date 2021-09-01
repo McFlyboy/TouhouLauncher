@@ -1,6 +1,5 @@
-﻿#nullable disable
-
-using Moq;
+﻿using Moq;
+using System.Collections.Generic;
 using System.Linq;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
@@ -28,15 +27,13 @@ namespace TouhouLauncher.Test.Models.Application {
 					)
 				);
 
-			Assert.Equal(
-				GameCategories.MainGame,
-				_gameCategoryService.CreateGameCategoryList().First()
-			);
+			List<GameCategories> categoryListResult = _gameCategoryService.CreateGameCategoryList();
 
-			Assert.Equal(
-				GameCategories.MainGame,
-				_gameCategoryService.GetDefaultGameCategory()
-			);
+			Assert.Equal(GameCategories.MainGame, categoryListResult.First());
+
+			GameCategories dafaultCategoryResult = _gameCategoryService.GetDefaultGameCategory();
+
+			Assert.Equal(GameCategories.MainGame, dafaultCategoryResult);
 		}
 
 		[Fact]
@@ -50,14 +47,14 @@ namespace TouhouLauncher.Test.Models.Application {
 					)
 				);
 
-			var categoryList = _gameCategoryService.CreateGameCategoryList();
-			Assert.Equal(GameCategories.MainPC98, categoryList[0]);
-			Assert.Equal(GameCategories.MainWindows, categoryList[1]);
+			List<GameCategories> categoryListResult = _gameCategoryService.CreateGameCategoryList();
 
-			Assert.Equal(
-				GameCategories.MainWindows,
-				_gameCategoryService.GetDefaultGameCategory()
-			);
+			Assert.Equal(GameCategories.MainPC98, categoryListResult[0]);
+			Assert.Equal(GameCategories.MainWindows, categoryListResult[1]);
+
+			GameCategories dafaultCategoryResult = _gameCategoryService.GetDefaultGameCategory();
+
+			Assert.Equal(GameCategories.MainWindows, dafaultCategoryResult);
 		}
 	}
 }

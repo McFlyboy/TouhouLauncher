@@ -416,25 +416,25 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes {
 				}
 			}
 
-			public static DipSwitch3 ParseDipSwitch3(this string input) =>
+			public static DipSwitch3? ParseDipSwitch3(this string input) =>
 				input.ParseBytes()
 					?.Transform(dipSwitchSegments => new DipSwitch3(
-						dipSwitchSegments[0],
-						dipSwitchSegments[1],
-						dipSwitchSegments[2]
+						dipSwitchSegments.ElementAtOrDefault(0),
+						dipSwitchSegments.ElementAtOrDefault(1),
+						dipSwitchSegments.ElementAtOrDefault(2)
 					));
 
-			public static DipSwitch8 ParseDipSwitch8(this string input) =>
+			public static DipSwitch8? ParseDipSwitch8(this string input) =>
 				input.ParseBytes()
 					?.Transform(dipSwitchSegments => new DipSwitch8(
-						dipSwitchSegments[0],
-						dipSwitchSegments[1],
-						dipSwitchSegments[2],
-						dipSwitchSegments[3],
-						dipSwitchSegments[4],
-						dipSwitchSegments[5],
-						dipSwitchSegments[6],
-						dipSwitchSegments[7]
+						dipSwitchSegments.ElementAtOrDefault(0),
+						dipSwitchSegments.ElementAtOrDefault(1),
+						dipSwitchSegments.ElementAtOrDefault(2),
+						dipSwitchSegments.ElementAtOrDefault(3),
+						dipSwitchSegments.ElementAtOrDefault(4),
+						dipSwitchSegments.ElementAtOrDefault(5),
+						dipSwitchSegments.ElementAtOrDefault(6),
+						dipSwitchSegments.ElementAtOrDefault(7)
 					));
 
 			public static string ToHexString(this byte value) => value.ToString("x");

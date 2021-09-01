@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using TouhouLauncher.Models.Application.GameInfo;
+﻿using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
 	public class ActiveGameCategory {

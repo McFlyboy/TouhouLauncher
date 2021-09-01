@@ -1,6 +1,5 @@
-﻿#nullable disable
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
@@ -22,16 +21,16 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		public async Task<bool> LaunchRandomGame() {
-			var officialGames = _settingsAndGamesManager.OfficialGames
-				.Where(game => game.FileLocation != string.Empty)
+			List<Game> officialGames = _settingsAndGamesManager.OfficialGames
+				.Where(game => game.FileLocation != null && game.FileLocation != string.Empty)
 				.Select(game => (Game)game)
 				.ToList();
 
-			var fanGames = _settingsAndGamesManager.FanGames
+			List<Game> fanGames = _settingsAndGamesManager.FanGames
 				.Select(game => (Game)game)
 				.ToList();
 
-			var allGames = officialGames.Concat(fanGames)
+			List<Game> allGames = officialGames.Concat(fanGames)
 				.ToList();
 
 			if (allGames.Count == 0) {
@@ -39,7 +38,7 @@ namespace TouhouLauncher.Models.Application {
 			}
 
 			int randomNumber = _random.Next(allGames.Count);
-			var selectedGame = allGames[randomNumber];
+			Game selectedGame = allGames[randomNumber];
 
 			return await _launchGameService.LaunchGame(selectedGame);
 		}

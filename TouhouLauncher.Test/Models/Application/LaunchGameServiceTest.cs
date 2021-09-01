@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using Moq;
+﻿using Moq;
 using System.Diagnostics;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.SettingsInfo;
@@ -31,9 +29,9 @@ namespace TouhouLauncher.Test.Models.Application {
 		[Fact]
 		public async void Returns_false_when_saving_emulator_config_fails() {
 			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult(testNp21ntConfig));
+				.Returns(Task.FromResult(testNp21ntConfig)!);
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig>()))
+			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
 				.Returns(Task.FromResult(false));
 
 			var result = await _launchGameService.LaunchGame(testOfficialGame2);
@@ -44,7 +42,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		[Fact]
 		public async void Returns_false_when_game_location_is_wrong() {
 			_fileSystemExecutorServiceMock.Setup(obj => obj.StartExecutable(It.IsAny<string>()))
-				.Returns<Process>(null);
+				.Returns<Process?>(null);
 
 			var result = await _launchGameService.LaunchGame(testOfficialGame1);
 
@@ -72,12 +70,12 @@ namespace TouhouLauncher.Test.Models.Application {
 		[Fact]
 		public async void Returns_true_after_using_emulator_config_defaults_when_loading_config_fails() {
 			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<Np21ntConfig>(null));
+				.Returns(Task.FromResult<Np21ntConfig?>(null));
 
 			_np21ntConfigDefaultsServiceMock.Setup(obj => obj.CreateNp21ntConfigDefaults())
 				.Returns(testNp21ntConfig);
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig>()))
+			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
 				.Returns(Task.FromResult(true));
 
 			_fileSystemExecutorServiceMock.Setup(obj => obj.StartExecutable(It.IsAny<string>()))

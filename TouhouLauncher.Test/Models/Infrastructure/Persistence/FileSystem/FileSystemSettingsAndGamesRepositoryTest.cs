@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using Moq;
+﻿using Moq;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
@@ -37,7 +35,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 		public async void Loads_settings_and_games_from_file_system_async_and_returns_result() {
 			_fileAccessServiceMock
 				.Setup(obj => obj.ReadFileToYamlAsync<SettingsAndGamesYaml>(It.IsAny<string>()))
-				.Returns(Task.FromResult(testSettingsAndGamesYaml));
+				.Returns(Task.FromResult(testSettingsAndGamesYaml)!);
 
 			_officialGamesTemplateServiceMock
 				.Setup(obj => obj.CreateOfficialGamesFromTemplate())
@@ -46,13 +44,13 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 			var result = await _fileSystemSettingsAndGamesRepository.LoadAsync();
 
 			Assert.NotNull(result);
-			Assert.Equal(testSettingsAndGames.GeneralSettings, result.GeneralSettings);
-			Assert.Equal(testSettingsAndGames.EmulatorSettings, result.EmulatorSettings);
-			Assert.Equal(testSettingsAndGames.OfficialGames[0], result.OfficialGames[0]);
-			Assert.Equal(testSettingsAndGames.OfficialGames[1], result.OfficialGames[1]);
-			Assert.Equal(testSettingsAndGames.OfficialGames[2], result.OfficialGames[2]);
-			Assert.Equal(testSettingsAndGames.FanGames[0], result.FanGames[0]);
-			Assert.Equal(testSettingsAndGames.FanGames[1], result.FanGames[1]);
+			Assert.Equal(testSettingsAndGames.GeneralSettings, result?.GeneralSettings);
+			Assert.Equal(testSettingsAndGames.EmulatorSettings, result?.EmulatorSettings);
+			Assert.Equal(testSettingsAndGames.OfficialGames[0], result?.OfficialGames[0]);
+			Assert.Equal(testSettingsAndGames.OfficialGames[1], result?.OfficialGames[1]);
+			Assert.Equal(testSettingsAndGames.OfficialGames[2], result?.OfficialGames[2]);
+			Assert.Equal(testSettingsAndGames.FanGames[0], result?.FanGames[0]);
+			Assert.Equal(testSettingsAndGames.FanGames[1], result?.FanGames[1]);
 		}
 	}
 }

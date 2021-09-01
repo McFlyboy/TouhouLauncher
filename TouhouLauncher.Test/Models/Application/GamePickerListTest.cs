@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using Moq;
+﻿using Moq;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using static TouhouLauncher.Test.CommonTestToolsAndData;

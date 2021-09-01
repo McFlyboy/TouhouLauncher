@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -21,7 +19,7 @@ namespace TouhouLauncher.ViewModels {
 
 			GameLocations = new ObservableCollection<GameLocation>();
 
-			foreach (var game in _settingsAndGamesManager.OfficialGames) {
+			foreach (OfficialGame game in _settingsAndGamesManager.OfficialGames) {
 				GameLocations.Add(new(_fileSystemBrowserService, _settingsAndGamesManager, game));
 			}
 		}
@@ -57,7 +55,7 @@ namespace TouhouLauncher.ViewModels {
 			public string Name => _game.Title;
 
 			public string Location {
-				get => _game.FileLocation;
+				get => _game.FileLocation ?? string.Empty;
 				set {
 					_game.FileLocation = value;
 					_ = _settingsAndGamesManager.SaveAsync();
@@ -66,7 +64,7 @@ namespace TouhouLauncher.ViewModels {
 
 			public ICommand BrowseCommand { get; }
 
-			private string BrowseForGame() =>
+			private string? BrowseForGame() =>
 				_game.Categories.HasFlag(GameCategories.MainPC98)
 					? _fileSystemBrowserService.BrowseFiles(
 						new("Hard disk image files", "*.hdi", "*.t98"),

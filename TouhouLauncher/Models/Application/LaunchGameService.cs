@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
@@ -35,6 +33,10 @@ namespace TouhouLauncher.Models.Application {
 				? $"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.exe"
 				: game.FileLocation;
 
+			if (executableLocation == null) {
+				return false;
+			}
+
 			var process = _executorService.StartExecutable(executableLocation);
 
 			if (process == null) {
@@ -49,14 +51,14 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		private async Task<bool> ConfigureEmulatorForGame(Game game) {
-			var config = (await _np21ntConfigRepository.LoadAsync())
+			Np21ntConfig config = (await _np21ntConfigRepository.LoadAsync())
 				?? _np21ntConfigDefaultsService.CreateNp21ntConfigDefaults();
 
 			if (config.NekoProject21.Hdd1File == game.FileLocation) {
 				return true;
 			}
 
-			config.NekoProject21.Hdd1File = game.FileLocation;
+			config.NekoProject21.Hdd1File = game.FileLocation ?? string.Empty;
 
 			var saveSuccess = await _np21ntConfigRepository.SaveAsync(config);
 

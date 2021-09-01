@@ -1,12 +1,11 @@
-﻿#nullable disable
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Common.Extensions;
 using TouhouLauncher.Views;
 
 namespace TouhouLauncher.ViewModels {
@@ -41,7 +40,7 @@ namespace TouhouLauncher.ViewModels {
 
 		private void CreateGameButtons(List<Game> games) {
 			GameButtons.Clear();
-			foreach (var game in games) {
+			foreach (Game game in games) {
 				GameButtons.Add(
 					new GameButton(game, _launchGameService, _gameConfig)
 				);
@@ -49,21 +48,21 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		public class GameButton {
+			private readonly Game _game;
 			private readonly LaunchGameService _launchGameService;
 			private readonly GameConfig _gameConfig;
-			private readonly Game _game;
 
 			public GameButton(
 				Game game,
 				LaunchGameService launchGameService,
 				GameConfig gameConfig
 			) {
+				_game = game;
 				_launchGameService = launchGameService;
 				_gameConfig = gameConfig;
-				_game = game;
 
 				Command = new RelayCommand(() => {
-					if (!_game.FileLocation.Equals(string.Empty)) {
+					if (_game.FileLocation != null && _game.FileLocation != string.Empty) {
 						_ = _launchGameService.LaunchGame(_game);
 					}
 					else {
@@ -75,9 +74,11 @@ namespace TouhouLauncher.ViewModels {
 
 			public string Name => string.Join(":\n", _game.Title.Split(": "));
 
-			public string Image => _game.ImageLocation;
+			public string Image => _game.ImageLocation ?? string.Empty;
 
-			public string ReleaseYear => "Release: " + _game.ReleaseYear;
+			public string ReleaseYear => _game.ReleaseYear
+				?.Transform(releaseYear => $"Release: {releaseYear}")
+				?? string.Empty;
 
 			public ICommand Command { get; }
 		}

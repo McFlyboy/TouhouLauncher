@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
@@ -26,7 +24,7 @@ namespace TouhouLauncher.ViewModels {
 			_gameCategoryService = gameCategoryService;
 			_launchRandomGameService = launchRandomGameService;
 
-			MessengerInstance.Register<object>(this, RebuildHeadersMessageToken, RebuildHeaders);
+			MessengerInstance.Register<object?>(this, RebuildHeadersMessageToken, RebuildHeaders);
 
 			HeaderList = new ObservableCollection<HeaderButton>();
 
@@ -56,7 +54,7 @@ namespace TouhouLauncher.ViewModels {
 			action: LaunchRandomGame
 		);
 
-		private void RebuildHeaders(object _ = null) {
+		private void RebuildHeaders(object? _ = null) {
 			var gameCategoryList = _gameCategoryService.CreateGameCategoryList();
 
 			HeaderList.Clear();
@@ -100,15 +98,13 @@ namespace TouhouLauncher.ViewModels {
 				string desc = "",
 				string colorCode = "",
 				string colorHoverCode = "",
-				Action action = null
+				Action? action = null
 			) {
 				HeaderName = name;
 				HeaderDesc = desc;
 				HeaderColor = colorCode;
 				HeaderHoverColor = colorHoverCode;
-				if (action != null) {
-					HeaderCommand = new RelayCommand(action);
-				}
+				HeaderCommand = action != null ? new RelayCommand(action) : new RelayCommand(() => { });
 			}
 
 			public string HeaderName { get; protected set; }

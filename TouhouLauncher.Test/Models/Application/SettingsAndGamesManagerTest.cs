@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using Moq;
+﻿using Moq;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
@@ -33,10 +31,10 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public async void Returns_false_and_stores_default_settings_and_games_when_no_settings_and_games_exist() {
+		public async void Returns_false_when_no_settings_and_games_exist() {
 			_fileSystemSettingsAndGamesServiceMock
 				.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<SettingsAndGames>(null));
+				.Returns(Task.FromResult<SettingsAndGames?>(null));
 
 			_officialGamesTemplateServiceMock
 				.Setup(obj => obj.CreateOfficialGamesFromTemplate())
@@ -45,36 +43,24 @@ namespace TouhouLauncher.Test.Models.Application {
 			var result = await _settingsAndGamesManager.LoadAsync();
 
 			Assert.False(result);
-
-			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
-
-			Assert.NotNull(_settingsAndGamesManager.EmulatorSettings);
-
-			Assert.NotNull(_settingsAndGamesManager.OfficialGames);
-			Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);
-
-			Assert.NotNull(_settingsAndGamesManager.FanGames);
-			Assert.Empty(_settingsAndGamesManager.FanGames);
 		}
 
 		[Fact]
 		public async void Returns_true_and_stores_loaded_settings_and_games_when_settings_and_games_exist() {
 			_fileSystemSettingsAndGamesServiceMock
 				.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult(testSettingsAndGames));
+				.Returns(Task.FromResult(testSettingsAndGames)!);
 
 			var result = await _settingsAndGamesManager.LoadAsync();
 
 			Assert.True(result);
 
-			Assert.NotNull(_settingsAndGamesManager.GeneralSettings);
+			Assert.True(_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch);
 
-			Assert.NotNull(_settingsAndGamesManager.EmulatorSettings);
+			Assert.NotNull(_settingsAndGamesManager.EmulatorSettings.FolderLocation);
 
-			Assert.NotNull(_settingsAndGamesManager.OfficialGames);
 			Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);
 
-			Assert.NotNull(_settingsAndGamesManager.FanGames);
 			Assert.NotEmpty(_settingsAndGamesManager.FanGames);
 		}
 	}

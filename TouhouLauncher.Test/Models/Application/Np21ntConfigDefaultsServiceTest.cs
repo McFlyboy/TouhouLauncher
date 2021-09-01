@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using TouhouLauncher.Models.Application;
+﻿using TouhouLauncher.Models.Application;
 using Xunit;
 
 namespace TouhouLauncher.Test.Models.Application {
@@ -9,9 +7,8 @@ namespace TouhouLauncher.Test.Models.Application {
 
 		[Fact]
 		public void Returns_default_np21nt_config_values() {
-			var result = _np21ntConfigDefaultsService.CreateNp21ntConfigDefaults();
+			Np21ntConfig result = _np21ntConfigDefaultsService.CreateNp21ntConfigDefaults();
 
-			Assert.NotNull(result);
 			Assert.True(result.NekoProject21.WinSnap);
 		}
 	}

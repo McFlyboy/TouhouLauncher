@@ -48,7 +48,7 @@ namespace TouhouLauncher.Models.Infrastructure {
 	}
 
 	namespace Extensions {
-		public static partial class StringExtensions {
+		public static class IniStringExtensions {
 			public static TIni ToIniObject<TIni>(this string iniString) where TIni : Ini, new() {
 				IniData data = IniSerializerService.Instance.Deserialize(iniString);
 

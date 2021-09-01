@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.SettingsInfo;
@@ -19,16 +17,26 @@ namespace TouhouLauncher.Models.Application {
 			_settingsAndGamesRepository = settingsAndGamesRepository;
 			_officialGamesTemplateService = officialGamesTemplateService;
 
-			_settingsAndGames = null;
+			_settingsAndGames = new(
+					GeneralSettings: new(
+						closeOnGameLaunch: false,
+						combineMainCategories: false
+					),
+					EmulatorSettings: new(
+						folderLocation: null
+					),
+					OfficialGames: new OfficialGame[0],
+					FanGames: new()
+				);
 		}
 
-		public virtual GeneralSettings GeneralSettings => _settingsAndGames?.GeneralSettings;
+		public virtual GeneralSettings GeneralSettings => _settingsAndGames.GeneralSettings;
 
-		public virtual EmulatorSettings EmulatorSettings => _settingsAndGames?.EmulatorSettings;
+		public virtual EmulatorSettings EmulatorSettings => _settingsAndGames.EmulatorSettings;
 
-		public virtual OfficialGame[] OfficialGames => _settingsAndGames?.OfficialGames;
+		public virtual OfficialGame[] OfficialGames => _settingsAndGames.OfficialGames;
 
-		public virtual List<FanGame> FanGames => _settingsAndGames?.FanGames;
+		public virtual List<FanGame> FanGames => _settingsAndGames.FanGames;
 
 		public async virtual Task<bool> SaveAsync() {
 			return await _settingsAndGamesRepository.SaveAsync(_settingsAndGames);
@@ -37,20 +45,25 @@ namespace TouhouLauncher.Models.Application {
 		public async Task<bool> LoadAsync() {
 			var result = await _settingsAndGamesRepository.LoadAsync();
 
-			_settingsAndGames = result
-				?? new(
+			if (result == null) {
+				_settingsAndGames = new(
 					GeneralSettings: new(
 						closeOnGameLaunch: false,
 						combineMainCategories: false
 					),
 					EmulatorSettings: new(
-						folderLocation: string.Empty
+						folderLocation: null
 					),
 					OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
 					FanGames: new()
 				);
 
-			return result != null;
+				return false;
+			}
+
+			_settingsAndGames = result;
+
+			return true;
 		}
 	}
 }

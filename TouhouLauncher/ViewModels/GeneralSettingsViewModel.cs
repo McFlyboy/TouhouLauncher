@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using TouhouLauncher.Models.Application;
 
 namespace TouhouLauncher.ViewModels {
@@ -25,7 +23,7 @@ namespace TouhouLauncher.ViewModels {
 				_settingsAndGamesManager.GeneralSettings.CombineMainCategories = value;
 				_ = _settingsAndGamesManager.SaveAsync();
 
-				MessengerInstance.Send<object>(null, HomeViewModel.RebuildHeadersMessageToken);
+				MessengerInstance.Send<object?>(null, HomeViewModel.RebuildHeadersMessageToken);
 			}
 		}
 	}

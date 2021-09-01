@@ -1,6 +1,5 @@
-﻿#nullable disable
-
-using TouhouLauncher.Models.Application;
+﻿using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Application.GameInfo;
 using Xunit;
 
 namespace TouhouLauncher.Test.Models.Application {
@@ -9,9 +8,8 @@ namespace TouhouLauncher.Test.Models.Application {
 
 		[Fact]
 		public void Returns_all_official_games() {
-			var result = _officialGamesTemplateService.CreateOfficialGamesFromTemplate();
+			OfficialGame[] result = _officialGamesTemplateService.CreateOfficialGamesFromTemplate();
 
-			Assert.NotNull(result);
 			Assert.Equal(29, result.Length);
 		}
 	}

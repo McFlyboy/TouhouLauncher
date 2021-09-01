@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
@@ -14,7 +12,7 @@ namespace TouhouLauncher.Models.Application {
 			GameLocation = string.Empty;
 		}
 		
-		public Game TargetGame { get; private set; }
+		public Game? TargetGame { get; private set; }
 
 		public string GameLocation { get; set; }
 
@@ -29,7 +27,7 @@ namespace TouhouLauncher.Models.Application {
 
 		public void SetGameToConfigure(Game game) {
 			TargetGame = game;
-			GameLocation = TargetGame.FileLocation;
+			GameLocation = TargetGame.FileLocation ?? string.Empty;
 		}
 	}
 }
