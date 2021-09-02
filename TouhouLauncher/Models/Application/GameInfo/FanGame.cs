@@ -1,11 +1,18 @@
-﻿#nullable disable
-
-namespace TouhouLauncher.Models.Application.GameInfo {
+﻿namespace TouhouLauncher.Models.Application.GameInfo {
 	public record FanGame : Game {
-		public FanGame() {
-			base.Categories = GameCategories.FanGame;
-        }
-
-		public new GameCategories Categories => base.Categories;
+		public FanGame(
+			string title,
+			string? imageLocation,
+			string? audioLocation,
+			int? releaseYear,
+			string? fileLocation
+		) : base(
+			title: title,
+			imageLocation: imageLocation,
+			audioLocation: audioLocation,
+			releaseYear: releaseYear,
+			fileLocation: fileLocation,
+			categories: GameCategories.FanGame
+		) { }
 	}
 }

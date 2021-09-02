@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace TouhouLauncher.Models.Application {
+﻿namespace TouhouLauncher.Models.Application {
 	public record Np21ntConfig(
 		Np21ntConfig.NekoProject21Section NekoProject21,
 		Np21ntConfig.NP2ToolSection NP2Tool,
@@ -9,6 +7,270 @@ namespace TouhouLauncher.Models.Application {
 		Np21ntConfig.MemoryMapSection MemoryMap
 	) {
 		public record NekoProject21Section {
+			public NekoProject21Section(
+				int windPosX,
+				int windPosY,
+				bool winSnap,
+				string fdFolder,
+				string hdFolder,
+				string bMapDir,
+				string fontFile,
+				string pcModel,
+				int clkBase,
+				int clkMult,
+				DipSwitch3 dipSwtch,
+				DipSwitch8 memSwtch,
+				int exMemory,
+				string hdd1File,
+				string hdd2File,
+				string hdd3File,
+				string scsiHdd0,
+				string scsiHdd1,
+				string scsiHdd2,
+				string scsiHdd3,
+				int sampleHz,
+				int latencyS,
+				byte sndBoard,
+				int beepVol,
+				byte[] snd14Vol,
+				byte opt26Brd,
+				byte opt86Brd,
+				byte optSpbrd,
+				byte optSpbvr,
+				int optSpbvl,
+				bool optSpbX,
+				byte optMpu98,
+				int volumeF,
+				int volumeS,
+				int volumeA,
+				int volumeP,
+				int volumeR,
+				bool seekSnd,
+				int seekVol,
+				bool btnRapid,
+				bool btnMode,
+				bool mouseSw,
+				bool msRapid,
+				int backgrnd,
+				byte[] vramWait,
+				int dspClock,
+				bool dispSync,
+				bool realPal,
+				int rPalTim,
+				bool sNoWait,
+				int skpFrame,
+				bool uPd72020,
+				int grcgEgc,
+				bool color16B,
+				bool skipLine,
+				int skpLight,
+				int lcdMode,
+				bool pc9861E,
+				byte[] pc9861S,
+				byte[] pc9861J,
+				bool calendar,
+				bool use144Fd,
+				int drawType,
+				int scrnMul,
+				int opnaClk,
+				int fmgRate,
+				bool coffLpf,
+				bool mixType,
+				int volumeC,
+				int aaFilter,
+				int stFilter,
+				int priority,
+				int beepPcm,
+				string statName,
+				int lpfOrder,
+				int lpfCutof,
+				int fmWaitA,
+				int fmWaitD,
+				int mouseSns,
+				int fddWait,
+				int joystkId,
+				int cpuSpeed,
+				int mVolume,
+				int volumeV,
+				int f12Copy,
+				bool joystick,
+				byte[] joy1Btn,
+				int clockNow,
+				int clockFnt,
+				bool useSstp,
+				int sstpPort,
+				bool comfirm,
+				byte shortcut,
+				string mpu98Map,
+				string mpu98Min,
+				string mpu98Mdl,
+				int mpu98Den,
+				string mpu98Def,
+				int com1Port,
+				int com1Para,
+				int com1Bps,
+				string com1MMap,
+				string com1MMdl,
+				string com1MDef,
+				int com2Port,
+				int com2Para,
+				int com2Bps,
+				string com2MMap,
+				string com2MMdl,
+				string com2MDef,
+				int com3Port,
+				int com3Para,
+				int com3Bps,
+				string com3MMap,
+				string com3MMdl,
+				string com3MDef,
+				bool eResume,
+				bool nousemmx,
+				int windType,
+				bool toolWind,
+				bool keyDispl,
+				bool jastSnd,
+				bool useRomeo,
+				bool thickFrm,
+				byte fScrnMod,
+				bool sKeyDisp,
+				byte[] function,
+				int dllList,
+				string fdlFile,
+				int fdCache
+			) {
+				WindPosX = windPosX;
+				WindPosY = windPosY;
+				WinSnap  = winSnap ;
+				FdFolder = fdFolder;
+				HdFolder = hdFolder;
+				BMapDir  = bMapDir ;
+				FontFile = fontFile;
+				PcModel  = pcModel ;
+				ClkBase  = clkBase ;
+				ClkMult  = clkMult ;
+				DipSwtch = dipSwtch;
+				MemSwtch = memSwtch;
+				ExMemory = exMemory;
+				Hdd1File = hdd1File;
+				Hdd2File = hdd2File;
+				Hdd3File = hdd3File;
+				ScsiHdd0 = scsiHdd0;
+				ScsiHdd1 = scsiHdd1;
+				ScsiHdd2 = scsiHdd2;
+				ScsiHdd3 = scsiHdd3;
+				SampleHz = sampleHz;
+				LatencyS = latencyS;
+				SndBoard = sndBoard;
+				BeepVol  = beepVol ;
+				Snd14Vol = snd14Vol;
+				Opt26Brd = opt26Brd;
+				Opt86Brd = opt86Brd;
+				OptSpbrd = optSpbrd;
+				OptSpbvr = optSpbvr;
+				OptSpbvl = optSpbvl;
+				OptSpbX  = optSpbX ;
+				OptMpu98 = optMpu98;
+				VolumeF  = volumeF ;
+				VolumeS  = volumeS ;
+				VolumeA  = volumeA ;
+				VolumeP  = volumeP ;
+				VolumeR  = volumeR ;
+				SeekSnd  = seekSnd ;
+				SeekVol  = seekVol ;
+				BtnRapid = btnRapid;
+				BtnMode  = btnMode ;
+				MouseSw  = mouseSw ;
+				MsRapid  = msRapid ;
+				Backgrnd = backgrnd;
+				VramWait = vramWait;
+				DspClock = dspClock;
+				DispSync = dispSync;
+				RealPal  = realPal ;
+				RPalTim  = rPalTim ;
+				SNoWait  = sNoWait ;
+				SkpFrame = skpFrame;
+				UPd72020 = uPd72020;
+				GrcgEgc  = grcgEgc ;
+				Color16B = color16B;
+				SkipLine = skipLine;
+				SkpLight = skpLight;
+				LcdMode  = lcdMode ;
+				Pc9861E  = pc9861E ;
+				Pc9861S  = pc9861S ;
+				Pc9861J  = pc9861J ;
+				Calendar = calendar;
+				Use144Fd = use144Fd;
+				DrawType = drawType;
+				ScrnMul  = scrnMul ;
+				OpnaClk  = opnaClk ;
+				FmgRate  = fmgRate ;
+				CoffLpf  = coffLpf ;
+				MixType  = mixType ;
+				VolumeC  = volumeC ;
+				AaFilter = aaFilter;
+				StFilter = stFilter;
+				Priority = priority;
+				BeepPcm  = beepPcm ;
+				StatName = statName;
+				LpfOrder = lpfOrder;
+				LpfCutof = lpfCutof;
+				FmWaitA  = fmWaitA ;
+				FmWaitD  = fmWaitD ;
+				MouseSns = mouseSns;
+				FddWait  = fddWait ;
+				JoystkId = joystkId;
+				CpuSpeed = cpuSpeed;
+				MVolume  = mVolume ;
+				VolumeV  = volumeV ;
+				F12Copy  = f12Copy ;
+				Joystick = joystick;
+				Joy1Btn  = joy1Btn ;
+				ClockNow = clockNow;
+				ClockFnt = clockFnt;
+				UseSstp  = useSstp ;
+				SstpPort = sstpPort;
+				Comfirm  = comfirm ;
+				Shortcut = shortcut;
+				Mpu98Map = mpu98Map;
+				Mpu98Min = mpu98Min;
+				Mpu98Mdl = mpu98Mdl;
+				Mpu98Den = mpu98Den;
+				Mpu98Def = mpu98Def;
+				Com1Port = com1Port;
+				Com1Para = com1Para;
+				Com1Bps  = com1Bps ;
+				Com1MMap = com1MMap;
+				Com1MMdl = com1MMdl;
+				Com1MDef = com1MDef;
+				Com2Port = com2Port;
+				Com2Para = com2Para;
+				Com2Bps  = com2Bps ;
+				Com2MMap = com2MMap;
+				Com2MMdl = com2MMdl;
+				Com2MDef = com2MDef;
+				Com3Port = com3Port;
+				Com3Para = com3Para;
+				Com3Bps  = com3Bps ;
+				Com3MMap = com3MMap;
+				Com3MMdl = com3MMdl;
+				Com3MDef = com3MDef;
+				EResume  = eResume ;
+				Nousemmx = nousemmx;
+				WindType = windType;
+				ToolWind = toolWind;
+				KeyDispl = keyDispl;
+				JastSnd  = jastSnd ;
+				UseRomeo = useRomeo;
+				ThickFrm = thickFrm;
+				FScrnMod = fScrnMod;
+				SKeyDisp = sKeyDisp;
+				Function = function;
+				DllList  = dllList ;
+				FdlFile  = fdlFile ;
+				FdCache  = fdCache ;
+			}
+
 			public int WindPosX { get; set; }
 
 			public int WindPosY { get; set; }
@@ -271,6 +533,58 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		public record NP2ToolSection {
+			public NP2ToolSection(
+				int windPosX,
+				int windPosY,
+				bool windType,
+				string skinFile,
+				string skinMru0,
+				string skinMru1,
+				string skinMru2,
+				string skinMru3,
+				string fd1Name0,
+				string fd1Name1,
+				string fd1Name2,
+				string fd1Name3,
+				string fd1Name4,
+				string fd1Name5,
+				string fd1Name6,
+				string fd1Name7,
+				string fd2Name0,
+				string fd2Name1,
+				string fd2Name2,
+				string fd2Name3,
+				string fd2Name4,
+				string fd2Name5,
+				string fd2Name6,
+				string fd2Name7
+			) {
+				WindPosX = windPosX;
+				WindPosY = windPosY;
+				WindType = windType;
+				SkinFile = skinFile;
+				SkinMru0 = skinMru0;
+				SkinMru1 = skinMru1;
+				SkinMru2 = skinMru2;
+				SkinMru3 = skinMru3;
+				Fd1Name0 = fd1Name0;
+				Fd1Name1 = fd1Name1;
+				Fd1Name2 = fd1Name2;
+				Fd1Name3 = fd1Name3;
+				Fd1Name4 = fd1Name4;
+				Fd1Name5 = fd1Name5;
+				Fd1Name6 = fd1Name6;
+				Fd1Name7 = fd1Name7;
+				Fd2Name0 = fd2Name0;
+				Fd2Name1 = fd2Name1;
+				Fd2Name2 = fd2Name2;
+				Fd2Name3 = fd2Name3;
+				Fd2Name4 = fd2Name4;
+				Fd2Name5 = fd2Name5;
+				Fd2Name6 = fd2Name6;
+				Fd2Name7 = fd2Name7;
+			}
+
 			public int WindPosX { get; set; }
 
 			public int WindPosY { get; set; }
@@ -321,6 +635,18 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		public record KeyDisplaySection {
+			public KeyDisplaySection(
+				int windPosX,
+				int windPosY,
+				int keyDMode,
+				bool windType
+			) {
+				WindPosX = windPosX;
+				WindPosY = windPosY;
+				KeyDMode = keyDMode;
+				WindType = windType;
+			}
+
 			public int WindPosX { get; set; }
 
 			public int WindPosY { get; set; }
@@ -331,6 +657,16 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		public record SoftKeyboardSection {
+			public SoftKeyboardSection(
+				int windPosX,
+				int windPosY,
+				bool windType
+			) {
+				WindPosX = windPosX;
+				WindPosY = windPosY;
+				WindType = windType;
+			}
+
 			public int WindPosX { get; set; }
 
 			public int WindPosY { get; set; }
@@ -339,6 +675,16 @@ namespace TouhouLauncher.Models.Application {
 		}
 
 		public record MemoryMapSection {
+			public MemoryMapSection(
+				int windPosX,
+				int windPosY,
+				bool windType
+			) {
+				WindPosX = windPosX;
+				WindPosY = windPosY;
+				WindType = windType;
+			}
+
 			public int WindPosX { get; set; }
 
 			public int WindPosY { get; set; }
@@ -348,8 +694,6 @@ namespace TouhouLauncher.Models.Application {
 	}
 
 	public record DipSwitch {
-		public DipSwitch() { }
-
 		public DipSwitch(byte binaryValue) {
 			Switch1 = (binaryValue & (1 << 7)) != 0;
 			Switch2 = (binaryValue & (1 << 6)) != 0;
@@ -379,8 +723,6 @@ namespace TouhouLauncher.Models.Application {
 	}
 
 	public record DipSwitch3 {
-		public DipSwitch3() { }
-
 		public DipSwitch3(
 			byte segment1,
 			byte segment2,
@@ -399,8 +741,6 @@ namespace TouhouLauncher.Models.Application {
 	}
 
 	public record DipSwitch8 {
-		public DipSwitch8() { }
-
 		public DipSwitch8(
 			byte binarySegment1,
 			byte binarySegment2,

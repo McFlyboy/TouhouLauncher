@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using IniParser;
+﻿using IniParser;
 using System;
 
 namespace TouhouLauncher.Models.Infrastructure {
@@ -25,20 +23,13 @@ namespace TouhouLauncher.Models.Infrastructure {
 					}
 				);
 			}
-			catch (Exception e) {
-				return (e is NullReferenceException || e is ArgumentOutOfRangeException)
-					? string.Empty
-					: null;
+			catch (ArgumentOutOfRangeException) {
+				return string.Empty;
 			}
 		}
 
 		public IniData Deserialize(string ini) {
-			try {
-				return _iniDataParser.Parse(ini);
-			}
-			catch (Exception) {
-				return null;
-			}
+			return _iniDataParser.Parse(ini);
 		}
 
 		static IniSerializerService() => Instance = new();
@@ -47,19 +38,21 @@ namespace TouhouLauncher.Models.Infrastructure {
 	}
 
 	public abstract record Ini {
+		public Ini() {
+			Data = new();
+		}
+
 		public IniData Data { get; init; }
 
 		public string ToIniString() => IniSerializerService.Instance.Serialize(Data);
 	}
 
 	namespace Extensions {
-		public static partial class StringExtensions {
+		public static class IniStringExtensions {
 			public static TIni ToIniObject<TIni>(this string iniString) where TIni : Ini, new() {
-				var data = IniSerializerService.Instance.Deserialize(iniString);
+				IniData data = IniSerializerService.Instance.Deserialize(iniString);
 
-				return data != null
-					? new() { Data = data }
-					: null;
+				return new() { Data = data };
 			}
 		}
 	}

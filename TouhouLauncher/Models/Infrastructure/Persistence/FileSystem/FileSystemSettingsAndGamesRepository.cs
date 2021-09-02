@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes.Extensions;
@@ -22,10 +20,10 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 			filePath = "Settings.yaml";
 		}
 
-		public virtual async Task<bool> SaveAsync(SettingsAndGames settingsAndGames) =>
+		public virtual async Task<bool> SaveAsync(SettingsAndGames? settingsAndGames) =>
 			await _fileAccessService.WriteFileFromYamlAsync(filePath, settingsAndGames?.ToYaml());
 
-		public virtual async Task<SettingsAndGames> LoadAsync() =>
+		public virtual async Task<SettingsAndGames?> LoadAsync() =>
 			(await _fileAccessService.ReadFileToYamlAsync<SettingsAndGamesYaml>(filePath))
 				?.ToDomain(_officialGamesTemplateService.CreateOfficialGamesFromTemplate());
 	}

@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using Moq;
+﻿using Moq;
 using TouhouLauncher.Models.Application;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
@@ -43,7 +41,7 @@ namespace TouhouLauncher.Test.Models.Application {
 			var result = await _gameConfig.SaveAsync();
 
 			Assert.True(result);
-			Assert.Equal(testOfficialGame1.FileLocation, _gameConfig.GameLocation);
+			Assert.Equal(_gameConfig.GameLocation, testOfficialGame1.FileLocation);
 
 			_settingsAndGamesManagerMock.Verify(obj => obj.SaveAsync(), Times.Once);
 		}

@@ -1,273 +1,269 @@
-﻿#nullable disable
-
-using TouhouLauncher.Models.Application.GameInfo;
+﻿using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.Models.Application {
 	public class OfficialGamesTemplateService {
-		public virtual OfficialGame[] CreateOfficialGamesFromTemplate() {
-			return new OfficialGame[] {
-				new() {
-					Title = "Touhou 01: Highly Responsive to Prayers",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH01.png",
-					AudioLocation = "",
-					ReleaseYear = 1996,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainPC98
-				},
-				new() {
-					Title = "Touhou 02: Story of Eastern Wonderland",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH02.png",
-					AudioLocation = "",
-					ReleaseYear = 1997,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainPC98
-				},
-				new() {
-					Title = "Touhou 03: Phantasmagoria of Dim. Dream",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH03.png",
-					AudioLocation = "",
-					FileLocation = string.Empty,
-					ReleaseYear = 1997,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainPC98
-				},
-				new() {
-					Title = "Touhou 04: Lotus Land Story",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH04.png",
-					AudioLocation = "",
-					ReleaseYear = 1998,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainPC98
-				},
-				new() {
-					Title = "Touhou 05: Mystic Square",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH05.png",
-					AudioLocation = "",
-					ReleaseYear = 1998,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainPC98
-				},
-				new() {
-					Title = "Touhou 06: Embodyment of Scarlet Devil",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH06.png",
-					AudioLocation = "",
-					ReleaseYear = 2002,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 07: Perfect Cherry Blossom",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH07.png",
-					AudioLocation = "",
-					ReleaseYear = 2003,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 07.5: Immaterial and Missing Power",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH07_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2004,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.FightingGame
-				},
-				new() {
-					Title = "Touhou 08: Imperishable Night",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH08.png",
-					AudioLocation = "",
-					ReleaseYear = 2004,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 09: Phantasmagoria of Flower View",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH09.png",
-					AudioLocation = "",
-					ReleaseYear = 2005,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 09.5: Shoot the Bullet",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH09_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2005,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.SpinOff
-				},
-				new() {
-					Title = "Touhou 10: Mountain of Faith",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH10.png",
-					AudioLocation = "",
-					ReleaseYear = 2007,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 10.5: Scarlet Weather Rhapsody",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH10_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2008,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.FightingGame
-				},
-				new() {
-					Title = "Touhou 11: Subterranean Animism",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH11.png",
-					AudioLocation = "",
-					ReleaseYear = 2008,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 12: Undefined Fantastic Object",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12.png",
-					AudioLocation = "",
-					ReleaseYear = 2009,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 12.3: Hisoutensoku",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12_3.png",
-					AudioLocation = "",
-					ReleaseYear = 2009,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.FightingGame
-				},
-				new() {
-					Title = "Touhou 12.5: Double Spoiler",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2010,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.SpinOff
-				},
-				new() {
-					Title = "Touhou 12.8: Great Fairy Wars",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH12_8.png",
-					AudioLocation = "",
-					ReleaseYear = 2010,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.SpinOff
-				},
-				new() {
-					Title = "Touhou 13: Ten Desires",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH13.png",
-					AudioLocation = "",
-					ReleaseYear = 2011,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 13.5: Hopeless Masquerade",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH13_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2013,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.FightingGame
-				},
-				new() {
-					Title = "Touhou 14: Double Dealing Character",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH14.png",
-					AudioLocation = "",
-					ReleaseYear = 2013,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 14.3: Impossible Spell Card",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH14_3.png",
-					AudioLocation = "",
-					ReleaseYear = 2014,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.SpinOff
-				},
-				new() {
-					Title = "Touhou 14.5: Urban Legend in Limbo",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH14_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2015,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.FightingGame
-				},
-				new() {
-					Title = "Touhou 15: Legacy of Lunatic Kingdom",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH15.png",
-					AudioLocation = "",
-					ReleaseYear = 2015,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 15.5: Antinomy of Common Flowers",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH15_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2017,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.FightingGame
-				},
-				new() {
-					Title = "Touhou 16: Hidden Star in Four Seasons",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH16.png",
-					AudioLocation = "",
-					ReleaseYear = 2017,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 16.5: Violet Detector",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH16_5.png",
-					AudioLocation = "",
-					ReleaseYear = 2018,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.SpinOff
-				},
-				new() {
-					Title = "Touhou 17: Wily Beast and Weakest Creature",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH17.png",
-					AudioLocation = "",
-					ReleaseYear = 2019,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				},
-				new() {
-					Title = "Touhou 18: Unconnected Marketeers",
-					ImageLocation = "..\\..\\Resources\\Images\\OfficialGames\\TH18.png",
-					AudioLocation = "",
-					ReleaseYear = 2021,
-					FileLocation = string.Empty,
-					DownloadableFileLocation = "",
-					Categories = GameCategories.MainWindows
-				}
-			};
-		}
+		public virtual OfficialGame[] CreateOfficialGamesFromTemplate() => new OfficialGame[] {
+			new(
+				title: "Touhou 01: Highly Responsive to Prayers",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH01.png",
+				audioLocation: "",
+				releaseYear: 1996,
+				fileLocation: null,
+				categories: GameCategories.MainPC98,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 02: Story of Eastern Wonderland",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH02.png",
+				audioLocation: "",
+				releaseYear: 1997,
+				fileLocation: null,
+				categories: GameCategories.MainPC98,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 03: Phantasmagoria of Dim. Dream",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH03.png",
+				audioLocation: "",
+				releaseYear: 1997,
+				fileLocation: null,
+				categories: GameCategories.MainPC98,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 04: Lotus Land Story",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH04.png",
+				audioLocation: "",
+				releaseYear: 1998,
+				fileLocation: null,
+				categories: GameCategories.MainPC98,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 05: Mystic Square",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH05.png",
+				audioLocation: "",
+				releaseYear: 1998,
+				fileLocation: null,
+				categories: GameCategories.MainPC98,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 06: Embodyment of Scarlet Devil",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH06.png",
+				audioLocation: "",
+				releaseYear: 2002,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 07: Perfect Cherry Blossom",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH07.png",
+				audioLocation: "",
+				releaseYear: 2003,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 07.5: Immaterial and Missing Power",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH07_5.png",
+				audioLocation: "",
+				releaseYear: 2004,
+				fileLocation: null,
+				categories: GameCategories.FightingGame,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 08: Imperishable Night",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH08.png",
+				audioLocation: "",
+				releaseYear: 2004,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 09: Phantasmagoria of Flower View",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH09.png",
+				audioLocation: "",
+				releaseYear: 2005,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 09.5: Shoot the Bullet",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH09_5.png",
+				audioLocation: "",
+				releaseYear: 2005,
+				fileLocation: null,
+				categories: GameCategories.SpinOff,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 10: Mountain of Faith",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH10.png",
+				audioLocation: "",
+				releaseYear: 2007,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 10.5: Scarlet Weather Rhapsody",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH10_5.png",
+				audioLocation: "",
+				releaseYear: 2008,
+				fileLocation: null,
+				categories: GameCategories.FightingGame,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 11: Subterranean Animism",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH11.png",
+				audioLocation: "",
+				releaseYear: 2008,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 12: Undefined Fantastic Object",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH12.png",
+				audioLocation: "",
+				releaseYear: 2009,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 12.3: Hisoutensoku",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH12_3.png",
+				audioLocation: "",
+				releaseYear: 2009,
+				fileLocation: null,
+				categories: GameCategories.FightingGame,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 12.5: Double Spoiler",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH12_5.png",
+				audioLocation: "",
+				releaseYear: 2010,
+				fileLocation: null,
+				categories: GameCategories.SpinOff,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 12.8: Great Fairy Wars",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH12_8.png",
+				audioLocation: "",
+				releaseYear: 2010,
+				fileLocation: null,
+				categories: GameCategories.SpinOff,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 13: Ten Desires",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH13.png",
+				audioLocation: "",
+				releaseYear: 2011,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 13.5: Hopeless Masquerade",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH13_5.png",
+				audioLocation: "",
+				releaseYear: 2013,
+				fileLocation: null,
+				categories: GameCategories.FightingGame,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 14: Double Dealing Character",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH14.png",
+				audioLocation: "",
+				releaseYear: 2013,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 14.3: Impossible Spell Card",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH14_3.png",
+				audioLocation: "",
+				releaseYear: 2014,
+				fileLocation: null,
+				categories: GameCategories.SpinOff,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 14.5: Urban Legend in Limbo",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH14_5.png",
+				audioLocation: "",
+				releaseYear: 2015,
+				fileLocation: null,
+				categories: GameCategories.FightingGame,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 15: Legacy of Lunatic Kingdom",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH15.png",
+				audioLocation: "",
+				releaseYear: 2015,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 15.5: Antinomy of Common Flowers",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH15_5.png",
+				audioLocation: "",
+				releaseYear: 2017,
+				fileLocation: null,
+				categories: GameCategories.FightingGame,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 16: Hidden Star in Four Seasons",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH16.png",
+				audioLocation: "",
+				releaseYear: 2017,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 16.5: Violet Detector",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH16_5.png",
+				audioLocation: "",
+				releaseYear: 2018,
+				fileLocation: null,
+				categories: GameCategories.SpinOff,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 17: Wily Beast and Weakest Creature",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH17.png",
+				audioLocation: "",
+				releaseYear: 2019,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			),
+			new(
+				title: "Touhou 18: Unconnected Marketeers",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH18.png",
+				audioLocation: "",
+				releaseYear: 2021,
+				fileLocation: null,
+				categories: GameCategories.MainWindows,
+				downloadableFileLocation: ""
+			)
+		};
 	}
 }

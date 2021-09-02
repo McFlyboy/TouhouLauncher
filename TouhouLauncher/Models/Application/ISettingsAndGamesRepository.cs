@@ -1,11 +1,9 @@
-﻿#nullable disable
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace TouhouLauncher.Models.Application {
 	public interface ISettingsAndGamesRepository {
-		public Task<bool> SaveAsync(SettingsAndGames settingsAndGames);
+		public Task<bool> SaveAsync(SettingsAndGames? settingsAndGames);
 
-		public Task<SettingsAndGames> LoadAsync();
+		public Task<SettingsAndGames?> LoadAsync();
 	}
 }

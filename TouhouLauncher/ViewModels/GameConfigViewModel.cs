@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using System.Windows.Input;
@@ -20,7 +18,11 @@ namespace TouhouLauncher.ViewModels {
 			_fileSystemBrowserService = fileSystemBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				var browseResult = _gameConfig.TargetGame.Categories.HasFlag(GameCategories.MainPC98) 
+				if (_gameConfig.TargetGame == null) {
+					return;
+				} 
+
+				var browseResult = _gameConfig.TargetGame.Categories.HasFlag(GameCategories.MainPC98)
 					? _fileSystemBrowserService.BrowseFiles(
 						new("Hard disk image files", "*.hdi", "*.t98"),
 						new("All files", "*.*")
@@ -53,7 +55,7 @@ namespace TouhouLauncher.ViewModels {
 			});
 		}
 
-		public string WindowTitle => $"Configure {_gameConfig.TargetGame.Title}";
+		public string WindowTitle => $"Configure {_gameConfig.TargetGame?.Title ?? "unknown game"}";
 
 		public string GameLocation {
 			get => _gameConfig.GameLocation;

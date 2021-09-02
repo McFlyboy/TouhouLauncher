@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
@@ -30,7 +28,7 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		public string FolderLocation {
-			get => _settingsAndGamesManager.EmulatorSettings.FolderLocation;
+			get => _settingsAndGamesManager.EmulatorSettings.FolderLocation ?? string.Empty;
 			set {
 				_settingsAndGamesManager.EmulatorSettings.FolderLocation = value;
 				_ = _settingsAndGamesManager.SaveAsync();

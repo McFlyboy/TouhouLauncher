@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,7 +6,6 @@ using TouhouLauncher.Views.UserControls.Settings;
 
 namespace TouhouLauncher.ViewModels {
 	public class SettingsViewModel : ViewModelBase {
-
 		private SettingsCategory _category;
 
 		public SettingsViewModel() {

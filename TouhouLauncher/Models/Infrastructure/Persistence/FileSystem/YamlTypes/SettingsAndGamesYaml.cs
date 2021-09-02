@@ -1,34 +1,36 @@
-﻿#nullable disable
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
-using TouhouLauncher.Models.Application.SettingsInfo;
 
 namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes {
 	public record SettingsAndGamesYaml : Yaml {
-		public GeneralSettingsYaml GeneralSettings { get; init; }
+		public GeneralSettingsYaml? GeneralSettings { get; init; }
 
-		public EmulatorSettingsYaml EmulatorSettings { get; init; }
+		public EmulatorSettingsYaml? EmulatorSettings { get; init; }
 
-		public OfficialGameYaml[] OfficialGames { get; init; }
+		public OfficialGameYaml[]? OfficialGames { get; init; }
 
-		public List<FanGameYaml> FanGames { get; init; }
+		public List<FanGameYaml>? FanGames { get; init; }
 
 		public SettingsAndGames ToDomain(OfficialGame[] officialGamesTemplate) => new(
 			GeneralSettings: GeneralSettings?.ToDomain()
-				?? new(),
+				?? new(
+					closeOnGameLaunch: false,
+					combineMainCategories: false
+				),
 			EmulatorSettings: EmulatorSettings?.ToDomain()
-				?? new() {
-					FolderLocation = string.Empty
-				},
+				?? new(
+					folderLocation: string.Empty
+				),
 			OfficialGames: officialGamesTemplate.Select((template, index) =>
 				OfficialGames?.ElementAtOrDefault(index)
 					?.ToDomain(template)
 					?? template
 			).ToArray(),
 			FanGames: FanGames?.Select(game => game.ToDomain())
+				?.Where(game => game != null)
+				?.Select(game => game!)
 				?.ToList()
 				?? new()
 		);

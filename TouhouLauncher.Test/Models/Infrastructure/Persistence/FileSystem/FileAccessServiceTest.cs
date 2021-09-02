@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.IO;
+﻿using System.IO;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using Xunit;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
@@ -29,7 +27,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 		[Fact]
 		public async void Returns_false_when_failing_to_create_file_to_write_to_from_string_async_when_file_path_is_not_provided() {
-			bool result = await _fileAccessService.WriteFileFromStringAsync(null, "Test content");
+			bool result = await _fileAccessService.WriteFileFromStringAsync(string.Empty, "Test content");
 
 			Assert.False(result);
 		}
@@ -63,7 +61,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 		[Fact]
 		public async void Returns_false_when_failing_to_create_file_to_write_to_from_yaml_async_when_file_path_is_not_provided() {
-			bool result = await _fileAccessService.WriteFileFromYamlAsync(null, yamlTestTypeObject);
+			bool result = await _fileAccessService.WriteFileFromYamlAsync(string.Empty, yamlTestTypeObject);
 
 			Assert.False(result);
 		}
@@ -92,14 +90,14 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			File.Delete("Existing file.ini");
 
-			Assert.Equal(iniTestTypeObject.Data["Test"]["text"], result.Data["Test"]["text"]);
-			Assert.Equal(iniTestTypeObject.Data["Test"]["number"], result.Data["Test"]["number"]);
-			Assert.Equal(iniTestTypeObject.Data["More test"]["is_test"], result.Data["More test"]["is_test"]);
+			Assert.Equal(iniTestTypeObject.Data["Test"]["text"], result?.Data["Test"]?["text"]);
+			Assert.Equal(iniTestTypeObject.Data["Test"]["number"], result?.Data["Test"]?["number"]);
+			Assert.Equal(iniTestTypeObject.Data["More test"]["is_test"], result?.Data["More test"]?["is_test"]);
 		}
 
 		[Fact]
 		public async void Returns_false_when_failing_to_create_file_to_write_to_from_ini_async_when_file_path_is_not_provided() {
-			bool result = await _fileAccessService.WriteFileFromIniAsync(null, iniTestTypeObject);
+			bool result = await _fileAccessService.WriteFileFromIniAsync(string.Empty, iniTestTypeObject);
 
 			Assert.False(result);
 		}

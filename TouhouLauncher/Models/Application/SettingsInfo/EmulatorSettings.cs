@@ -1,7 +1,9 @@
-﻿#nullable disable
-
-namespace TouhouLauncher.Models.Application.SettingsInfo {
+﻿namespace TouhouLauncher.Models.Application.SettingsInfo {
 	public record EmulatorSettings {
-		public string FolderLocation { get; set; }
+		public EmulatorSettings(string? folderLocation) {
+			FolderLocation = folderLocation;
+		}
+
+		public string? FolderLocation { get; set; }
 	}
 }

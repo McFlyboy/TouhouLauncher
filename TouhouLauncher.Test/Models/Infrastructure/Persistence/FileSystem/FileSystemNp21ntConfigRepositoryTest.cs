@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using Moq;
+﻿using Moq;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
@@ -47,7 +45,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			_fileAccessServiceMock
 				.Setup(obj => obj.ReadFileToIniAsync<Np21ntConfigIni>(It.IsAny<string>()))
-				.Returns(Task.FromResult(testNp21ntConfigIni));
+				.Returns(Task.FromResult(testNp21ntConfigIni)!);
 
 			_np21ntConfigDefaultsService
 				.Setup(obj => obj.CreateNp21ntConfigDefaults())
@@ -55,27 +53,20 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			var result = await _fileSystemNp21ntConfigRepository.LoadAsync();
 
-			Assert.Equal(5, result.NekoProject21.WindPosX);
-			Assert.True(result.NekoProject21.WinSnap);
-			Assert.Equal("some text...", result.NekoProject21.FdFolder);
+			Assert.Equal(5, result?.NekoProject21.WindPosX);
+			Assert.True(result?.NekoProject21.WinSnap);
+			Assert.Equal("some text...", result?.NekoProject21.FdFolder);
 			Assert.Equal(
 				new DipSwitch3(0xab, 0xcd, 0xef),
-				result.NekoProject21.DipSwtch
+				result?.NekoProject21.DipSwtch
 			);
 			Assert.Equal(
 				new DipSwitch8(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef),
-				result.NekoProject21.MemSwtch
+				result?.NekoProject21.MemSwtch
 			);
 			Assert.Equal(
-				new byte[] {
-					0x01,
-					0x23,
-					0x45,
-					0x67,
-					0x89,
-					0xab
-				},
-				result.NekoProject21.Snd14Vol
+				new byte[] { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab },
+				result?.NekoProject21.Snd14Vol
 			);
 		}
 	}
