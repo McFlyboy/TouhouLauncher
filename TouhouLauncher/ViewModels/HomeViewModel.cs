@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
@@ -28,7 +29,7 @@ namespace TouhouLauncher.ViewModels {
 
 			HeaderList = new ObservableCollection<HeaderButton>();
 
-			var gameCategoryList = _gameCategoryService.CreateGameCategoryList();
+			List<GameCategories> gameCategoryList = _gameCategoryService.CreateGameCategoryList();
 
 			foreach (var category in gameCategoryList) {
 				HeaderList.Add(new CategoryHeaderButton(category, this));
@@ -55,7 +56,7 @@ namespace TouhouLauncher.ViewModels {
 		);
 
 		private void RebuildHeaders(object? _ = null) {
-			var gameCategoryList = _gameCategoryService.CreateGameCategoryList();
+			List<GameCategories> gameCategoryList = _gameCategoryService.CreateGameCategoryList();
 
 			HeaderList.Clear();
 
