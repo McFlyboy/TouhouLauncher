@@ -21,10 +21,11 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 		}
 
 		public virtual async Task<bool> SaveAsync(SettingsAndGames? settingsAndGames) =>
-			await _fileAccessService.WriteFileFromYamlAsync(filePath, settingsAndGames?.ToYaml());
+			(await _fileAccessService.WriteFileFromYamlAsync(filePath, settingsAndGames?.ToYaml())) == null;
 
 		public virtual async Task<SettingsAndGames?> LoadAsync() =>
 			(await _fileAccessService.ReadFileToYamlAsync<SettingsAndGamesYaml>(filePath))
+				.Resolve<SettingsAndGamesYaml?>(error => null, yaml => yaml)
 				?.ToDomain(_officialGamesTemplateService.CreateOfficialGamesFromTemplate());
 	}
 }

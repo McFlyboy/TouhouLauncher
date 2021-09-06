@@ -60,9 +60,9 @@ namespace TouhouLauncher.Models.Application {
 
 			config.NekoProject21.Hdd1File = game.FileLocation ?? string.Empty;
 
-			var saveSuccess = await _np21ntConfigRepository.SaveAsync(config);
+			var error = await _np21ntConfigRepository.SaveAsync(config);
 
-			return saveSuccess;
+			return error == null;
 		}
 	}
 }

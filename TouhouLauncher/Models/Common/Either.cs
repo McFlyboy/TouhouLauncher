@@ -27,10 +27,10 @@ namespace TouhouLauncher.Models.Common {
 			IsLeft ? leftResolver((TLeft)_value) : rightResolver((TRight)_value);
 
 		public Either<TLeftResult, TRightResult> ResolveToEither<TLeftResult, TRightResult>(
-			Func<TLeft, TLeftResult> leftResolver,
-			Func<TRight, TRightResult> rightResolver
+			Func<TLeft, Either<TLeftResult, TRightResult>> leftResolver,
+			Func<TRight, Either<TLeftResult, TRightResult>> rightResolver
 		) where TLeftResult : notnull where TRightResult : notnull =>
-			IsLeft ? new(leftResolver((TLeft)_value)) : new(rightResolver((TRight)_value));
+			IsLeft ? leftResolver((TLeft)_value) : rightResolver((TRight)_value);
 
 		public Either<TResult, TRight> SelectLeft<TResult>(Func<TLeft, TResult> leftSelector) where TResult : notnull =>
 			IsLeft ? new(leftSelector((TLeft)_value)) : new((TRight)_value);

@@ -5,6 +5,7 @@ using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
+using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 	public class FileSystemNp21ntConfigRepositoryTest {
@@ -30,11 +31,11 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			_fileAccessServiceMock
 				.Setup(obj => obj.WriteFileFromIniAsync(It.IsAny<string>(), It.IsAny<Np21ntConfigIni>()))
-				.Returns(Task.FromResult(true));
+				.Returns(Task.FromResult<FileWriteError?>(null));
 
 			var result = await _fileSystemNp21ntConfigRepository.SaveAsync(testNp21ntConfig);
 
-			Assert.True(result);
+			Assert.Null(result);
 		}
 
 		[Fact]
@@ -45,7 +46,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			_fileAccessServiceMock
 				.Setup(obj => obj.ReadFileToIniAsync<Np21ntConfigIni>(It.IsAny<string>()))
-				.Returns(Task.FromResult(testNp21ntConfigIni)!);
+				.Returns(Task.FromResult<Either<FileReadError, Np21ntConfigIni>>(testNp21ntConfigIni));
 
 			_np21ntConfigDefaultsService
 				.Setup(obj => obj.CreateNp21ntConfigDefaults())

@@ -1,4 +1,5 @@
 ﻿using System;
+using TouhouLauncher.Models.Common;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -22,12 +23,18 @@ namespace TouhouLauncher.Models.Infrastructure {
 		public string Serialize<T>(T graph) where T : class, new() =>
 			_serializer.Serialize(graph);
 
-		public T? Deserialize<T>(string yaml) where T : class, new() {
+		public Either<YamlDeserializeError, T> Deserialize<T>(string yaml) where T : class, new() {
 			try {
-				return _deserializer.Deserialize<T>(yaml);
+				var obj = _deserializer.Deserialize<T?>(yaml);
+
+				if (obj != null) {
+					return obj;
+				}
+
+				return new YamlDeserializeError();
 			}
 			catch (Exception) {
-				return null;
+				return new YamlDeserializeError();
 			}
 		}
 
@@ -43,8 +50,12 @@ namespace TouhouLauncher.Models.Infrastructure {
 			public static string ToYamlString<TYaml>(this TYaml yamlObject) where TYaml : Yaml, new() =>
 				YamlSerializerService.Instance.Serialize(yamlObject);
 
-			public static TYaml? ToYamlObject<TYaml>(this string yamlString) where TYaml : Yaml, new() =>
+			public static Either<YamlDeserializeError, TYaml> ToYamlObject<TYaml>(this string yamlString) where TYaml : Yaml, new() =>
 				YamlSerializerService.Instance.Deserialize<TYaml>(yamlString);
 		}
+	}
+
+	public record YamlDeserializeError : TouhouLauncherError {
+		public override string Message => "Could not deserialize yaml content";
 	}
 }

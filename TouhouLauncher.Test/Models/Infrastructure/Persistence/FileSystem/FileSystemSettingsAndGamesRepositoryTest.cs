@@ -1,6 +1,7 @@
 ﻿using Moq;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Common;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes;
 using Xunit;
@@ -24,7 +25,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 		public async void Saves_settings_and_games_to_file_system_async_and_returns_result() {
 			_fileAccessServiceMock
 				.Setup(obj => obj.WriteFileFromYamlAsync(It.IsAny<string>(), It.IsAny<SettingsAndGamesYaml>()))
-				.Returns(Task.FromResult(true));
+				.Returns(Task.FromResult<FileWriteError?>(null));
 
 			var result = await _fileSystemSettingsAndGamesRepository.SaveAsync(testSettingsAndGames);
 
@@ -35,7 +36,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 		public async void Loads_settings_and_games_from_file_system_async_and_returns_result() {
 			_fileAccessServiceMock
 				.Setup(obj => obj.ReadFileToYamlAsync<SettingsAndGamesYaml>(It.IsAny<string>()))
-				.Returns(Task.FromResult(testSettingsAndGamesYaml)!);
+				.Returns(Task.FromResult<Either<TouhouLauncherError, SettingsAndGamesYaml>>(testSettingsAndGamesYaml));
 
 			_officialGamesTemplateServiceMock
 				.Setup(obj => obj.CreateOfficialGamesFromTemplate())

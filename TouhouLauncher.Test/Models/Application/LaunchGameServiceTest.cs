@@ -32,7 +32,7 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(Task.FromResult(testNp21ntConfig)!);
 
 			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
-				.Returns(Task.FromResult(false));
+				.Returns(Task.FromResult(new Np21ntConfigSaveError(""))!);
 
 			var result = await _launchGameService.LaunchGame(testOfficialGame2);
 
@@ -76,7 +76,7 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(testNp21ntConfig);
 
 			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
-				.Returns(Task.FromResult(true));
+				.Returns(Task.FromResult<Np21ntConfigSaveError?>(null));
 
 			_fileSystemExecutorServiceMock.Setup(obj => obj.StartExecutable(It.IsAny<string>()))
 				.Returns(new Process());
