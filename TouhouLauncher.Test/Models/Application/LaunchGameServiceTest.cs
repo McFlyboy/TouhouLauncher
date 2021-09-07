@@ -1,12 +1,13 @@
 ﻿using Moq;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.SettingsInfo;
+using TouhouLauncher.Models.Common;
 using TouhouLauncher.Models.Infrastructure.Execution.FileSystem;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
-using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
-using System.Threading.Tasks;
+using static TouhouLauncher.Test.CommonTestToolsAndData;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchGameServiceTest {
@@ -28,11 +29,14 @@ namespace TouhouLauncher.Test.Models.Application {
 
 		[Fact]
 		public async void Returns_false_when_saving_emulator_config_fails() {
+			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
+				.Returns(testEmulatorSettings);
+
 			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult(testNp21ntConfig)!);
+				.Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(testNp21ntConfig));
 
 			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
-				.Returns(Task.FromResult(new Np21ntConfigSaveError(""))!);
+				.Returns(Task.FromResult(new Np21ntConfigSaveError("Error"))!);
 
 			var result = await _launchGameService.LaunchGame(testOfficialGame2);
 
@@ -70,7 +74,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		[Fact]
 		public async void Returns_true_after_using_emulator_config_defaults_when_loading_config_fails() {
 			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<Np21ntConfig?>(null));
+				.Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(new Np21ntConfigLoadError("Error")));
 
 			_np21ntConfigDefaultsServiceMock.Setup(obj => obj.CreateNp21ntConfigDefaults())
 				.Returns(testNp21ntConfig);
