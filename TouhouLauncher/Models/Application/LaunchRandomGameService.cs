@@ -22,7 +22,7 @@ namespace TouhouLauncher.Models.Application {
 
 		public async Task<bool> LaunchRandomGame() {
 			List<Game> officialGames = _settingsAndGamesManager.OfficialGames
-				.Where(game => game.FileLocation != null && game.FileLocation != string.Empty)
+				.Where(game => !string.IsNullOrEmpty(game.FileLocation))
 				.Select(game => (Game)game)
 				.ToList();
 
@@ -40,7 +40,7 @@ namespace TouhouLauncher.Models.Application {
 			int randomNumber = _random.Next(allGames.Count);
 			Game selectedGame = allGames[randomNumber];
 
-			return await _launchGameService.LaunchGame(selectedGame);
+			return await _launchGameService.LaunchGame(selectedGame) == null;
 		}
 	}
 }

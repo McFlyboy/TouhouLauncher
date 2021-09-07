@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Models.Application {
 	public class LaunchGameService {
@@ -20,16 +21,16 @@ namespace TouhouLauncher.Models.Application {
 			_np21ntConfigDefaultsService = np21ntConfigDefaultsService;
 		}
 
-		public virtual async Task<bool> LaunchGame(Game game) {
+		public virtual async Task<TouhouLauncherError?> LaunchGame(Game game) {
 			if (game.Categories.HasFlag(GameCategories.MainPC98)) {
 				if (_settingsAndGamesManager.EmulatorSettings.FolderLocation == null) {
-					return false;
+					return new LaunchGameError.EmulatorLocationNotSetError();
 				}
 
-				var configSuccess = await ConfigureEmulatorForGame(game);
+				var configError = await ConfigureEmulatorForGame(game);
 
-				if (!configSuccess) {
-					return false;
+				if (configError != null) {
+					return configError;
 				}
 			}
 
@@ -38,23 +39,24 @@ namespace TouhouLauncher.Models.Application {
 				: game.FileLocation;
 
 			if (executableLocation == null) {
-				return false;
+				return new LaunchGameError.GameLocationNotSetError();
 			}
 
 			var process = _executorService.StartExecutable(executableLocation);
 
-			if (process == null) {
-				return false;
-			}
+			return process.Resolve<ExecutorServiceError?>(
+				error => error,
+				process => {
+					if (_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch) {
+						System.Windows.Application.Current.Shutdown();
+					}
 
-			if (_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch) {
-				System.Windows.Application.Current.Shutdown();
-			}
-
-			return true;
+					return null;
+				}
+			);
 		}
 
-		private async Task<bool> ConfigureEmulatorForGame(Game game) {
+		private async Task<Np21ntConfigSaveError?> ConfigureEmulatorForGame(Game game) {
 			Np21ntConfig config = (await _np21ntConfigRepository.LoadAsync())
 				.Resolve(
 					error => _np21ntConfigDefaultsService.CreateNp21ntConfigDefaults(),
@@ -62,7 +64,7 @@ namespace TouhouLauncher.Models.Application {
 				);
 
 			if (config.NekoProject21.Hdd1File == game.FileLocation) {
-				return true;
+				return null;
 			}
 
 			Np21ntConfig newConfig = config with {
@@ -73,7 +75,17 @@ namespace TouhouLauncher.Models.Application {
 
 			var error = await _np21ntConfigRepository.SaveAsync(newConfig);
 
-			return error == null;
+			return error;
+		}
+	}
+
+	public abstract record LaunchGameError : TouhouLauncherError {
+		public record EmulatorLocationNotSetError : LaunchGameError {
+			public override string Message => "An emulator must be connected before you can launch a PC-98 game";
+		}
+
+		public record GameLocationNotSetError : LaunchGameError {
+			public override string Message => "A game executable must be connected before you can launch this game";
 		}
 	}
 }

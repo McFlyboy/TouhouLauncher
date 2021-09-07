@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Common;
+using TouhouLauncher.Models.Common.Extensions;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes.Extensions;
 
@@ -20,12 +22,15 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 			filePath = "Settings.yaml";
 		}
 
-		public virtual async Task<bool> SaveAsync(SettingsAndGames? settingsAndGames) =>
-			(await _fileAccessService.WriteFileFromYamlAsync(filePath, settingsAndGames?.ToYaml())) == null;
+		public virtual async Task<SettingsAndGamesSaveError?> SaveAsync(SettingsAndGames? settingsAndGames) =>
+			(await _fileAccessService.WriteFileFromYamlAsync(filePath, settingsAndGames?.ToYaml()))
+				?.Transform(error => new SettingsAndGamesSaveError(error.Message));
 
-		public virtual async Task<SettingsAndGames?> LoadAsync() =>
+		public virtual async Task<Either<SettingsAndGamesLoadError, SettingsAndGames>> LoadAsync() =>
 			(await _fileAccessService.ReadFileToYamlAsync<SettingsAndGamesYaml>(filePath))
-				.Resolve<SettingsAndGamesYaml?>(error => null, yaml => yaml)
-				?.ToDomain(_officialGamesTemplateService.CreateOfficialGamesFromTemplate());
+				.ResolveToEither<SettingsAndGamesLoadError, SettingsAndGames>(
+					error => new SettingsAndGamesLoadError(error.Message),
+					yaml => yaml.ToDomain(_officialGamesTemplateService.CreateOfficialGamesFromTemplate())
+				);
 	}
 }

@@ -29,7 +29,7 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			var result = await _fileSystemSettingsAndGamesRepository.SaveAsync(testSettingsAndGames);
 
-			Assert.True(result);
+			Assert.Null(result);
 		}
 
 		[Fact]
@@ -44,14 +44,14 @@ namespace TouhouLauncher.Test.Models.Infrastructure.Persistence.FileSystem {
 
 			var result = await _fileSystemSettingsAndGamesRepository.LoadAsync();
 
-			Assert.NotNull(result);
-			Assert.Equal(testSettingsAndGames.GeneralSettings, result?.GeneralSettings);
-			Assert.Equal(testSettingsAndGames.EmulatorSettings, result?.EmulatorSettings);
-			Assert.Equal(testSettingsAndGames.OfficialGames[0], result?.OfficialGames[0]);
-			Assert.Equal(testSettingsAndGames.OfficialGames[1], result?.OfficialGames[1]);
-			Assert.Equal(testSettingsAndGames.OfficialGames[2], result?.OfficialGames[2]);
-			Assert.Equal(testSettingsAndGames.FanGames[0], result?.FanGames[0]);
-			Assert.Equal(testSettingsAndGames.FanGames[1], result?.FanGames[1]);
+			Assert.True(result.IsRight);
+			Assert.Equal(testSettingsAndGames.GeneralSettings, result.GetRight().GeneralSettings);
+			Assert.Equal(testSettingsAndGames.EmulatorSettings, result.GetRight().EmulatorSettings);
+			Assert.Equal(testSettingsAndGames.OfficialGames[0], result.GetRight().OfficialGames[0]);
+			Assert.Equal(testSettingsAndGames.OfficialGames[1], result.GetRight().OfficialGames[1]);
+			Assert.Equal(testSettingsAndGames.OfficialGames[2], result.GetRight().OfficialGames[2]);
+			Assert.Equal(testSettingsAndGames.FanGames[0], result.GetRight().FanGames[0]);
+			Assert.Equal(testSettingsAndGames.FanGames[1], result.GetRight().FanGames[1]);
 		}
 	}
 }

@@ -23,10 +23,10 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public async void Doesnt_save_changes_when_target_game_is_null_and_returns_false() {
-			var result = await _gameConfig.SaveAsync();
+		public async void Doesnt_save_changes_when_target_game_is_null_and_returns_error() {
+			var error = await _gameConfig.SaveAsync();
 
-			Assert.False(result);
+			Assert.NotNull(error);
 
 			_settingsAndGamesManagerMock.Verify(obj => obj.SaveAsync(), Times.Never);
 		}
@@ -34,13 +34,13 @@ namespace TouhouLauncher.Test.Models.Application {
 		[Fact]
 		public async void Stores_game_location_in_game_and_saves_changes_and_returns_save_result() {
 			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
-				.Returns(Task.FromResult(true));
+				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
 			_gameConfig.SetGameToConfigure(testOfficialGame1);
 
-			var result = await _gameConfig.SaveAsync();
+			var error = await _gameConfig.SaveAsync();
 
-			Assert.True(result);
+			Assert.Null(error);
 			Assert.Equal(_gameConfig.GameLocation, testOfficialGame1.FileLocation);
 
 			_settingsAndGamesManagerMock.Verify(obj => obj.SaveAsync(), Times.Once);

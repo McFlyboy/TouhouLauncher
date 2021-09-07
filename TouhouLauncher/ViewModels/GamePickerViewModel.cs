@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
@@ -63,7 +64,14 @@ namespace TouhouLauncher.ViewModels {
 
 				Command = new RelayCommand(() => {
 					if (!string.IsNullOrEmpty(_game.FileLocation)) {
-						_ = _launchGameService.LaunchGame(_game);
+						_ = _launchGameService.LaunchGame(_game)
+							.ContinueWith(async result => {
+								var error = await result;
+
+								if (error != null) {
+									MessageBox.Show(error.Message, "Error");
+								}
+							});
 					}
 					else {
 						_gameConfig.SetGameToConfigure(_game);

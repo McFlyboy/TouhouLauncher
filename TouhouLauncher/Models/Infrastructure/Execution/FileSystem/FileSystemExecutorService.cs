@@ -2,12 +2,13 @@
 using System.Diagnostics;
 using System.IO;
 using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Models.Infrastructure.Execution.FileSystem {
 	public class FileSystemExecutorService : IExecutorService {
-		public virtual Process? StartExecutable(string executableLocation) {
+		public virtual Either<ExecutorServiceError, Process> StartExecutable(string executableLocation) {
 			if (!File.Exists(executableLocation)) {
-				return null;
+				return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
 			}
 
 			ProcessStartInfo startInfo = new(executableLocation);
@@ -15,16 +16,22 @@ namespace TouhouLauncher.Models.Infrastructure.Execution.FileSystem {
 			string? directoryPath = Path.GetDirectoryName(startInfo.FileName);
 
 			if (directoryPath == null) {
-				return null;
+				return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
 			}
 
 			startInfo.WorkingDirectory = directoryPath;
 
 			try {
-				return Process.Start(startInfo);
+				var process = Process.Start(startInfo);
+
+				if (process == null || process.HasExited) {
+					return new ExecutorServiceError.ProcessExecuteError(executableLocation);
+				}
+
+				return process;
 			}
 			catch(Exception) {
-				return null;
+				return new ExecutorServiceError.ProcessExecuteError(executableLocation);
 			}
 		}
 	}

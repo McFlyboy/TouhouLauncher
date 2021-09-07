@@ -6,6 +6,7 @@ using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
+using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchRandomGameServiceTest {
@@ -48,7 +49,7 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(1);
 
 			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
-				.Returns(Task.FromResult(true));
+				.Returns(Task.FromResult<TouhouLauncherError?>(null));
 
 			var result = await _launchRandomGameService.LaunchRandomGame();
 
