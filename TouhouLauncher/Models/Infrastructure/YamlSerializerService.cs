@@ -56,6 +56,6 @@ namespace TouhouLauncher.Models.Infrastructure {
 	}
 
 	public record YamlDeserializeError : TouhouLauncherError {
-		public override string Message => "Could not deserialize yaml content";
+		public override string Message => "Failed to deserialize YAML content";
 	}
 }

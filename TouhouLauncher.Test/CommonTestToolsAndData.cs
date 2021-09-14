@@ -33,7 +33,7 @@ namespace TouhouLauncher.Test {
 			imageLocation: "",
 			audioLocation: "",
 			releaseYear: 2001,
-			fileLocation: "",
+			fileLocation: "C:\\test\\location2.exe",
 			categories: GameCategories.MainPC98,
 			downloadableFileLocation: ""
 		);
@@ -96,7 +96,7 @@ namespace TouhouLauncher.Test {
 		};
 
 		public static readonly OfficialGameYaml testOfficialGameYaml2 = new() {
-			FileLocation = ""
+			FileLocation = "C:\\test\\location2.exe"
 		};
 
 		public static readonly OfficialGameYaml testOfficialGameYaml3 = new() {

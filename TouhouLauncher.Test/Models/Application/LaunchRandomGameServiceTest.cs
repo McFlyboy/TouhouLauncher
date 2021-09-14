@@ -11,7 +11,7 @@ using TouhouLauncher.Models.Common;
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchRandomGameServiceTest {
 		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
-		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null, null, null);
+		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null, null, null, null);
 		private readonly Mock<Random> _randomMock = new();
 
 		private readonly LaunchRandomGameService _launchRandomGameService;

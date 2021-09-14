@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Common;
+using TouhouLauncher.Models.Common.Extensions;
 
 namespace TouhouLauncher.Models.Application {
 	public class LaunchGameService {
@@ -8,23 +9,37 @@ namespace TouhouLauncher.Models.Application {
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 		private readonly INp21ntConfigRepository _np21ntConfigRepository;
 		private readonly Np21ntConfigDefaultsService _np21ntConfigDefaultsService;
+		private readonly PathExistanceService _pathExistanceService;
 
 		public LaunchGameService(
 			IExecutorService executorService,
 			SettingsAndGamesManager settingsAndGamesManager,
 			INp21ntConfigRepository np21ntConfigRepository,
-			Np21ntConfigDefaultsService np21ntConfigDefaultsService
+			Np21ntConfigDefaultsService np21ntConfigDefaultsService,
+			PathExistanceService pathExistanceService
 		) {
 			_executorService = executorService;
 			_settingsAndGamesManager = settingsAndGamesManager;
 			_np21ntConfigRepository = np21ntConfigRepository;
 			_np21ntConfigDefaultsService = np21ntConfigDefaultsService;
+			_pathExistanceService = pathExistanceService;
 		}
 
 		public virtual async Task<TouhouLauncherError?> LaunchGame(Game game) {
-			if (game.Categories.HasFlag(GameCategories.MainPC98)) {
-				if (_settingsAndGamesManager.EmulatorSettings.FolderLocation == null) {
-					return new LaunchGameError.EmulatorLocationNotSetError();
+			if (!_pathExistanceService.PathExists(game.FileLocation)) {
+				return new LaunchGameError.GameDoesNotExistError();
+			}
+
+			bool isEmulatorGame = game.Categories.HasFlag(GameCategories.MainPC98);
+
+			string? emulatorLocation = _settingsAndGamesManager.EmulatorSettings.FolderLocation
+				?.Transform(folderLocation => $"{folderLocation}\\np21nt.exe");
+
+			if (isEmulatorGame) {
+				if (!_pathExistanceService.PathExists(emulatorLocation)) {
+					return string.IsNullOrEmpty(_settingsAndGamesManager.EmulatorSettings.FolderLocation)
+						? new LaunchGameError.EmulatorLocationNotSetError()
+						: new LaunchGameError.EmulatorDoesNotExistError();
 				}
 
 				var configError = await ConfigureEmulatorForGame(game);
@@ -34,17 +49,11 @@ namespace TouhouLauncher.Models.Application {
 				}
 			}
 
-			var executableLocation = game.Categories.HasFlag(GameCategories.MainPC98)
-				? $"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.exe"
-				: game.FileLocation;
+			string executableLocation = isEmulatorGame ? emulatorLocation! : game.FileLocation!;
 
-			if (executableLocation == null) {
-				return new LaunchGameError.GameLocationNotSetError();
-			}
+			var result = _executorService.StartExecutable(executableLocation);
 
-			var process = _executorService.StartExecutable(executableLocation);
-
-			return process.Resolve<ExecutorServiceError?>(
+			return result.Resolve<ExecutorServiceError?>(
 				error => error,
 				process => {
 					if (_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch) {
@@ -67,25 +76,31 @@ namespace TouhouLauncher.Models.Application {
 				return null;
 			}
 
-			Np21ntConfig newConfig = config with {
+			Np21ntConfig editedConfig = config with {
 				NekoProject21 = config.NekoProject21 with {
 					Hdd1File = game.FileLocation ?? string.Empty
 				}
 			};
 
-			var error = await _np21ntConfigRepository.SaveAsync(newConfig);
+			var error = await _np21ntConfigRepository.SaveAsync(editedConfig);
 
 			return error;
 		}
 	}
 
 	public abstract record LaunchGameError : TouhouLauncherError {
+		public record GameDoesNotExistError : LaunchGameError {
+			public override string Message => "The requested game could not be found. " +
+				"Please check that the game's file location is correct";
+		}
+
 		public record EmulatorLocationNotSetError : LaunchGameError {
 			public override string Message => "An emulator must be connected before you can launch a PC-98 game";
 		}
 
-		public record GameLocationNotSetError : LaunchGameError {
-			public override string Message => "A game executable must be connected before you can launch this game";
+		public record EmulatorDoesNotExistError : LaunchGameError {
+			public override string Message => "The PC-98 emulator was not found. " +
+				"Please update the emulator's location in settings before trying again";
 		}
 	}
 }
