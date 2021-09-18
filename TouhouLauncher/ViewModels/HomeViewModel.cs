@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
@@ -87,8 +88,12 @@ namespace TouhouLauncher.ViewModels {
 			}
 		}
 
-		private void LaunchRandomGame() {
-			_ = _launchRandomGameService.LaunchRandomGame();
+		private async void LaunchRandomGame() {
+			var error = await _launchRandomGameService.LaunchRandomGame();
+
+			if (error != null) {
+				MessageBox.Show(error.Message, "Error");
+			}
 		}
 
 		public static object RebuildHeadersMessageToken { get; } = new();

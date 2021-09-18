@@ -32,7 +32,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public async void Returns_false_when_no_settings_and_games_exist() {
+		public async void Returns_error_when_no_settings_and_games_exist() {
 			_fileSystemSettingsAndGamesServiceMock
 				.Setup(obj => obj.LoadAsync())
 				.Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(new SettingsAndGamesLoadError("Error")));
@@ -43,18 +43,18 @@ namespace TouhouLauncher.Test.Models.Application {
 
 			var result = await _settingsAndGamesManager.LoadAsync();
 
-			Assert.False(result);
+			Assert.NotNull(result);
 		}
 
 		[Fact]
-		public async void Returns_true_and_stores_loaded_settings_and_games_when_settings_and_games_exist() {
+		public async void Returns_null_and_stores_loaded_settings_and_games_when_settings_and_games_exist() {
 			_fileSystemSettingsAndGamesServiceMock
 				.Setup(obj => obj.LoadAsync())
 				.Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(testSettingsAndGames));
 
 			var result = await _settingsAndGamesManager.LoadAsync();
 
-			Assert.True(result);
+			Assert.Null(result);
 
 			Assert.True(_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch);
 

@@ -30,12 +30,12 @@ namespace TouhouLauncher.Models.Application {
 				return new LaunchGameError.GameDoesNotExistError();
 			}
 
-			bool isEmulatorGame = game.Categories.HasFlag(GameCategories.MainPC98);
+			bool isPc98Game = game.Categories.HasFlag(GameCategories.MainPC98);
 
 			string? emulatorLocation = _settingsAndGamesManager.EmulatorSettings.FolderLocation
 				?.Transform(folderLocation => $"{folderLocation}\\np21nt.exe");
 
-			if (isEmulatorGame) {
+			if (isPc98Game) {
 				if (!_pathExistanceService.PathExists(emulatorLocation)) {
 					return string.IsNullOrEmpty(_settingsAndGamesManager.EmulatorSettings.FolderLocation)
 						? new LaunchGameError.EmulatorLocationNotSetError()
@@ -49,7 +49,7 @@ namespace TouhouLauncher.Models.Application {
 				}
 			}
 
-			string executableLocation = isEmulatorGame ? emulatorLocation! : game.FileLocation!;
+			string executableLocation = isPc98Game ? emulatorLocation! : game.FileLocation!;
 
 			var result = _executorService.StartExecutable(executableLocation);
 
@@ -78,7 +78,7 @@ namespace TouhouLauncher.Models.Application {
 
 			Np21ntConfig editedConfig = config with {
 				NekoProject21 = config.NekoProject21 with {
-					Hdd1File = game.FileLocation ?? string.Empty
+					Hdd1File = game.FileLocation!
 				}
 			};
 

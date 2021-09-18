@@ -42,25 +42,30 @@ namespace TouhouLauncher.Models.Application {
 			return await _settingsAndGamesRepository.SaveAsync(_settingsAndGames);
 		}
 
-		public async Task<bool> LoadAsync() {
-			var result = await _settingsAndGamesRepository.LoadAsync();
+		public async Task<SettingsAndGamesLoadError?> LoadAsync() {
+			return (await _settingsAndGamesRepository.LoadAsync())
+				.Resolve<SettingsAndGamesLoadError?>(
+					error => {
+						_settingsAndGames = new(
+							GeneralSettings: new(
+								closeOnGameLaunch: false,
+								combineMainCategories: false
+							),
+							EmulatorSettings: new(
+								folderLocation: null
+							),
+							OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
+							FanGames: new()
+						);
 
-			_settingsAndGames = result.Resolve(
-				error => new(
-					GeneralSettings: new(
-						closeOnGameLaunch: false,
-						combineMainCategories: false
-					),
-					EmulatorSettings: new(
-						folderLocation: null
-					),
-					OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
-					FanGames: new()
-				),
-				settingsAndGames => settingsAndGames
-			);
+						return error;
+					},
+					settingsAndGames => {
+						_settingsAndGames = settingsAndGames;
 
-			return result.IsRight;
+						return null;
+					}
+				);
 		}
 	}
 }
