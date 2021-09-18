@@ -38,12 +38,12 @@ namespace TouhouLauncher.Models.Application {
 
 		public virtual List<FanGame> FanGames => _settingsAndGames.FanGames;
 
-		public async virtual Task<SettingsAndGamesSaveError?> SaveAsync() {
+		public virtual async Task<SettingsAndGamesSaveError?> SaveAsync() {
 			return await _settingsAndGamesRepository.SaveAsync(_settingsAndGames);
 		}
 
-		public async Task<SettingsAndGamesLoadError?> LoadAsync() {
-			return (await _settingsAndGamesRepository.LoadAsync())
+		public async Task<SettingsAndGamesLoadError?> LoadAsync() =>
+			(await _settingsAndGamesRepository.LoadAsync())
 				.Resolve<SettingsAndGamesLoadError?>(
 					error => {
 						_settingsAndGames = new(
@@ -66,6 +66,5 @@ namespace TouhouLauncher.Models.Application {
 						return null;
 					}
 				);
-		}
 	}
 }
