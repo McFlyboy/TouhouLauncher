@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Common;
+using TouhouLauncher.Models.Common.Extensions;
 
 namespace TouhouLauncher.Models.Application {
 	public class LaunchGameService {
@@ -7,62 +9,98 @@ namespace TouhouLauncher.Models.Application {
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 		private readonly INp21ntConfigRepository _np21ntConfigRepository;
 		private readonly Np21ntConfigDefaultsService _np21ntConfigDefaultsService;
+		private readonly PathExistanceService _pathExistanceService;
 
 		public LaunchGameService(
 			IExecutorService executorService,
 			SettingsAndGamesManager settingsAndGamesManager,
 			INp21ntConfigRepository np21ntConfigRepository,
-			Np21ntConfigDefaultsService np21ntConfigDefaultsService
+			Np21ntConfigDefaultsService np21ntConfigDefaultsService,
+			PathExistanceService pathExistanceService
 		) {
 			_executorService = executorService;
 			_settingsAndGamesManager = settingsAndGamesManager;
 			_np21ntConfigRepository = np21ntConfigRepository;
 			_np21ntConfigDefaultsService = np21ntConfigDefaultsService;
+			_pathExistanceService = pathExistanceService;
 		}
 
-		public virtual async Task<bool> LaunchGame(Game game) {
-			if (game.Categories.HasFlag(GameCategories.MainPC98)) {
-				var configSuccess = await ConfigureEmulatorForGame(game);
+		public virtual async Task<TouhouLauncherError?> LaunchGame(Game game) {
+			if (!_pathExistanceService.PathExists(game.FileLocation)) {
+				return new LaunchGameError.GameDoesNotExistError();
+			}
 
-				if (!configSuccess) {
-					return false;
+			bool isPc98Game = game.Categories.HasFlag(GameCategories.MainPC98);
+
+			string? emulatorLocation = _settingsAndGamesManager.EmulatorSettings.FolderLocation
+				?.Transform(folderLocation => $"{folderLocation}\\np21nt.exe");
+
+			if (isPc98Game) {
+				if (!_pathExistanceService.PathExists(emulatorLocation)) {
+					return string.IsNullOrEmpty(_settingsAndGamesManager.EmulatorSettings.FolderLocation)
+						? new LaunchGameError.EmulatorLocationNotSetError()
+						: new LaunchGameError.EmulatorDoesNotExistError();
+				}
+
+				var configError = await ConfigureEmulatorForGame(game);
+
+				if (configError != null) {
+					return configError;
 				}
 			}
 
-			var executableLocation = game.Categories.HasFlag(GameCategories.MainPC98)
-				? $"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.exe"
-				: game.FileLocation;
+			string executableLocation = isPc98Game ? emulatorLocation! : game.FileLocation!;
 
-			if (executableLocation == null) {
-				return false;
-			}
+			var result = _executorService.StartExecutable(executableLocation);
 
-			var process = _executorService.StartExecutable(executableLocation);
+			return result.Resolve<ExecutorServiceError?>(
+				error => error,
+				process => {
+					if (_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch) {
+						System.Windows.Application.Current.Shutdown();
+					}
 
-			if (process == null) {
-				return false;
-			}
-
-			if (_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch) {
-				System.Windows.Application.Current.Shutdown();
-			}
-
-			return true;
+					return null;
+				}
+			);
 		}
 
-		private async Task<bool> ConfigureEmulatorForGame(Game game) {
+		private async Task<Np21ntConfigSaveError?> ConfigureEmulatorForGame(Game game) {
 			Np21ntConfig config = (await _np21ntConfigRepository.LoadAsync())
-				?? _np21ntConfigDefaultsService.CreateNp21ntConfigDefaults();
+				.Resolve(
+					error => _np21ntConfigDefaultsService.CreateNp21ntConfigDefaults(),
+					config => config
+				);
 
 			if (config.NekoProject21.Hdd1File == game.FileLocation) {
-				return true;
+				return null;
 			}
 
-			config.NekoProject21.Hdd1File = game.FileLocation ?? string.Empty;
+			Np21ntConfig editedConfig = config with {
+				NekoProject21 = config.NekoProject21 with {
+					Hdd1File = game.FileLocation!
+				}
+			};
 
-			var saveSuccess = await _np21ntConfigRepository.SaveAsync(config);
+			var error = await _np21ntConfigRepository.SaveAsync(editedConfig);
 
-			return saveSuccess;
+			return error;
+		}
+	}
+
+	public abstract record LaunchGameError : TouhouLauncherError {
+		public record GameDoesNotExistError : LaunchGameError {
+			public override string Message => "The requested game could not be found. " +
+				"Please check that the game's file location is correct";
+		}
+
+		public record EmulatorLocationNotSetError : LaunchGameError {
+			public override string Message => "An emulator must be connected before you can launch a PC-98 game";
+		}
+
+		public record EmulatorDoesNotExistError : LaunchGameError {
+			public override string Message => "The PC-98 emulator was not found. " +
+				"Please update the emulator's location in settings before trying again";
 		}
 	}
 }

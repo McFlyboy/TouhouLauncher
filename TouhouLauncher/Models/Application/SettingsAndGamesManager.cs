@@ -25,7 +25,7 @@ namespace TouhouLauncher.Models.Application {
 					EmulatorSettings: new(
 						folderLocation: null
 					),
-					OfficialGames: new OfficialGame[0],
+					OfficialGames: System.Array.Empty<OfficialGame>(),
 					FanGames: new()
 				);
 		}
@@ -38,32 +38,34 @@ namespace TouhouLauncher.Models.Application {
 
 		public virtual List<FanGame> FanGames => _settingsAndGames.FanGames;
 
-		public async virtual Task<bool> SaveAsync() {
+		public async virtual Task<SettingsAndGamesSaveError?> SaveAsync() {
 			return await _settingsAndGamesRepository.SaveAsync(_settingsAndGames);
 		}
 
-		public async Task<bool> LoadAsync() {
-			var result = await _settingsAndGamesRepository.LoadAsync();
+		public async Task<SettingsAndGamesLoadError?> LoadAsync() {
+			return (await _settingsAndGamesRepository.LoadAsync())
+				.Resolve<SettingsAndGamesLoadError?>(
+					error => {
+						_settingsAndGames = new(
+							GeneralSettings: new(
+								closeOnGameLaunch: false,
+								combineMainCategories: false
+							),
+							EmulatorSettings: new(
+								folderLocation: null
+							),
+							OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
+							FanGames: new()
+						);
 
-			if (result == null) {
-				_settingsAndGames = new(
-					GeneralSettings: new(
-						closeOnGameLaunch: false,
-						combineMainCategories: false
-					),
-					EmulatorSettings: new(
-						folderLocation: null
-					),
-					OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
-					FanGames: new()
+						return error;
+					},
+					settingsAndGames => {
+						_settingsAndGames = settingsAndGames;
+
+						return null;
+					}
 				);
-
-				return false;
-			}
-
-			_settingsAndGames = result;
-
-			return true;
 		}
 	}
 }

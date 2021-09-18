@@ -16,15 +16,15 @@ namespace TouhouLauncher.Test.Models.Infrastructure {
 
 		[Fact]
 		public void Deserializes_yaml_formatted_strings_to_objects() {
-			object? emptyResult = _yamlSerializerService.Deserialize<object>("");
-			object? nonsenseResult = _yamlSerializerService.Deserialize<object>("grer43t4q3g43rab b fewfe2");
-			object? nullResult = _yamlSerializerService.Deserialize<object>("--- ");
-			SimpleType? simpleObjectResult = _yamlSerializerService.Deserialize<SimpleType>($"text: Hello{LineBreak}number: 3{LineBreak}");
+			var emptyResult = _yamlSerializerService.Deserialize<object>("");
+			var nonsenseResult = _yamlSerializerService.Deserialize<object>("grer43t4q3g43rab b fewfe2");
+			var nullResult = _yamlSerializerService.Deserialize<object>("--- ");
+			var simpleObjectResult = _yamlSerializerService.Deserialize<SimpleType>($"text: Hello{LineBreak}number: 3{LineBreak}");
 
-			Assert.Null(emptyResult);
-			Assert.Equal("grer43t4q3g43rab b fewfe2", nonsenseResult);
-			Assert.Null(nullResult);
-			Assert.Equal(new() { Text = "Hello", Number = 3 }, simpleObjectResult);
+			Assert.True(emptyResult.IsLeft);
+			Assert.Equal("grer43t4q3g43rab b fewfe2", nonsenseResult.GetRight());
+			Assert.True(nullResult.IsLeft);
+			Assert.Equal(new() { Text = "Hello", Number = 3 }, simpleObjectResult.GetRight());
 		}
 
 		[Fact]
@@ -40,9 +40,10 @@ namespace TouhouLauncher.Test.Models.Infrastructure {
 		public void Yaml_string_turns_into_yaml_object() {
 			string yamlString = yamlTestTypeObjectAsString;
 
-			YamlTestType? result = yamlString.ToYamlObject<YamlTestType>();
+			var result = yamlString.ToYamlObject<YamlTestType>();
 
-			Assert.Equal(yamlTestTypeObject, result);
+			Assert.True(result.IsRight);
+			Assert.Equal(yamlTestTypeObject, result.GetRight());
 		}
 	}
 }

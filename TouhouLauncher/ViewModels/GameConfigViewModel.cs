@@ -41,9 +41,10 @@ namespace TouhouLauncher.ViewModels {
 			});
 
 			OkCommand = new RelayCommand<Window>(async window => {
-				bool success = await _gameConfig.SaveAsync();
+				var error = await _gameConfig.SaveAsync();
 
-				if (!success) {
+				if (error != null) {
+					MessageBox.Show(error.Message, "Error");
 					return;
 				}
 

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
+using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Models.Application {
 	public class GameConfig {
@@ -16,9 +17,9 @@ namespace TouhouLauncher.Models.Application {
 
 		public string GameLocation { get; set; }
 
-		public async Task<bool> SaveAsync() {
+		public async Task<TouhouLauncherError?> SaveAsync() {
 			if (TargetGame == null) {
-				return false;
+				return new TargetGameNotSetError();
 			}
 
 			TargetGame.FileLocation = GameLocation;
@@ -29,5 +30,9 @@ namespace TouhouLauncher.Models.Application {
 			TargetGame = game;
 			GameLocation = TargetGame.FileLocation ?? string.Empty;
 		}
+	}
+
+	public record TargetGameNotSetError : TouhouLauncherError {
+		public override string Message => "Target game to configure was not set correctly";
 	}
 }

@@ -25,7 +25,7 @@ namespace TouhouLauncher.Test.Models.Common.Either {
 		public void Converts_both_types_into_new_types_packed_into_a_new_either_and_returns_it() {
 			Either<bool, float> either = 3.2f;
 
-			Either<string, int> result = either.ResolveToEither(
+			Either<string, int> result = either.ResolveToEither<string, int>(
 				leftValue => leftValue.ToString(),
 				rightValue => (int)rightValue
 			);

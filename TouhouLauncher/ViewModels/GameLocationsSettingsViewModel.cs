@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application;
+using System.Windows;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameLocationsSettingsViewModel : ViewModelBase {
@@ -58,7 +59,14 @@ namespace TouhouLauncher.ViewModels {
 				get => _game.FileLocation ?? string.Empty;
 				set {
 					_game.FileLocation = value;
-					_ = _settingsAndGamesManager.SaveAsync();
+					_settingsAndGamesManager.SaveAsync()
+						.ContinueWith(async result => {
+							var error = await result;
+
+							if (error != null) {
+								MessageBox.Show(error.Message, "Error");
+							}
+						});
 				}
 			}
 

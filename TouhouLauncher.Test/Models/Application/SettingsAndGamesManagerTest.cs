@@ -4,6 +4,7 @@ using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
+using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class SettingsAndGamesManagerTest {
@@ -23,18 +24,18 @@ namespace TouhouLauncher.Test.Models.Application {
 		public async void Saves_settings_and_games_and_returns_result() {
 			_fileSystemSettingsAndGamesServiceMock
 				.Setup(obj => obj.SaveAsync(It.IsAny<SettingsAndGames>()))
-				.Returns(Task.FromResult(true));
+				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
-			var result = await _settingsAndGamesManager.SaveAsync();
+			var error = await _settingsAndGamesManager.SaveAsync();
 
-			Assert.True(result);
+			Assert.Null(error);
 		}
 
 		[Fact]
-		public async void Returns_false_when_no_settings_and_games_exist() {
+		public async void Returns_error_when_no_settings_and_games_exist() {
 			_fileSystemSettingsAndGamesServiceMock
 				.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<SettingsAndGames?>(null));
+				.Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(new SettingsAndGamesLoadError("Error")));
 
 			_officialGamesTemplateServiceMock
 				.Setup(obj => obj.CreateOfficialGamesFromTemplate())
@@ -42,18 +43,18 @@ namespace TouhouLauncher.Test.Models.Application {
 
 			var result = await _settingsAndGamesManager.LoadAsync();
 
-			Assert.False(result);
+			Assert.NotNull(result);
 		}
 
 		[Fact]
-		public async void Returns_true_and_stores_loaded_settings_and_games_when_settings_and_games_exist() {
+		public async void Returns_null_and_stores_loaded_settings_and_games_when_settings_and_games_exist() {
 			_fileSystemSettingsAndGamesServiceMock
 				.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult(testSettingsAndGames)!);
+				.Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(testSettingsAndGames));
 
 			var result = await _settingsAndGamesManager.LoadAsync();
 
-			Assert.True(result);
+			Assert.Null(result);
 
 			Assert.True(_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch);
 

@@ -6,11 +6,12 @@ using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
+using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Test.Models.Application {
 	public class LaunchRandomGameServiceTest {
 		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
-		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null, null, null);
+		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null, null, null, null);
 		private readonly Mock<Random> _randomMock = new();
 
 		private readonly LaunchRandomGameService _launchRandomGameService;
@@ -24,7 +25,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public async void Does_not_start_a_game_when_no_games_exist() {
+		public async void Returns_error_when_no_games_exist() {
 			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
 				.Returns(Array.Empty<OfficialGame>());
 
@@ -33,11 +34,12 @@ namespace TouhouLauncher.Test.Models.Application {
 
 			var result = await _launchRandomGameService.LaunchRandomGame();
 
-			Assert.False(result);
+			Assert.NotNull(result);
+			Assert.IsType<LaunchRandomGameServiceError.NoGamesAddedError>(result);
 		}
 
 		[Fact]
-		public async void Starts_a_game_when_games_exist() {
+		public async void Returns_error_when_a_game_fails_to_start() {
 			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
 				.Returns(testOfficialGames);
 
@@ -48,14 +50,35 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(1);
 
 			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
-				.Returns(Task.FromResult(true));
+				.Returns(Task.FromResult<TouhouLauncherError?>(new LaunchGameError.GameDoesNotExistError()));
 
 			var result = await _launchRandomGameService.LaunchRandomGame();
 
-			_launchGameServiceMock
-				.Verify(obj => obj.LaunchGame(It.IsAny<Game>()), Times.Once());
+			_launchGameServiceMock.Verify(obj => obj.LaunchGame(It.IsAny<Game>()), Times.Once());
 
-			Assert.True(result);
+			Assert.NotNull(result);
+			Assert.IsType<LaunchGameError.GameDoesNotExistError>(result);
+		}
+
+		[Fact]
+		public async void Returns_null_when_a_game_starts_successfully() {
+			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
+				.Returns(testOfficialGames);
+
+			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
+				.Returns(testFanGames);
+
+			_randomMock.Setup(obj => obj.Next(It.IsAny<int>()))
+				.Returns(1);
+
+			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
+				.Returns(Task.FromResult<TouhouLauncherError?>(null));
+
+			var result = await _launchRandomGameService.LaunchRandomGame();
+
+			_launchGameServiceMock.Verify(obj => obj.LaunchGame(It.IsAny<Game>()), Times.Once());
+
+			Assert.Null(result);
 		}
 	}
 }

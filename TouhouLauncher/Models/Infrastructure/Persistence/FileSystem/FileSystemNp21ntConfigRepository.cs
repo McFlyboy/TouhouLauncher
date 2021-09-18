@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
+using TouhouLauncher.Models.Common;
+using TouhouLauncher.Models.Common.Extensions;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.IniTypes.Extensions;
 
@@ -19,15 +21,18 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 			_np21ntConfigDefaultsService = np21ntConfigDefaultsService;
 		}
 
-		public virtual async Task<bool> SaveAsync(Np21ntConfig? config) =>
-			await _fileAccessService.WriteFileFromIniAsync(
+		public virtual async Task<Np21ntConfigSaveError?> SaveAsync(Np21ntConfig? config) =>
+			(await _fileAccessService.WriteFileFromIniAsync(
 				$"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.ini",
 				config?.ToIni()
-			);
+			))?.Transform(error => new Np21ntConfigSaveError(error.Message));
 
-		public virtual async Task<Np21ntConfig?> LoadAsync() =>
+		public virtual async Task<Either<Np21ntConfigLoadError, Np21ntConfig>> LoadAsync() =>
 			(await _fileAccessService.ReadFileToIniAsync<Np21ntConfigIni>(
 				$"{_settingsAndGamesManager.EmulatorSettings.FolderLocation}\\np21nt.ini"
-			))?.ToDomain(_np21ntConfigDefaultsService.CreateNp21ntConfigDefaults());
+			)).ResolveToEither<Np21ntConfigLoadError, Np21ntConfig>(
+				error => new Np21ntConfigLoadError(error.Message),
+				ini => ini.ToDomain(_np21ntConfigDefaultsService.CreateNp21ntConfigDefaults())
+			);
 	}
 }

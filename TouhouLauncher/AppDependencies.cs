@@ -38,6 +38,7 @@ namespace TouhouLauncher {
 			dependencies.Register<Random>(() => new());
 			dependencies.Register<INp21ntConfigRepository, FileSystemNp21ntConfigRepository>();
 			dependencies.Register<Np21ntConfigDefaultsService>();
+			dependencies.Register<PathExistanceService>();
 		}
 
 		public MainViewModel MainVM =>
