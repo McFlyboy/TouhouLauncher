@@ -52,6 +52,7 @@
 				Content="Browse..."
 				Width="100"
 				Margin="10 0 0 0"
+				Cursor="Hand"
 			/>
 		</Grid>
 	</Grid>

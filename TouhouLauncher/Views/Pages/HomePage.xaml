@@ -86,6 +86,40 @@
 					</ControlTemplate>
 				</Button.Template>
 			</Button>
+
+			<Button
+				Cursor="Hand"
+				Margin="855, 370, 0, 0"
+				Width="60"
+				Height="60"
+				ToolTip="New fan game..."
+				Visibility="{Binding NewFanGameVisibility}"
+				Command="{Binding CreateNewFanGameCommand}"
+			>
+				<Button.Template>
+					<ControlTemplate TargetType="Button">
+						<Border Background="#342E30" CornerRadius="30">
+							<TextBlock Text="+" Foreground="#FFC106" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-9,0,0"/>
+							<Border.Triggers>
+								<EventTrigger RoutedEvent="Mouse.MouseEnter">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).Color" To="#453F41"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+								<EventTrigger RoutedEvent="Mouse.MouseLeave">
+									<BeginStoryboard>
+										<Storyboard>
+											<ColorAnimation Duration="0:0:0.125" Storyboard.TargetProperty="(Border.Background).Color" To="#342E30"/>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+							</Border.Triggers>
+						</Border>
+					</ControlTemplate>
+				</Button.Template>
+			</Button>
 		</Grid>
 	</Grid>
 </Page>

@@ -4,7 +4,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls.Settings"
-		mc:Ignorable="d" 
+		mc:Ignorable="d"
 		d:DesignHeight="800" d:DesignWidth="600"
 		DataContext="{Binding GameLocationsSettingsVM, Source={StaticResource Dependencies}}">
 	<Grid>
@@ -55,6 +55,7 @@
 							Command="{Binding BrowseCommand}"
 							Width="100"
 							Margin="10 0 0 0"
+							Cursor="Hand"
 						/>
 					</Grid>
 				</DataTemplate>

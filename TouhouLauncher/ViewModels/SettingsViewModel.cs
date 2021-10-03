@@ -11,9 +11,9 @@ namespace TouhouLauncher.ViewModels {
 		public SettingsViewModel() {
 			_category = SettingsCategory.GeneralSettings;
 
-			BackCommand = new RelayCommand(() => {
-				MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken);
-			});
+			BackCommand = new RelayCommand(
+				() => MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken)
+			);
 		}
 
 		public int CurrentSettingsCategoryIndex {
