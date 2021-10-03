@@ -38,9 +38,15 @@ namespace TouhouLauncher.ViewModels {
 
 			HeaderList.Add(CreateRandomGameHeader());
 
-			OpenSettingsCommand = new RelayCommand(() => {
-				MessengerInstance.Send("SettingsPage.xaml", MainViewModel.ChangePageMessageToken);
-			});
+			OpenSettingsCommand = new RelayCommand(
+				() => MessengerInstance.Send("SettingsPage.xaml", MainViewModel.ChangePageMessageToken)
+			);
+
+			CreateNewFanGameCommand = new RelayCommand(
+				() => MessengerInstance.Send("FanGameEditorPage.xaml", MainViewModel.ChangePageMessageToken)
+			);
+
+			NewFanGameVisibility = Visibility.Hidden;
 		}
 
 		public ObservableCollection<HeaderButton> HeaderList { get; }
@@ -48,6 +54,10 @@ namespace TouhouLauncher.ViewModels {
 		public string HeaderPadding => $"{(HeaderList.Count > 5 ? 10 : 30)} 0";
 
 		public ICommand OpenSettingsCommand { get; }
+
+		public ICommand CreateNewFanGameCommand { get; }
+
+		public Visibility NewFanGameVisibility { get; private set; }
 
 		private HeaderButton CreateRandomGameHeader() => new(
 			name: "LAUNCH\nRANDOM GAME",
@@ -167,6 +177,12 @@ namespace TouhouLauncher.ViewModels {
 				}
 				HeaderCommand = new RelayCommand(() => {
 					_parent.SetCurrentCategory(_categories);
+
+					_parent.NewFanGameVisibility = _categories.HasFlag(GameCategories.FanGame)
+						? Visibility.Visible
+						: Visibility.Hidden;
+
+					_parent.RaisePropertyChanged(nameof(_parent.NewFanGameVisibility));
 				});
 			}
 
