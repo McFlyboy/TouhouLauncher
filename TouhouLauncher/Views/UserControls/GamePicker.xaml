@@ -36,7 +36,7 @@
 									</Image>
 									<Grid x:Name="GameButtonOverlay" Opacity="0" Background="#3A2E3F">
 										<TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-										<TextBlock Text="{Binding ReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5, 5"/>
+										<TextBlock Text="{Binding ReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5, 5"/>
 									</Grid>
 								</Grid>
 								<ControlTemplate.Triggers>
