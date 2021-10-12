@@ -25,7 +25,7 @@ namespace TouhouLauncher {
 
 			/* ------ MODELS ------ */
 			dependencies.Register<SettingsAndGamesManager>();
-			dependencies.Register<GameConfig>();
+			dependencies.Register<GameConfigService>();
 			dependencies.Register<ActiveGameCategory>();
 			dependencies.Register<GamePickerList>();
 			dependencies.Register<IExecutorService, FileSystemExecutorService>();
@@ -40,6 +40,7 @@ namespace TouhouLauncher {
 			dependencies.Register<INp21ntConfigRepository, FileSystemNp21ntConfigRepository>();
 			dependencies.Register<Np21ntConfigDefaultsService>();
 			dependencies.Register<PathExistanceService>();
+			dependencies.Register<FanGameEditingService>();
 		}
 
 		public MainViewModel MainVM =>

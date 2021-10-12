@@ -14,18 +14,18 @@ namespace TouhouLauncher.ViewModels {
 		private readonly GamePickerList _gamePickerList;
 		private readonly ActiveGameCategory _activeGameCategory;
 		private readonly LaunchGameService _launchGameService;
-		private readonly GameConfig _gameConfig;
+		private readonly GameConfigService _gameConfigService;
 
 		public GamePickerViewModel(
 			GamePickerList gamePickerList,
 			ActiveGameCategory activeGameCategory,
 			LaunchGameService launchGameService,
-			GameConfig gameConfig
+			GameConfigService gameConfigService
 		) {
 			_gamePickerList = gamePickerList;
 			_activeGameCategory = activeGameCategory;
 			_launchGameService = launchGameService;
-			_gameConfig = gameConfig;
+			_gameConfigService = gameConfigService;
 
 			GameButtons = new ObservableCollection<GameButton>();
 
@@ -43,7 +43,7 @@ namespace TouhouLauncher.ViewModels {
 			GameButtons.Clear();
 			foreach (Game game in games) {
 				GameButtons.Add(
-					new GameButton(game, _launchGameService, _gameConfig)
+					new GameButton(game, _launchGameService, _gameConfigService)
 				);
 			}
 		}
@@ -51,16 +51,16 @@ namespace TouhouLauncher.ViewModels {
 		public class GameButton {
 			private readonly Game _game;
 			private readonly LaunchGameService _launchGameService;
-			private readonly GameConfig _gameConfig;
+			private readonly GameConfigService _gameConfigService;
 
 			public GameButton(
 				Game game,
 				LaunchGameService launchGameService,
-				GameConfig gameConfig
+				GameConfigService gameConfigService
 			) {
 				_game = game;
 				_launchGameService = launchGameService;
-				_gameConfig = gameConfig;
+				_gameConfigService = gameConfigService;
 
 				Command = new RelayCommand(async () => {
 					if (!string.IsNullOrEmpty(_game.FileLocation)) {
@@ -71,7 +71,7 @@ namespace TouhouLauncher.ViewModels {
 						}
 					}
 					else {
-						_gameConfig.SetGameToConfigure(_game);
+						_gameConfigService.SetGameToConfigure(_game);
 						new GameConfigWindow().ShowDialog();
 					}
 				});

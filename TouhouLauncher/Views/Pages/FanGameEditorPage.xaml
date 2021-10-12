@@ -51,7 +51,7 @@
 					<TextBox
 						Grid.Row="1"
 						Style="{StaticResource DarkTextbox}"
-						Text=""
+						Text="{Binding GameTitle}"
 						Padding="5"
 					/>
 				</Grid>
@@ -75,7 +75,7 @@
 					<TextBox
 						Grid.Row="1"
 						Style="{StaticResource DarkTextbox}"
-						Text=""
+						Text="{Binding YearOfRelease}"
 						Padding="5"
 					/>
 				</Grid>
@@ -99,7 +99,7 @@
 					<TextBox
 						Grid.Row="1"
 						Style="{StaticResource DarkTextbox}"
-						Text=""
+						Text="{Binding GameLocation}"
 						Padding="5"
 					/>
 
@@ -111,6 +111,7 @@
 						Width="100"
 						Margin="10 0 0 0"
 						Cursor="Hand"
+						Command="{Binding BrowseCommand}"
 					/>
 				</Grid>
 			</StackPanel>
@@ -124,6 +125,7 @@
 				Margin="0,560,110,-370"
 				HorizontalAlignment="Right"
 				Cursor="Hand"
+				Command="{Binding SaveCommand}"
 			/>
 
 			<Button

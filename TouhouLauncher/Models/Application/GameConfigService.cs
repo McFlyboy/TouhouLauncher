@@ -3,10 +3,10 @@ using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Common;
 
 namespace TouhouLauncher.Models.Application {
-	public class GameConfig {
+	public class GameConfigService {
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
-		public GameConfig(SettingsAndGamesManager settingsAndGamesManager) {
+		public GameConfigService(SettingsAndGamesManager settingsAndGamesManager) {
 			_settingsAndGamesManager = settingsAndGamesManager;
 
 			TargetGame = null;
