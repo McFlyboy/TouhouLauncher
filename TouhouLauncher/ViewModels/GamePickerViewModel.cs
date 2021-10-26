@@ -27,6 +27,8 @@ namespace TouhouLauncher.ViewModels {
 			_launchGameService = launchGameService;
 			_gameConfigService = gameConfigService;
 
+			MessengerInstance.Register<object?>(this, UpdateGamesToken, _ => UpdateGames());
+
 			GameButtons = new ObservableCollection<GameButton>();
 
 			UpdateGames();
@@ -47,6 +49,8 @@ namespace TouhouLauncher.ViewModels {
 				);
 			}
 		}
+
+		public static object UpdateGamesToken { get; } = new();
 
 		public class GameButton {
 			private readonly Game _game;

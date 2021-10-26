@@ -55,6 +55,7 @@ namespace TouhouLauncher.ViewModels {
 					return;
 				}
 
+				MessengerInstance.Send<object?>(null, GamePickerViewModel.UpdateGamesToken);
 				MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken);
 			});
 
