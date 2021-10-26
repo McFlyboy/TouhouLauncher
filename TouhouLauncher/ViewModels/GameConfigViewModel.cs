@@ -24,10 +24,12 @@ namespace TouhouLauncher.ViewModels {
 
 				var browseResult = _gameConfigService.TargetGame.Categories.HasFlag(GameCategories.MainPC98)
 					? _fileSystemBrowserService.BrowseFiles(
+						"Select game",
 						new("Hard disk image files", "*.hdi", "*.t98"),
 						new("All files", "*.*")
 					)
 					: _fileSystemBrowserService.BrowseFiles(
+						"Select game",
 						new("Executable files", "*.exe"),
 						new("All files", "*.*")
 					);

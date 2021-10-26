@@ -11,28 +11,32 @@ namespace TouhouLauncher.Models.Application {
 
 			TargetFanGame = null;
 			GameTitle = string.Empty;
-			YearOfRelease = string.Empty;
+			YearOfRelease = null;
 			GameLocation = string.Empty;
-			CoverImageLocation = string.Empty;
+			CoverImageLocation = null;
 		}
 
 		public FanGame? TargetFanGame { get; private set; }
 
 		public string GameTitle { get; set; }
 
-		public string YearOfRelease { get; set; }
+		public int? YearOfRelease { get; set; }
 
 		public string GameLocation { get; set; }
 
-		public string CoverImageLocation { get; set; }
+		public string? CoverImageLocation { get; set; }
 
 		public async Task<TouhouLauncherError?> SaveAsync() {
+			if (GameTitle.Length == 0 || GameLocation.Length == 0) {
+				return new FanGameInfoMissingError();
+			}
+
 			if (TargetFanGame == null) {
 				TargetFanGame = new(
 					title: GameTitle,
 					imageLocation: CoverImageLocation,
 					audioLocation: null,
-					releaseYear: int.Parse(YearOfRelease),
+					releaseYear: YearOfRelease,
 					fileLocation: GameLocation
 				);
 
@@ -42,7 +46,7 @@ namespace TouhouLauncher.Models.Application {
 				TargetFanGame.Title = GameTitle;
 				TargetFanGame.ImageLocation = CoverImageLocation;
 				TargetFanGame.AudioLocation = null;
-				TargetFanGame.ReleaseYear = int.Parse(YearOfRelease);
+				TargetFanGame.ReleaseYear = YearOfRelease;
 				TargetFanGame.FileLocation = GameLocation;
 			}
 
@@ -52,9 +56,13 @@ namespace TouhouLauncher.Models.Application {
 		public void SetFanGameToEdit(FanGame? fanGame) {
 			TargetFanGame = fanGame;
 			GameTitle = fanGame?.Title ?? string.Empty;
-			YearOfRelease = fanGame?.ReleaseYear?.ToString() ?? string.Empty;
+			YearOfRelease = fanGame?.ReleaseYear;
 			GameLocation = fanGame?.FileLocation ?? string.Empty;
-			CoverImageLocation = fanGame?.ImageLocation ?? string.Empty;
+			CoverImageLocation = fanGame?.ImageLocation;
 		}
+	}
+
+	public record FanGameInfoMissingError : TouhouLauncherError {
+		public override string Message => "Game title and location must both be specified in order to add a new fan game";
 	}
 }

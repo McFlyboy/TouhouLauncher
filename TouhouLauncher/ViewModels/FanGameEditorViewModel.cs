@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
@@ -18,6 +19,7 @@ namespace TouhouLauncher.ViewModels {
 
 			BrowseCommand = new RelayCommand(() => {
 				var browseResult = _fileSystemBrowserService.BrowseFiles(
+					"Select game",
 					new("Executable files", "*.exe"),
 					new("All files", "*.*")
 				);
@@ -28,6 +30,21 @@ namespace TouhouLauncher.ViewModels {
 
 				GameLocation = browseResult;
 				RaisePropertyChanged(nameof(GameLocation));
+			});
+
+			BrowseImageCommand = new RelayCommand(() => {
+				var browseResult = _fileSystemBrowserService.BrowseFiles(
+					"Select cover image",
+					new("Image files", "*.png", "*.jpg"),
+					new("All files", "*.*")
+				);
+
+				if (browseResult == null) {
+					return;
+				}
+
+				CoverImageLocation = browseResult;
+				RaisePropertyChanged(nameof(CoverImageLocation));
 			});
 
 			SaveCommand = new RelayCommand(async () => {
@@ -52,8 +69,15 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		public string YearOfRelease {
-			get => _fanGameEditingService.YearOfRelease;
-			set => _fanGameEditingService.YearOfRelease = value;
+			get => _fanGameEditingService.YearOfRelease?.ToString() ?? "";
+			set {
+				try {
+					_fanGameEditingService.YearOfRelease = int.Parse(value);
+				}
+				catch (Exception) {
+					_fanGameEditingService.YearOfRelease = null;
+				}
+			}
 		}
 
 		public string GameLocation {
@@ -62,11 +86,13 @@ namespace TouhouLauncher.ViewModels {
 		}
 
 		public string CoverImageLocation {
-			get => _fanGameEditingService.CoverImageLocation;
-			set => _fanGameEditingService.CoverImageLocation = value;
+			get => _fanGameEditingService.CoverImageLocation ?? string.Empty;
+			set => _fanGameEditingService.CoverImageLocation = value.Length > 0 ? value : null;
 		}
 
 		public ICommand BrowseCommand { get; }
+
+		public ICommand BrowseImageCommand { get; }
 
 		public ICommand SaveCommand { get; }
 
