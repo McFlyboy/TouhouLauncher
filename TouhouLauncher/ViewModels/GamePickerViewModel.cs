@@ -89,6 +89,10 @@ namespace TouhouLauncher.ViewModels {
 				?.Transform(releaseYear => $"Release: {releaseYear}")
 				?? string.Empty;
 
+			public Visibility ShowEditButton => _game.Categories.HasFlag(GameCategories.FanGame)
+				? Visibility.Visible
+				: Visibility.Hidden;
+
 			public ICommand Command { get; }
 		}
 	}
