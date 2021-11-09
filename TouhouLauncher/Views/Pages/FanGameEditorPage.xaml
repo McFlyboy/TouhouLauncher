@@ -25,7 +25,7 @@
 			</Grid.RowDefinitions>
 
 			<TextBlock
-				Text="New fan game"
+				Text="{Binding PageTitle}"
 				Foreground="White"
 				FontSize="22"
 				FontWeight="Bold"

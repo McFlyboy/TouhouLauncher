@@ -64,6 +64,8 @@ namespace TouhouLauncher.ViewModels {
 			);
 		}
 
+		public string PageTitle => _fanGameEditingService.TargetFanGame == null ? "New fan game" : "Edit fan game";
+
 		public string GameTitle {
 			get => _fanGameEditingService.GameTitle;
 			set => _fanGameEditingService.GameTitle = value;

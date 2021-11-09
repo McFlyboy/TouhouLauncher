@@ -46,6 +46,7 @@
 											Margin="5"
 											Padding="5"
 											Visibility="{Binding ShowEditButton}"
+                                            Command="{Binding EditCommand}"
 										/>
 									</Grid>
 								</Grid>
