@@ -7,27 +7,29 @@ using TouhouLauncher.Models.Application.GameInfo;
 
 namespace TouhouLauncher.ViewModels {
 	public class GameConfigViewModel : ViewModelBase {
-		private readonly GameConfig _gameConfig;
+		private readonly GameConfigService _gameConfigService;
 		private readonly FileSystemBrowserService _fileSystemBrowserService;
 
 		public GameConfigViewModel(
-			GameConfig gameConfig,
+			GameConfigService gameConfigService,
 			FileSystemBrowserService fileSystemBrowserService
 		) {
-			_gameConfig = gameConfig;
+			_gameConfigService = gameConfigService;
 			_fileSystemBrowserService = fileSystemBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				if (_gameConfig.TargetGame == null) {
+				if (_gameConfigService.TargetGame == null) {
 					return;
 				} 
 
-				var browseResult = _gameConfig.TargetGame.Categories.HasFlag(GameCategories.MainPC98)
+				var browseResult = _gameConfigService.TargetGame.Categories.HasFlag(GameCategories.MainPC98)
 					? _fileSystemBrowserService.BrowseFiles(
+						"Select game",
 						new("Hard disk image files", "*.hdi", "*.t98"),
 						new("All files", "*.*")
 					)
 					: _fileSystemBrowserService.BrowseFiles(
+						"Select game",
 						new("Executable files", "*.exe"),
 						new("All files", "*.*")
 					);
@@ -41,7 +43,7 @@ namespace TouhouLauncher.ViewModels {
 			});
 
 			OkCommand = new RelayCommand<Window>(async window => {
-				var error = await _gameConfig.SaveAsync();
+				var error = await _gameConfigService.SaveAsync();
 
 				if (error != null) {
 					MessageBox.Show(error.Message, "Error");
@@ -56,11 +58,11 @@ namespace TouhouLauncher.ViewModels {
 			});
 		}
 
-		public string WindowTitle => $"Configure {_gameConfig.TargetGame?.Title ?? "unknown game"}";
+		public string WindowTitle => $"Configure {_gameConfigService.TargetGame?.Title ?? "unknown game"}";
 
 		public string GameLocation {
-			get => _gameConfig.GameLocation;
-			set => _gameConfig.GameLocation = value;
+			get => _gameConfigService.GameLocation;
+			set => _gameConfigService.GameLocation = value;
 		}
 
 		public ICommand BrowseCommand { get; }

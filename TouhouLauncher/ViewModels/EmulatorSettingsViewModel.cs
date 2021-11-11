@@ -17,7 +17,7 @@ namespace TouhouLauncher.ViewModels {
 			_fileSystemBrowserService = fileSystemBrowserService;
 
 			BrowseCommand = new RelayCommand(() => {
-				var result = _fileSystemBrowserService.BrowseFolders();
+				var result = _fileSystemBrowserService.BrowseFolders("Select emulator folder");
 
 				if (result == null) {
 					return;

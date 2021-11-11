@@ -3,18 +3,18 @@ using System.Linq;
 
 namespace TouhouLauncher.Models.Application {
 	public class FileSystemBrowserService {
-		public string? BrowseFolders() {
+		public string? BrowseFolders(string browserTitle) {
 			System.Windows.Forms.FolderBrowserDialog folderDialog = new() {
-				Description = "Select emulator folder",
+				Description = browserTitle,
 				UseDescriptionForTitle = true
 			};
 
 			return (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) ? folderDialog.SelectedPath : null;
 		}
 
-		public string? BrowseFiles(params Filter[] filters) {
+		public string? BrowseFiles(string browserTitle, params Filter[] filters) {
 			OpenFileDialog fileDialog = new() {
-				Title = "Select game",
+				Title = browserTitle,
 				Filter = CreateFileFilterString(filters),
 			};
 

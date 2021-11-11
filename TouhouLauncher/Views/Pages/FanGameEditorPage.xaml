@@ -4,6 +4,7 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  xmlns:local="clr-namespace:TouhouLauncher.Views.Pages"
+	  xmlns:viewModels="clr-namespace:TouhouLauncher.ViewModels"
 	  mc:Ignorable="d"
 	  d:DesignWidth="1000" d:DesignHeight="800"
 	  Title="FanGameEditorPage"
@@ -24,7 +25,7 @@
 			</Grid.RowDefinitions>
 
 			<TextBlock
-				Text="New fan game"
+				Text="{Binding PageTitle}"
 				Foreground="White"
 				FontSize="22"
 				FontWeight="Bold"
@@ -51,7 +52,7 @@
 					<TextBox
 						Grid.Row="1"
 						Style="{StaticResource DarkTextbox}"
-						Text=""
+						Text="{Binding GameTitle}"
 						Padding="5"
 					/>
 				</Grid>
@@ -75,7 +76,7 @@
 					<TextBox
 						Grid.Row="1"
 						Style="{StaticResource DarkTextbox}"
-						Text=""
+						Text="{Binding YearOfRelease}"
 						Padding="5"
 					/>
 				</Grid>
@@ -99,7 +100,7 @@
 					<TextBox
 						Grid.Row="1"
 						Style="{StaticResource DarkTextbox}"
-						Text=""
+						Text="{Binding GameLocation}"
 						Padding="5"
 					/>
 
@@ -111,6 +112,7 @@
 						Width="100"
 						Margin="10 0 0 0"
 						Cursor="Hand"
+						Command="{Binding BrowseCommand}"
 					/>
 				</Grid>
 			</StackPanel>
@@ -124,6 +126,7 @@
 				Margin="0,560,110,-370"
 				HorizontalAlignment="Right"
 				Cursor="Hand"
+				Command="{Binding SaveCommand}"
 			/>
 
 			<Button
@@ -146,11 +149,16 @@
 			VerticalAlignment="Top"
 			Margin="0, 143"
 			Cursor="Hand"
+			Command="{Binding BrowseImageCommand}"
 		>
 			<Button.Template>
 				<ControlTemplate TargetType="Button">
-					<Grid ClipToBounds="True" Background="#342E30">
-						<!--<Image Source=""/>-->
+					<Grid
+						ClipToBounds="True"
+						Background="#342E30"
+						d:DataContext="{d:DesignInstance Type=viewModels:FanGameEditorViewModel}"
+					>
+						<Image Source="{Binding CoverImageLocation}"/>
 
 						<Border Background="#3A2E3F" Opacity="0.85"/>
 

@@ -5,26 +5,26 @@ using Xunit;
 using System.Threading.Tasks;
 
 namespace TouhouLauncher.Test.Models.Application {
-	public class GameConfigTest {
+	public class GameConfigServiceTest {
 		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
 
-		private readonly GameConfig _gameConfig;
+		private readonly GameConfigService _gameConfigService;
 
-		public GameConfigTest() {
-			_gameConfig = new(_settingsAndGamesManagerMock.Object);
+		public GameConfigServiceTest() {
+			_gameConfigService = new(_settingsAndGamesManagerMock.Object);
 		}
 
 		[Fact]
 		public void Sets_game_to_configure_and_sets_game_location_to_location_of_game() {
-			_gameConfig.SetGameToConfigure(testOfficialGame1);
+			_gameConfigService.SetGameToConfigure(testOfficialGame1);
 
-			Assert.Equal(testOfficialGame1, _gameConfig.TargetGame);
-			Assert.Equal(testOfficialGame1.FileLocation, _gameConfig.GameLocation);
+			Assert.Equal(testOfficialGame1, _gameConfigService.TargetGame);
+			Assert.Equal(testOfficialGame1.FileLocation, _gameConfigService.GameLocation);
 		}
 
 		[Fact]
 		public async void Doesnt_save_changes_when_target_game_is_null_and_returns_error() {
-			var error = await _gameConfig.SaveAsync();
+			var error = await _gameConfigService.SaveAsync();
 
 			Assert.NotNull(error);
 
@@ -36,12 +36,12 @@ namespace TouhouLauncher.Test.Models.Application {
 			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
 				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
-			_gameConfig.SetGameToConfigure(testOfficialGame1);
+			_gameConfigService.SetGameToConfigure(testOfficialGame1);
 
-			var error = await _gameConfig.SaveAsync();
+			var error = await _gameConfigService.SaveAsync();
 
 			Assert.Null(error);
-			Assert.Equal(_gameConfig.GameLocation, testOfficialGame1.FileLocation);
+			Assert.Equal(_gameConfigService.GameLocation, testOfficialGame1.FileLocation);
 
 			_settingsAndGamesManagerMock.Verify(obj => obj.SaveAsync(), Times.Once);
 		}

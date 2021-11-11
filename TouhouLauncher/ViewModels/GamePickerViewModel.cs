@@ -14,18 +14,23 @@ namespace TouhouLauncher.ViewModels {
 		private readonly GamePickerList _gamePickerList;
 		private readonly ActiveGameCategory _activeGameCategory;
 		private readonly LaunchGameService _launchGameService;
-		private readonly GameConfig _gameConfig;
+		private readonly GameConfigService _gameConfigService;
+		private readonly FanGameEditingService _fanGameEditingService;
 
 		public GamePickerViewModel(
 			GamePickerList gamePickerList,
 			ActiveGameCategory activeGameCategory,
 			LaunchGameService launchGameService,
-			GameConfig gameConfig
+			GameConfigService gameConfigService,
+			FanGameEditingService fanGameEditingService
 		) {
 			_gamePickerList = gamePickerList;
 			_activeGameCategory = activeGameCategory;
 			_launchGameService = launchGameService;
-			_gameConfig = gameConfig;
+			_gameConfigService = gameConfigService;
+			_fanGameEditingService = fanGameEditingService;
+
+			MessengerInstance.Register<object?>(this, UpdateGamesToken, _ => UpdateGames());
 
 			GameButtons = new ObservableCollection<GameButton>();
 
@@ -43,24 +48,32 @@ namespace TouhouLauncher.ViewModels {
 			GameButtons.Clear();
 			foreach (Game game in games) {
 				GameButtons.Add(
-					new GameButton(game, _launchGameService, _gameConfig)
+					new GameButton(game, this, _launchGameService, _gameConfigService, _fanGameEditingService)
 				);
 			}
 		}
 
+		public static object UpdateGamesToken { get; } = new();
+
 		public class GameButton {
 			private readonly Game _game;
+			private readonly GamePickerViewModel _parent;
 			private readonly LaunchGameService _launchGameService;
-			private readonly GameConfig _gameConfig;
+			private readonly GameConfigService _gameConfigService;
+			private readonly FanGameEditingService _fanGameEditingService;
 
 			public GameButton(
 				Game game,
+				GamePickerViewModel parent,
 				LaunchGameService launchGameService,
-				GameConfig gameConfig
+				GameConfigService gameConfigService,
+				FanGameEditingService fanGameEditingService
 			) {
 				_game = game;
+				_parent = parent;
 				_launchGameService = launchGameService;
-				_gameConfig = gameConfig;
+				_gameConfigService = gameConfigService;
+				_fanGameEditingService = fanGameEditingService;
 
 				Command = new RelayCommand(async () => {
 					if (!string.IsNullOrEmpty(_game.FileLocation)) {
@@ -71,9 +84,15 @@ namespace TouhouLauncher.ViewModels {
 						}
 					}
 					else {
-						_gameConfig.SetGameToConfigure(_game);
+						_gameConfigService.SetGameToConfigure(_game);
 						new GameConfigWindow().ShowDialog();
 					}
+				});
+
+				EditCommand = new RelayCommand(() => {
+					_fanGameEditingService.SetFanGameToEdit((FanGame)_game);
+
+					_parent.MessengerInstance.Send("FanGameEditorPage.xaml", MainViewModel.ChangePageMessageToken);
 				});
 			}
 
@@ -85,7 +104,13 @@ namespace TouhouLauncher.ViewModels {
 				?.Transform(releaseYear => $"Release: {releaseYear}")
 				?? string.Empty;
 
+			public Visibility ShowEditButton => _game.Categories.HasFlag(GameCategories.FanGame)
+				? Visibility.Visible
+				: Visibility.Hidden;
+
 			public ICommand Command { get; }
+
+			public ICommand EditCommand { get; }
 		}
 	}
 }

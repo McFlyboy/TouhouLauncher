@@ -14,17 +14,20 @@ namespace TouhouLauncher.ViewModels {
 		private readonly ActiveGameCategory _activeGameCategory;
 		private readonly GameCategoryService _gameCategoryService;
 		private readonly LaunchRandomGameService _launchRandomGameService;
+		private readonly FanGameEditingService _fanGameEditingService;
 
 		public HomeViewModel(
 			GamePickerViewModel gamePickerViewModel,
 			ActiveGameCategory activeGameCategory,
 			GameCategoryService gameCategoryService,
-			LaunchRandomGameService launchRandomGameService
+			LaunchRandomGameService launchRandomGameService,
+			FanGameEditingService fanGameEditingService
 		) {
 			_gamePickerViewModel = gamePickerViewModel;
 			_activeGameCategory = activeGameCategory;
 			_gameCategoryService = gameCategoryService;
 			_launchRandomGameService = launchRandomGameService;
+			_fanGameEditingService = fanGameEditingService;
 
 			MessengerInstance.Register<object?>(this, RebuildHeadersMessageToken, RebuildHeaders);
 
@@ -42,9 +45,11 @@ namespace TouhouLauncher.ViewModels {
 				() => MessengerInstance.Send("SettingsPage.xaml", MainViewModel.ChangePageMessageToken)
 			);
 
-			CreateNewFanGameCommand = new RelayCommand(
-				() => MessengerInstance.Send("FanGameEditorPage.xaml", MainViewModel.ChangePageMessageToken)
-			);
+			CreateNewFanGameCommand = new RelayCommand(() => {
+				_fanGameEditingService.SetFanGameToEdit(null);
+
+				MessengerInstance.Send("FanGameEditorPage.xaml", MainViewModel.ChangePageMessageToken);
+			});
 
 			NewFanGameVisibility = Visibility.Hidden;
 		}

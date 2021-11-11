@@ -34,16 +34,27 @@
 											<ScaleTransform x:Name="GameImageScale"/>
 										</Image.RenderTransform>
 									</Image>
-									<Grid x:Name="GameButtonOverlay" Opacity="0" Background="#3A2E3F">
+									<Grid x:Name="GameButtonOverlay" Opacity="0">
+										<Border Background="#3A2E3F" Opacity="0.85"/>
 										<TextBlock Text="{Binding Name}" Foreground="White" FontSize="18" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
-										<TextBlock Text="{Binding ReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5, 5"/>
+										<TextBlock Text="{Binding ReleaseYear}" Foreground="LightGray" FontSize="14" FontStyle="Italic" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5"/>
+										<Button
+											Style="{DynamicResource DarkButton}"
+											Content="Edit..."
+											HorizontalAlignment="Right"
+											VerticalAlignment="Top"
+											Margin="5"
+											Padding="5"
+											Visibility="{Binding ShowEditButton}"
+                                            Command="{Binding EditCommand}"
+										/>
 									</Grid>
 								</Grid>
 								<ControlTemplate.Triggers>
 									<EventTrigger RoutedEvent="Mouse.MouseEnter">
 										<BeginStoryboard>
 											<Storyboard>
-												<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlay" Storyboard.TargetProperty="Opacity" To="0.85"/>
+												<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameButtonOverlay" Storyboard.TargetProperty="Opacity" To="1"/>
 												<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleX" To="1.1"/>
 												<DoubleAnimation Duration="0:0:0.125" Storyboard.TargetName="GameImageScale" Storyboard.TargetProperty="ScaleY" To="1.1"/>
 											</Storyboard>
