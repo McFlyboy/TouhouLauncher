@@ -47,6 +47,18 @@ namespace TouhouLauncher.ViewModels {
 				RaisePropertyChanged(nameof(CoverImageLocation));
 			});
 
+			DeleteCommand = new RelayCommand(async () => {
+				var error = await _fanGameEditingService.DeleteFanGame();
+
+				if (error != null) {
+					MessageBox.Show(error.Message, "Error");
+					return;
+				}
+
+				MessengerInstance.Send<object?>(null, GamePickerViewModel.UpdateGamesToken);
+				MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken);
+			});
+
 			SaveCommand = new RelayCommand(async () => {
 				var error = await _fanGameEditingService.SaveAsync();
 
@@ -64,7 +76,9 @@ namespace TouhouLauncher.ViewModels {
 			);
 		}
 
-		public string PageTitle => _fanGameEditingService.TargetFanGame == null ? "New fan game" : "Edit fan game";
+		public string PageTitle => _fanGameEditingService.TargetFanGame == null
+			? "New fan game"
+			: "Edit fan game";
 
 		public string GameTitle {
 			get => _fanGameEditingService.GameTitle;
@@ -93,9 +107,15 @@ namespace TouhouLauncher.ViewModels {
 			set => _fanGameEditingService.CoverImageLocation = value.Length > 0 ? value : null;
 		}
 
+		public Visibility DeleteButtonVisibility => _fanGameEditingService.TargetFanGame == null
+			? Visibility.Collapsed
+			: Visibility.Visible;
+
 		public ICommand BrowseCommand { get; }
 
 		public ICommand BrowseImageCommand { get; }
+
+		public ICommand DeleteCommand { get; }
 
 		public ICommand SaveCommand { get; }
 

@@ -53,6 +53,16 @@ namespace TouhouLauncher.Models.Application {
 			return await _settingsAndGamesManager.SaveAsync();
 		}
 
+		public async Task<TouhouLauncherError?> DeleteFanGame() {
+			if (TargetFanGame == null) {
+				return new FanGameNotSpecifiedError();
+			}
+
+			_settingsAndGamesManager.FanGames.Remove(TargetFanGame);
+
+			return await _settingsAndGamesManager.SaveAsync();
+		}
+
 		public void SetFanGameToEdit(FanGame? fanGame) {
 			TargetFanGame = fanGame;
 			GameTitle = fanGame?.Title ?? string.Empty;
@@ -64,5 +74,9 @@ namespace TouhouLauncher.Models.Application {
 
 	public record FanGameInfoMissingError : TouhouLauncherError {
 		public override string Message => "Game title and location must both be specified in order to add a new fan game";
+	}
+
+	public record FanGameNotSpecifiedError : TouhouLauncherError {
+		public override string Message => "A fan game has not been specified";
 	}
 }

@@ -46,7 +46,7 @@
 					<TextBlock
 						Grid.ColumnSpan="2"
 						Foreground="White"
-						Text="Game title"
+						Text="Game title *"
 					/>
 
 					<TextBox
@@ -94,7 +94,7 @@
 					<TextBlock
 						Grid.ColumnSpan="2"
 						Foreground="White"
-						Text="Game location"
+						Text="Game location *"
 					/>
 
 					<TextBox
@@ -116,6 +116,18 @@
 					/>
 				</Grid>
 			</StackPanel>
+
+			<Button
+				Grid.Row="1"
+				Margin="0,200,0,-10"
+				Style="{StaticResource DarkButton}"
+				Content="Delete"
+				Width="100"
+				Cursor="Hand"
+				HorizontalAlignment="Left"
+				Command="{Binding DeleteCommand}"
+				Visibility="{Binding DeleteButtonVisibility}"
+			/>
 
 			<Button
 				Style="{StaticResource DarkButton}"
@@ -175,7 +187,7 @@
 					</Grid>
 				</ControlTemplate>
 			</Button.Template>
-			
+
 			<Button.Effect>
 				<DropShadowEffect BlurRadius="20" ShadowDepth="10" Color="#726D82"/>
 			</Button.Effect>
