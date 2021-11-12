@@ -97,5 +97,63 @@ namespace TouhouLauncher.Test.Models.Application {
 				fanGames.Last()
 			);
 		}
+
+		[Fact]
+		public async void Returns_error_when_trying_to_delete_non_existing_game() {
+			var error = await _fanGameEditingService.DeleteFanGame();
+
+			Assert.IsType<FanGameNotSpecifiedError>(error);
+		}
+
+		[Fact]
+		public async void Returns_error_when_saving_deletion_of_fan_game_fails() {
+			var fanGames = new List<FanGame>() {
+				new(
+					title: "title",
+					imageLocation: null,
+					audioLocation: null,
+					releaseYear: null,
+					fileLocation: "location"
+				)
+			};
+
+			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
+				.Returns(fanGames);
+
+			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
+				.Returns(Task.FromResult(new SettingsAndGamesSaveError("error"))!);
+
+			_fanGameEditingService.SetFanGameToEdit(fanGames.First());
+
+			var error = await _fanGameEditingService.DeleteFanGame();
+
+			Assert.IsType<SettingsAndGamesSaveError>(error);
+		}
+
+		[Fact]
+		public async void Returns_null_when_saving_deletion_of_fan_game_succeeds() {
+			var fanGames = new List<FanGame>() {
+				new(
+					title: "title",
+					imageLocation: null,
+					audioLocation: null,
+					releaseYear: null,
+					fileLocation: "location"
+				)
+			};
+
+			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
+				.Returns(fanGames);
+
+			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
+				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
+
+			_fanGameEditingService.SetFanGameToEdit(fanGames.First());
+
+			var error = await _fanGameEditingService.DeleteFanGame();
+
+			Assert.Null(error);
+			Assert.Empty(fanGames);
+		}
 	}
 }
