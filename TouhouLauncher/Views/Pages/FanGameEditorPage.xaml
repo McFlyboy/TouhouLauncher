@@ -6,7 +6,8 @@
 	  xmlns:local="clr-namespace:TouhouLauncher.Views.Pages"
 	  xmlns:viewModels="clr-namespace:TouhouLauncher.ViewModels"
 	  mc:Ignorable="d"
-	  d:DesignWidth="1000" d:DesignHeight="800"
+	  d:DesignWidth="1000"
+	  d:DesignHeight="800"
 	  Title="FanGameEditorPage"
 	  DataContext="{Binding FanGameEditorVM, Source={StaticResource Dependencies}}">
 	<Grid Background="#595362">
@@ -57,7 +58,7 @@
 					/>
 				</Grid>
 
-				<Grid Grid.Row="1" Margin="0 5">
+				<Grid Grid.Row="1" Margin="0, 5">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*"/>
 						<ColumnDefinition Width="auto"/>
@@ -115,11 +116,18 @@
 						Command="{Binding BrowseCommand}"
 					/>
 				</Grid>
+
+				<CheckBox
+					Style="{DynamicResource DarkCheckbox}"
+					Margin="-2, 5"
+					Content="Include in random game"
+                    IsChecked="{Binding IncludeInRandomGame}"
+				/>
 			</StackPanel>
 
 			<Button
 				Grid.Row="1"
-				Margin="0,200,0,-10"
+				Margin="0,220,0,-30"
 				Style="{StaticResource DarkButton}"
 				Content="Delete"
 				Width="100"

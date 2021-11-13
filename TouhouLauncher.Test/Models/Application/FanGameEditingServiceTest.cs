@@ -34,7 +34,8 @@ namespace TouhouLauncher.Test.Models.Application {
 					imageLocation: null,
 					audioLocation: null,
 					releaseYear: null,
-					fileLocation: string.Empty
+					fileLocation: string.Empty,
+					includeInRandomGame: true
 				)
 			);
 
@@ -56,7 +57,8 @@ namespace TouhouLauncher.Test.Models.Application {
 					imageLocation: null,
 					audioLocation: null,
 					releaseYear: null,
-					fileLocation: string.Empty
+					fileLocation: string.Empty,
+					includeInRandomGame: true
 				)
 			);
 
@@ -92,7 +94,8 @@ namespace TouhouLauncher.Test.Models.Application {
 					imageLocation: null,
 					audioLocation: null,
 					releaseYear: null,
-					fileLocation: "location"
+					fileLocation: "location",
+					includeInRandomGame: true
 				),
 				fanGames.Last()
 			);
@@ -113,7 +116,8 @@ namespace TouhouLauncher.Test.Models.Application {
 					imageLocation: null,
 					audioLocation: null,
 					releaseYear: null,
-					fileLocation: "location"
+					fileLocation: "location",
+					includeInRandomGame: true
 				)
 			};
 
@@ -138,7 +142,8 @@ namespace TouhouLauncher.Test.Models.Application {
 					imageLocation: null,
 					audioLocation: null,
 					releaseYear: null,
-					fileLocation: "location"
+					fileLocation: "location",
+					includeInRandomGame: true
 				)
 			};
 

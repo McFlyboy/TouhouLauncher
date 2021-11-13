@@ -6,6 +6,7 @@
 			string? audioLocation,
 			int? releaseYear,
 			string? fileLocation,
+			bool includeInRandomGame,
 			GameCategories categories,
 			string downloadableFileLocation
 		) : base(
@@ -14,6 +15,7 @@
 			audioLocation: audioLocation,
 			releaseYear: releaseYear,
 			fileLocation: fileLocation,
+			includeInRandomGame: includeInRandomGame,
 			categories: categories
 		) {
 			DownloadableFileLocation = downloadableFileLocation;

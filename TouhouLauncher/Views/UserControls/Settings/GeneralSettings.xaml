@@ -14,7 +14,7 @@
 		</Grid.RowDefinitions>
 		
 		<TextBlock
-			Text="Settings"
+			Text="General"
 			Foreground="White"
 			FontSize="22"
 			FontWeight="Bold"

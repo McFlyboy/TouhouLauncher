@@ -15,11 +15,12 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public void Sets_game_to_configure_and_sets_game_location_to_location_of_game() {
+		public void Sets_game_to_configure_and_sets_game_settings() {
 			_gameConfigService.SetGameToConfigure(testOfficialGame1);
 
 			Assert.Equal(testOfficialGame1, _gameConfigService.TargetGame);
 			Assert.Equal(testOfficialGame1.FileLocation, _gameConfigService.GameLocation);
+			Assert.Equal(testOfficialGame1.IncludeInRandomGame, _gameConfigService.IncludeInRandomGame);
 		}
 
 		[Fact]
@@ -32,7 +33,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		}
 
 		[Fact]
-		public async void Stores_game_location_in_game_and_saves_changes_and_returns_save_result() {
+		public async void Stores_game_settings_in_game_and_saves_changes_and_returns_save_result() {
 			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
 				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
@@ -42,6 +43,7 @@ namespace TouhouLauncher.Test.Models.Application {
 
 			Assert.Null(error);
 			Assert.Equal(_gameConfigService.GameLocation, testOfficialGame1.FileLocation);
+			Assert.Equal(_gameConfigService.IncludeInRandomGame, testOfficialGame1.IncludeInRandomGame);
 
 			_settingsAndGamesManagerMock.Verify(obj => obj.SaveAsync(), Times.Once);
 		}

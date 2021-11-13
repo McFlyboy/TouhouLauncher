@@ -77,7 +77,7 @@
 			<SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#342E30"/>
 			<Style x:Key="SettingsCategoryMenuItem" TargetType="{x:Type ListBoxItem}">
 				<Setter Property="SnapsToDevicePixels" Value="True"/>
-				<Setter Property="Padding" Value="40, 10, 0, 10"/>
+				<Setter Property="Padding" Value="70, 10, 0, 10"/>
 				<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
 				<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
 				<Setter Property="Background" Value="Transparent"/>
@@ -256,7 +256,7 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
-			<SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FF2A2A2A"/>
+            <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#342E30"/>
 			<SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF666666"/>
 			<SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#FFFFFFFF"/>
 			<SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FF3A3A3A"/>

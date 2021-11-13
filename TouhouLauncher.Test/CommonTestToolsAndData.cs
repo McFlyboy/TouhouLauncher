@@ -24,6 +24,7 @@ namespace TouhouLauncher.Test {
 			audioLocation: "",
 			releaseYear: 2000,
 			fileLocation: "C:\\test\\location.exe",
+			includeInRandomGame: true,
 			categories: GameCategories.MainWindows,
 			downloadableFileLocation: ""
 		);
@@ -34,6 +35,7 @@ namespace TouhouLauncher.Test {
 			audioLocation: "",
 			releaseYear: 2001,
 			fileLocation: "C:\\test\\location2.exe",
+			includeInRandomGame: false,
 			categories: GameCategories.MainPC98,
 			downloadableFileLocation: ""
 		);
@@ -44,6 +46,7 @@ namespace TouhouLauncher.Test {
 			audioLocation: "",
 			releaseYear: 2002,
 			fileLocation: "",
+			includeInRandomGame: true,
 			categories: GameCategories.FightingGame,
 			downloadableFileLocation: ""
 		);
@@ -59,7 +62,8 @@ namespace TouhouLauncher.Test {
 			imageLocation: "",
 			audioLocation: "",
 			releaseYear: 2003,
-			fileLocation: ""
+			fileLocation: "",
+			includeInRandomGame: true
 		);
 
 		public static readonly FanGame testFangame2 = new(
@@ -67,7 +71,8 @@ namespace TouhouLauncher.Test {
 			imageLocation: "",
 			audioLocation: "",
 			releaseYear: 2004,
-			fileLocation: ""
+			fileLocation: "",
+			includeInRandomGame: false
 		);
 
 		public static readonly List<FanGame> testFanGames = new() {
@@ -92,15 +97,18 @@ namespace TouhouLauncher.Test {
 		};
 
 		public static readonly OfficialGameYaml testOfficialGameYaml1 = new() {
-			FileLocation = "C:\\test\\location.exe"
+			FileLocation = "C:\\test\\location.exe",
+			IncludeInRandomGame = true
 		};
 
 		public static readonly OfficialGameYaml testOfficialGameYaml2 = new() {
-			FileLocation = "C:\\test\\location2.exe"
+			FileLocation = "C:\\test\\location2.exe",
+			IncludeInRandomGame = false
 		};
 
 		public static readonly OfficialGameYaml testOfficialGameYaml3 = new() {
-			FileLocation = ""
+			FileLocation = "",
+			IncludeInRandomGame = true
 		};
 
 		public static readonly OfficialGameYaml[] testOfficialGameYamls = new OfficialGameYaml[] {
@@ -114,7 +122,8 @@ namespace TouhouLauncher.Test {
 			ImageLocation = "",
 			AudioLocation = "",
 			ReleaseYear = 2003,
-			FileLocation = ""
+			FileLocation = "",
+			IncludeInRandomGame = true
 		};
 
 		public static readonly FanGameYaml testFanGameYaml2 = new() {
@@ -122,7 +131,8 @@ namespace TouhouLauncher.Test {
 			ImageLocation = "",
 			AudioLocation = "",
 			ReleaseYear = 2004,
-			FileLocation = ""
+			FileLocation = "",
+			IncludeInRandomGame = false
 		};
 
 		public static readonly List<FanGameYaml> testFanGameYamls = new() {

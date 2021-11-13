@@ -14,6 +14,7 @@ namespace TouhouLauncher.Models.Application {
 			YearOfRelease = null;
 			GameLocation = string.Empty;
 			CoverImageLocation = null;
+			IncludeInRandomGame = true;
 		}
 
 		public FanGame? TargetFanGame { get; private set; }
@@ -26,6 +27,8 @@ namespace TouhouLauncher.Models.Application {
 
 		public string? CoverImageLocation { get; set; }
 
+		public bool IncludeInRandomGame { get; set; }
+
 		public async Task<TouhouLauncherError?> SaveAsync() {
 			if (GameTitle.Length == 0 || GameLocation.Length == 0) {
 				return new FanGameInfoMissingError();
@@ -37,7 +40,8 @@ namespace TouhouLauncher.Models.Application {
 					imageLocation: CoverImageLocation,
 					audioLocation: null,
 					releaseYear: YearOfRelease,
-					fileLocation: GameLocation
+					fileLocation: GameLocation,
+					includeInRandomGame: IncludeInRandomGame
 				);
 
 				_settingsAndGamesManager.FanGames.Add(TargetFanGame);
@@ -48,6 +52,7 @@ namespace TouhouLauncher.Models.Application {
 				TargetFanGame.AudioLocation = null;
 				TargetFanGame.ReleaseYear = YearOfRelease;
 				TargetFanGame.FileLocation = GameLocation;
+				TargetFanGame.IncludeInRandomGame = IncludeInRandomGame;
 			}
 
 			return await _settingsAndGamesManager.SaveAsync();
@@ -69,6 +74,7 @@ namespace TouhouLauncher.Models.Application {
 			YearOfRelease = fanGame?.ReleaseYear;
 			GameLocation = fanGame?.FileLocation ?? string.Empty;
 			CoverImageLocation = fanGame?.ImageLocation;
+			IncludeInRandomGame = fanGame?.IncludeInRandomGame ?? true;
 		}
 	}
 
