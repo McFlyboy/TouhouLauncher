@@ -107,6 +107,11 @@ namespace TouhouLauncher.ViewModels {
 			set => _fanGameEditingService.CoverImageLocation = value.Length > 0 ? value : null;
 		}
 
+		public bool IncludeInRandomGame {
+			get => _fanGameEditingService.IncludeInRandomGame;
+			set => _fanGameEditingService.IncludeInRandomGame = value;
+		}
+
 		public Visibility DeleteButtonVisibility => _fanGameEditingService.TargetFanGame == null
 			? Visibility.Collapsed
 			: Visibility.Visible;

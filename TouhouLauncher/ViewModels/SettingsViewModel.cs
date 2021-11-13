@@ -27,7 +27,7 @@ namespace TouhouLauncher.ViewModels {
 		public UserControl CurrentSettingsCategory => _category switch {
 			SettingsCategory.GeneralSettings => new GeneralSettings(),
 			SettingsCategory.EmulatorSettings => new EmulatorSettings(),
-			SettingsCategory.GameLocations => new GameLocationsSettings(),
+			SettingsCategory.Games => new GamesSettings(),
 			_ => new UserControl(),
 		};
 
@@ -36,7 +36,7 @@ namespace TouhouLauncher.ViewModels {
 		private enum SettingsCategory {
 			GeneralSettings,
 			EmulatorSettings,
-			GameLocations
+			Games
 		}
 	}
 }

@@ -23,17 +23,17 @@
 		>
 			<ListBoxItem
 				Style="{DynamicResource SettingsCategoryMenuItem}"
-				Content="General settings"
+				Content="General"
 			/>
 
 			<ListBoxItem
 				Style="{DynamicResource SettingsCategoryMenuItem}"
-				Content="PC-98 emulator settings"
+				Content="PC-98 emulator"
 			/>
 
 			<ListBoxItem
 				Style="{DynamicResource SettingsCategoryMenuItem}"
-				Content="Game locations"
+				Content="Games"
 			/>
 		</ListBox>
 		

@@ -65,6 +65,11 @@ namespace TouhouLauncher.ViewModels {
 			set => _gameConfigService.GameLocation = value;
 		}
 
+		public bool IncludeInRandomGame {
+			get => _gameConfigService.IncludeInRandomGame;
+			set => _gameConfigService.IncludeInRandomGame = value;
+		}
+
 		public ICommand BrowseCommand { get; }
 
 		public ICommand OkCommand { get; }

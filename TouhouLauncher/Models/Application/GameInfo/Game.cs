@@ -6,6 +6,7 @@
 			string? audioLocation,
 			int? releaseYear,
 			string? fileLocation,
+			bool includeInRandomGame,
 			GameCategories categories
 		) {
 			Title = title;
@@ -13,6 +14,7 @@
 			AudioLocation = audioLocation;
 			ReleaseYear = releaseYear;
 			FileLocation = fileLocation;
+			IncludeInRandomGame = includeInRandomGame;
 			Categories = categories;
 		}
 
@@ -25,6 +27,8 @@
 		public int? ReleaseYear { get; set; }
 
 		public string? FileLocation { get; set; }
+
+		public bool IncludeInRandomGame { get; set; }
 
 		public GameCategories Categories { get; init; }
 	}

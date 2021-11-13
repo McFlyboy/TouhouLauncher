@@ -35,7 +35,7 @@ namespace TouhouLauncher.Test.Models.Application {
 			var result = await _launchRandomGameService.LaunchRandomGame();
 
 			Assert.NotNull(result);
-			Assert.IsType<LaunchRandomGameServiceError.NoGamesAddedError>(result);
+			Assert.IsType<LaunchRandomGameServiceError.NoGamesFoundError>(result);
 		}
 
 		[Fact]
@@ -47,7 +47,7 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(testFanGames);
 
 			_randomMock.Setup(obj => obj.Next(It.IsAny<int>()))
-				.Returns(1);
+				.Returns(0);
 
 			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
 				.Returns(Task.FromResult<TouhouLauncherError?>(new LaunchGameError.GameDoesNotExistError()));
@@ -69,7 +69,7 @@ namespace TouhouLauncher.Test.Models.Application {
 				.Returns(testFanGames);
 
 			_randomMock.Setup(obj => obj.Next(It.IsAny<int>()))
-				.Returns(1);
+				.Returns(0);
 
 			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
 				.Returns(Task.FromResult<TouhouLauncherError?>(null));

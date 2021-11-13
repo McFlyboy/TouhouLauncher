@@ -5,13 +5,15 @@
 			string? imageLocation,
 			string? audioLocation,
 			int? releaseYear,
-			string? fileLocation
+			string? fileLocation,
+			bool includeInRandomGame
 		) : base(
 			title: title,
 			imageLocation: imageLocation,
 			audioLocation: audioLocation,
 			releaseYear: releaseYear,
 			fileLocation: fileLocation,
+			includeInRandomGame: includeInRandomGame,
 			categories: GameCategories.FanGame
 		) { }
 	}

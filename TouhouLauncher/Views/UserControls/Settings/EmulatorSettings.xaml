@@ -14,7 +14,7 @@
 		</Grid.RowDefinitions>
 
 		<TextBlock
-			Text="PC-98 emulator settings"
+			Text="PC-98 emulator"
 			Foreground="White"
 			FontSize="22"
 			FontWeight="Bold"

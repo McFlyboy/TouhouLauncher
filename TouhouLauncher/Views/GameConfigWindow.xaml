@@ -9,7 +9,9 @@
 		ResizeMode="CanMinimize"
 		x:Name="Window"
 		DataContext="{Binding GameConfigVM, Source={StaticResource Dependencies}}"
-		Title="{Binding WindowTitle}" Width="500" Height="130">
+		Title="{Binding WindowTitle}"
+		Width="500"
+		Height="150">
 	<Grid Background="#595362">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="2*"/>
@@ -17,9 +19,10 @@
 			<ColumnDefinition Width="1*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="1.5*"/>
 			<RowDefinition Height="2*"/>
-			<RowDefinition Height="2*"/>
-			<RowDefinition Height="3*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="2.5*"/>
 		</Grid.RowDefinitions>
 		
 		<TextBlock
@@ -46,14 +49,23 @@
 			Margin="5, 2"
 			Cursor="Hand"
 		/>
-		
+
+		<CheckBox
+			Style="{DynamicResource DarkCheckbox}"
+			Grid.Row="2"
+			Grid.ColumnSpan="3"
+			Margin="4, 0"
+			Content="Include in random game"
+			IsChecked="{Binding IncludeInRandomGame}"
+		/>
+
 		<Button
 			Style="{DynamicResource DarkButton}"
 			Content="OK"
 			Command="{Binding OkCommand}"
 			CommandParameter="{Binding ElementName=Window}"
 			Grid.Column="1"
-			Grid.Row="2"
+			Grid.Row="3"
 			Margin="5, 5"
 			Cursor="Hand"
 		/>
@@ -64,7 +76,7 @@
 			Command="{Binding CancelCommand}"
 			CommandParameter="{Binding ElementName=Window}"
 			Grid.Column="2"
-			Grid.Row="2"
+			Grid.Row="3"
 			Margin="5, 5"
 			Cursor="Hand"
 		/>

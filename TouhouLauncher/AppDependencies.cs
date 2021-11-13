@@ -20,7 +20,7 @@ namespace TouhouLauncher {
 			dependencies.Register<SettingsViewModel>();
 			dependencies.Register<GeneralSettingsViewModel>();
 			dependencies.Register<EmulatorSettingsViewModel>();
-			dependencies.Register<GameLocationsSettingsViewModel>();
+			dependencies.Register<GamesSettingsViewModel>();
 			dependencies.Register<FanGameEditorViewModel>();
 
 			/* ------ MODELS ------ */
@@ -64,8 +64,8 @@ namespace TouhouLauncher {
 		public EmulatorSettingsViewModel EmulatorSettingsVM =>
 			dependencies.GetInstance<EmulatorSettingsViewModel>();
 
-		public GameLocationsSettingsViewModel GameLocationsSettingsVM =>
-			dependencies.GetInstance<GameLocationsSettingsViewModel>();
+		public GamesSettingsViewModel GameLocationsSettingsVM =>
+			dependencies.GetInstance<GamesSettingsViewModel>();
 
 		public FanGameEditorViewModel FanGameEditorVM =>
 			dependencies.GetInstance<FanGameEditorViewModel>();

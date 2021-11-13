@@ -11,11 +11,14 @@ namespace TouhouLauncher.Models.Application {
 
 			TargetGame = null;
 			GameLocation = string.Empty;
+			IncludeInRandomGame = false;
 		}
 		
 		public Game? TargetGame { get; private set; }
 
 		public string GameLocation { get; set; }
+
+		public bool IncludeInRandomGame { get; set; }
 
 		public async Task<TouhouLauncherError?> SaveAsync() {
 			if (TargetGame == null) {
@@ -23,12 +26,15 @@ namespace TouhouLauncher.Models.Application {
 			}
 
 			TargetGame.FileLocation = GameLocation;
+			TargetGame.IncludeInRandomGame = IncludeInRandomGame;
+
 			return await _settingsAndGamesManager.SaveAsync();
 		}
 
 		public void SetGameToConfigure(Game game) {
 			TargetGame = game;
 			GameLocation = TargetGame.FileLocation ?? string.Empty;
+			IncludeInRandomGame = TargetGame.IncludeInRandomGame;
 		}
 	}
 

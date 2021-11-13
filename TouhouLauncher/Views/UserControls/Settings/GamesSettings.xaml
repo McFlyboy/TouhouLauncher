@@ -1,11 +1,12 @@
-﻿<UserControl x:Class="TouhouLauncher.Views.UserControls.Settings.GameLocationsSettings"
+﻿<UserControl x:Class="TouhouLauncher.Views.UserControls.Settings.GamesSettings"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:local="clr-namespace:TouhouLauncher.Views.UserControls.Settings"
 		mc:Ignorable="d"
-		d:DesignHeight="800" d:DesignWidth="600"
+		d:DesignHeight="800"
+		d:DesignWidth="600"
 		DataContext="{Binding GameLocationsSettingsVM, Source={StaticResource Dependencies}}">
 	<Grid>
 		<Grid.RowDefinitions>
@@ -14,24 +15,26 @@
 		</Grid.RowDefinitions>
 
 		<TextBlock
-			Text="Game locations"
+			Text="Games"
 			Foreground="White"
 			FontSize="22"
 			FontWeight="Bold"
 			VerticalAlignment="Center"
 		/>
 
-		<ItemsControl ItemsSource="{Binding GameLocations}" Grid.Row="1" Margin="0, 0, 0, 50">
+		<ItemsControl ItemsSource="{Binding GamesSettings}" Grid.Row="1" Margin="0, 0, 0, 50">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<Grid Margin="0 5">
+					<Grid Margin="0, 5">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"/>
 							<ColumnDefinition Width="auto"/>
 						</Grid.ColumnDefinitions>
+						
 						<Grid.RowDefinitions>
 							<RowDefinition Height="1*"/>
 							<RowDefinition Height="1*"/>
+							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
 
 						<TextBlock
@@ -54,8 +57,17 @@
 							Content="Browse..."
 							Command="{Binding BrowseCommand}"
 							Width="100"
-							Margin="10 0 0 0"
+							Margin="10, 0, 0, 0"
 							Cursor="Hand"
+						/>
+
+						<CheckBox
+							Style="{DynamicResource DarkCheckbox}"
+							Grid.Row="2"
+							Grid.ColumnSpan="2"
+							Margin="-2, 2, 0, 0"
+							Content="Include in random game"
+							IsChecked="{Binding IncludeInRandomGame}"
 						/>
 					</Grid>
 				</DataTemplate>

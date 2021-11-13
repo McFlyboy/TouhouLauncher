@@ -17,8 +17,8 @@ namespace TouhouLauncher.Views.UserControls.Settings {
 	/// <summary>
 	/// Interaction logic for GameLocationsSettingsControl.xaml
 	/// </summary>
-	public partial class GameLocationsSettings : UserControl {
-		public GameLocationsSettings() {
+	public partial class GamesSettings : UserControl {
+		public GamesSettings() {
 			InitializeComponent();
 		}
 	}

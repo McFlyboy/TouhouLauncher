@@ -9,6 +9,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 1996,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
 				downloadableFileLocation: ""
 			),
@@ -18,6 +19,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 1997,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
 				downloadableFileLocation: ""
 			),
@@ -27,6 +29,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 1997,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
 				downloadableFileLocation: ""
 			),
@@ -36,6 +39,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 1998,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
 				downloadableFileLocation: ""
 			),
@@ -45,6 +49,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 1998,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
 				downloadableFileLocation: ""
 			),
@@ -54,6 +59,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2002,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -63,6 +69,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2003,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -72,6 +79,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2004,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
 				downloadableFileLocation: ""
 			),
@@ -81,6 +89,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2004,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -90,6 +99,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2005,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -99,6 +109,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2005,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
 				downloadableFileLocation: ""
 			),
@@ -108,6 +119,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2007,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -117,6 +129,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2008,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
 				downloadableFileLocation: ""
 			),
@@ -126,6 +139,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2008,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -135,6 +149,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2009,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -144,6 +159,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2009,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
 				downloadableFileLocation: ""
 			),
@@ -153,6 +169,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2010,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
 				downloadableFileLocation: ""
 			),
@@ -162,6 +179,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2010,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
 				downloadableFileLocation: ""
 			),
@@ -171,6 +189,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2011,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -180,6 +199,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2013,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
 				downloadableFileLocation: ""
 			),
@@ -189,6 +209,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2013,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -198,6 +219,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2014,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
 				downloadableFileLocation: ""
 			),
@@ -207,6 +229,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2015,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
 				downloadableFileLocation: ""
 			),
@@ -216,6 +239,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2015,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -225,6 +249,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2017,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
 				downloadableFileLocation: ""
 			),
@@ -234,6 +259,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2017,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -243,6 +269,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2018,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
 				downloadableFileLocation: ""
 			),
@@ -252,6 +279,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2019,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			),
@@ -261,6 +289,7 @@ namespace TouhouLauncher.Models.Application {
 				audioLocation: "",
 				releaseYear: 2021,
 				fileLocation: null,
+				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
 				downloadableFileLocation: ""
 			)

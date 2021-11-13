@@ -7,32 +7,32 @@ using TouhouLauncher.Models.Application;
 using System.Windows;
 
 namespace TouhouLauncher.ViewModels {
-	public class GameLocationsSettingsViewModel : ViewModelBase {
+	public class GamesSettingsViewModel : ViewModelBase {
 		private readonly FileSystemBrowserService _fileSystemBrowserService;
 		private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
-		public GameLocationsSettingsViewModel(
+		public GamesSettingsViewModel(
 			FileSystemBrowserService fileSystemBrowserService,
 			SettingsAndGamesManager settingsAndGamesManager
 		) {
 			_fileSystemBrowserService = fileSystemBrowserService;
 			_settingsAndGamesManager = settingsAndGamesManager;
 
-			GameLocations = new ObservableCollection<GameLocation>();
+			GamesSettings = new ObservableCollection<GameSettings>();
 
 			foreach (OfficialGame game in _settingsAndGamesManager.OfficialGames) {
-				GameLocations.Add(new(_fileSystemBrowserService, _settingsAndGamesManager, game));
+				GamesSettings.Add(new(_fileSystemBrowserService, _settingsAndGamesManager, game));
 			}
 		}
 
-		public ObservableCollection<GameLocation> GameLocations { get; }
+		public ObservableCollection<GameSettings> GamesSettings { get; }
 
-		public class GameLocation : ObservableObject {
+		public class GameSettings : ObservableObject {
 			private readonly FileSystemBrowserService _fileSystemBrowserService;
 			private readonly SettingsAndGamesManager _settingsAndGamesManager;
 			private readonly OfficialGame _game;
 
-			public GameLocation(
+			public GameSettings(
 				FileSystemBrowserService fileSystemBrowserService,
 				SettingsAndGamesManager settingsAndGamesManager,
 				OfficialGame game
@@ -59,6 +59,21 @@ namespace TouhouLauncher.ViewModels {
 				get => _game.FileLocation ?? string.Empty;
 				set {
 					_game.FileLocation = value;
+					_settingsAndGamesManager.SaveAsync()
+						.ContinueWith(async result => {
+							var error = await result;
+
+							if (error != null) {
+								MessageBox.Show(error.Message, "Error");
+							}
+						});
+				}
+			}
+
+			public bool IncludeInRandomGame {
+				get => _game.IncludeInRandomGame;
+				set {
+					_game.IncludeInRandomGame = value;
 					_settingsAndGamesManager.SaveAsync()
 						.ContinueWith(async result => {
 							var error = await result;
