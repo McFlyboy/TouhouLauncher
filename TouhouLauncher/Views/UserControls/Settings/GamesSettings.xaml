@@ -38,10 +38,15 @@
 						</Grid.RowDefinitions>
 
 						<TextBlock
-							Grid.ColumnSpan="2"
 							Foreground="White"
 							Text="{Binding Name}"
 						/>
+
+						<TextBlock HorizontalAlignment="Right">
+							<Hyperlink Foreground="White" Command="{Binding ExternalLinkToGameDownloadCommand}">
+								<TextBlock Text="Download this game..." />
+							</Hyperlink>
+						</TextBlock>
 
 						<TextBox
 							Grid.Row="1"

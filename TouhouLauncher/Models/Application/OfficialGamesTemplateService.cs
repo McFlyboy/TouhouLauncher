@@ -11,7 +11,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/273-touhou-1-highly-responsive-to-prayers/"
 			),
 			new(
 				title: "Touhou 02: Story of Eastern Wonderland",
@@ -21,7 +21,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/274-touhou-2-the-story-of-eastern-wonderland/"
 			),
 			new(
 				title: "Touhou 03: Phantasmagoria of Dim. Dream",
@@ -31,7 +31,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/275-touhou-3-phantasmagoria-of-dimensional-dream/"
 			),
 			new(
 				title: "Touhou 04: Lotus Land Story",
@@ -41,7 +41,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/276-touhou-4-lotus-land-story/"
 			),
 			new(
 				title: "Touhou 05: Mystic Square",
@@ -51,7 +51,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainPC98,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/277-touhou-5-mystic-square/"
 			),
 			new(
 				title: "Touhou 06: Embodyment of Scarlet Devil",
@@ -61,7 +61,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/13-touhou-6-koumakyou-the-embodiment-of-scarlet-devil/"
 			),
 			new(
 				title: "Touhou 07: Perfect Cherry Blossom",
@@ -71,7 +71,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/14-touhou-7-youyoumu-perfect-cherry-blossom/"
 			),
 			new(
 				title: "Touhou 07.5: Immaterial and Missing Power",
@@ -81,7 +81,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/19-touhou-75-suimusou-immaterial-and-missing-power/"
 			),
 			new(
 				title: "Touhou 08: Imperishable Night",
@@ -91,7 +91,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/20-touhou-8-eiyashou-imperishable-night/"
 			),
 			new(
 				title: "Touhou 09: Phantasmagoria of Flower View",
@@ -101,7 +101,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/21-touhou-9-kaiedzuka-phantasmagoria-of-flower-view/"
 			),
 			new(
 				title: "Touhou 09.5: Shoot the Bullet",
@@ -111,7 +111,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/22-touhou-95-bunkachou-shoot-the-bullet/"
 			),
 			new(
 				title: "Touhou 10: Mountain of Faith",
@@ -121,7 +121,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/23-touhou-10-fuujinroku-mountain-of-faith/"
 			),
 			new(
 				title: "Touhou 10.5: Scarlet Weather Rhapsody",
@@ -131,7 +131,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/24-touhou-105-hisouten-scarlet-weather-rhapsody/"
 			),
 			new(
 				title: "Touhou 11: Subterranean Animism",
@@ -141,7 +141,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/25-touhou-11-chireiden-subterranean-animism/"
 			),
 			new(
 				title: "Touhou 12: Undefined Fantastic Object",
@@ -151,7 +151,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/26-touhou-12-seirensen-undefined-fantastic-object/"
 			),
 			new(
 				title: "Touhou 12.3: Hisoutensoku",
@@ -161,7 +161,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/27-touhou-123-hisoutensoku-choudokyuu-ginyoru-no-nazo-wo-oe/"
 			),
 			new(
 				title: "Touhou 12.5: Double Spoiler",
@@ -171,7 +171,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/28-touhou-125-bunkachou-double-spoiler/"
 			),
 			new(
 				title: "Touhou 12.8: Great Fairy Wars",
@@ -181,7 +181,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/52-touhou-128-sangetsusei-great-fairy-wars/"
 			),
 			new(
 				title: "Touhou 13: Ten Desires",
@@ -191,7 +191,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/53-touhou-13-touhou-shinreibyou-ten-desires/"
 			),
 			new(
 				title: "Touhou 13.5: Hopeless Masquerade",
@@ -201,7 +201,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/54-touhou-135-shinkirou-hopeless-masquerade/"
 			),
 			new(
 				title: "Touhou 14: Double Dealing Character",
@@ -211,7 +211,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/55-touhou-14-kishinjou-double-dealing-character/"
 			),
 			new(
 				title: "Touhou 14.3: Impossible Spell Card",
@@ -221,7 +221,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/56-touhou-143-danmaku-amanojaku-impossible-spell-card/"
 			),
 			new(
 				title: "Touhou 14.5: Urban Legend in Limbo",
@@ -231,7 +231,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/57-touhou-145-shinhiroku-urban-legend-in-limbo/"
 			),
 			new(
 				title: "Touhou 15: Legacy of Lunatic Kingdom",
@@ -241,7 +241,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/58-touhou-15-kanjuden-legacy-of-lunatic-kingdom/"
 			),
 			new(
 				title: "Touhou 15.5: Antinomy of Common Flowers",
@@ -251,7 +251,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.FightingGame,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/43-touhou-155-antinomy-of-common-flowers/"
 			),
 			new(
 				title: "Touhou 16: Hidden Star in Four Seasons",
@@ -261,7 +261,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/44-touhou-16-tenkuushou-hidden-star-in-four-seasons/"
 			),
 			new(
 				title: "Touhou 16.5: Violet Detector",
@@ -271,7 +271,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.SpinOff,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/332-touhou-165-violet-detector/"
 			),
 			new(
 				title: "Touhou 17: Wily Beast and Weakest Creature",
@@ -281,7 +281,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/649-touhou-17-kikeijuu-wily-beast-and-weakest-creature/"
 			),
 			new(
 				title: "Touhou 18: Unconnected Marketeers",
@@ -291,7 +291,7 @@ namespace TouhouLauncher.Models.Application {
 				fileLocation: null,
 				includeInRandomGame: true,
 				categories: GameCategories.MainWindows,
-				downloadableFileLocation: ""
+				downloadableFileLocation: "https://moriyashrine.org/files/file/905-touhou-18-unconnected-marketeers/"
 			)
 		};
 	}

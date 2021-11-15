@@ -5,6 +5,7 @@ using System.Windows.Input;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application;
 using System.Windows;
+using System.Diagnostics;
 
 namespace TouhouLauncher.ViewModels {
 	public class GamesSettingsViewModel : ViewModelBase {
@@ -40,6 +41,14 @@ namespace TouhouLauncher.ViewModels {
 				_fileSystemBrowserService = fileSystemBrowserService;
 				_settingsAndGamesManager = settingsAndGamesManager;
 				_game = game;
+
+				ExternalLinkToGameDownloadCommand = new RelayCommand(
+					() => Process.Start(
+						new ProcessStartInfo("cmd", $"/c start {_game.DownloadableFileLocation}") {
+							CreateNoWindow = true
+						}
+					)
+				);
 
 				BrowseCommand = new RelayCommand(() => {
 					var browseResult = BrowseForGame();
@@ -84,6 +93,8 @@ namespace TouhouLauncher.ViewModels {
 						});
 				}
 			}
+
+			public ICommand ExternalLinkToGameDownloadCommand { get; }
 
 			public ICommand BrowseCommand { get; }
 
