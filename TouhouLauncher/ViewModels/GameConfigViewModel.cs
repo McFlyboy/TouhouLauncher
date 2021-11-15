@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
@@ -16,6 +17,16 @@ namespace TouhouLauncher.ViewModels {
 		) {
 			_gameConfigService = gameConfigService;
 			_fileSystemBrowserService = fileSystemBrowserService;
+
+			ExternalLinkToGameDownloadCommand = new RelayCommand(() => {
+				if (_gameConfigService.TargetGame is OfficialGame game) {
+					Process.Start(
+						new ProcessStartInfo("cmd", $"/c start {game.DownloadableFileLocation}") {
+							CreateNoWindow = true
+						}
+					);
+				}
+			});
 
 			BrowseCommand = new RelayCommand(() => {
 				if (_gameConfigService.TargetGame == null) {
@@ -69,6 +80,8 @@ namespace TouhouLauncher.ViewModels {
 			get => _gameConfigService.IncludeInRandomGame;
 			set => _gameConfigService.IncludeInRandomGame = value;
 		}
+
+		public ICommand ExternalLinkToGameDownloadCommand { get; }
 
 		public ICommand BrowseCommand { get; }
 

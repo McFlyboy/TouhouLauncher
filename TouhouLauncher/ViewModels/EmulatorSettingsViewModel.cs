@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
@@ -15,6 +16,17 @@ namespace TouhouLauncher.ViewModels {
 		) {
 			_settingsAndGamesManager = settingsAndGamesManager;
 			_fileSystemBrowserService = fileSystemBrowserService;
+
+			ExternalLinkToEmulatorDownloadCommand = new RelayCommand(
+				() => Process.Start(
+					new ProcessStartInfo(
+						"cmd",
+						"/c start https://moriyashrine.org/files/file/387-pc-98-emulator-~-neko-project-ii/"
+					) {
+						CreateNoWindow = true
+					}
+				)
+			);
 
 			BrowseCommand = new RelayCommand(() => {
 				var result = _fileSystemBrowserService.BrowseFolders("Select emulator folder");
@@ -42,6 +54,8 @@ namespace TouhouLauncher.ViewModels {
 					});
 			}
 		}
+
+		public ICommand ExternalLinkToEmulatorDownloadCommand { get; }
 
 		public ICommand BrowseCommand { get; }
 	}

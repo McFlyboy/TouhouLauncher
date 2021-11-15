@@ -32,10 +32,15 @@
 			</Grid.RowDefinitions>
 
 			<TextBlock
-				Grid.ColumnSpan="2"
 				Foreground="White"
 				Text="Neko Project II folder"
 			/>
+
+			<TextBlock HorizontalAlignment="Right">
+				<Hyperlink Foreground="White" Command="{Binding ExternalLinkToEmulatorDownloadCommand}">
+					<TextBlock Text="Download the emulator..." />
+				</Hyperlink>
+			</TextBlock>
 
 			<TextBox
 				Grid.Row="1"

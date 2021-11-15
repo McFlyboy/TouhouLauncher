@@ -27,11 +27,23 @@
 		
 		<TextBlock
 			Text="Game location:"
+			Grid.ColumnSpan="2"
 			Margin="5, 0"
 			VerticalAlignment="Bottom"
 			Foreground="White"
 		/>
-		
+
+		<TextBlock
+			HorizontalAlignment="Right"
+			Grid.ColumnSpan="2"
+			Margin="5, 0"
+			VerticalAlignment="Bottom"
+		>
+			<Hyperlink Foreground="White" Command="{Binding ExternalLinkToGameDownloadCommand}">
+				<TextBlock Text="Download this game..." />
+			</Hyperlink>
+		</TextBlock>
+
 		<TextBox
 			Style="{DynamicResource DarkTextbox}"
 			Text="{Binding GameLocation}"
