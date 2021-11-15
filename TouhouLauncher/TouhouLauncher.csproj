@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>TouhouLauncher.App</StartupObject>
     <ApplicationIcon>Resources\Images\Icons\AppIcon.ico</ApplicationIcon>
-	<Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
