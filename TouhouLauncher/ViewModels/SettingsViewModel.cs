@@ -1,7 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System.Diagnostics;
+using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TouhouLauncher.Models.Common.Extensions;
 using TouhouLauncher.Views.UserControls.Settings;
 
 namespace TouhouLauncher.ViewModels {
@@ -30,6 +33,15 @@ namespace TouhouLauncher.ViewModels {
 			SettingsCategory.Games => new GamesSettings(),
 			_ => new UserControl(),
 		};
+
+		public string BuildVersion => FileVersionInfo
+			.GetVersionInfo(Assembly.GetExecutingAssembly().Location)
+			.ProductVersion!
+			.Transform(
+				version => !version.EndsWith("unofficial")
+					? $"Version: {version}"
+					: "unofficial-build"
+			);
 
 		public ICommand BackCommand { get; }
 
