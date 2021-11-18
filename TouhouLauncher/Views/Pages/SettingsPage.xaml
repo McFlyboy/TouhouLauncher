@@ -48,5 +48,14 @@
 			Margin="12, 658, 0, 0"
 			ToolTip="Back"
 		/>
+
+		<TextBlock
+			Text="{Binding BuildVersion}"
+			Grid.Row="1"
+			Foreground="White"
+			Margin="3"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Bottom"
+		/>
 	</Grid>
 </Page>
