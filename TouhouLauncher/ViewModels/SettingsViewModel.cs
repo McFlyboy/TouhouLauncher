@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Controls;
@@ -34,8 +35,7 @@ namespace TouhouLauncher.ViewModels {
 			_ => new UserControl(),
 		};
 
-		public string BuildVersion => FileVersionInfo
-			.GetVersionInfo(Assembly.GetExecutingAssembly().Location)
+		public string BuildVersion => FileVersionInfo.GetVersionInfo(Environment.ProcessPath!)
 			.ProductVersion!
 			.Transform(
 				version => !version.EndsWith("unofficial")

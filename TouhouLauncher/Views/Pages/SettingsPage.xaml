@@ -52,6 +52,7 @@
 		<TextBlock
 			Text="{Binding BuildVersion}"
 			Grid.Row="1"
+            Grid.ColumnSpan="3"
 			Foreground="White"
 			Margin="3"
 			HorizontalAlignment="Left"
