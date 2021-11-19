@@ -16,7 +16,7 @@ Touhou Launcher is a desktop app for Windows that provides a quick and easy way 
 
 ## Getting Touhou Launcher
 ### Download latest release
-Touhou Launcher comes in 32-bit (x86) and 64-bit (x64). You can download the latest release [here](https://github.com/McFlyboy/TouhouLauncher/releases) and unzip it using your favorite zipping tool. :)
+Touhou Launcher comes in 32-bit (x86) and 64-bit (x64). You can download the latest release [here](https://github.com/McFlyboy/TouhouLauncher/releases) and unzip it using your favorite zipping tool. 🙂
 
 ### Build from source
 Alternatively you can build it yourself from source by downloading it and invoking one of the following commands from the solution directory:
@@ -29,20 +29,29 @@ dotnet publish -c Release -p:PublishProfile=x86
 dotnet publish -c Release -p:PublishProfile=x64
 ```
 
-## Support
-If you need help or have questions about the launcher, feel free to find me on my [Discord server](https://discord.com/invite/T7bp4Vy), or start a discussion in the [Discussions section](https://github.com/McFlyboy/TouhouLauncher/discussions) of this repo.
-
-## A new UI is coming!
-A new user interface is currently being designed for the beta release of the launcher. You can check out the design sketches [here](https://www.figma.com/file/4RDZ4GZz8maF8HgYTJsrBC/Touhou-Launcher). :)
-
-## How to contribute
-I haven't nailed down any contribution guidelines yet, but if you're eager to help out with the launcher then please do contact me through my [Discord server](https://discord.com/invite/T7bp4Vy), and we'll figure something out together. :D
-
 ## Running unit tests
-You can run the unit tests from the solution directory by invoking the command:
+You can download the source and run unit tests from the solution directory by invoking the command:
 ``` shell
 dotnet test
 ```
+
+## Support
+If you need help or have questions about the launcher you can start a discussion in the [Discussions section](https://github.com/McFlyboy/TouhouLauncher/discussions) of this repo, or feel free to find me on my [Discord server](https://discord.com/invite/T7bp4Vy).
+
+## A new UI is coming!
+A new user interface is currently being designed for the beta release of the launcher. You can check out the design sketches [here](https://www.figma.com/file/4RDZ4GZz8maF8HgYTJsrBC/Touhou-Launcher). 🙂
+
+## How to contribute
+I haven't nailed down any contribution guidelines yet, but if you're eager to help out with the launcher then please do contact me through my [Discord server](https://discord.com/invite/T7bp4Vy), and we'll figure something out together. 😄
+
+## Contributors
+I would personally like to thank everyone who has worked on the launcher so far. This launcher wouldn't be the same without you! 😄
+
+Thank you [mjari](https://github.com/mjari) for your design sketches, suggestions, the awesome logo you drew for the launcher (the logo at the top of this readme) and for being my wonderful wife! ❤️
+
+Thank you [Jacksonbird8237](https://github.com/Jacksonbird8237) for helping create thumbnails for all the official games, working on the code with me, and listening to me blather about code. 😆
+
+And a special thanks to Widdiful for creating the old launcher which I and countless other people have had much use of, and for being available to answer my questions while developing this launcher 😄
 
 ## License
 The Touhou Launcher uses the [MIT license](https://github.com/McFlyboy/TouhouLauncher/blob/master/LICENSE).
