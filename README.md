@@ -54,7 +54,7 @@ Thank you [Jacksonbird8237](https://github.com/Jacksonbird8237) for helping crea
 And a special thanks to Widdiful for creating the old launcher which I and countless other people have had much use of, and for being available to answer my questions while developing this launcher 😄
 
 ## License
-The Touhou Launcher uses the [MIT license](https://github.com/McFlyboy/TouhouLauncher/blob/master/LICENSE).
+Touhou Launcher uses the [MIT license](https://github.com/McFlyboy/TouhouLauncher/blob/master/LICENSE).
 
 ## 3rd-party acknowledgements
 Touhou Launcher uses 3rd-party open source .NET libraries. I am very grateful to the creators and contributors of these libraries for making their work open source.
