@@ -9,7 +9,7 @@ Touhou Launcher is a desktop app for Windows that provides a quick and easy way 
 ### Key features
 - Connect and launch your Touhou games from a game library
 - Help you find downloads for official Touhou games
-- Help find a download and connect a PC-98 emulator for playing the oldes games (Touhou 01 - 05). No emulator configuration required!
+- Help find a download and connect a PC-98 emulator for playing the oldest games (Touhou 01 - 05). No emulator configuration required!
 - An editor for adding fan made games with the same look and treatment as official games
 - Organizing your list of games into categories
 - Launch a random game
