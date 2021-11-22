@@ -284,6 +284,16 @@ namespace TouhouLauncher.Models.Application {
 				downloadableFileLocation: "https://moriyashrine.org/files/file/649-touhou-17-kikeijuu-wily-beast-and-weakest-creature/"
 			),
 			new(
+				title: "Touhou 17.5: Gouyoku Ibun",
+				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH17_5.png",
+				audioLocation: "",
+				releaseYear: 2021,
+				fileLocation: null,
+				includeInRandomGame: true,
+				categories: GameCategories.SpinOff,
+				downloadableFileLocation: "https://moriyashrine.org/files/file/694-touhou-175-touhou-gouyoku-ibun-~-suibotsushita-chinshuu-jigoku/"
+			),
+			new(
 				title: "Touhou 18: Unconnected Marketeers",
 				imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH18.png",
 				audioLocation: "",
