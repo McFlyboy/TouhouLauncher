@@ -10,7 +10,7 @@ namespace TouhouLauncher.Test.Models.Application {
 		public void Returns_all_official_games() {
 			OfficialGame[] result = _officialGamesTemplateService.CreateOfficialGamesFromTemplate();
 
-			Assert.Equal(29, result.Length);
+			Assert.Equal(30, result.Length);
 		}
 	}
 }
