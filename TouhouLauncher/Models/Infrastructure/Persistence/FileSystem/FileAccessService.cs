@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Common;
+using TouhouLauncher.Models.Common.Extensions;
 using TouhouLauncher.Models.Infrastructure.Extensions;
 
 namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
@@ -17,6 +18,14 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 
 		public virtual async Task<FileWriteError?> WriteFileFromStringAsync(string path, string? content) {
 			try {
+				Directory.CreateDirectory(
+					Path.GetDirectoryName(path).Transform(
+						directory => string.IsNullOrEmpty(directory)
+							? $"{Environment.CurrentDirectory}\\{directory}"
+							: directory
+					)
+				);
+
 				await File.WriteAllTextAsync(path, content);
 				return null;
 			}

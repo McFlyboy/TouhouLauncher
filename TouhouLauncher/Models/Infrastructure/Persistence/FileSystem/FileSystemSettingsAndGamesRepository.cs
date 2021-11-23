@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Common;
 using TouhouLauncher.Models.Common.Extensions;
@@ -19,7 +20,9 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem {
 			_fileAccessService = fileAccessService;
 			_officialGamesTemplateService = officialGamesTemplateService;
 
-			filePath = "Settings.yaml";
+			filePath = @$"{
+				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+			}\McFlyboy\Touhou Launcher\Settings.yaml";
 		}
 
 		public virtual async Task<SettingsAndGamesSaveError?> SaveAsync(SettingsAndGames? settingsAndGames) =>
