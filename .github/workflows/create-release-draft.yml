@@ -27,19 +27,19 @@ jobs:
       with:
         files: TouhouLauncher\bin\publish\x86\
         recursive: true
-        dest: Touhou Launcher - x86.zip
+        dest: TouhouLauncher-x86.zip
 
     - name: Package up results (x64)
       uses: papeloto/action-zip@v1
       with:
         files: TouhouLauncher\bin\publish\x64\
         recursive: true
-        dest: Touhou Launcher - x64.zip
+        dest: TouhouLauncher-x64.zip
 
     - name: Create release draft
       uses: softprops/action-gh-release@v1
       with:
         draft: true
         files: |
-          Touhou Launcher - x86.zip
-          Touhou Launcher - x64.zip
+          TouhouLauncher-x86.zip
+          TouhouLauncher-x64.zip
