@@ -8,7 +8,7 @@
     <StartupObject>TouhouLauncher.App</StartupObject>
     <ApplicationIcon>Resources\Images\Icons\AppIcon.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
-    <Version>0.0.0-unofficial</Version>
+    <Version>1.1.0-alpha</Version>
     <Copyright>Copyright (c) 2019-2021 Henrik Soltvedt Nyhammer</Copyright>
     <RepositoryUrl>https://github.com/McFlyboy/TouhouLauncher</RepositoryUrl>
     <Authors>Henrik Soltvedt Nyhammer</Authors>
