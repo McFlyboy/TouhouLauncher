@@ -13,13 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TouhouLauncher.Views.UserControls.Settings {
-	/// <summary>
-	/// Interaction logic for GeneralSettings.xaml
-	/// </summary>
-	public partial class GeneralSettings : UserControl {
-		public GeneralSettings() {
-			InitializeComponent();
-		}
-	}
+namespace TouhouLauncher.Views.UserControls.Settings
+{
+    /// <summary>
+    /// Interaction logic for GeneralSettings.xaml
+    /// </summary>
+    public partial class GeneralSettings : UserControl
+    {
+        public GeneralSettings()
+        {
+            InitializeComponent();
+        }
+    }
 }

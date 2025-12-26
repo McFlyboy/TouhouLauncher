@@ -1,37 +1,41 @@
-﻿using Moq;
+﻿using NSubstitute;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
 
-namespace TouhouLauncher.Test.Models.Application {
-	public class GamePickerListTest {
-		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
+namespace TouhouLauncher.Test.Models.Application;
 
-		private readonly GamePickerList _gamePickerList;
+public class GamePickerListTest
+{
+    private readonly SettingsAndGamesManager _settingsAndGamesManagerMock = Substitute.For<SettingsAndGamesManager>(null, null);
 
-		public GamePickerListTest() {
-			_gamePickerList = new(_settingsAndGamesManagerMock.Object);
-		}
+    private readonly GamePickerList _gamePickerList;
 
-		[Fact]
-		public void Populates_list_with_no_games_when_no_categories() {
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
-				.Returns(testOfficialGames);
+    public GamePickerListTest()
+    {
+        _gamePickerList = new(_settingsAndGamesManagerMock);
+    }
 
-			_gamePickerList.PopulateGameList(GameCategories.None);
+    [Fact]
+    public void Populates_list_with_no_games_when_no_categories()
+    {
+        _settingsAndGamesManagerMock.OfficialGames
+            .Returns(testOfficialGames);
 
-			Assert.Empty(_gamePickerList.GameList);
-		}
+        _gamePickerList.PopulateGameList(GameCategories.None);
 
-		[Fact]
-		public void Populates_list_with_games_from_categories() {
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
-				.Returns(testOfficialGames);
+        Assert.Empty(_gamePickerList.GameList);
+    }
 
-			_gamePickerList.PopulateGameList(GameCategories.MainGame);
+    [Fact]
+    public void Populates_list_with_games_from_categories()
+    {
+        _settingsAndGamesManagerMock.OfficialGames
+            .Returns(testOfficialGames);
 
-			Assert.Equal(2, _gamePickerList.GameList.Count);
-		}
-	}
+        _gamePickerList.PopulateGameList(GameCategories.MainGame);
+
+        Assert.Equal(2, _gamePickerList.GameList.Count);
+    }
 }

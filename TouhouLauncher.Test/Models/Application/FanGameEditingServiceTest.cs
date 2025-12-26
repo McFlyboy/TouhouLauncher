@@ -1,4 +1,4 @@
-﻿using Moq;
+﻿using NSubstitute;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,159 +6,168 @@ using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 using Xunit;
 
-namespace TouhouLauncher.Test.Models.Application {
-	public class FanGameEditingServiceTest {
-		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
+namespace TouhouLauncher.Test.Models.Application;
 
-		private readonly FanGameEditingService _fanGameEditingService;
+public class FanGameEditingServiceTest
+{
+    private readonly SettingsAndGamesManager _settingsAndGamesManagerMock = Substitute.For<SettingsAndGamesManager>(null, null);
 
-		public FanGameEditingServiceTest() {
-			_fanGameEditingService = new(_settingsAndGamesManagerMock.Object);
-		}
+    private readonly FanGameEditingService _fanGameEditingService;
 
-		[Fact]
-		public async void Fails_to_create_and_save_fan_game_when_required_fields_are_missing() {
-			var error = await _fanGameEditingService.SaveAsync();
+    public FanGameEditingServiceTest()
+    {
+        _fanGameEditingService = new(_settingsAndGamesManagerMock);
+    }
 
-			Assert.IsType<FanGameInfoMissingError>(error);
-		}
+    [Fact]
+    public async Task Fails_to_create_and_save_fan_game_when_required_fields_are_missing()
+    {
+        var error = await _fanGameEditingService.SaveAsync();
 
-		[Fact]
-		public async void Returns_error_when_saving_edited_fan_game_fails() {
-			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
-				.Returns(Task.FromResult(new SettingsAndGamesSaveError("error"))!);
+        Assert.IsType<FanGameInfoMissingError>(error);
+    }
 
-			_fanGameEditingService.SetFanGameToEdit(
-				new(
-					title: "title",
-					imageLocation: null,
-					audioLocation: null,
-					releaseYear: null,
-					fileLocation: string.Empty,
-					includeInRandomGame: true
-				)
-			);
+    [Fact]
+    public async Task Returns_error_when_saving_edited_fan_game_fails()
+    {
+        _settingsAndGamesManagerMock.SaveAsync()
+            .Returns(Task.FromResult<SettingsAndGamesSaveError?>(new("error")));
 
-			_fanGameEditingService.GameLocation = "location";
+        _fanGameEditingService.SetFanGameToEdit(
+            new(
+                title: "title",
+                imageLocation: null,
+                audioLocation: null,
+                releaseYear: null,
+                fileLocation: string.Empty,
+                includeInRandomGame: true
+            )
+        );
 
-			var error = await _fanGameEditingService.SaveAsync();
+        _fanGameEditingService.GameLocation = "location";
 
-			Assert.IsType<SettingsAndGamesSaveError>(error);
-		}
+        var error = await _fanGameEditingService.SaveAsync();
 
-		[Fact]
-		public async void Returns_null_when_saving_edited_fan_game_succeeds() {
-			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
-				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
+        Assert.IsType<SettingsAndGamesSaveError>(error);
+    }
 
-			_fanGameEditingService.SetFanGameToEdit(
-				new(
-					title: "title",
-					imageLocation: null,
-					audioLocation: null,
-					releaseYear: null,
-					fileLocation: string.Empty,
-					includeInRandomGame: true
-				)
-			);
+    [Fact]
+    public async Task Returns_null_when_saving_edited_fan_game_succeeds()
+    {
+        _settingsAndGamesManagerMock.SaveAsync()
+            .Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
-			_fanGameEditingService.GameLocation = "location";
+        _fanGameEditingService.SetFanGameToEdit(
+            new(
+                title: "title",
+                imageLocation: null,
+                audioLocation: null,
+                releaseYear: null,
+                fileLocation: string.Empty,
+                includeInRandomGame: true
+            )
+        );
 
-			var error = await _fanGameEditingService.SaveAsync();
+        _fanGameEditingService.GameLocation = "location";
 
-			Assert.Null(error);
-			Assert.Equal(_fanGameEditingService.GameLocation, _fanGameEditingService.TargetFanGame!.FileLocation);
-		}
+        var error = await _fanGameEditingService.SaveAsync();
 
-		[Fact]
-		public async void Returns_null_when_creating_and_saving_new_fan_game_succeeds() {
-			var fanGames = new List<FanGame>();
+        Assert.Null(error);
+        Assert.Equal(_fanGameEditingService.GameLocation, _fanGameEditingService.TargetFanGame!.FileLocation);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
-				.Returns(fanGames);
+    [Fact]
+    public async Task Returns_null_when_creating_and_saving_new_fan_game_succeeds()
+    {
+        List<FanGame> fanGames = [];
 
-			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
-				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
+        _settingsAndGamesManagerMock.FanGames
+            .Returns(fanGames);
 
-			_fanGameEditingService.SetFanGameToEdit(null);
+        _settingsAndGamesManagerMock.SaveAsync()
+            .Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
-			_fanGameEditingService.GameTitle = "title";
-			_fanGameEditingService.GameLocation = "location";
+        _fanGameEditingService.SetFanGameToEdit(null);
 
-			var error = await _fanGameEditingService.SaveAsync();
+        _fanGameEditingService.GameTitle = "title";
+        _fanGameEditingService.GameLocation = "location";
 
-			Assert.Null(error);
-			Assert.Equal(
-				new(
-					title: "title",
-					imageLocation: null,
-					audioLocation: null,
-					releaseYear: null,
-					fileLocation: "location",
-					includeInRandomGame: true
-				),
-				fanGames.Last()
-			);
-		}
+        var error = await _fanGameEditingService.SaveAsync();
 
-		[Fact]
-		public async void Returns_error_when_trying_to_delete_non_existing_game() {
-			var error = await _fanGameEditingService.DeleteFanGame();
+        Assert.Null(error);
+        Assert.Equal(
+            new(
+                title: "title",
+                imageLocation: null,
+                audioLocation: null,
+                releaseYear: null,
+                fileLocation: "location",
+                includeInRandomGame: true
+            ),
+            fanGames.Last()
+        );
+    }
 
-			Assert.IsType<FanGameNotSpecifiedError>(error);
-		}
+    [Fact]
+    public async Task Returns_error_when_trying_to_delete_non_existing_game()
+    {
+        var error = await _fanGameEditingService.DeleteFanGame();
 
-		[Fact]
-		public async void Returns_error_when_saving_deletion_of_fan_game_fails() {
-			var fanGames = new List<FanGame>() {
-				new(
-					title: "title",
-					imageLocation: null,
-					audioLocation: null,
-					releaseYear: null,
-					fileLocation: "location",
-					includeInRandomGame: true
-				)
-			};
+        Assert.IsType<FanGameNotSpecifiedError>(error);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
-				.Returns(fanGames);
+    [Fact]
+    public async Task Returns_error_when_saving_deletion_of_fan_game_fails()
+    {
+        List<FanGame> fanGames = [
+            new(
+                title: "title",
+                imageLocation: null,
+                audioLocation: null,
+                releaseYear: null,
+                fileLocation: "location",
+                includeInRandomGame: true
+            )
+        ];
 
-			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
-				.Returns(Task.FromResult(new SettingsAndGamesSaveError("error"))!);
+        _settingsAndGamesManagerMock.FanGames
+            .Returns(fanGames);
 
-			_fanGameEditingService.SetFanGameToEdit(fanGames.First());
+        _settingsAndGamesManagerMock.SaveAsync()
+            .Returns(Task.FromResult<SettingsAndGamesSaveError?>(new("error")));
 
-			var error = await _fanGameEditingService.DeleteFanGame();
+        _fanGameEditingService.SetFanGameToEdit(fanGames.First());
 
-			Assert.IsType<SettingsAndGamesSaveError>(error);
-		}
+        var error = await _fanGameEditingService.DeleteFanGame();
 
-		[Fact]
-		public async void Returns_null_when_saving_deletion_of_fan_game_succeeds() {
-			var fanGames = new List<FanGame>() {
-				new(
-					title: "title",
-					imageLocation: null,
-					audioLocation: null,
-					releaseYear: null,
-					fileLocation: "location",
-					includeInRandomGame: true
-				)
-			};
+        Assert.IsType<SettingsAndGamesSaveError>(error);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
-				.Returns(fanGames);
+    [Fact]
+    public async Task Returns_null_when_saving_deletion_of_fan_game_succeeds()
+    {
+        List<FanGame> fanGames = [
+            new(
+                title: "title",
+                imageLocation: null,
+                audioLocation: null,
+                releaseYear: null,
+                fileLocation: "location",
+                includeInRandomGame: true
+            )
+        ];
 
-			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
-				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
+        _settingsAndGamesManagerMock.FanGames
+            .Returns(fanGames);
 
-			_fanGameEditingService.SetFanGameToEdit(fanGames.First());
+        _settingsAndGamesManagerMock.SaveAsync()
+            .Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
-			var error = await _fanGameEditingService.DeleteFanGame();
+        _fanGameEditingService.SetFanGameToEdit(fanGames.First());
 
-			Assert.Null(error);
-			Assert.Empty(fanGames);
-		}
-	}
+        var error = await _fanGameEditingService.DeleteFanGame();
+
+        Assert.Null(error);
+        Assert.Empty(fanGames);
+    }
 }

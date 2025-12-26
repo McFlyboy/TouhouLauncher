@@ -1,15 +1,17 @@
-﻿namespace TouhouLauncher.Models.Application.SettingsInfo {
-	public record GeneralSettings {
-		public GeneralSettings(
-			bool closeOnGameLaunch,
-			bool combineMainCategories
-		) {
-			CloseOnGameLaunch = closeOnGameLaunch;
-			CombineMainCategories = combineMainCategories;
-		}
+﻿namespace TouhouLauncher.Models.Application.SettingsInfo;
 
-		public bool CloseOnGameLaunch { get; set; }
+public record GeneralSettings
+{
+    public GeneralSettings(
+        bool closeOnGameLaunch,
+        bool combineMainCategories
+    )
+    {
+        CloseOnGameLaunch = closeOnGameLaunch;
+        CombineMainCategories = combineMainCategories;
+    }
 
-		public bool CombineMainCategories { get; set; }
-	}
+    public bool CloseOnGameLaunch { get; set; }
+
+    public bool CombineMainCategories { get; set; }
 }

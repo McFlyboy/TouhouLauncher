@@ -1,4 +1,4 @@
-﻿using Moq;
+﻿using NSubstitute;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
@@ -6,63 +6,68 @@ using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
 using TouhouLauncher.Models.Common;
 
-namespace TouhouLauncher.Test.Models.Application {
-	public class SettingsAndGamesManagerTest {
-		private readonly Mock<FileSystemSettingsAndGamesRepository> _fileSystemSettingsAndGamesServiceMock = new(null, null);
-		private readonly Mock<OfficialGamesTemplateService> _officialGamesTemplateServiceMock = new();
+namespace TouhouLauncher.Test.Models.Application;
 
-		private readonly SettingsAndGamesManager _settingsAndGamesManager;
+public class SettingsAndGamesManagerTest
+{
+    private readonly FileSystemSettingsAndGamesRepository _fileSystemSettingsAndGamesServiceMock = Substitute.For<FileSystemSettingsAndGamesRepository>(null, null);
+    private readonly OfficialGamesTemplateService _officialGamesTemplateServiceMock = Substitute.For<OfficialGamesTemplateService>();
 
-		public SettingsAndGamesManagerTest() {
-			_settingsAndGamesManager = new(
-				_fileSystemSettingsAndGamesServiceMock.Object,
-				_officialGamesTemplateServiceMock.Object
-			);
-		}
+    private readonly SettingsAndGamesManager _settingsAndGamesManager;
 
-		[Fact]
-		public async void Saves_settings_and_games_and_returns_result() {
-			_fileSystemSettingsAndGamesServiceMock
-				.Setup(obj => obj.SaveAsync(It.IsAny<SettingsAndGames>()))
-				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
+    public SettingsAndGamesManagerTest()
+    {
+        _settingsAndGamesManager = new(
+            _fileSystemSettingsAndGamesServiceMock,
+            _officialGamesTemplateServiceMock
+        );
+    }
 
-			var error = await _settingsAndGamesManager.SaveAsync();
+    [Fact]
+    public async Task Saves_settings_and_games_and_returns_result()
+    {
+        _fileSystemSettingsAndGamesServiceMock
+            .SaveAsync(Arg.Any<SettingsAndGames>())
+            .Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
-			Assert.Null(error);
-		}
+        var error = await _settingsAndGamesManager.SaveAsync();
 
-		[Fact]
-		public async void Returns_error_when_no_settings_and_games_exist() {
-			_fileSystemSettingsAndGamesServiceMock
-				.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(new SettingsAndGamesLoadError("Error")));
+        Assert.Null(error);
+    }
 
-			_officialGamesTemplateServiceMock
-				.Setup(obj => obj.CreateOfficialGamesFromTemplate())
-				.Returns(testOfficialGames);
+    [Fact]
+    public async Task Returns_error_when_no_settings_and_games_exist()
+    {
+        _fileSystemSettingsAndGamesServiceMock
+            .LoadAsync()
+            .Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(new SettingsAndGamesLoadError("Error")));
 
-			var result = await _settingsAndGamesManager.LoadAsync();
+        _officialGamesTemplateServiceMock
+            .CreateOfficialGamesFromTemplate()
+            .Returns(testOfficialGames);
 
-			Assert.NotNull(result);
-		}
+        var result = await _settingsAndGamesManager.LoadAsync();
 
-		[Fact]
-		public async void Returns_null_and_stores_loaded_settings_and_games_when_settings_and_games_exist() {
-			_fileSystemSettingsAndGamesServiceMock
-				.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(testSettingsAndGames));
+        Assert.NotNull(result);
+    }
 
-			var result = await _settingsAndGamesManager.LoadAsync();
+    [Fact]
+    public async Task Returns_null_and_stores_loaded_settings_and_games_when_settings_and_games_exist()
+    {
+        _fileSystemSettingsAndGamesServiceMock
+            .LoadAsync()
+            .Returns(Task.FromResult<Either<SettingsAndGamesLoadError, SettingsAndGames>>(testSettingsAndGames));
 
-			Assert.Null(result);
+        var result = await _settingsAndGamesManager.LoadAsync();
 
-			Assert.True(_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch);
+        Assert.Null(result);
 
-			Assert.NotNull(_settingsAndGamesManager.EmulatorSettings.FolderLocation);
+        Assert.True(_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch);
 
-			Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);
+        Assert.NotNull(_settingsAndGamesManager.EmulatorSettings.FolderLocation);
 
-			Assert.NotEmpty(_settingsAndGamesManager.FanGames);
-		}
-	}
+        Assert.NotEmpty(_settingsAndGamesManager.OfficialGames);
+
+        Assert.NotEmpty(_settingsAndGamesManager.FanGames);
+    }
 }

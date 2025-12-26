@@ -10,12 +10,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 10.0.x
 
     - name: Run .NET Publish
       run: |
@@ -23,21 +23,19 @@ jobs:
         dotnet publish -c Release -p:PublishProfile=x64
 
     - name: Package up results (x86)
-      uses: papeloto/action-zip@v1
+      uses: vimtor/action-zip@v1.2
       with:
         files: TouhouLauncher\bin\publish\x86\
-        recursive: true
         dest: TouhouLauncher-x86.zip
 
     - name: Package up results (x64)
-      uses: papeloto/action-zip@v1
+      uses: vimtor/action-zip@v1.2
       with:
         files: TouhouLauncher\bin\publish\x64\
-        recursive: true
         dest: TouhouLauncher-x64.zip
 
     - name: Create release draft
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2.5
       with:
         draft: true
         files: |

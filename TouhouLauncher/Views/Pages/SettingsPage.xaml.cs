@@ -13,13 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TouhouLauncher.Views.Pages {
-	/// <summary>
-	/// Interaction logic for SettingsPage.xaml
-	/// </summary>
-	public partial class SettingsPage : Page {
-		public SettingsPage() {
-			InitializeComponent();
-		}
+namespace TouhouLauncher.Views.Pages
+{
+    /// <summary>
+    /// Interaction logic for SettingsPage.xaml
+    /// </summary>
+    public partial class SettingsPage : Page
+    {
+        public SettingsPage()
+        {
+            InitializeComponent();
+        }
     }
 }

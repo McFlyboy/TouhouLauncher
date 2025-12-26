@@ -1,51 +1,56 @@
-﻿using Moq;
+﻿using NSubstitute;
 using TouhouLauncher.Models.Application;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
 using System.Threading.Tasks;
 
-namespace TouhouLauncher.Test.Models.Application {
-	public class GameConfigServiceTest {
-		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
+namespace TouhouLauncher.Test.Models.Application;
 
-		private readonly GameConfigService _gameConfigService;
+public class GameConfigServiceTest
+{
+    private readonly SettingsAndGamesManager _settingsAndGamesManagerMock = Substitute.For<SettingsAndGamesManager>(null, null);
 
-		public GameConfigServiceTest() {
-			_gameConfigService = new(_settingsAndGamesManagerMock.Object);
-		}
+    private readonly GameConfigService _gameConfigService;
 
-		[Fact]
-		public void Sets_game_to_configure_and_sets_game_settings() {
-			_gameConfigService.SetGameToConfigure(testOfficialGame1);
+    public GameConfigServiceTest()
+    {
+        _gameConfigService = new(_settingsAndGamesManagerMock);
+    }
 
-			Assert.Equal(testOfficialGame1, _gameConfigService.TargetGame);
-			Assert.Equal(testOfficialGame1.FileLocation, _gameConfigService.GameLocation);
-			Assert.Equal(testOfficialGame1.IncludeInRandomGame, _gameConfigService.IncludeInRandomGame);
-		}
+    [Fact]
+    public void Sets_game_to_configure_and_sets_game_settings()
+    {
+        _gameConfigService.SetGameToConfigure(testOfficialGame1);
 
-		[Fact]
-		public async void Doesnt_save_changes_when_target_game_is_null_and_returns_error() {
-			var error = await _gameConfigService.SaveAsync();
+        Assert.Equal(testOfficialGame1, _gameConfigService.TargetGame);
+        Assert.Equal(testOfficialGame1.FileLocation, _gameConfigService.GameLocation);
+        Assert.Equal(testOfficialGame1.IncludeInRandomGame, _gameConfigService.IncludeInRandomGame);
+    }
 
-			Assert.NotNull(error);
+    [Fact]
+    public async Task Doesnt_save_changes_when_target_game_is_null_and_returns_error()
+    {
+        var error = await _gameConfigService.SaveAsync();
 
-			_settingsAndGamesManagerMock.Verify(obj => obj.SaveAsync(), Times.Never);
-		}
+        Assert.NotNull(error);
 
-		[Fact]
-		public async void Stores_game_settings_in_game_and_saves_changes_and_returns_save_result() {
-			_settingsAndGamesManagerMock.Setup(obj => obj.SaveAsync())
-				.Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
+        await _settingsAndGamesManagerMock.DidNotReceive().SaveAsync();
+    }
 
-			_gameConfigService.SetGameToConfigure(testOfficialGame1);
+    [Fact]
+    public async Task Stores_game_settings_in_game_and_saves_changes_and_returns_save_result()
+    {
+        _settingsAndGamesManagerMock.SaveAsync()
+            .Returns(Task.FromResult<SettingsAndGamesSaveError?>(null));
 
-			var error = await _gameConfigService.SaveAsync();
+        _gameConfigService.SetGameToConfigure(testOfficialGame1);
 
-			Assert.Null(error);
-			Assert.Equal(_gameConfigService.GameLocation, testOfficialGame1.FileLocation);
-			Assert.Equal(_gameConfigService.IncludeInRandomGame, testOfficialGame1.IncludeInRandomGame);
+        var error = await _gameConfigService.SaveAsync();
 
-			_settingsAndGamesManagerMock.Verify(obj => obj.SaveAsync(), Times.Once);
-		}
-	}
+        Assert.Null(error);
+        Assert.Equal(_gameConfigService.GameLocation, testOfficialGame1.FileLocation);
+        Assert.Equal(_gameConfigService.IncludeInRandomGame, testOfficialGame1.IncludeInRandomGame);
+
+        await _settingsAndGamesManagerMock.Received(1).SaveAsync();
+    }
 }

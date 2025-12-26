@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace TouhouLauncher {
-	public partial class App : Application {
-	}
+namespace TouhouLauncher
+{
+    public partial class App : Application { }
 }

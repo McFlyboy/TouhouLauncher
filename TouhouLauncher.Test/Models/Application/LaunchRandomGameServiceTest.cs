@@ -1,6 +1,5 @@
-﻿using Moq;
+﻿using NSubstitute;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
@@ -8,77 +7,82 @@ using static TouhouLauncher.Test.CommonTestToolsAndData;
 using Xunit;
 using TouhouLauncher.Models.Common;
 
-namespace TouhouLauncher.Test.Models.Application {
-	public class LaunchRandomGameServiceTest {
-		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
-		private readonly Mock<LaunchGameService> _launchGameServiceMock = new(null, null, null, null, null);
-		private readonly Mock<Random> _randomMock = new();
+namespace TouhouLauncher.Test.Models.Application;
 
-		private readonly LaunchRandomGameService _launchRandomGameService;
+public class LaunchRandomGameServiceTest
+{
+    private readonly SettingsAndGamesManager _settingsAndGamesManagerMock = Substitute.For<SettingsAndGamesManager>(null, null);
+    private readonly LaunchGameService _launchGameServiceMock = Substitute.For<LaunchGameService>(null, null, null, null, null);
+    private readonly Random _randomMock = Substitute.For<Random>();
 
-		public LaunchRandomGameServiceTest() {
-			_launchRandomGameService = new(
-				_settingsAndGamesManagerMock.Object,
-				_launchGameServiceMock.Object,
-				_randomMock.Object
-			);
-		}
+    private readonly LaunchRandomGameService _launchRandomGameService;
 
-		[Fact]
-		public async void Returns_error_when_no_games_exist() {
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
-				.Returns(Array.Empty<OfficialGame>());
+    public LaunchRandomGameServiceTest()
+    {
+        _launchRandomGameService = new(
+            _settingsAndGamesManagerMock,
+            _launchGameServiceMock,
+            _randomMock
+        );
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
-				.Returns(new List<FanGame>());
+    [Fact]
+    public async Task Returns_error_when_no_games_exist()
+    {
+        _settingsAndGamesManagerMock.OfficialGames
+            .Returns([]);
 
-			var result = await _launchRandomGameService.LaunchRandomGame();
+        _settingsAndGamesManagerMock.FanGames
+            .Returns([]);
 
-			Assert.NotNull(result);
-			Assert.IsType<LaunchRandomGameServiceError.NoGamesFoundError>(result);
-		}
+        var result = await _launchRandomGameService.LaunchRandomGame();
 
-		[Fact]
-		public async void Returns_error_when_a_game_fails_to_start() {
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
-				.Returns(testOfficialGames);
+        Assert.NotNull(result);
+        Assert.IsType<LaunchRandomGameServiceError.NoGamesFoundError>(result);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
-				.Returns(testFanGames);
+    [Fact]
+    public async Task Returns_error_when_a_game_fails_to_start()
+    {
+        _settingsAndGamesManagerMock.OfficialGames
+            .Returns(testOfficialGames);
 
-			_randomMock.Setup(obj => obj.Next(It.IsAny<int>()))
-				.Returns(0);
+        _settingsAndGamesManagerMock.FanGames
+            .Returns(testFanGames);
 
-			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
-				.Returns(Task.FromResult<TouhouLauncherError?>(new LaunchGameError.GameDoesNotExistError()));
+        _randomMock.Next(Arg.Any<int>())
+            .Returns(0);
 
-			var result = await _launchRandomGameService.LaunchRandomGame();
+        _launchGameServiceMock.LaunchGame(Arg.Any<Game>())
+            .Returns(Task.FromResult<TouhouLauncherError?>(new LaunchGameError.GameDoesNotExistError()));
 
-			_launchGameServiceMock.Verify(obj => obj.LaunchGame(It.IsAny<Game>()), Times.Once());
+        var result = await _launchRandomGameService.LaunchRandomGame();
 
-			Assert.NotNull(result);
-			Assert.IsType<LaunchGameError.GameDoesNotExistError>(result);
-		}
+        await _launchGameServiceMock.Received(1).LaunchGame(Arg.Any<Game>());
 
-		[Fact]
-		public async void Returns_null_when_a_game_starts_successfully() {
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.OfficialGames)
-				.Returns(testOfficialGames);
+        Assert.NotNull(result);
+        Assert.IsType<LaunchGameError.GameDoesNotExistError>(result);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.FanGames)
-				.Returns(testFanGames);
+    [Fact]
+    public async Task Returns_null_when_a_game_starts_successfully()
+    {
+        _settingsAndGamesManagerMock.OfficialGames
+            .Returns(testOfficialGames);
 
-			_randomMock.Setup(obj => obj.Next(It.IsAny<int>()))
-				.Returns(0);
+        _settingsAndGamesManagerMock.FanGames
+            .Returns(testFanGames);
 
-			_launchGameServiceMock.Setup(obj => obj.LaunchGame(It.IsAny<Game>()))
-				.Returns(Task.FromResult<TouhouLauncherError?>(null));
+        _randomMock.Next(Arg.Any<int>())
+            .Returns(0);
 
-			var result = await _launchRandomGameService.LaunchRandomGame();
+        _launchGameServiceMock.LaunchGame(Arg.Any<Game>())
+            .Returns(Task.FromResult<TouhouLauncherError?>(null));
 
-			_launchGameServiceMock.Verify(obj => obj.LaunchGame(It.IsAny<Game>()), Times.Once());
+        var result = await _launchRandomGameService.LaunchRandomGame();
 
-			Assert.Null(result);
-		}
-	}
+        await _launchGameServiceMock.Received(1).LaunchGame(Arg.Any<Game>());
+
+        Assert.Null(result);
+    }
 }

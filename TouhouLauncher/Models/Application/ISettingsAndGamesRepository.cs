@@ -1,22 +1,21 @@
 ﻿using System.Threading.Tasks;
 using TouhouLauncher.Models.Common;
 
-namespace TouhouLauncher.Models.Application {
-	public interface ISettingsAndGamesRepository {
-		public Task<SettingsAndGamesSaveError?> SaveAsync(SettingsAndGames? settingsAndGames);
+namespace TouhouLauncher.Models.Application;
 
-		public Task<Either<SettingsAndGamesLoadError, SettingsAndGames>> LoadAsync();
-	}
+public interface ISettingsAndGamesRepository
+{
+    public Task<SettingsAndGamesSaveError?> SaveAsync(SettingsAndGames? settingsAndGames);
 
-	public record SettingsAndGamesSaveError(string Reason) : TouhouLauncherError {
-		public override string Message => "Unable to save launcher settings.\n\n" +
-			"Reason:\n" +
-			Reason;
-	}
+    public Task<Either<SettingsAndGamesLoadError, SettingsAndGames>> LoadAsync();
+}
 
-	public record SettingsAndGamesLoadError(string Reason) : TouhouLauncherError {
-		public override string Message => "Unable to load launcher settings.\n\n" +
-			"Reason:\n" +
-			Reason;
-	}
+public record SettingsAndGamesSaveError(string Reason) : TouhouLauncherError
+{
+    public override string Message => $"Unable to save launcher settings.\n\nReason:\n{Reason}";
+}
+
+public record SettingsAndGamesLoadError(string Reason) : TouhouLauncherError
+{
+    public override string Message => $"Unable to load launcher settings.\n\nReason:\n{Reason}";
 }

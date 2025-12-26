@@ -1,24 +1,27 @@
 ﻿using TouhouLauncher.Models.Common;
 using Xunit;
 
-namespace TouhouLauncher.Test.Models.Common.Either {
-	public class EitherSelectTest {
-		[Fact]
-		public void Converts_left_side_to_new_type_and_returns_new_Either() {
-			Either<bool, float> either = true;
+namespace TouhouLauncher.Test.Models.Common.Either;
 
-			Either<string, float> result = either.SelectLeft(value => value.ToString());
+public class EitherSelectTest
+{
+    [Fact]
+    public void Converts_left_side_to_new_type_and_returns_new_Either()
+    {
+        Either<bool, float> either = true;
 
-			Assert.Equal("True", result.GetLeft());
-		}
+        Either<string, float> result = either.SelectLeft(value => value.ToString());
 
-		[Fact]
-		public void Converts_right_side_to_new_type_and_returns_new_Either() {
-			Either<bool, float> either = 3.2f;
+        Assert.Equal("True", result.GetLeft());
+    }
 
-			Either<bool, int> result = either.SelectRight(value => (int)value);
+    [Fact]
+    public void Converts_right_side_to_new_type_and_returns_new_Either()
+    {
+        Either<bool, float> either = 3.2f;
 
-			Assert.Equal(3, result.GetRight());
-		}
-	}
+        Either<bool, int> result = either.SelectRight(value => (int)value);
+
+        Assert.Equal(3, result.GetRight());
+    }
 }

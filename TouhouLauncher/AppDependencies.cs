@@ -1,73 +1,76 @@
-using GalaSoft.MvvmLight.Ioc;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Infrastructure.Execution.FileSystem;
 using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using TouhouLauncher.ViewModels;
 
-namespace TouhouLauncher {
-	public class AppDependencies {
-		private readonly SimpleIoc dependencies;
+namespace TouhouLauncher;
 
-		public AppDependencies() {
-			dependencies = SimpleIoc.Default;
+public class AppDependencies
+{
+    public AppDependencies()
+    {
+        ServiceProvider serviceProvider = new ServiceCollection()
+            /* ------ VIEW MODELS ------ */
+            .AddSingleton<MainViewModel>()
+            .AddSingleton<GameConfigViewModel>()
+            .AddSingleton<HomeViewModel>()
+            .AddSingleton<GamePickerViewModel>()
+            .AddSingleton<SettingsViewModel>()
+            .AddSingleton<GeneralSettingsViewModel>()
+            .AddSingleton<EmulatorSettingsViewModel>()
+            .AddSingleton<GamesSettingsViewModel>()
+            .AddSingleton<FanGameEditorViewModel>()
 
-			/* ------ VIEW MODELS ------ */
-			dependencies.Register<MainViewModel>();
-			dependencies.Register<GameConfigViewModel>();
-			dependencies.Register<HomeViewModel>();
-			dependencies.Register<GamePickerViewModel>();
-			dependencies.Register<SettingsViewModel>();
-			dependencies.Register<GeneralSettingsViewModel>();
-			dependencies.Register<EmulatorSettingsViewModel>();
-			dependencies.Register<GamesSettingsViewModel>();
-			dependencies.Register<FanGameEditorViewModel>();
+            /* ------ MODELS ------ */
+            .AddSingleton<SettingsAndGamesManager>()
+            .AddSingleton<GameConfigService>()
+            .AddSingleton<ActiveGameCategory>()
+            .AddSingleton<GamePickerList>()
+            .AddSingleton<IExecutorService, FileSystemExecutorService>()
+            .AddSingleton<GameCategoryService>()
+            .AddSingleton<OfficialGamesTemplateService>()
+            .AddSingleton<FileSystemBrowserService>()
+            .AddSingleton<FileAccessService>()
+            .AddSingleton<ISettingsAndGamesRepository, FileSystemSettingsAndGamesRepository>()
+            .AddSingleton<LaunchGameService>()
+            .AddSingleton<LaunchRandomGameService>()
+            .AddSingleton<Random>()
+            .AddSingleton<INp21ntConfigRepository, FileSystemNp21ntConfigRepository>()
+            .AddSingleton<Np21ntConfigDefaultsService>()
+            .AddSingleton<PathExistanceService>()
+            .AddSingleton<FanGameEditingService>()
+            .BuildServiceProvider();
 
-			/* ------ MODELS ------ */
-			dependencies.Register<SettingsAndGamesManager>();
-			dependencies.Register<GameConfigService>();
-			dependencies.Register<ActiveGameCategory>();
-			dependencies.Register<GamePickerList>();
-			dependencies.Register<IExecutorService, FileSystemExecutorService>();
-			dependencies.Register<GameCategoryService>();
-			dependencies.Register<OfficialGamesTemplateService>();
-			dependencies.Register<FileSystemBrowserService>();
-			dependencies.Register<FileAccessService>();
-			dependencies.Register<ISettingsAndGamesRepository, FileSystemSettingsAndGamesRepository>();
-			dependencies.Register<LaunchGameService>();
-			dependencies.Register<LaunchRandomGameService>();
-			dependencies.Register<Random>(() => new());
-			dependencies.Register<INp21ntConfigRepository, FileSystemNp21ntConfigRepository>();
-			dependencies.Register<Np21ntConfigDefaultsService>();
-			dependencies.Register<PathExistanceService>();
-			dependencies.Register<FanGameEditingService>();
-		}
+        Ioc.Default.ConfigureServices(serviceProvider);
+    }
 
-		public MainViewModel MainVM =>
-			dependencies.GetInstance<MainViewModel>();
+    public MainViewModel MainVM =>
+        Ioc.Default.GetRequiredService<MainViewModel>();
 
-		public GameConfigViewModel GameConfigVM =>
-			dependencies.GetInstance<GameConfigViewModel>();
+    public GameConfigViewModel GameConfigVM =>
+        Ioc.Default.GetRequiredService<GameConfigViewModel>();
 
-		public HomeViewModel HomeVM =>
-			dependencies.GetInstance<HomeViewModel>();
+    public HomeViewModel HomeVM =>
+        Ioc.Default.GetRequiredService<HomeViewModel>();
 
-		public GamePickerViewModel GamePickerVM =>
-			dependencies.GetInstance<GamePickerViewModel>();
+    public GamePickerViewModel GamePickerVM =>
+        Ioc.Default.GetRequiredService<GamePickerViewModel>();
 
-		public SettingsViewModel SettingsVM =>
-			dependencies.GetInstance<SettingsViewModel>();
+    public SettingsViewModel SettingsVM =>
+        Ioc.Default.GetRequiredService<SettingsViewModel>();
 
-		public GeneralSettingsViewModel GeneralSettingsVM =>
-			dependencies.GetInstance<GeneralSettingsViewModel>();
+    public GeneralSettingsViewModel GeneralSettingsVM =>
+        Ioc.Default.GetRequiredService<GeneralSettingsViewModel>();
 
-		public EmulatorSettingsViewModel EmulatorSettingsVM =>
-			dependencies.GetInstance<EmulatorSettingsViewModel>();
+    public EmulatorSettingsViewModel EmulatorSettingsVM =>
+        Ioc.Default.GetRequiredService<EmulatorSettingsViewModel>();
 
-		public GamesSettingsViewModel GameLocationsSettingsVM =>
-			dependencies.GetInstance<GamesSettingsViewModel>();
+    public GamesSettingsViewModel GameLocationsSettingsVM =>
+        Ioc.Default.GetRequiredService<GamesSettingsViewModel>();
 
-		public FanGameEditorViewModel FanGameEditorVM =>
-			dependencies.GetInstance<FanGameEditorViewModel>();
-	}
+    public FanGameEditorViewModel FanGameEditorVM =>
+        Ioc.Default.GetRequiredService<FanGameEditorViewModel>();
 }

@@ -13,13 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TouhouLauncher.Views.UserControls.Settings {
-	/// <summary>
-	/// Interaction logic for EmulatorSettings.xaml
-	/// </summary>
-	public partial class EmulatorSettings : UserControl {
-		public EmulatorSettings() {
-			InitializeComponent();
-		}
-	}
+namespace TouhouLauncher.Views.UserControls.Settings
+{
+    /// <summary>
+    /// Interaction logic for EmulatorSettings.xaml
+    /// </summary>
+    public partial class EmulatorSettings : UserControl
+    {
+        public EmulatorSettings()
+        {
+            InitializeComponent();
+        }
+    }
 }

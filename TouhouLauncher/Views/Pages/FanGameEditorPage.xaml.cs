@@ -13,13 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TouhouLauncher.Views.Pages {
-	/// <summary>
-	/// Interaction logic for FanGameEditorPage.xaml
-	/// </summary>
-	public partial class FanGameEditorPage : Page {
-		public FanGameEditorPage() {
-			InitializeComponent();
-		}
-	}
+namespace TouhouLauncher.Views.Pages
+{
+    /// <summary>
+    /// Interaction logic for FanGameEditorPage.xaml
+    /// </summary>
+    public partial class FanGameEditorPage : Page
+    {
+        public FanGameEditorPage()
+        {
+            InitializeComponent();
+        }
+    }
 }
