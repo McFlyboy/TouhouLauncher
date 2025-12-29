@@ -1,129 +1,144 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 
-namespace TouhouLauncher.ViewModels {
-	public class FanGameEditorViewModel : ViewModelBase {
-		private readonly FanGameEditingService _fanGameEditingService;
-		private readonly FileSystemBrowserService _fileSystemBrowserService;
+namespace TouhouLauncher.ViewModels;
 
-		public FanGameEditorViewModel(
-			FanGameEditingService fanGameEditingService,
-			FileSystemBrowserService fileSystemBrowserService
-		) {
-			_fanGameEditingService = fanGameEditingService;
-			_fileSystemBrowserService = fileSystemBrowserService;
+public class FanGameEditorViewModel : ObservableRecipient
+{
+    private readonly FanGameEditingService _fanGameEditingService;
+    private readonly FileSystemBrowserService _fileSystemBrowserService;
 
-			BrowseCommand = new RelayCommand(() => {
-				var browseResult = _fileSystemBrowserService.BrowseFiles(
-					"Select game",
-					new("Executable files", "*.exe"),
-					new("All files", "*.*")
-				);
+    public FanGameEditorViewModel(
+        FanGameEditingService fanGameEditingService,
+        FileSystemBrowserService fileSystemBrowserService
+    )
+    {
+        _fanGameEditingService = fanGameEditingService;
+        _fileSystemBrowserService = fileSystemBrowserService;
 
-				if (browseResult == null) {
-					return;
-				}
+        BrowseCommand = new RelayCommand(() =>
+        {
+            var browseResult = _fileSystemBrowserService.BrowseFiles(
+                "Select game",
+                new("Executable files", "*.exe"),
+                new("All files", "*.*")
+            );
 
-				GameLocation = browseResult;
-				RaisePropertyChanged(nameof(GameLocation));
-			});
+            if (browseResult == null)
+                return;
 
-			BrowseImageCommand = new RelayCommand(() => {
-				var browseResult = _fileSystemBrowserService.BrowseFiles(
-					"Select cover image",
-					new("Image files", "*.png", "*.jpg"),
-					new("All files", "*.*")
-				);
+            GameLocation = browseResult;
+            OnPropertyChanged(nameof(GameLocation));
+        });
 
-				if (browseResult == null) {
-					return;
-				}
+        BrowseImageCommand = new RelayCommand(() =>
+        {
+            var browseResult = _fileSystemBrowserService.BrowseFiles(
+                "Select cover image",
+                new("Image files", "*.png", "*.jpg"),
+                new("All files", "*.*")
+            );
 
-				CoverImageLocation = browseResult;
-				RaisePropertyChanged(nameof(CoverImageLocation));
-			});
+            if (browseResult == null)
+                return;
 
-			DeleteCommand = new RelayCommand(async () => {
-				var error = await _fanGameEditingService.DeleteFanGame();
+            CoverImageLocation = browseResult;
+            OnPropertyChanged(nameof(CoverImageLocation));
+        });
 
-				if (error != null) {
-					MessageBox.Show(error.Message, "Error");
-					return;
-				}
+        DeleteCommand = new RelayCommand(async () =>
+        {
+            var error = await _fanGameEditingService.DeleteFanGame();
 
-				MessengerInstance.Send<object?>(null, GamePickerViewModel.UpdateGamesToken);
-				MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken);
-			});
+            if (error != null)
+            {
+                MessageBox.Show(error.Message, "Error");
+                return;
+            }
 
-			SaveCommand = new RelayCommand(async () => {
-				var error = await _fanGameEditingService.SaveAsync();
+            Messenger.Send(new GamePickerUpdateGamesMessage());
+            Messenger.Send(new MainViewChangePageMessage("HomePage.xaml"));
+        });
 
-				if (error != null) {
-					MessageBox.Show(error.Message, "Error");
-					return;
-				}
+        SaveCommand = new RelayCommand(async () =>
+        {
+            var error = await _fanGameEditingService.SaveAsync();
 
-				MessengerInstance.Send<object?>(null, GamePickerViewModel.UpdateGamesToken);
-				MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken);
-			});
+            if (error != null)
+            {
+                MessageBox.Show(error.Message, "Error");
+                return;
+            }
 
-			CancelCommand = new RelayCommand(
-				() => MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken)
-			);
-		}
+            Messenger.Send(new GamePickerUpdateGamesMessage());
+            Messenger.Send(new MainViewChangePageMessage("HomePage.xaml"));
+        });
 
-		public string PageTitle => _fanGameEditingService.TargetFanGame == null
-			? "New fan game"
-			: "Edit fan game";
+        CancelCommand = new RelayCommand(
+            () => Messenger.Send(new MainViewChangePageMessage("HomePage.xaml"))
+        );
+    }
 
-		public string GameTitle {
-			get => _fanGameEditingService.GameTitle;
-			set => _fanGameEditingService.GameTitle = value;
-		}
+    public string PageTitle => _fanGameEditingService.TargetFanGame == null
+        ? "New fan game"
+        : "Edit fan game";
 
-		public string YearOfRelease {
-			get => _fanGameEditingService.YearOfRelease?.ToString() ?? "";
-			set {
-				try {
-					_fanGameEditingService.YearOfRelease = int.Parse(value);
-				}
-				catch (Exception) {
-					_fanGameEditingService.YearOfRelease = null;
-				}
-			}
-		}
+    public string GameTitle
+    {
+        get => _fanGameEditingService.GameTitle;
+        set => _fanGameEditingService.GameTitle = value;
+    }
 
-		public string GameLocation {
-			get => _fanGameEditingService.GameLocation;
-			set => _fanGameEditingService.GameLocation = value;
-		}
+    public string YearOfRelease
+    {
+        get => _fanGameEditingService.YearOfRelease?.ToString() ?? "";
+        set
+        {
+            try
+            {
+                _fanGameEditingService.YearOfRelease = int.Parse(value);
+            }
+            catch (Exception)
+            {
+                _fanGameEditingService.YearOfRelease = null;
+            }
+        }
+    }
 
-		public string CoverImageLocation {
-			get => _fanGameEditingService.CoverImageLocation ?? string.Empty;
-			set => _fanGameEditingService.CoverImageLocation = value.Length > 0 ? value : null;
-		}
+    public string GameLocation
+    {
+        get => _fanGameEditingService.GameLocation;
+        set => _fanGameEditingService.GameLocation = value;
+    }
 
-		public bool IncludeInRandomGame {
-			get => _fanGameEditingService.IncludeInRandomGame;
-			set => _fanGameEditingService.IncludeInRandomGame = value;
-		}
+    public string CoverImageLocation
+    {
+        get => _fanGameEditingService.CoverImageLocation ?? string.Empty;
+        set => _fanGameEditingService.CoverImageLocation = value.Length > 0 ? value : null;
+    }
 
-		public Visibility DeleteButtonVisibility => _fanGameEditingService.TargetFanGame == null
-			? Visibility.Collapsed
-			: Visibility.Visible;
+    public bool IncludeInRandomGame
+    {
+        get => _fanGameEditingService.IncludeInRandomGame;
+        set => _fanGameEditingService.IncludeInRandomGame = value;
+    }
 
-		public ICommand BrowseCommand { get; }
+    public Visibility DeleteButtonVisibility => _fanGameEditingService.TargetFanGame == null
+        ? Visibility.Collapsed
+        : Visibility.Visible;
 
-		public ICommand BrowseImageCommand { get; }
+    public ICommand BrowseCommand { get; }
 
-		public ICommand DeleteCommand { get; }
+    public ICommand BrowseImageCommand { get; }
 
-		public ICommand SaveCommand { get; }
+    public ICommand DeleteCommand { get; }
 
-		public ICommand CancelCommand { get; }
-	}
+    public ICommand SaveCommand { get; }
+
+    public ICommand CancelCommand { get; }
 }

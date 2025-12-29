@@ -1,42 +1,45 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Windows;
 using TouhouLauncher.Models.Application;
 
-namespace TouhouLauncher.ViewModels {
-	public class GeneralSettingsViewModel : ViewModelBase {
-		private readonly SettingsAndGamesManager _settingsAndGamesManager;
+namespace TouhouLauncher.ViewModels;
 
-		public GeneralSettingsViewModel(SettingsAndGamesManager settingsAndGamesManager) {
-			_settingsAndGamesManager = settingsAndGamesManager;
-		}
+public class GeneralSettingsViewModel(SettingsAndGamesManager settingsAndGamesManager) : ObservableRecipient
+{
+    public bool CloseOnGameLaunchChecked
+    {
+        get => settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch;
+        set
+        {
+            settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch = value;
+            SaveSettings();
+        }
+    }
 
-		public bool CloseOnGameLaunchChecked {
-			get => _settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch;
-			set {
-				_settingsAndGamesManager.GeneralSettings.CloseOnGameLaunch = value;
-				SaveSettings();
-			}
-		}
+    public bool CombineMainCategoriesChecked
+    {
+        get => settingsAndGamesManager.GeneralSettings.CombineMainCategories;
+        set
+        {
+            settingsAndGamesManager.GeneralSettings.CombineMainCategories = value;
+            SaveSettings();
 
-		public bool CombineMainCategoriesChecked {
-			get => _settingsAndGamesManager.GeneralSettings.CombineMainCategories;
-			set {
-				_settingsAndGamesManager.GeneralSettings.CombineMainCategories = value;
-				SaveSettings();
+            Messenger.Send(new HomeViewRebuildHeadersMessage());
+        }
+    }
 
-				MessengerInstance.Send<object?>(null, HomeViewModel.RebuildHeadersMessageToken);
-			}
-		}
+    private void SaveSettings()
+    {
+        settingsAndGamesManager.SaveAsync()
+            .ContinueWith(async result =>
+            {
+                var error = await result;
 
-		private void SaveSettings() {
-			_settingsAndGamesManager.SaveAsync()
-				.ContinueWith(async result => {
-					var error = await result;
-
-					if (error != null) {
-						MessageBox.Show(error.Message, "Error");
-					}
-				});
-		}
-	}
+                if (error != null)
+                {
+                    MessageBox.Show(error.Message, "Error");
+                }
+            });
+    }
 }

@@ -1,25 +1,29 @@
-using GalaSoft.MvvmLight;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using TouhouLauncher.Models.Application;
 
-namespace TouhouLauncher.ViewModels {
-	public class MainViewModel : ViewModelBase {
-		private string _page;
+namespace TouhouLauncher.ViewModels;
 
-		public MainViewModel(SettingsAndGamesManager settingsAndGamesManager) {
-			MessengerInstance.Register<string>(this, ChangePageMessageToken, ChangePage);
+public class MainViewModel : ObservableRecipient
+{
+    private string _page;
 
-			_page = "HomePage.xaml";
+    public MainViewModel(SettingsAndGamesManager settingsAndGamesManager)
+    {
+        Messenger.Register<MainViewModel, MainViewChangePageMessage>(this, static (r, m) => r.ChangePage(m.Page));
 
-			_ = settingsAndGamesManager.LoadAsync();
-		}
+        _page = "HomePage.xaml";
 
-		public string Page => "Pages/" + _page;
+        _ = settingsAndGamesManager.LoadAsync();
+    }
 
-		private void ChangePage(string page) {
-			_page = page;
-			RaisePropertyChanged(nameof(Page));
-		}
+    public string Page => "Pages/" + _page;
 
-		public static object ChangePageMessageToken { get; } = new();
-	}
+    private void ChangePage(string page)
+    {
+        _page = page;
+        OnPropertyChanged(nameof(Page));
+    }
 }
+
+public record MainViewChangePageMessage(string Page);

@@ -1,4 +1,4 @@
-﻿using Moq;
+﻿using NSubstitute;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using TouhouLauncher.Models.Application;
@@ -9,181 +9,191 @@ using TouhouLauncher.Models.Infrastructure.Persistence.FileSystem;
 using Xunit;
 using static TouhouLauncher.Test.CommonTestToolsAndData;
 
-namespace TouhouLauncher.Test.Models.Application {
-	public class LaunchGameServiceTest {
-		private readonly Mock<FileSystemExecutorService> _fileSystemExecutorServiceMock = new();
-		private readonly Mock<SettingsAndGamesManager> _settingsAndGamesManagerMock = new(null, null);
-		private readonly Mock<FileSystemNp21ntConfigRepository> _fileSystemNp21ntConfigRepository = new(null, null, null);
-		private readonly Mock<Np21ntConfigDefaultsService> _np21ntConfigDefaultsServiceMock = new();
-		private readonly Mock<PathExistanceService> _pathExistanceServiceMock = new();
+namespace TouhouLauncher.Test.Models.Application;
 
-		private readonly LaunchGameService _launchGameService;
+public class LaunchGameServiceTest
+{
+    private readonly FileSystemExecutorService _fileSystemExecutorServiceMock = Substitute.For<FileSystemExecutorService>();
+    private readonly SettingsAndGamesManager _settingsAndGamesManagerMock = Substitute.For<SettingsAndGamesManager>(null, null);
+    private readonly FileSystemNp21ntConfigRepository _fileSystemNp21ntConfigRepository = Substitute.For<FileSystemNp21ntConfigRepository>(null, null, null);
+    private readonly Np21ntConfigDefaultsService _np21ntConfigDefaultsServiceMock = Substitute.For<Np21ntConfigDefaultsService>();
+    private readonly PathExistanceService _pathExistanceServiceMock = Substitute.For<PathExistanceService>();
 
-		public LaunchGameServiceTest() {
-			_launchGameService = new(
-				_fileSystemExecutorServiceMock.Object,
-				_settingsAndGamesManagerMock.Object,
-				_fileSystemNp21ntConfigRepository.Object,
-				_np21ntConfigDefaultsServiceMock.Object,
-				_pathExistanceServiceMock.Object
-			);
-		}
+    private readonly LaunchGameService _launchGameService;
 
-		[Fact]
-		public async void Returns_error_when_game_does_not_exist() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists(It.IsAny<string?>()))
-				.Returns(false);
+    public LaunchGameServiceTest()
+    {
+        _launchGameService = new(
+            _fileSystemExecutorServiceMock,
+            _settingsAndGamesManagerMock,
+            _fileSystemNp21ntConfigRepository,
+            _np21ntConfigDefaultsServiceMock,
+            _pathExistanceServiceMock
+        );
+    }
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame1);
+    [Fact]
+    public async Task Returns_error_when_game_does_not_exist()
+    {
+        _pathExistanceServiceMock.PathExists(Arg.Any<string?>())
+            .Returns(false);
 
-			Assert.NotNull(error);
-			Assert.IsType<LaunchGameError.GameDoesNotExistError>(error);
-		}
+        var error = await _launchGameService.LaunchGame(testOfficialGame1);
 
-		[Fact]
-		public async void Returns_error_when_emulator_location_has_not_been_set() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists("C:\\test\\location2.exe"))
-				.Returns(true);
+        Assert.NotNull(error);
+        Assert.IsType<LaunchGameError.GameDoesNotExistError>(error);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
-				.Returns(new EmulatorSettings(null));
+    [Fact]
+    public async Task Returns_error_when_emulator_location_has_not_been_set()
+    {
+        _pathExistanceServiceMock.PathExists("C:\\test\\location2.exe")
+            .Returns(true);
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame2);
+        _settingsAndGamesManagerMock.EmulatorSettings
+            .Returns(new EmulatorSettings(null));
 
-			Assert.NotNull(error);
-			Assert.IsType<LaunchGameError.EmulatorLocationNotSetError>(error);
-		}
+        var error = await _launchGameService.LaunchGame(testOfficialGame2);
 
-		[Fact]
-		public async void Returns_error_when_emulator_does_not_exist() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists("C:\\test\\location2.exe"))
-				.Returns(true);
+        Assert.NotNull(error);
+        Assert.IsType<LaunchGameError.EmulatorLocationNotSetError>(error);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
-				.Returns(testEmulatorSettings);
+    [Fact]
+    public async Task Returns_error_when_emulator_does_not_exist()
+    {
+        _pathExistanceServiceMock.PathExists("C:\\test\\location2.exe")
+            .Returns(true);
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame2);
+        _settingsAndGamesManagerMock.EmulatorSettings
+            .Returns(testEmulatorSettings);
 
-			Assert.NotNull(error);
-			Assert.IsType<LaunchGameError.EmulatorDoesNotExistError>(error);
-		}
+        var error = await _launchGameService.LaunchGame(testOfficialGame2);
 
-		[Fact]
-		public async void Returns_error_when_unable_to_save_emulator_config() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists(It.IsAny<string?>()))
-				.Returns(true);
+        Assert.NotNull(error);
+        Assert.IsType<LaunchGameError.EmulatorDoesNotExistError>(error);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
-				.Returns(testEmulatorSettings);
+    [Fact]
+    public async Task Returns_error_when_unable_to_save_emulator_config()
+    {
+        _pathExistanceServiceMock.PathExists(Arg.Any<string?>())
+            .Returns(true);
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(testNp21ntConfig));
+        _settingsAndGamesManagerMock.EmulatorSettings
+            .Returns(testEmulatorSettings);
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
-				.Returns(Task.FromResult(new Np21ntConfigSaveError("error"))!);
+        _fileSystemNp21ntConfigRepository.LoadAsync()
+            .Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(testNp21ntConfig));
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame2);
+        _fileSystemNp21ntConfigRepository.SaveAsync(Arg.Any<Np21ntConfig?>())
+            .Returns(Task.FromResult<Np21ntConfigSaveError?>(new("error")));
 
-			Assert.NotNull(error);
-			Assert.IsType<Np21ntConfigSaveError>(error);
-		}
+        var error = await _launchGameService.LaunchGame(testOfficialGame2);
 
-		[Fact]
-		public async void Returns_error_when_unable_to_execute_game() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists(It.IsAny<string?>()))
-				.Returns(true);
+        Assert.NotNull(error);
+        Assert.IsType<Np21ntConfigSaveError>(error);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
-				.Returns(testEmulatorSettings);
+    [Fact]
+    public async Task Returns_error_when_unable_to_execute_game()
+    {
+        _pathExistanceServiceMock.PathExists(Arg.Any<string?>())
+            .Returns(true);
 
-			_fileSystemExecutorServiceMock.Setup(obj => obj.StartExecutable(It.IsAny<string>()))
-				.Returns(new ExecutorServiceError.ProcessExecuteError("location"));
+        _settingsAndGamesManagerMock.EmulatorSettings
+            .Returns(testEmulatorSettings);
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame1);
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+            .Returns(new ExecutorServiceError.ProcessExecuteError("location"));
 
-			Assert.NotNull(error);
-			Assert.IsType<ExecutorServiceError.ProcessExecuteError>(error);
-		}
+        var error = await _launchGameService.LaunchGame(testOfficialGame1);
 
-		[Fact]
-		public async void Returns_null_when_game_launches_successfully() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists(It.IsAny<string?>()))
-				.Returns(true);
+        Assert.NotNull(error);
+        Assert.IsType<ExecutorServiceError.ProcessExecuteError>(error);
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
-				.Returns(testEmulatorSettings);
+    [Fact]
+    public async Task Returns_null_when_game_launches_successfully()
+    {
+        _pathExistanceServiceMock.PathExists(Arg.Any<string?>())
+            .Returns(true);
 
-			_fileSystemExecutorServiceMock.Setup(obj => obj.StartExecutable(It.IsAny<string>()))
-				.Returns(new Process());
+        _settingsAndGamesManagerMock.EmulatorSettings
+            .Returns(testEmulatorSettings);
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.GeneralSettings)
-				.Returns(testGeneralSettings with { CloseOnGameLaunch = false });
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+            .Returns(new Process());
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame1);
+        _settingsAndGamesManagerMock.GeneralSettings
+            .Returns(testGeneralSettings with { CloseOnGameLaunch = false });
 
-			Assert.Null(error);
+        var error = await _launchGameService.LaunchGame(testOfficialGame1);
 
-			_fileSystemExecutorServiceMock.Verify(obj => obj.StartExecutable(It.IsAny<string>()), Times.Once);
-		}
+        Assert.Null(error);
 
-		[Fact]
-		public async void Returns_null_when_emulator_game_launches_successfully() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists(It.IsAny<string?>()))
-				.Returns(true);
+        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>());
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
-				.Returns(testEmulatorSettings);
+    [Fact]
+    public async Task Returns_null_when_emulator_game_launches_successfully()
+    {
+        _pathExistanceServiceMock.PathExists(Arg.Any<string?>())
+            .Returns(true);
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(testNp21ntConfig));
+        _settingsAndGamesManagerMock.EmulatorSettings
+            .Returns(testEmulatorSettings);
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
-				.Returns(Task.FromResult<Np21ntConfigSaveError?>(null));
+        _fileSystemNp21ntConfigRepository.LoadAsync()
+            .Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(testNp21ntConfig));
 
-			_fileSystemExecutorServiceMock.Setup(obj => obj.StartExecutable(It.IsAny<string>()))
-				.Returns(new Process());
+        _fileSystemNp21ntConfigRepository.SaveAsync(Arg.Any<Np21ntConfig?>())
+            .Returns(Task.FromResult<Np21ntConfigSaveError?>(null));
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.GeneralSettings)
-				.Returns(testGeneralSettings with { CloseOnGameLaunch = false });
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+            .Returns(new Process());
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame2);
+        _settingsAndGamesManagerMock.GeneralSettings
+            .Returns(testGeneralSettings with { CloseOnGameLaunch = false });
 
-			Assert.Null(error);
+        var error = await _launchGameService.LaunchGame(testOfficialGame2);
 
-			_fileSystemNp21ntConfigRepository.Verify(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()), Times.Once);
-			_fileSystemExecutorServiceMock.Verify(obj => obj.StartExecutable(It.IsAny<string>()), Times.Once);
-		}
+        Assert.Null(error);
 
-		[Fact]
-		public async void Returns_null_when_emulator_game_launches_successfully_after_failing_to_load_emulator_config() {
-			_pathExistanceServiceMock.Setup(obj => obj.PathExists(It.IsAny<string?>()))
-				.Returns(true);
+        await _fileSystemNp21ntConfigRepository.Received(1).SaveAsync(Arg.Any<Np21ntConfig?>());
+        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>());
+    }
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.EmulatorSettings)
-				.Returns(testEmulatorSettings);
+    [Fact]
+    public async Task Returns_null_when_emulator_game_launches_successfully_after_failing_to_load_emulator_config()
+    {
+        _pathExistanceServiceMock.PathExists(Arg.Any<string?>())
+            .Returns(true);
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.LoadAsync())
-				.Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(new Np21ntConfigLoadError("error")));
+        _settingsAndGamesManagerMock.EmulatorSettings
+            .Returns(testEmulatorSettings);
 
-			_np21ntConfigDefaultsServiceMock.Setup(obj => obj.CreateNp21ntConfigDefaults())
-				.Returns(testNp21ntConfig);
+        _fileSystemNp21ntConfigRepository.LoadAsync()
+            .Returns(Task.FromResult<Either<Np21ntConfigLoadError, Np21ntConfig>>(new Np21ntConfigLoadError("error")));
 
-			_fileSystemNp21ntConfigRepository.Setup(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()))
-				.Returns(Task.FromResult<Np21ntConfigSaveError?>(null));
+        _np21ntConfigDefaultsServiceMock.CreateNp21ntConfigDefaults()
+            .Returns(testNp21ntConfig);
 
-			_fileSystemExecutorServiceMock.Setup(obj => obj.StartExecutable(It.IsAny<string>()))
-				.Returns(new Process());
+        _fileSystemNp21ntConfigRepository.SaveAsync(Arg.Any<Np21ntConfig?>())
+            .Returns(Task.FromResult<Np21ntConfigSaveError?>(null));
 
-			_settingsAndGamesManagerMock.SetupGet(obj => obj.GeneralSettings)
-				.Returns(testGeneralSettings with { CloseOnGameLaunch = false });
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+            .Returns(new Process());
 
-			var error = await _launchGameService.LaunchGame(testOfficialGame2);
+        _settingsAndGamesManagerMock.GeneralSettings
+            .Returns(testGeneralSettings with { CloseOnGameLaunch = false });
 
-			Assert.Null(error);
+        var error = await _launchGameService.LaunchGame(testOfficialGame2);
 
-			_np21ntConfigDefaultsServiceMock.Verify(obj => obj.CreateNp21ntConfigDefaults(), Times.Once);
-			_fileSystemNp21ntConfigRepository.Verify(obj => obj.SaveAsync(It.IsAny<Np21ntConfig?>()), Times.Once);
-			_fileSystemExecutorServiceMock.Verify(obj => obj.StartExecutable(It.IsAny<string>()), Times.Once);
-		}
-	}
+        Assert.Null(error);
+
+        _np21ntConfigDefaultsServiceMock.Received(1).CreateNp21ntConfigDefaults();
+        await _fileSystemNp21ntConfigRepository.Received(1).SaveAsync(Arg.Any<Np21ntConfig?>());
+        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>());
+    }
 }

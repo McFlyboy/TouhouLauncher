@@ -13,13 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TouhouLauncher.Views.UserControls {
-	/// <summary>
-	/// Interaction logic for GamePicker.xaml
-	/// </summary>
-	public partial class GamePicker : UserControl {
-		public GamePicker() {
-			InitializeComponent();
-		}
-	}
+namespace TouhouLauncher.Views.UserControls
+{
+    /// <summary>
+    /// Interaction logic for GamePicker.xaml
+    /// </summary>
+    public partial class GamePicker : UserControl
+    {
+        public GamePicker()
+        {
+            InitializeComponent();
+        }
+    }
 }

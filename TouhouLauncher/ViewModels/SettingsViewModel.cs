@@ -1,54 +1,60 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TouhouLauncher.Models.Common.Extensions;
 using TouhouLauncher.Views.UserControls.Settings;
 
-namespace TouhouLauncher.ViewModels {
-	public class SettingsViewModel : ViewModelBase {
-		private SettingsCategory _category;
+namespace TouhouLauncher.ViewModels;
 
-		public SettingsViewModel() {
-			_category = SettingsCategory.GeneralSettings;
+public class SettingsViewModel : ObservableRecipient
+{
+    private SettingsCategory _category;
 
-			BackCommand = new RelayCommand(
-				() => MessengerInstance.Send("HomePage.xaml", MainViewModel.ChangePageMessageToken)
-			);
-		}
+    public SettingsViewModel()
+    {
+        _category = SettingsCategory.GeneralSettings;
 
-		public int CurrentSettingsCategoryIndex {
-			get => (int)_category;
-			set {
-				_category = (SettingsCategory)value;
-				RaisePropertyChanged(nameof(CurrentSettingsCategory));
-			}
-		}
+        BackCommand = new RelayCommand(
+            () => Messenger.Send(new MainViewChangePageMessage("HomePage.xaml"))
+        );
+    }
 
-		public UserControl CurrentSettingsCategory => _category switch {
-			SettingsCategory.GeneralSettings => new GeneralSettings(),
-			SettingsCategory.EmulatorSettings => new EmulatorSettings(),
-			SettingsCategory.Games => new GamesSettings(),
-			_ => new UserControl(),
-		};
+    public int CurrentSettingsCategoryIndex
+    {
+        get => (int)_category;
+        set
+        {
+            _category = (SettingsCategory)value;
+            OnPropertyChanged(nameof(CurrentSettingsCategory));
+        }
+    }
 
-		public string BuildVersion => FileVersionInfo.GetVersionInfo(Environment.ProcessPath!)
-			.ProductVersion!
-			.Transform(
-				version => !version.EndsWith("unofficial")
-					? $"Version: {version}"
-					: "unofficial-build"
-			);
+    public UserControl CurrentSettingsCategory => _category switch
+    {
+        SettingsCategory.GeneralSettings => new GeneralSettings(),
+        SettingsCategory.EmulatorSettings => new EmulatorSettings(),
+        SettingsCategory.Games => new GamesSettings(),
+        _ => new UserControl(),
+    };
 
-		public ICommand BackCommand { get; }
+    public string BuildVersion => FileVersionInfo.GetVersionInfo(Environment.ProcessPath!)
+        .ProductVersion!
+        .Transform(
+            version => !version.EndsWith("unofficial")
+                ? $"Version: {version}"
+                : "unofficial-build"
+        );
 
-		private enum SettingsCategory {
-			GeneralSettings,
-			EmulatorSettings,
-			Games
-		}
-	}
+    public ICommand BackCommand { get; }
+
+    private enum SettingsCategory
+    {
+        GeneralSettings,
+        EmulatorSettings,
+        Games
+    }
 }

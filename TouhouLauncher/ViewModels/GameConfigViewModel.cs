@@ -1,92 +1,101 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.ViewModels {
-	public class GameConfigViewModel : ViewModelBase {
-		private readonly GameConfigService _gameConfigService;
-		private readonly FileSystemBrowserService _fileSystemBrowserService;
+namespace TouhouLauncher.ViewModels;
 
-		public GameConfigViewModel(
-			GameConfigService gameConfigService,
-			FileSystemBrowserService fileSystemBrowserService
-		) {
-			_gameConfigService = gameConfigService;
-			_fileSystemBrowserService = fileSystemBrowserService;
+public class GameConfigViewModel : ObservableRecipient
+{
+    private readonly GameConfigService _gameConfigService;
+    private readonly FileSystemBrowserService _fileSystemBrowserService;
 
-			ExternalLinkToGameDownloadCommand = new RelayCommand(() => {
-				if (_gameConfigService.TargetGame is OfficialGame game) {
-					Process.Start(
-						new ProcessStartInfo("cmd", $"/c start {game.DownloadableFileLocation}") {
-							CreateNoWindow = true
-						}
-					);
-				}
-			});
+    public GameConfigViewModel(
+        GameConfigService gameConfigService,
+        FileSystemBrowserService fileSystemBrowserService
+    )
+    {
+        _gameConfigService = gameConfigService;
+        _fileSystemBrowserService = fileSystemBrowserService;
 
-			BrowseCommand = new RelayCommand(() => {
-				if (_gameConfigService.TargetGame == null) {
-					return;
-				} 
+        ExternalLinkToGameDownloadCommand = new RelayCommand(() =>
+        {
+            if (_gameConfigService.TargetGame is OfficialGame game)
+            {
+                Process.Start(
+                    new ProcessStartInfo("cmd", $"/c start {game.DownloadableFileLocation}")
+                    {
+                        CreateNoWindow = true
+                    }
+                );
+            }
+        });
 
-				var browseResult = _gameConfigService.TargetGame.Categories.HasFlag(GameCategories.MainPC98)
-					? _fileSystemBrowserService.BrowseFiles(
-						"Select game",
-						new("Hard disk image files", "*.hdi", "*.t98"),
-						new("All files", "*.*")
-					)
-					: _fileSystemBrowserService.BrowseFiles(
-						"Select game",
-						new("Executable files", "*.exe"),
-						new("All files", "*.*")
-					);
+        BrowseCommand = new RelayCommand(() =>
+        {
+            if (_gameConfigService.TargetGame == null)
+                return;
 
-				if (browseResult == null) {
-					return;
-				}
+            var browseResult = _gameConfigService.TargetGame.Categories.HasFlag(GameCategories.MainPC98)
+                ? _fileSystemBrowserService.BrowseFiles(
+                    "Select game",
+                    new("Hard disk image files", "*.hdi", "*.t98"),
+                    new("All files", "*.*")
+                )
+                : _fileSystemBrowserService.BrowseFiles(
+                    "Select game",
+                    new("Executable files", "*.exe"),
+                    new("All files", "*.*")
+                );
 
-				GameLocation = browseResult;
-				RaisePropertyChanged(nameof(GameLocation));
-			});
+            if (browseResult == null)
+                return;
 
-			OkCommand = new RelayCommand<Window>(async window => {
-				var error = await _gameConfigService.SaveAsync();
+            GameLocation = browseResult;
+            OnPropertyChanged(nameof(GameLocation));
+        });
 
-				if (error != null) {
-					MessageBox.Show(error.Message, "Error");
-					return;
-				}
+        OkCommand = new RelayCommand<Window>(async window =>
+        {
+            var error = await _gameConfigService.SaveAsync();
 
-				window.Close();
-			});
+            if (error != null)
+            {
+                MessageBox.Show(error.Message, "Error");
+                return;
+            }
 
-			CancelCommand = new RelayCommand<Window>(window => {
-				window.Close();
-			});
-		}
+            window?.Close();
+        });
 
-		public string WindowTitle => $"Configure {_gameConfigService.TargetGame?.Title ?? "unknown game"}";
+        CancelCommand = new RelayCommand<Window>(window =>
+        {
+            window?.Close();
+        });
+    }
 
-		public string GameLocation {
-			get => _gameConfigService.GameLocation;
-			set => _gameConfigService.GameLocation = value;
-		}
+    public string WindowTitle => $"Configure {_gameConfigService.TargetGame?.Title ?? "unknown game"}";
 
-		public bool IncludeInRandomGame {
-			get => _gameConfigService.IncludeInRandomGame;
-			set => _gameConfigService.IncludeInRandomGame = value;
-		}
+    public string GameLocation
+    {
+        get => _gameConfigService.GameLocation;
+        set => _gameConfigService.GameLocation = value;
+    }
 
-		public ICommand ExternalLinkToGameDownloadCommand { get; }
+    public bool IncludeInRandomGame
+    {
+        get => _gameConfigService.IncludeInRandomGame;
+        set => _gameConfigService.IncludeInRandomGame = value;
+    }
 
-		public ICommand BrowseCommand { get; }
+    public ICommand ExternalLinkToGameDownloadCommand { get; }
 
-		public ICommand OkCommand { get; }
+    public ICommand BrowseCommand { get; }
 
-		public ICommand CancelCommand { get; }
-	}
+    public ICommand OkCommand { get; }
+
+    public ICommand CancelCommand { get; }
 }

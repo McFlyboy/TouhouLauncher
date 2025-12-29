@@ -1,62 +1,69 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 
-namespace TouhouLauncher.ViewModels {
-	public class EmulatorSettingsViewModel : ViewModelBase {
-		private readonly SettingsAndGamesManager _settingsAndGamesManager;
-		private readonly FileSystemBrowserService _fileSystemBrowserService;
+namespace TouhouLauncher.ViewModels;
 
-		public EmulatorSettingsViewModel(
-			SettingsAndGamesManager settingsAndGamesManager,
-			FileSystemBrowserService fileSystemBrowserService
-		) {
-			_settingsAndGamesManager = settingsAndGamesManager;
-			_fileSystemBrowserService = fileSystemBrowserService;
+public class EmulatorSettingsViewModel : ObservableRecipient
+{
+    private readonly SettingsAndGamesManager _settingsAndGamesManager;
+    private readonly FileSystemBrowserService _fileSystemBrowserService;
 
-			ExternalLinkToEmulatorDownloadCommand = new RelayCommand(
-				() => Process.Start(
-					new ProcessStartInfo(
-						"cmd",
-						"/c start https://moriyashrine.org/files/file/387-pc-98-emulator-~-neko-project-ii/"
-					) {
-						CreateNoWindow = true
-					}
-				)
-			);
+    public EmulatorSettingsViewModel(
+        SettingsAndGamesManager settingsAndGamesManager,
+        FileSystemBrowserService fileSystemBrowserService
+    )
+    {
+        _settingsAndGamesManager = settingsAndGamesManager;
+        _fileSystemBrowserService = fileSystemBrowserService;
 
-			BrowseCommand = new RelayCommand(() => {
-				var result = _fileSystemBrowserService.BrowseFolders("Select emulator folder");
+        ExternalLinkToEmulatorDownloadCommand = new RelayCommand(
+            () => Process.Start(
+                new ProcessStartInfo(
+                    "cmd",
+                    "/c start https://moriyashrine.org/files/file/387-pc-98-emulator-~-neko-project-ii/"
+                )
+                {
+                    CreateNoWindow = true
+                }
+            )
+        );
 
-				if (result == null) {
-					return;
-				}
+        BrowseCommand = new RelayCommand(() =>
+        {
+            var result = _fileSystemBrowserService.BrowseFolders("Select emulator folder");
 
-				FolderLocation = result;
-				RaisePropertyChanged(nameof(FolderLocation));
-			});
-		}
+            if (result == null)
+                return;
 
-		public string FolderLocation {
-			get => _settingsAndGamesManager.EmulatorSettings.FolderLocation ?? string.Empty;
-			set {
-				_settingsAndGamesManager.EmulatorSettings.FolderLocation = value;
-				_settingsAndGamesManager.SaveAsync()
-					.ContinueWith(async result => {
-						var error = await result;
+            FolderLocation = result;
+            OnPropertyChanged(nameof(FolderLocation));
+        });
+    }
 
-						if (error != null) {
-							MessageBox.Show(error.Message, "Error");
-						}
-					});
-			}
-		}
+    public string FolderLocation
+    {
+        get => _settingsAndGamesManager.EmulatorSettings.FolderLocation ?? string.Empty;
+        set
+        {
+            _settingsAndGamesManager.EmulatorSettings.FolderLocation = value;
+            _settingsAndGamesManager.SaveAsync()
+                .ContinueWith(async result =>
+                {
+                    var error = await result;
 
-		public ICommand ExternalLinkToEmulatorDownloadCommand { get; }
+                    if (error != null)
+                    {
+                        MessageBox.Show(error.Message, "Error");
+                    }
+                });
+        }
+    }
 
-		public ICommand BrowseCommand { get; }
-	}
+    public ICommand ExternalLinkToEmulatorDownloadCommand { get; }
+
+    public ICommand BrowseCommand { get; }
 }

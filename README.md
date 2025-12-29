@@ -4,7 +4,7 @@
 [![Building & Testing](https://github.com/McFlyboy/TouhouLauncher/actions/workflows/building-and-testing.yml/badge.svg)](https://github.com/McFlyboy/TouhouLauncher/actions/workflows/building-and-testing.yml)
 
 ## Introduction
-Touhou Launcher is a desktop app for Windows that provides a quick and easy way to access and run [Touhou](https://en.wikipedia.org/wiki/Touhou_Project) games. It's written in C# with WPF and runs on .NET 6. The app serves as a modern and simplified alternative to an [old launcher](http://www.widdiful.co.uk/touhou.html) with the same name. 
+Touhou Launcher is a desktop app for Windows that provides a quick and easy way to access and run [Touhou](https://en.wikipedia.org/wiki/Touhou_Project) games. It's written in C# with WPF and runs on .NET 10. The app serves as a modern and simplified alternative to an [old launcher](https://moriyashrine.org/resources/touhou-launcher.208/) with the same name.
 
 ### Key features
 - Connect and launch your Touhou games from a game library
@@ -36,7 +36,7 @@ dotnet test
 ```
 
 ## Support
-If you need help or have questions about the launcher you can start a discussion in the [Discussions section](https://github.com/McFlyboy/TouhouLauncher/discussions) of this repo, or feel free to find me on my [Discord server](https://discord.com/invite/T7bp4Vy).
+If you need help or have questions about the launcher you can start a discussion in the [Discussions section](https://github.com/McFlyboy/TouhouLauncher/discussions) of this repo, or feel free to find me on my [Discord server](https://discord.com/invite/7mA3Gg32DV).
 
 ## A new UI is coming!
 A new user interface is currently being designed for the beta release of the launcher. You can check out the design sketches [here](https://www.figma.com/file/4RDZ4GZz8maF8HgYTJsrBC/Touhou-Launcher). 🙂
@@ -59,10 +59,10 @@ Touhou Launcher uses the [MIT license](https://github.com/McFlyboy/TouhouLaunche
 ## 3rd-party acknowledgements
 Touhou Launcher uses 3rd-party open source .NET libraries. I am very grateful to the creators and contributors of these libraries for making their work open source.
 
-**MVVM Light Toolkit**
-<br/>Project: https://github.com/lbugnion/mvvmlight
-<br/>Copyright (c) 2009 - 2018 Laurent Bugnion
-<br/>Licence: (MIT) https://github.com/lbugnion/mvvmlight/blob/master/LICENSE
+**.NET Community Toolkit**
+<br/>Project: https://github.com/CommunityToolkit/dotnet
+<br/>Copyright (c) .NET Foundation and Contributors
+<br/>Licence: (MIT) https://github.com/CommunityToolkit/dotnet/blob/main/License.md
 
 **YamlDotNet**
 <br/>Project: https://github.com/aaubry/YamlDotNet

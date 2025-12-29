@@ -2,28 +2,21 @@
 using System.Linq;
 using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.Models.Application {
-	public class GamePickerList {
-		private readonly SettingsAndGamesManager _settingsAndGamesManager;
+namespace TouhouLauncher.Models.Application;
 
-		public GamePickerList(SettingsAndGamesManager settingsAndGamesManager) {
-			_settingsAndGamesManager = settingsAndGamesManager;
+public class GamePickerList(SettingsAndGamesManager settingsAndGamesManager)
+{
+    public List<Game> GameList { get; } = [];
 
-			GameList = new List<Game>();
-		}
-
-		public List<Game> GameList { get; }
-
-		public void PopulateGameList(GameCategories categories) {
-			GameList.Clear();
-			GameList.AddRange(
-				categories switch {
-					GameCategories.FanGame => _settingsAndGamesManager.FanGames,
-					_ => _settingsAndGamesManager.OfficialGames
-						.Where(game => categories.HasFlag(game.Categories))
-						.ToList()
-				}
-			);
-		}
-	}
+    public void PopulateGameList(GameCategories categories)
+    {
+        GameList.Clear();
+        GameList.AddRange(
+            categories switch
+            {
+                GameCategories.FanGame => settingsAndGamesManager.FanGames,
+                _ => settingsAndGamesManager.OfficialGames.Where(game => categories.HasFlag(game.Categories))
+            }
+        );
+    }
 }

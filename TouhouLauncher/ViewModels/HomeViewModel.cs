@@ -1,5 +1,6 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,196 +9,224 @@ using System.Windows.Input;
 using TouhouLauncher.Models.Application;
 using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.ViewModels {
-	public class HomeViewModel : ViewModelBase {
-		private readonly GamePickerViewModel _gamePickerViewModel;
-		private readonly ActiveGameCategory _activeGameCategory;
-		private readonly GameCategoryService _gameCategoryService;
-		private readonly LaunchRandomGameService _launchRandomGameService;
-		private readonly FanGameEditingService _fanGameEditingService;
+namespace TouhouLauncher.ViewModels;
 
-		public HomeViewModel(
-			GamePickerViewModel gamePickerViewModel,
-			ActiveGameCategory activeGameCategory,
-			GameCategoryService gameCategoryService,
-			LaunchRandomGameService launchRandomGameService,
-			FanGameEditingService fanGameEditingService
-		) {
-			_gamePickerViewModel = gamePickerViewModel;
-			_activeGameCategory = activeGameCategory;
-			_gameCategoryService = gameCategoryService;
-			_launchRandomGameService = launchRandomGameService;
-			_fanGameEditingService = fanGameEditingService;
+public class HomeViewModel : ObservableRecipient
+{
+    private readonly GamePickerViewModel _gamePickerViewModel;
+    private readonly ActiveGameCategory _activeGameCategory;
+    private readonly GameCategoryService _gameCategoryService;
+    private readonly LaunchRandomGameService _launchRandomGameService;
+    private readonly FanGameEditingService _fanGameEditingService;
 
-			MessengerInstance.Register<object?>(this, RebuildHeadersMessageToken, RebuildHeaders);
+    public HomeViewModel(
+        GamePickerViewModel gamePickerViewModel,
+        ActiveGameCategory activeGameCategory,
+        GameCategoryService gameCategoryService,
+        LaunchRandomGameService launchRandomGameService,
+        FanGameEditingService fanGameEditingService
+    )
+    {
+        _gamePickerViewModel = gamePickerViewModel;
+        _activeGameCategory = activeGameCategory;
+        _gameCategoryService = gameCategoryService;
+        _launchRandomGameService = launchRandomGameService;
+        _fanGameEditingService = fanGameEditingService;
 
-			HeaderList = new ObservableCollection<HeaderButton>();
+        Messenger.Register<HomeViewModel, HomeViewRebuildHeadersMessage>(this, static (r, m) => r.RebuildHeaders());
 
-			List<GameCategories> gameCategoryList = _gameCategoryService.CreateGameCategoryList();
+        HeaderList = [];
 
-			foreach (var category in gameCategoryList) {
-				HeaderList.Add(new CategoryHeaderButton(category, this));
-			}
+        List<GameCategories> gameCategoryList = _gameCategoryService.CreateGameCategoryList();
 
-			HeaderList.Add(CreateRandomGameHeader());
+        foreach (var category in gameCategoryList)
+        {
+            HeaderList.Add(new CategoryHeaderButton(category, this));
+        }
 
-			OpenSettingsCommand = new RelayCommand(
-				() => MessengerInstance.Send("SettingsPage.xaml", MainViewModel.ChangePageMessageToken)
-			);
+        HeaderList.Add(CreateRandomGameHeader());
 
-			CreateNewFanGameCommand = new RelayCommand(() => {
-				_fanGameEditingService.SetFanGameToEdit(null);
+        OpenSettingsCommand = new RelayCommand(
+            () => Messenger.Send(new MainViewChangePageMessage("SettingsPage.xaml"))
+        );
 
-				MessengerInstance.Send("FanGameEditorPage.xaml", MainViewModel.ChangePageMessageToken);
-			});
+        CreateNewFanGameCommand = new RelayCommand(() =>
+        {
+            _fanGameEditingService.SetFanGameToEdit(null);
 
-			NewFanGameVisibility = Visibility.Hidden;
-		}
+            Messenger.Send(new MainViewChangePageMessage("FanGameEditorPage.xaml"));
+        });
 
-		public ObservableCollection<HeaderButton> HeaderList { get; }
+        NewFanGameVisibility = Visibility.Hidden;
+    }
 
-		public string HeaderPadding => $"{(HeaderList.Count > 5 ? 10 : 30)} 0";
+    public ObservableCollection<HeaderButton> HeaderList { get; }
 
-		public ICommand OpenSettingsCommand { get; }
+    public string HeaderPadding => $"{(HeaderList.Count > 5 ? 10 : 30)} 0";
 
-		public ICommand CreateNewFanGameCommand { get; }
+    public ICommand OpenSettingsCommand { get; }
 
-		public Visibility NewFanGameVisibility { get; private set; }
+    public ICommand CreateNewFanGameCommand { get; }
 
-		private HeaderButton CreateRandomGameHeader() => new(
-			name: "LAUNCH\nRANDOM GAME",
-			colorCode: "#4284C4",
-			colorHoverCode: "#5395D5",
-			action: LaunchRandomGame
-		);
+    public Visibility NewFanGameVisibility { get; private set; }
 
-		private void RebuildHeaders(object? _ = null) {
-			List<GameCategories> gameCategoryList = _gameCategoryService.CreateGameCategoryList();
+    private HeaderButton CreateRandomGameHeader() => new(
+        name: "LAUNCH\nRANDOM GAME",
+        colorCode: "#4284C4",
+        colorHoverCode: "#5395D5",
+        action: LaunchRandomGame
+    );
 
-			HeaderList.Clear();
+    private void RebuildHeaders()
+    {
+        List<GameCategories> gameCategoryList = _gameCategoryService.CreateGameCategoryList();
 
-			foreach (var category in gameCategoryList) {
-				HeaderList.Add(new CategoryHeaderButton(category, this));
-			}
+        HeaderList.Clear();
 
-			HeaderList.Add(CreateRandomGameHeader());
+        foreach (var category in gameCategoryList)
+        {
+            HeaderList.Add(new CategoryHeaderButton(category, this));
+        }
 
-			if (
-				_activeGameCategory.CurrentCategory.HasFlag(GameCategories.MainPC98)
-				|| _activeGameCategory.CurrentCategory.HasFlag(GameCategories.MainWindows)
-			) {
-				SetCurrentCategory(_gameCategoryService.GetDefaultGameCategory());
-			}
-		}
+        HeaderList.Add(CreateRandomGameHeader());
 
-		private void SetCurrentCategory(GameCategories categoryFlags) {
-			_activeGameCategory.CurrentCategory = categoryFlags;
+        if (
+            _activeGameCategory.CurrentCategory.HasFlag(GameCategories.MainPC98)
+            || _activeGameCategory.CurrentCategory.HasFlag(GameCategories.MainWindows)
+        )
+        {
+            SetCurrentCategory(_gameCategoryService.GetDefaultGameCategory());
+        }
+    }
 
-			_gamePickerViewModel.UpdateGames();
+    private void SetCurrentCategory(GameCategories categoryFlags)
+    {
+        _activeGameCategory.CurrentCategory = categoryFlags;
 
-			foreach (var button in HeaderList) {
-				button.RaisePropertyChanged("HeaderColor");
-				button.RaisePropertyChanged("HeaderHoverColor");
-				button.RaisePropertyChanged("HeaderTextColor");
-				button.RaisePropertyChanged("HeaderEnabled");
-			}
-		}
+        _gamePickerViewModel.UpdateGames();
 
-		private async void LaunchRandomGame() {
-			var error = await _launchRandomGameService.LaunchRandomGame();
+        foreach (var button in HeaderList)
+        {
+            if (button is CategoryHeaderButton categoryHeaderButton)
+                categoryHeaderButton.UpdateCategoryHeaderButton();
+        }
+    }
 
-			if (error != null) {
-				MessageBox.Show(error.Message, "Error");
-			}
-		}
+    private async void LaunchRandomGame()
+    {
+        var error = await _launchRandomGameService.LaunchRandomGame();
 
-		public static object RebuildHeadersMessageToken { get; } = new();
+        if (error != null)
+        {
+            MessageBox.Show(error.Message, "Error");
+        }
+    }
 
-		public class HeaderButton : ObservableObject {
-			public HeaderButton(
-				string name = "",
-				string desc = "",
-				string colorCode = "",
-				string colorHoverCode = "",
-				Action? action = null
-			) {
-				HeaderName = name;
-				HeaderDesc = desc;
-				HeaderColor = colorCode;
-				HeaderHoverColor = colorHoverCode;
-				HeaderCommand = action != null ? new RelayCommand(action) : new RelayCommand(() => { });
-			}
+    public class HeaderButton : ObservableObject
+    {
+        public HeaderButton(
+            string name = "",
+            string desc = "",
+            string colorCode = "",
+            string colorHoverCode = "",
+            Action? action = null
+        )
+        {
+            HeaderName = name;
+            HeaderDesc = desc;
+            HeaderColor = colorCode;
+            HeaderHoverColor = colorHoverCode;
+            HeaderCommand = action != null ? new RelayCommand(action) : new RelayCommand(() => { });
+        }
 
-			public string HeaderName { get; protected set; }
+        public string HeaderName { get; protected set; }
 
-			public string HeaderDesc { get; protected set; }
+        public string HeaderDesc { get; protected set; }
 
-			public int HeaderDescHeight => HeaderDesc.Length != 0 ? 15 : 0;
+        public int HeaderDescHeight => HeaderDesc.Length != 0 ? 15 : 0;
 
-			public virtual string HeaderColor { get; }
+        public virtual string HeaderColor { get; }
 
-			public virtual string HeaderHoverColor { get; }
+        public virtual string HeaderHoverColor { get; }
 
-			public string HeaderTextColor => "#FFFFFF";
+        public string HeaderTextColor => "#FFFFFF";
 
-			public virtual bool HeaderEnabled => true;
+        public virtual bool HeaderEnabled => true;
 
-			public ICommand HeaderCommand { get; protected set; }
-		}
+        public ICommand HeaderCommand { get; protected set; }
+    }
 
-		public class CategoryHeaderButton : HeaderButton {
-			private readonly GameCategories _categories;
-			private readonly HomeViewModel _parent;
+    public class CategoryHeaderButton : HeaderButton
+    {
+        private readonly GameCategories _categories;
+        private readonly HomeViewModel _parent;
 
-			public CategoryHeaderButton(
-				GameCategories categories,
-				HomeViewModel parent
-			) : base() {
-				_categories = categories;
-				_parent = parent;
-				switch (_categories) {
-					case GameCategories.MainPC98:
-						HeaderName = "MAIN GAMES";
-						HeaderDesc = "(PC-98)";
-						break;
-					case GameCategories.MainWindows:
-						HeaderName = "MAIN GAMES";
-						HeaderDesc = "(WINDOWS)";
-						break;
-					case GameCategories.MainGame:
-						HeaderName = "MAIN GAMES";
-						break;
-					case GameCategories.FightingGame:
-						HeaderName = "FIGHTING\nGAMES";
-						break;
-					case GameCategories.SpinOff:
-						HeaderName = "SPIN-OFFS";
-						break;
-					case GameCategories.FanGame:
-						HeaderName = "FAN GAMES";
-						break;
-					default:
-						HeaderName = "UNKNOWN\nCATEGORY";
-						break;
-				}
-				HeaderCommand = new RelayCommand(() => {
-					_parent.SetCurrentCategory(_categories);
+        public CategoryHeaderButton(
+            GameCategories categories,
+            HomeViewModel parent
+        ) : base()
+        {
+            _categories = categories;
+            _parent = parent;
+            switch (_categories)
+            {
+                case GameCategories.MainPC98:
+                    HeaderName = "MAIN GAMES";
+                    HeaderDesc = "(PC-98)";
+                    break;
 
-					_parent.NewFanGameVisibility = _categories.HasFlag(GameCategories.FanGame)
-						? Visibility.Visible
-						: Visibility.Hidden;
+                case GameCategories.MainWindows:
+                    HeaderName = "MAIN GAMES";
+                    HeaderDesc = "(WINDOWS)";
+                    break;
 
-					_parent.RaisePropertyChanged(nameof(_parent.NewFanGameVisibility));
-				});
-			}
+                case GameCategories.MainGame:
+                    HeaderName = "MAIN GAMES";
+                    break;
 
-			public override string HeaderColor =>
-				_categories == _parent._activeGameCategory.CurrentCategory ? "#694F77" : "#342E30";
+                case GameCategories.FightingGame:
+                    HeaderName = "FIGHTING\nGAMES";
+                    break;
 
-			public override string HeaderHoverColor => "#453F41";
+                case GameCategories.SpinOff:
+                    HeaderName = "SPIN-OFFS";
+                    break;
 
-			public override bool HeaderEnabled =>
-				_categories != _parent._activeGameCategory.CurrentCategory;
-		}
-	}
+                case GameCategories.FanGame:
+                    HeaderName = "FAN GAMES";
+                    break;
+
+                default:
+                    HeaderName = "UNKNOWN\nCATEGORY";
+                    break;
+            }
+            HeaderCommand = new RelayCommand(() =>
+            {
+                _parent.SetCurrentCategory(_categories);
+
+                _parent.NewFanGameVisibility = _categories.HasFlag(GameCategories.FanGame)
+                    ? Visibility.Visible
+                    : Visibility.Hidden;
+
+                _parent.OnPropertyChanged(nameof(_parent.NewFanGameVisibility));
+            });
+        }
+
+        public void UpdateCategoryHeaderButton()
+        {
+            OnPropertyChanged(nameof(HeaderColor));
+            OnPropertyChanged(nameof(HeaderHoverColor));
+            OnPropertyChanged(nameof(HeaderEnabled));
+        }
+
+        public override string HeaderColor =>
+            _categories == _parent._activeGameCategory.CurrentCategory ? "#694F77" : "#342E30";
+
+        public override string HeaderHoverColor => "#453F41";
+
+        public override bool HeaderEnabled =>
+            _categories != _parent._activeGameCategory.CurrentCategory;
+    }
 }
+
+public record HomeViewRebuildHeadersMessage();

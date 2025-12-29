@@ -3,68 +3,60 @@ using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Application.SettingsInfo;
 
-namespace TouhouLauncher.Models.Application {
-	public class SettingsAndGamesManager {
-		private readonly ISettingsAndGamesRepository _settingsAndGamesRepository;
-		private readonly OfficialGamesTemplateService _officialGamesTemplateService;
+namespace TouhouLauncher.Models.Application;
 
-		private SettingsAndGames _settingsAndGames;
+public class SettingsAndGamesManager(
+    ISettingsAndGamesRepository settingsAndGamesRepository,
+    OfficialGamesTemplateService officialGamesTemplateService
+)
+{
+    private SettingsAndGames _settingsAndGames = new(
+        GeneralSettings: new(
+            closeOnGameLaunch: false,
+            combineMainCategories: false
+        ),
+        EmulatorSettings: new(
+            folderLocation: null
+        ),
+        OfficialGames: [],
+        FanGames: []
+    );
 
-		public SettingsAndGamesManager(
-			ISettingsAndGamesRepository settingsAndGamesRepository,
-			OfficialGamesTemplateService officialGamesTemplateService
-		) {
-			_settingsAndGamesRepository = settingsAndGamesRepository;
-			_officialGamesTemplateService = officialGamesTemplateService;
+    public virtual GeneralSettings GeneralSettings => _settingsAndGames.GeneralSettings;
 
-			_settingsAndGames = new(
-					GeneralSettings: new(
-						closeOnGameLaunch: false,
-						combineMainCategories: false
-					),
-					EmulatorSettings: new(
-						folderLocation: null
-					),
-					OfficialGames: System.Array.Empty<OfficialGame>(),
-					FanGames: new()
-				);
-		}
+    public virtual EmulatorSettings EmulatorSettings => _settingsAndGames.EmulatorSettings;
 
-		public virtual GeneralSettings GeneralSettings => _settingsAndGames.GeneralSettings;
+    public virtual OfficialGame[] OfficialGames => _settingsAndGames.OfficialGames;
 
-		public virtual EmulatorSettings EmulatorSettings => _settingsAndGames.EmulatorSettings;
+    public virtual List<FanGame> FanGames => _settingsAndGames.FanGames;
 
-		public virtual OfficialGame[] OfficialGames => _settingsAndGames.OfficialGames;
+    public virtual async Task<SettingsAndGamesSaveError?> SaveAsync() =>
+        await settingsAndGamesRepository.SaveAsync(_settingsAndGames);
 
-		public virtual List<FanGame> FanGames => _settingsAndGames.FanGames;
+    public async Task<SettingsAndGamesLoadError?> LoadAsync() =>
+        (await settingsAndGamesRepository.LoadAsync())
+            .Resolve<SettingsAndGamesLoadError?>(
+                error =>
+                {
+                    _settingsAndGames = new(
+                        GeneralSettings: new(
+                            closeOnGameLaunch: false,
+                            combineMainCategories: false
+                        ),
+                        EmulatorSettings: new(
+                            folderLocation: null
+                        ),
+                        OfficialGames: officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
+                        FanGames: []
+                    );
 
-		public virtual async Task<SettingsAndGamesSaveError?> SaveAsync() {
-			return await _settingsAndGamesRepository.SaveAsync(_settingsAndGames);
-		}
+                    return error;
+                },
+                settingsAndGames =>
+                {
+                    _settingsAndGames = settingsAndGames;
 
-		public async Task<SettingsAndGamesLoadError?> LoadAsync() =>
-			(await _settingsAndGamesRepository.LoadAsync())
-				.Resolve<SettingsAndGamesLoadError?>(
-					error => {
-						_settingsAndGames = new(
-							GeneralSettings: new(
-								closeOnGameLaunch: false,
-								combineMainCategories: false
-							),
-							EmulatorSettings: new(
-								folderLocation: null
-							),
-							OfficialGames: _officialGamesTemplateService.CreateOfficialGamesFromTemplate(),
-							FanGames: new()
-						);
-
-						return error;
-					},
-					settingsAndGames => {
-						_settingsAndGames = settingsAndGames;
-
-						return null;
-					}
-				);
-	}
+                    return null;
+                }
+            );
 }

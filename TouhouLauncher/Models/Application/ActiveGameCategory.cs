@@ -1,12 +1,8 @@
 ﻿using TouhouLauncher.Models.Application.GameInfo;
 
-namespace TouhouLauncher.Models.Application {
-	public class ActiveGameCategory {
+namespace TouhouLauncher.Models.Application;
 
-		public ActiveGameCategory(GameCategoryService gameCategoryService) {
-			CurrentCategory = gameCategoryService.GetDefaultGameCategory();
-		}
-
-		public GameCategories CurrentCategory { get; set; }
-	}
+public class ActiveGameCategory(GameCategoryService gameCategoryService)
+{
+    public GameCategories CurrentCategory { get; set; } = gameCategoryService.GetDefaultGameCategory();
 }
