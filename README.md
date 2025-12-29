@@ -1,7 +1,7 @@
 # Touhou Launcher
 ![App icon](https://raw.githubusercontent.com/McFlyboy/TouhouLauncher/master/TouhouLauncher/Resources/Images/Icons/AppIcon.ico)
 
-[![Building & Testing](https://github.com/McFlyboy/TouhouLauncher/actions/workflows/building-and-testing.yml/badge.svg)](https://github.com/McFlyboy/TouhouLauncher/actions/workflows/building-and-testing.yml)
+[![Build & Test](https://github.com/McFlyboy/TouhouLauncher/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/McFlyboy/TouhouLauncher/actions/workflows/build-and-test.yml)
 
 ## Introduction
 Touhou Launcher is a desktop app for Windows that provides a quick and easy way to access and run [Touhou](https://en.wikipedia.org/wiki/Touhou_Project) games. It's written in C# with WPF and runs on .NET 10. The app serves as a modern and simplified alternative to an [old launcher](https://moriyashrine.org/resources/touhou-launcher.208/) with the same name.
