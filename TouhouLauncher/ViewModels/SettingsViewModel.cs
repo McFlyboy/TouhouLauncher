@@ -41,7 +41,14 @@ public class SettingsViewModel : ObservableRecipient
         _ => new UserControl(),
     };
 
-    public string BuildVersion => $"Version: {FileVersionInfo.GetVersionInfo(Environment.ProcessPath!).ProductVersion!}";
+    public string BuildVersion => FileVersionInfo.GetVersionInfo(Environment.ProcessPath!)
+        .ProductVersion!
+        .Split('+')
+        .Transform(
+            version => version[0] != "0.0.0-unofficial"
+                ? $"Version: {version[0]}"
+                : $"Unofficial version: {version[1][..7]}"
+        );
 
     public ICommand BackCommand { get; }
 
