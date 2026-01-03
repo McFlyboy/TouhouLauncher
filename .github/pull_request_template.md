@@ -1,3 +1,3 @@
 **What does this PR do?**
 
-# **Screenshots:**
+<!-- **Screenshots:** -->

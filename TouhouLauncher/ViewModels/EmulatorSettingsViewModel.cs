@@ -24,7 +24,7 @@ public class EmulatorSettingsViewModel : ObservableRecipient
             () => Process.Start(
                 new ProcessStartInfo(
                     "cmd",
-                    "/c start https://moriyashrine.org/files/file/387-pc-98-emulator-~-neko-project-ii/"
+                    "/c start \"Browse\" \"https://nenecchi.kirara.st/#PC-98\""
                 )
                 {
                     CreateNoWindow = true
