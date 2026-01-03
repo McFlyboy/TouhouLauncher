@@ -9,7 +9,7 @@
     <ApplicationIcon>Resources\Images\Icons\AppIcon.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <Version>0.0.0-unofficial</Version>
-    <Copyright>Copyright (c) 2019-2021 Henrik Soltvedt Nyhammer</Copyright>
+    <Copyright>Copyright (c) 2019-2021, 2025-2026 Henrik Soltvedt Nyhammer</Copyright>
     <RepositoryUrl>https://github.com/McFlyboy/TouhouLauncher</RepositoryUrl>
     <Authors>Henrik Soltvedt Nyhammer</Authors>
   </PropertyGroup>

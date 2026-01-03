@@ -4,7 +4,7 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
-    <Copyright>Copyright (c) 2019-2021 Henrik Soltvedt Nyhammer</Copyright>
+    <Copyright>Copyright (c) 2019-2021, 2025-2026 Henrik Soltvedt Nyhammer</Copyright>
     <RepositoryUrl>https://github.com/McFlyboy/TouhouLauncher</RepositoryUrl>
     <Authors>Henrik Soltvedt Nyhammer</Authors>
   </PropertyGroup>
