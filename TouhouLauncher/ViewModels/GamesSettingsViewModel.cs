@@ -50,7 +50,7 @@ public class GamesSettingsViewModel : ObservableRecipient
 
             ExternalLinkToGameDownloadCommand = new RelayCommand(
                 () => Process.Start(
-                    new ProcessStartInfo("cmd", $"/c start {_game.DownloadableFileLocation}")
+                    new ProcessStartInfo("cmd", $"/c start \"Browse\" \"{_game.DownloadableFileLocation}\"")
                     {
                         CreateNoWindow = true
                     }

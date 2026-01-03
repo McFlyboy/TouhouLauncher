@@ -37,7 +37,7 @@
             />
 
             <TextBlock HorizontalAlignment="Right">
-                <Hyperlink Foreground="White" Command="{Binding ExternalLinkToEmulatorDownloadCommand}">
+                <Hyperlink ToolTip="PC-98 np2fmgen emulator location" Foreground="White" Command="{Binding ExternalLinkToEmulatorDownloadCommand}">
                     <TextBlock Text="Download the emulator..." />
                 </Hyperlink>
             </TextBlock>

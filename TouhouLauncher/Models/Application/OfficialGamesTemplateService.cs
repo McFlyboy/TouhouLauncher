@@ -13,7 +13,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainPC98,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/273-touhou-1-highly-responsive-to-prayers/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
         new(
             title: "Touhou 02: Story of Eastern Wonderland",
@@ -23,7 +23,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainPC98,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/274-touhou-2-the-story-of-eastern-wonderland/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
         new(
             title: "Touhou 03: Phantasmagoria of Dim. Dream",
@@ -33,7 +33,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainPC98,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/275-touhou-3-phantasmagoria-of-dimensional-dream/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
         new(
             title: "Touhou 04: Lotus Land Story",
@@ -43,7 +43,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainPC98,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/276-touhou-4-lotus-land-story/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
         new(
             title: "Touhou 05: Mystic Square",
@@ -53,7 +53,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainPC98,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/277-touhou-5-mystic-square/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
         new(
             title: "Touhou 06: Embodyment of Scarlet Devil",
@@ -63,7 +63,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/13-touhou-6-koumakyou-the-embodiment-of-scarlet-devil/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=1"
         ),
         new(
             title: "Touhou 07: Perfect Cherry Blossom",
@@ -73,7 +73,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/14-touhou-7-youyoumu-perfect-cherry-blossom/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=2"
         ),
         new(
             title: "Touhou 07.5: Immaterial and Missing Power",
@@ -83,7 +83,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.FightingGame,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/19-touhou-75-suimusou-immaterial-and-missing-power/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=3"
         ),
         new(
             title: "Touhou 08: Imperishable Night",
@@ -93,7 +93,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/20-touhou-8-eiyashou-imperishable-night/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=4"
         ),
         new(
             title: "Touhou 09: Phantasmagoria of Flower View",
@@ -103,7 +103,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/21-touhou-9-kaiedzuka-phantasmagoria-of-flower-view/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1420810/__Phantasmagoria_of_Flower_View/"
         ),
         new(
             title: "Touhou 09.5: Shoot the Bullet",
@@ -113,7 +113,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.SpinOff,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/22-touhou-95-bunkachou-shoot-the-bullet/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1420650/__Shoot_the_Bullet/"
         ),
         new(
             title: "Touhou 10: Mountain of Faith",
@@ -123,7 +123,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/23-touhou-10-fuujinroku-mountain-of-faith/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1100140/__Mountain_of_Faith/"
         ),
         new(
             title: "Touhou 10.5: Scarlet Weather Rhapsody",
@@ -133,7 +133,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.FightingGame,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/24-touhou-105-hisouten-scarlet-weather-rhapsody/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=8"
         ),
         new(
             title: "Touhou 11: Subterranean Animism",
@@ -143,7 +143,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/25-touhou-11-chireiden-subterranean-animism/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1100150/__Subterranean_Animism/"
         ),
         new(
             title: "Touhou 12: Undefined Fantastic Object",
@@ -153,7 +153,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/26-touhou-12-seirensen-undefined-fantastic-object/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1100160/__Undefined_Fantastic_Object/"
         ),
         new(
             title: "Touhou 12.3: Hisoutensoku",
@@ -163,7 +163,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.FightingGame,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/27-touhou-123-hisoutensoku-choudokyuu-ginyoru-no-nazo-wo-oe/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=11"
         ),
         new(
             title: "Touhou 12.5: Double Spoiler",
@@ -173,7 +173,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.SpinOff,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/28-touhou-125-bunkachou-double-spoiler/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1100170/_/"
         ),
         new(
             title: "Touhou 12.8: Great Fairy Wars",
@@ -183,7 +183,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.SpinOff,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/52-touhou-128-sangetsusei-great-fairy-wars/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1100180/_/"
         ),
         new(
             title: "Touhou 13: Ten Desires",
@@ -193,7 +193,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/53-touhou-13-touhou-shinreibyou-ten-desires/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1043230/__Ten_Desires/"
         ),
         new(
             title: "Touhou 13.5: Hopeless Masquerade",
@@ -203,7 +203,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.FightingGame,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/54-touhou-135-shinkirou-hopeless-masquerade/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=15"
         ),
         new(
             title: "Touhou 14: Double Dealing Character",
@@ -213,7 +213,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/55-touhou-14-kishinjou-double-dealing-character/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1043240/__Double_Dealing_Character/"
         ),
         new(
             title: "Touhou 14.3: Impossible Spell Card",
@@ -223,7 +223,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.SpinOff,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/56-touhou-143-danmaku-amanojaku-impossible-spell-card/"
+            downloadableFileLocation: "https://store.steampowered.com/app/937570/__Impossible_Spell_Card/"
         ),
         new(
             title: "Touhou 14.5: Urban Legend in Limbo",
@@ -233,7 +233,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.FightingGame,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/57-touhou-145-shinhiroku-urban-legend-in-limbo/"
+            downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=18"
         ),
         new(
             title: "Touhou 15: Legacy of Lunatic Kingdom",
@@ -243,7 +243,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/58-touhou-15-kanjuden-legacy-of-lunatic-kingdom/"
+            downloadableFileLocation: "https://store.steampowered.com/app/937580/__Legacy_of_Lunatic_Kingdom/"
         ),
         new(
             title: "Touhou 15.5: Antinomy of Common Flowers",
@@ -253,7 +253,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.FightingGame,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/43-touhou-155-antinomy-of-common-flowers/"
+            downloadableFileLocation: "https://store.steampowered.com/app/716710/__Antinomy_of_Common_Flowers/"
         ),
         new(
             title: "Touhou 16: Hidden Star in Four Seasons",
@@ -263,7 +263,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/44-touhou-16-tenkuushou-hidden-star-in-four-seasons/"
+            downloadableFileLocation: "https://store.steampowered.com/app/745880/__Hidden_Star_in_Four_Seasons/"
         ),
         new(
             title: "Touhou 16.5: Violet Detector",
@@ -273,7 +273,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.SpinOff,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/332-touhou-165-violet-detector/"
+            downloadableFileLocation: "https://store.steampowered.com/app/924650/__Violet_Detector/"
         ),
         new(
             title: "Touhou 17: Wily Beast and Weakest Creature",
@@ -283,7 +283,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/649-touhou-17-kikeijuu-wily-beast-and-weakest-creature/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1079160/__Wily_Beast_and_Weakest_Creature/"
         ),
         new(
             title: "Touhou 17.5: Gouyoku Ibun",
@@ -293,7 +293,7 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.SpinOff,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/694-touhou-175-touhou-gouyoku-ibun-~-suibotsushita-chinshuu-jigoku/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1440500/_/"
         ),
         new(
             title: "Touhou 18: Unconnected Marketeers",
@@ -303,7 +303,37 @@ public class OfficialGamesTemplateService
             fileLocation: null,
             includeInRandomGame: true,
             categories: GameCategories.MainWindows,
-            downloadableFileLocation: "https://moriyashrine.org/files/file/905-touhou-18-unconnected-marketeers/"
+            downloadableFileLocation: "https://store.steampowered.com/app/1566410/__Unconnected_Marketeers/"
+        ),
+        new(
+            title: "Touhou 18.5: 100th Black Market",
+            imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH18_5.png",
+            audioLocation: "",
+            releaseYear: 2022,
+            fileLocation: null,
+            includeInRandomGame: true,
+            categories: GameCategories.SpinOff,
+            downloadableFileLocation: "https://store.steampowered.com/app/2097720/__100th_Black_Market/"
+        ),
+        new(
+            title: "Touhou 19: Unfinished Dream of All Living Ghost",
+            imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH19.png",
+            audioLocation: "",
+            releaseYear: 2023,
+            fileLocation: null,
+            includeInRandomGame: true,
+            categories: GameCategories.MainWindows,
+            downloadableFileLocation: "https://store.steampowered.com/app/2400340/__Unfinished_Dream_of_All_Living_Ghost/"
+        ),
+        new(
+            title: "Touhou 20: Fossilized Wonders",
+            imageLocation: "..\\..\\Resources\\Images\\OfficialGames\\TH20.png",
+            audioLocation: "",
+            releaseYear: 2025,
+            fileLocation: null,
+            includeInRandomGame: true,
+            categories: GameCategories.MainWindows,
+            downloadableFileLocation: "https://store.steampowered.com/app/3671710/__Fossilized_Wonders/"
         )
     ];
 }
