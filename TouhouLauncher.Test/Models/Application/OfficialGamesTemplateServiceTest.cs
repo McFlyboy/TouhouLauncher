@@ -13,6 +13,6 @@ public class OfficialGamesTemplateServiceTest
     {
         OfficialGame[] result = _officialGamesTemplateService.CreateOfficialGamesFromTemplate();
 
-        Assert.Equal(30, result.Length);
+        Assert.Equal(33, result.Length);
     }
 }
