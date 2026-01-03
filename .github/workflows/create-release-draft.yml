@@ -30,7 +30,7 @@ jobs:
         dest: TouhouLauncher-x64.zip
 
     - name: Create release draft
-      uses: softprops/action-gh-release@v2.5
+      uses: softprops/action-gh-release@v2
       with:
         draft: true
         files: |
