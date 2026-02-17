@@ -13,25 +13,21 @@ public class FileSystemExecutorService : IExecutorService
         if (!File.Exists(executableLocation))
             return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
 
-        ProcessStartInfo startInfo = new(executableLocation);
-
-        string? directoryPath = Path.GetDirectoryName(startInfo.FileName);
-
-        if (directoryPath == null)
-            return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
-
-        startInfo.WorkingDirectory = directoryPath;
-
         try
         {
-            var process = Process.Start(startInfo);
+            var process = Process.Start(
+                new ProcessStartInfo(executableLocation)
+                {
+                    UseShellExecute = true
+                }
+            );
 
             if (process == null || process.HasExited)
                 return new ExecutorServiceError.ProcessExecuteError(executableLocation);
 
             return process;
         }
-        catch(Exception)
+        catch (Exception)
         {
             return new ExecutorServiceError.ProcessExecuteError(executableLocation);
         }

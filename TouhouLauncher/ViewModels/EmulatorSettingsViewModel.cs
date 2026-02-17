@@ -23,11 +23,10 @@ public class EmulatorSettingsViewModel : ObservableRecipient
         ExternalLinkToEmulatorDownloadCommand = new RelayCommand(
             () => Process.Start(
                 new ProcessStartInfo(
-                    "cmd",
-                    "/c start \"Browse\" \"https://nenecchi.kirara.st/#PC-98\""
+                    "https://nenecchi.kirara.st/#PC-98"
                 )
                 {
-                    CreateNoWindow = true
+                    UseShellExecute = true
                 }
             )
         );
