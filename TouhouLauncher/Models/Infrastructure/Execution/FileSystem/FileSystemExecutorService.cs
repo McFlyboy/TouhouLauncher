@@ -10,7 +10,10 @@ public class FileSystemExecutorService : IExecutorService
 {
     public virtual Either<ExecutorServiceError, Process> StartExecutable(string executableLocation)
     {
-        if (!File.Exists(executableLocation))
+        if (!Uri.TryCreate(executableLocation, UriKind.Absolute, out Uri? uri))
+            return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
+
+        if (uri.IsFile && !File.Exists(executableLocation))
             return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
 
         try
