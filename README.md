@@ -38,9 +38,6 @@ dotnet test
 ## Support
 If you need help or have questions about the launcher you can start a discussion in the [Discussions section](https://github.com/McFlyboy/TouhouLauncher/discussions) of this repo, or feel free to find me on my [Discord server](https://discord.com/invite/7mA3Gg32DV).
 
-## A new UI is coming!
-A new user interface is currently being designed for the beta release of the launcher. You can check out the design sketches [here](https://www.figma.com/file/4RDZ4GZz8maF8HgYTJsrBC/Touhou-Launcher). 🙂
-
 ## How to contribute
 I haven't nailed down any contribution guidelines yet, but if you're eager to help out with the launcher then please do contact me through my [Discord server](https://discord.com/invite/T7bp4Vy), and we'll figure something out together. 😄
 
