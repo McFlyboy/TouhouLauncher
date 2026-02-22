@@ -108,19 +108,22 @@ public static class CommonTestToolsAndData
     public static readonly OfficialGameYaml testOfficialGameYaml1 = new()
     {
         FileLocation = "C:\\test\\location.exe",
-        IncludeInRandomGame = true
+        IncludeInRandomGame = true,
+        LaunchArgs = ""
     };
 
     public static readonly OfficialGameYaml testOfficialGameYaml2 = new()
     {
         FileLocation = "C:\\test\\location2.exe",
-        IncludeInRandomGame = false
+        IncludeInRandomGame = false,
+        LaunchArgs = ""
     };
 
     public static readonly OfficialGameYaml testOfficialGameYaml3 = new()
     {
         FileLocation = "",
-        IncludeInRandomGame = true
+        IncludeInRandomGame = true,
+        LaunchArgs = ""
     };
 
     public static readonly OfficialGameYaml[] testOfficialGameYamls = [
@@ -136,7 +139,8 @@ public static class CommonTestToolsAndData
         AudioLocation = "",
         ReleaseYear = 2003,
         FileLocation = "",
-        IncludeInRandomGame = true
+        IncludeInRandomGame = true,
+        LaunchArgs = ""
     };
 
     public static readonly FanGameYaml testFanGameYaml2 = new()
@@ -146,7 +150,8 @@ public static class CommonTestToolsAndData
         AudioLocation = "",
         ReleaseYear = 2004,
         FileLocation = "",
-        IncludeInRandomGame = false
+        IncludeInRandomGame = false,
+        LaunchArgs = ""
     };
 
     public static readonly List<FanGameYaml> testFanGameYamls = [
