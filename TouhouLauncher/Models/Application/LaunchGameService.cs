@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TouhouLauncher.Models.Application.GameInfo;
 using TouhouLauncher.Models.Common;
 using TouhouLauncher.Models.Common.Extensions;
@@ -15,7 +16,10 @@ public class LaunchGameService(
 {
     public virtual async Task<TouhouLauncherError?> LaunchGame(Game game)
     {
-        if (!pathExistanceService.PathExists(game.FileLocation))
+        if (!Uri.TryCreate(game.FileLocation, UriKind.Absolute, out Uri? gameUri))
+            return new LaunchGameError.GameDoesNotExistError();
+
+        if (gameUri.IsFile && !pathExistanceService.PathExists(game.FileLocation))
             return new LaunchGameError.GameDoesNotExistError();
 
         bool isPc98Game = game.Categories.HasFlag(GameCategories.MainPC98);

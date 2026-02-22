@@ -10,28 +10,27 @@ public class FileSystemExecutorService : IExecutorService
 {
     public virtual Either<ExecutorServiceError, Process> StartExecutable(string executableLocation)
     {
-        if (!File.Exists(executableLocation))
+        if (!Uri.TryCreate(executableLocation, UriKind.Absolute, out Uri? uri))
             return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
 
-        ProcessStartInfo startInfo = new(executableLocation);
-
-        string? directoryPath = Path.GetDirectoryName(startInfo.FileName);
-
-        if (directoryPath == null)
+        if (uri.IsFile && !File.Exists(executableLocation))
             return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
-
-        startInfo.WorkingDirectory = directoryPath;
 
         try
         {
-            var process = Process.Start(startInfo);
+            var process = Process.Start(
+                new ProcessStartInfo(executableLocation)
+                {
+                    UseShellExecute = true
+                }
+            );
 
             if (process == null || process.HasExited)
                 return new ExecutorServiceError.ProcessExecuteError(executableLocation);
 
             return process;
         }
-        catch(Exception)
+        catch (Exception)
         {
             return new ExecutorServiceError.ProcessExecuteError(executableLocation);
         }
