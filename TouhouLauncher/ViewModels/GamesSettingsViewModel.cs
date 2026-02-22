@@ -90,6 +90,25 @@ public class GamesSettingsViewModel : ObservableRecipient
             }
         }
 
+        public string LaunchArgs
+        {
+            get => _game.LaunchArgs ?? string.Empty;
+            set
+            {
+                _game.LaunchArgs = value;
+                _settingsAndGamesManager.SaveAsync()
+                    .ContinueWith(async result =>
+                    {
+                        var error = await result;
+
+                        if (error != null)
+                        {
+                            MessageBox.Show(error.Message, "Error");
+                        }
+                    });
+            }
+        }
+
         public bool IncludeInRandomGame
         {
             get => _game.IncludeInRandomGame;

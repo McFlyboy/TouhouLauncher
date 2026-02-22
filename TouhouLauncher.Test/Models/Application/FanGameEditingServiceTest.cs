@@ -40,7 +40,8 @@ public class FanGameEditingServiceTest
                 audioLocation: null,
                 releaseYear: null,
                 fileLocation: string.Empty,
-                includeInRandomGame: true
+                includeInRandomGame: true,
+                launchArgs: null
             )
         );
 
@@ -64,7 +65,8 @@ public class FanGameEditingServiceTest
                 audioLocation: null,
                 releaseYear: null,
                 fileLocation: string.Empty,
-                includeInRandomGame: true
+                includeInRandomGame: true,
+                launchArgs: null
             )
         );
 
@@ -102,7 +104,8 @@ public class FanGameEditingServiceTest
                 audioLocation: null,
                 releaseYear: null,
                 fileLocation: "location",
-                includeInRandomGame: true
+                includeInRandomGame: true,
+                launchArgs: ""
             ),
             fanGames.Last()
         );
@@ -126,7 +129,8 @@ public class FanGameEditingServiceTest
                 audioLocation: null,
                 releaseYear: null,
                 fileLocation: "location",
-                includeInRandomGame: true
+                includeInRandomGame: true,
+                launchArgs: ""
             )
         ];
 
@@ -153,7 +157,8 @@ public class FanGameEditingServiceTest
                 audioLocation: null,
                 releaseYear: null,
                 fileLocation: "location",
-                includeInRandomGame: true
+                includeInRandomGame: true,
+                launchArgs: ""
             )
         ];
 

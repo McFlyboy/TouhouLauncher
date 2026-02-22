@@ -85,6 +85,12 @@ public class GameConfigViewModel : ObservableRecipient
         set => _gameConfigService.GameLocation = value;
     }
 
+    public string LaunchArgs
+    {
+        get => _gameConfigService.LaunchArgs;
+        set => _gameConfigService.LaunchArgs = value;
+    }
+
     public bool IncludeInRandomGame
     {
         get => _gameConfigService.IncludeInRandomGame;

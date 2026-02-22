@@ -27,6 +27,7 @@ public static class CommonTestToolsAndData
         releaseYear: 2000,
         fileLocation: "C:\\test\\location.exe",
         includeInRandomGame: true,
+        launchArgs: "",
         categories: GameCategories.MainWindows,
         downloadableFileLocation: ""
     );
@@ -38,6 +39,7 @@ public static class CommonTestToolsAndData
         releaseYear: 2001,
         fileLocation: "C:\\test\\location2.exe",
         includeInRandomGame: false,
+        launchArgs: "",
         categories: GameCategories.MainPC98,
         downloadableFileLocation: ""
     );
@@ -49,6 +51,7 @@ public static class CommonTestToolsAndData
         releaseYear: 2002,
         fileLocation: "",
         includeInRandomGame: true,
+        launchArgs: "",
         categories: GameCategories.FightingGame,
         downloadableFileLocation: ""
     );
@@ -65,7 +68,8 @@ public static class CommonTestToolsAndData
         audioLocation: "",
         releaseYear: 2003,
         fileLocation: "",
-        includeInRandomGame: true
+        includeInRandomGame: true,
+        launchArgs: ""
     );
 
     public static readonly FanGame testFangame2 = new(
@@ -74,7 +78,8 @@ public static class CommonTestToolsAndData
         audioLocation: "",
         releaseYear: 2004,
         fileLocation: "",
-        includeInRandomGame: false
+        includeInRandomGame: false,
+        launchArgs: ""
     );
 
     public static readonly List<FanGame> testFanGames = [

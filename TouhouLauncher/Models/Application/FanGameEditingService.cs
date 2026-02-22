@@ -18,6 +18,7 @@ public class FanGameEditingService
         GameLocation = string.Empty;
         CoverImageLocation = null;
         IncludeInRandomGame = true;
+        LaunchArgs = string.Empty;
     }
 
     public FanGame? TargetFanGame { get; private set; }
@@ -32,6 +33,8 @@ public class FanGameEditingService
 
     public bool IncludeInRandomGame { get; set; }
 
+    public string LaunchArgs { get; set; }
+
     public async Task<TouhouLauncherError?> SaveAsync()
     {
         if (GameTitle.Length == 0 || GameLocation.Length == 0)
@@ -45,7 +48,8 @@ public class FanGameEditingService
                 audioLocation: null,
                 releaseYear: YearOfRelease,
                 fileLocation: GameLocation,
-                includeInRandomGame: IncludeInRandomGame
+                includeInRandomGame: IncludeInRandomGame,
+                launchArgs: LaunchArgs
             );
 
             _settingsAndGamesManager.FanGames.Add(TargetFanGame);
@@ -58,6 +62,7 @@ public class FanGameEditingService
             TargetFanGame.ReleaseYear = YearOfRelease;
             TargetFanGame.FileLocation = GameLocation;
             TargetFanGame.IncludeInRandomGame = IncludeInRandomGame;
+            TargetFanGame.LaunchArgs = LaunchArgs;
         }
 
         return await _settingsAndGamesManager.SaveAsync();
@@ -81,6 +86,7 @@ public class FanGameEditingService
         GameLocation = fanGame?.FileLocation ?? string.Empty;
         CoverImageLocation = fanGame?.ImageLocation;
         IncludeInRandomGame = fanGame?.IncludeInRandomGame ?? true;
+        LaunchArgs = fanGame?.LaunchArgs ?? string.Empty;
     }
 }
 

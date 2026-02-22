@@ -42,7 +42,7 @@ public class LaunchGameService(
 
         string executableLocation = isPc98Game ? emulatorLocation! : game.FileLocation!;
 
-        var result = executorService.StartExecutable(executableLocation);
+        var result = executorService.StartExecutable(executableLocation, game.LaunchArgs);
 
         return result.Resolve<ExecutorServiceError?>(
             error => error,

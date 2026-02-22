@@ -17,6 +17,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes
 
         public bool? IncludeInRandomGame { get; init; }
 
+        public string? LaunchArgs { get; init; }
+
         public FanGame? ToDomain() => 
             Title?.Transform(
                 title => new FanGame(
@@ -25,7 +27,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes
                     audioLocation: AudioLocation,
                     releaseYear: ReleaseYear,
                     fileLocation: FileLocation,
-                    includeInRandomGame: IncludeInRandomGame ?? true
+                    includeInRandomGame: IncludeInRandomGame ?? true,
+                    launchArgs: LaunchArgs
                 )
             );
     }
@@ -41,7 +44,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes
                 AudioLocation = domain.AudioLocation,
                 ReleaseYear = domain.ReleaseYear,
                 FileLocation = domain.FileLocation,
-                IncludeInRandomGame = domain.IncludeInRandomGame
+                IncludeInRandomGame = domain.IncludeInRandomGame,
+                LaunchArgs = domain.LaunchArgs
             };
         }
 

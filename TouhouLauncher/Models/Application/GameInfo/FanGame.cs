@@ -8,7 +8,8 @@ public record FanGame : Game
         string? audioLocation,
         int? releaseYear,
         string? fileLocation,
-        bool includeInRandomGame
+        bool includeInRandomGame,
+        string? launchArgs
     ) : base(
         title: title,
         imageLocation: imageLocation,
@@ -16,6 +17,7 @@ public record FanGame : Game
         releaseYear: releaseYear,
         fileLocation: fileLocation,
         includeInRandomGame: includeInRandomGame,
+        launchArgs,
         categories: GameCategories.FanGame
     ) { }
 }

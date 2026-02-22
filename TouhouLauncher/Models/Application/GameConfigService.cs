@@ -10,6 +10,8 @@ public class GameConfigService(SettingsAndGamesManager settingsAndGamesManager)
 
     public string GameLocation { get; set; } = string.Empty;
 
+    public string LaunchArgs { get; set; } = string.Empty;
+
     public bool IncludeInRandomGame { get; set; } = false;
 
     public async Task<TouhouLauncherError?> SaveAsync()
@@ -18,6 +20,7 @@ public class GameConfigService(SettingsAndGamesManager settingsAndGamesManager)
             return new TargetGameNotSetError();
 
         TargetGame.FileLocation = GameLocation;
+        TargetGame.LaunchArgs = LaunchArgs;
         TargetGame.IncludeInRandomGame = IncludeInRandomGame;
 
         return await settingsAndGamesManager.SaveAsync();
@@ -27,6 +30,7 @@ public class GameConfigService(SettingsAndGamesManager settingsAndGamesManager)
     {
         TargetGame = game;
         GameLocation = TargetGame.FileLocation ?? string.Empty;
+        LaunchArgs = TargetGame.LaunchArgs ?? string.Empty;
         IncludeInRandomGame = TargetGame.IncludeInRandomGame;
     }
 }

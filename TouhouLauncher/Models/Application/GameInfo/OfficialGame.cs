@@ -9,6 +9,7 @@ public record OfficialGame : Game
         int? releaseYear,
         string? fileLocation,
         bool includeInRandomGame,
+        string? launchArgs,
         GameCategories categories,
         string downloadableFileLocation
     ) : base(
@@ -18,6 +19,7 @@ public record OfficialGame : Game
         releaseYear: releaseYear,
         fileLocation: fileLocation,
         includeInRandomGame: includeInRandomGame,
+        launchArgs,
         categories: categories
     )
     {

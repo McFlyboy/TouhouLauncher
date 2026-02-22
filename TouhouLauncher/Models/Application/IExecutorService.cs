@@ -5,7 +5,7 @@ namespace TouhouLauncher.Models.Application;
 
 public interface IExecutorService
 {
-    public Either<ExecutorServiceError, Process> StartExecutable(string executableLocation);
+    public Either<ExecutorServiceError, Process> StartExecutable(string executableLocation, string? launchArgs = null);
 }
 
 public abstract record ExecutorServiceError : TouhouLauncherError
