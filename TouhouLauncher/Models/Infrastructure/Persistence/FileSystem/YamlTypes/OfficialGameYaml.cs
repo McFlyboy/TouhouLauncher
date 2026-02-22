@@ -8,6 +8,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes
 
         public bool? IncludeInRandomGame { get; init; }
 
+        public string? LaunchArgs { get; init; }
+
         public OfficialGame ToDomain(OfficialGame domainTemplate) => new(
             title: domainTemplate.Title,
             imageLocation: domainTemplate.ImageLocation,
@@ -15,6 +17,7 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes
             releaseYear: domainTemplate.ReleaseYear,
             fileLocation: FileLocation,
             includeInRandomGame: IncludeInRandomGame ?? domainTemplate.IncludeInRandomGame,
+            launchArgs: LaunchArgs,
             categories: domainTemplate.Categories,
             downloadableFileLocation: domainTemplate.DownloadableFileLocation
         );
@@ -27,7 +30,8 @@ namespace TouhouLauncher.Models.Infrastructure.Persistence.FileSystem.YamlTypes
             public static OfficialGameYaml ToYaml(this OfficialGame domain) => new()
             {
                 FileLocation = domain.FileLocation,
-                IncludeInRandomGame = domain.IncludeInRandomGame
+                IncludeInRandomGame = domain.IncludeInRandomGame,
+                LaunchArgs = domain.LaunchArgs
             };
         }
     }

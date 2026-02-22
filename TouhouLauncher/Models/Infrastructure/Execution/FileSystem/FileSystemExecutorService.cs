@@ -8,7 +8,7 @@ namespace TouhouLauncher.Models.Infrastructure.Execution.FileSystem;
 
 public class FileSystemExecutorService : IExecutorService
 {
-    public virtual Either<ExecutorServiceError, Process> StartExecutable(string executableLocation)
+    public virtual Either<ExecutorServiceError, Process> StartExecutable(string executableLocation, string? launchArgs = null)
     {
         if (!Uri.TryCreate(executableLocation, UriKind.Absolute, out Uri? uri))
             return new ExecutorServiceError.ExecutableDoesNotExistError(executableLocation);
@@ -21,6 +21,7 @@ public class FileSystemExecutorService : IExecutorService
             var process = Process.Start(
                 new ProcessStartInfo(executableLocation)
                 {
+                    Arguments = launchArgs,
                     UseShellExecute = true
                 }
             );

@@ -117,6 +117,30 @@
                     />
                 </Grid>
 
+                <Grid Grid.Row="1" Margin="0, 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Grid.ColumnSpan="2"
+                        Foreground="White"
+                        Text="Launch arguments"
+                    />
+
+                    <TextBox
+                        Grid.Row="1"
+                        Style="{StaticResource DarkTextbox}"
+                        Text="{Binding LaunchArgs}"
+                        Padding="5"
+                    />
+                </Grid>
+
                 <CheckBox
                     Style="{DynamicResource DarkCheckbox}"
                     Margin="-2, 5"
@@ -127,7 +151,7 @@
 
             <Button
                 Grid.Row="1"
-                Margin="0,220,0,-30"
+                Margin="0,577,0,-352"
                 Style="{StaticResource DarkButton}"
                 Content="Delete"
                 Width="100"

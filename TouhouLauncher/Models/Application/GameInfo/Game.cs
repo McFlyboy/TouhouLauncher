@@ -9,6 +9,7 @@ public abstract record Game
         int? releaseYear,
         string? fileLocation,
         bool includeInRandomGame,
+        string? launchArgs,
         GameCategories categories
     )
     {
@@ -18,6 +19,7 @@ public abstract record Game
         ReleaseYear = releaseYear;
         FileLocation = fileLocation;
         IncludeInRandomGame = includeInRandomGame;
+        LaunchArgs = launchArgs;
         Categories = categories;
     }
 
@@ -32,6 +34,8 @@ public abstract record Game
     public string? FileLocation { get; set; }
 
     public bool IncludeInRandomGame { get; set; }
+
+    public string? LaunchArgs { get; set; }
 
     public GameCategories Categories { get; init; }
 }

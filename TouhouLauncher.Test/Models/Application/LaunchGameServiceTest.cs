@@ -104,7 +104,7 @@ public class LaunchGameServiceTest
         _settingsAndGamesManagerMock.EmulatorSettings
             .Returns(testEmulatorSettings);
 
-        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>(), Arg.Any<string?>())
             .Returns(new ExecutorServiceError.ProcessExecuteError("location"));
 
         var error = await _launchGameService.LaunchGame(testOfficialGame1);
@@ -122,7 +122,7 @@ public class LaunchGameServiceTest
         _settingsAndGamesManagerMock.EmulatorSettings
             .Returns(testEmulatorSettings);
 
-        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>(), Arg.Any<string?>())
             .Returns(new Process());
 
         _settingsAndGamesManagerMock.GeneralSettings
@@ -132,7 +132,7 @@ public class LaunchGameServiceTest
 
         Assert.Null(error);
 
-        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>());
+        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>(), Arg.Any<string?>());
     }
 
     [Fact]
@@ -150,7 +150,7 @@ public class LaunchGameServiceTest
         _fileSystemNp21ntConfigRepository.SaveAsync(Arg.Any<Np21ntConfig?>())
             .Returns(Task.FromResult<Np21ntConfigSaveError?>(null));
 
-        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>(), Arg.Any<string?>())
             .Returns(new Process());
 
         _settingsAndGamesManagerMock.GeneralSettings
@@ -161,7 +161,7 @@ public class LaunchGameServiceTest
         Assert.Null(error);
 
         await _fileSystemNp21ntConfigRepository.Received(1).SaveAsync(Arg.Any<Np21ntConfig?>());
-        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>());
+        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>(), Arg.Any<string?>());
     }
 
     [Fact]
@@ -182,7 +182,7 @@ public class LaunchGameServiceTest
         _fileSystemNp21ntConfigRepository.SaveAsync(Arg.Any<Np21ntConfig?>())
             .Returns(Task.FromResult<Np21ntConfigSaveError?>(null));
 
-        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>())
+        _fileSystemExecutorServiceMock.StartExecutable(Arg.Any<string>(), Arg.Any<string?>())
             .Returns(new Process());
 
         _settingsAndGamesManagerMock.GeneralSettings
@@ -194,6 +194,6 @@ public class LaunchGameServiceTest
 
         _np21ntConfigDefaultsServiceMock.Received(1).CreateNp21ntConfigDefaults();
         await _fileSystemNp21ntConfigRepository.Received(1).SaveAsync(Arg.Any<Np21ntConfig?>());
-        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>());
+        _fileSystemExecutorServiceMock.Received(1).StartExecutable(Arg.Any<string>(), Arg.Any<string?>());
     }
 }

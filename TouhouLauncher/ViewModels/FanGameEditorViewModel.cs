@@ -128,6 +128,12 @@ public class FanGameEditorViewModel : ObservableRecipient
         set => _fanGameEditingService.IncludeInRandomGame = value;
     }
 
+    public string LaunchArgs
+    {
+        get => _fanGameEditingService.LaunchArgs;
+        set => _fanGameEditingService.LaunchArgs = value;
+    }
+
     public Visibility DeleteButtonVisibility => _fanGameEditingService.TargetFanGame == null
         ? Visibility.Collapsed
         : Visibility.Visible;

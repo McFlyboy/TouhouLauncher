@@ -12,6 +12,7 @@ public class OfficialGamesTemplateService
             releaseYear: 1996,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainPC98,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
@@ -22,6 +23,7 @@ public class OfficialGamesTemplateService
             releaseYear: 1997,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainPC98,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
@@ -32,6 +34,7 @@ public class OfficialGamesTemplateService
             releaseYear: 1997,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainPC98,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
@@ -42,6 +45,7 @@ public class OfficialGamesTemplateService
             releaseYear: 1998,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainPC98,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
@@ -52,6 +56,7 @@ public class OfficialGamesTemplateService
             releaseYear: 1998,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainPC98,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=0"
         ),
@@ -62,6 +67,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2002,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=1"
         ),
@@ -72,6 +78,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2003,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=2"
         ),
@@ -82,6 +89,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2004,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.FightingGame,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=3"
         ),
@@ -92,6 +100,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2004,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=4"
         ),
@@ -102,6 +111,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2005,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1420810/__Phantasmagoria_of_Flower_View/"
         ),
@@ -112,6 +122,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2005,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.SpinOff,
             downloadableFileLocation: "https://store.steampowered.com/app/1420650/__Shoot_the_Bullet/"
         ),
@@ -122,6 +133,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2007,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1100140/__Mountain_of_Faith/"
         ),
@@ -132,6 +144,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2008,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.FightingGame,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=8"
         ),
@@ -142,6 +155,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2008,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1100150/__Subterranean_Animism/"
         ),
@@ -152,6 +166,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2009,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1100160/__Undefined_Fantastic_Object/"
         ),
@@ -162,6 +177,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2009,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.FightingGame,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=11"
         ),
@@ -172,6 +188,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2010,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.SpinOff,
             downloadableFileLocation: "https://store.steampowered.com/app/1100170/_/"
         ),
@@ -182,6 +199,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2010,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.SpinOff,
             downloadableFileLocation: "https://store.steampowered.com/app/1100180/_/"
         ),
@@ -192,6 +210,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2011,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1043230/__Ten_Desires/"
         ),
@@ -202,6 +221,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2013,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.FightingGame,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=15"
         ),
@@ -212,6 +232,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2013,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1043240/__Double_Dealing_Character/"
         ),
@@ -222,6 +243,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2014,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.SpinOff,
             downloadableFileLocation: "https://store.steampowered.com/app/937570/__Impossible_Spell_Card/"
         ),
@@ -232,6 +254,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2015,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.FightingGame,
             downloadableFileLocation: "https://doujinstyle.com/?p=page&type=2&id=18"
         ),
@@ -242,6 +265,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2015,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/937580/__Legacy_of_Lunatic_Kingdom/"
         ),
@@ -252,6 +276,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2017,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.FightingGame,
             downloadableFileLocation: "https://store.steampowered.com/app/716710/__Antinomy_of_Common_Flowers/"
         ),
@@ -262,6 +287,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2017,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/745880/__Hidden_Star_in_Four_Seasons/"
         ),
@@ -272,6 +298,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2018,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.SpinOff,
             downloadableFileLocation: "https://store.steampowered.com/app/924650/__Violet_Detector/"
         ),
@@ -282,6 +309,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2019,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1079160/__Wily_Beast_and_Weakest_Creature/"
         ),
@@ -292,6 +320,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2021,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.SpinOff,
             downloadableFileLocation: "https://store.steampowered.com/app/1440500/_/"
         ),
@@ -302,6 +331,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2021,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/1566410/__Unconnected_Marketeers/"
         ),
@@ -312,6 +342,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2022,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.SpinOff,
             downloadableFileLocation: "https://store.steampowered.com/app/2097720/__100th_Black_Market/"
         ),
@@ -322,6 +353,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2023,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/2400340/__Unfinished_Dream_of_All_Living_Ghost/"
         ),
@@ -332,6 +364,7 @@ public class OfficialGamesTemplateService
             releaseYear: 2025,
             fileLocation: null,
             includeInRandomGame: true,
+            launchArgs: null,
             categories: GameCategories.MainWindows,
             downloadableFileLocation: "https://store.steampowered.com/app/3671710/__Fossilized_Wonders/"
         )
